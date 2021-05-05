@@ -5,10 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
 using Audyssey.MultEQAvrAdapter;
 using Audyssey.MultEQTcp;
+using ReactiveUI;
+
+#nullable enable
 
 namespace Ratbuddyssey.Views
 {
@@ -16,11 +20,11 @@ namespace Ratbuddyssey.Views
     {
         #region Properties
 
-        public AudysseyMultEQAvr Avr { get; set; }
-        public AudysseyMultEQAvrAdapter AvrAdapter { get; set; }
+        public AudysseyMultEQAvr? Avr { get; set; }
+        public AudysseyMultEQAvrAdapter? AvrAdapter { get; set; }
 
-        private AudysseyMultEQAvrTcp AvrTcp { get; set; }
-        private AudysseyMultEQTcpSniffer TcpSniffer { get; set; }
+        private AudysseyMultEQAvrTcp? AvrTcp { get; set; }
+        private AudysseyMultEQTcpSniffer? TcpSniffer { get; set; }
 
         private static string TcpClientFileName { get; } = "TcpClient.json";
 
@@ -32,40 +36,33 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
-            var hostEntry = System.Net.Dns.GetHostEntry((System.Net.Dns.GetHostName()));
-            if (hostEntry.AddressList.Length > 0)
+            this.WhenActivated(disposable =>
             {
-                foreach (var ip in hostEntry.AddressList)
+                if (ViewModel == null)
                 {
-                    cmbInterfaceHost.Items.Add(ip.ToString());
+                    return;
                 }
-                cmbInterfaceHost.SelectedIndex = cmbInterfaceHost.Items.Count - 1;
-            }
 
-            if (File.Exists(Environment.CurrentDirectory + "\\" + TcpClientFileName))
-            {
-                var text = File.ReadAllText(Environment.CurrentDirectory + "\\" + TcpClientFileName);
-                if (text.Length > 0)
-                {
-                    var tcpClient = JsonConvert.DeserializeObject<TcpIP>(text);
-                    if (tcpClient != null)
-                    {
-                        cmbInterfaceClient.Items.Add(tcpClient.Address);
-                        cmbInterfaceClient.SelectedIndex = cmbInterfaceClient.Items.Count - 1;
-                    }
-                }
-            }
-
-            for (var x = 0; x < 61; x++)
-            {
-                var fcentre = Math.Pow(10.0, 3.0) * Math.Pow(2.0, (x - 34.0) / 6.0);
-                Console.Write(x); Console.Write(" ");
-                Console.WriteLine("{0:N1}", fcentre);
-            }
+                this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.Ips,
+                        static view => view.cmbInterfaceHost.ItemsSource)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel,
+                        static viewModel => viewModel.SelectedIp,
+                        static view => view.cmbInterfaceHost.SelectedItem)
+                    .DisposeWith(disposable);
+                this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.InterfaceIps,
+                        static view => view.cmbInterfaceClient.ItemsSource)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel,
+                        static viewModel => viewModel.SelectedInterfaceIp,
+                        static view => view.cmbInterfaceClient.SelectedItem)
+                    .DisposeWith(disposable);
+            });
         }
 
         #endregion
-
 
         #region Methods
 

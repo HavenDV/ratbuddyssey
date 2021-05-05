@@ -1,9 +1,12 @@
-﻿<UserControl 
+﻿<reactiveUi:ReactiveUserControl
+    x:TypeArguments="viewModels:EthernetViewModel"
     x:Class="Ratbuddyssey.Views.EthernetView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:reactiveUi="http://reactiveui.net"
+    xmlns:viewModels="clr-namespace:Audyssey.ViewModels;assembly=Ratbuddyssey.Core"
     mc:Ignorable="d" 
     d:DesignWidth="1200"
     d:DesignHeight="800" 
@@ -23,7 +26,7 @@
             <Label Content="Receiver IP Address:" VerticalAlignment="Top" ></Label>
             <ComboBox x:Name="cmbInterfaceClient"  VerticalAlignment="Top" Width="120" IsEditable="True"/>
             <Label Content="Computer IP Address:" VerticalAlignment="Top" ></Label>
-            <ComboBox x:Name="cmbInterfaceHost" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="cmbInterfaceHost" VerticalAlignment="Top" Width="120" DisplayMemberPath="."/>
         </StackPanel>
         <Menu Grid.Row="0">
             <MenuItem Header="_Ethernet">
@@ -521,4 +524,4 @@
             </Grid>
         </Grid>
     </Grid>
-</UserControl>
+</reactiveUi:ReactiveUserControl>

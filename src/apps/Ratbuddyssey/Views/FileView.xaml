@@ -1,10 +1,13 @@
-﻿<UserControl 
+﻿<reactiveUi:ReactiveUserControl
+    x:TypeArguments="viewModels:FileViewModel"
     x:Class="Ratbuddyssey.Views.FileView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:oxy="http://oxyplot.org/wpf"
+    xmlns:reactiveUi="http://reactiveui.net"
+    xmlns:viewModels="clr-namespace:Audyssey.ViewModels;assembly=Ratbuddyssey.Core"
     mc:Ignorable="d" 
     d:DesignWidth="1200"
     d:DesignHeight="800" 
@@ -276,4 +279,4 @@
             </Grid>
         </Grid>
     </Grid>
-</UserControl>
+</reactiveUi:ReactiveUserControl>

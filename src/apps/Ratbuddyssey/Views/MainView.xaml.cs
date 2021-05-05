@@ -1,4 +1,7 @@
 ﻿using System.Windows.Controls;
+using Audyssey.ViewModels;
+
+#nullable enable
 
 namespace Ratbuddyssey.Views
 {
@@ -9,6 +12,10 @@ namespace Ratbuddyssey.Views
         public MainView()
         {
             InitializeComponent();
+
+            ViewModel = new MainViewModel();
+            FileView.ViewModel = ViewModel.File;
+            EthernetView.ViewModel = ViewModel.Ethernet;
         }
 
         #endregion
@@ -17,30 +24,30 @@ namespace Ratbuddyssey.Views
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var currentTab = ((TabControl)sender).SelectedIndex;
+            //var currentTab = ((TabControl)sender).SelectedIndex;
 
-            switch (currentTab)
-            {
-                case 0:
-                    if (FileView.AudysseyApp == null)
-                    {
-                        if (EthernetView.AvrAdapter != null)
-                        {
-                            FileView.DataContext = EthernetView.AvrAdapter;
-                        }
-                    }
-                    else
-                    {
-                        FileView.DataContext = FileView.AudysseyApp;
-                    }
-                    break;
-                case 1:
-                    if (EthernetView.Avr != null)
-                    {
-                        EthernetView.DataContext = EthernetView.Avr;
-                    }
-                    break;
-            }
+            //switch (currentTab)
+            //{
+            //    case 0:
+            //        if (FileView.AudysseyApp == null)
+            //        {
+            //            if (EthernetView.AvrAdapter != null)
+            //            {
+            //                FileView.DataContext = EthernetView.AvrAdapter;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            FileView.DataContext = FileView.AudysseyApp;
+            //        }
+            //        break;
+            //    case 1:
+            //        if (EthernetView.Avr != null)
+            //        {
+            //            EthernetView.DataContext = EthernetView.Avr;
+            //        }
+            //        break;
+            //}
         }
 
         #endregion

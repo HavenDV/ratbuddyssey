@@ -13,11 +13,11 @@
   
   <ItemGroup>
     <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
-    <!--<PackageReference Include="MaterialDesignColors" Version="2.0.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="13.2.18" />
-    <PackageReference Include="ReactiveUI.WPF" Version="13.2.18" />-->
+    <PackageReference Include="ReactiveUI.WPF" Version="13.2.18" />
   </ItemGroup>
 
   <ItemGroup>
