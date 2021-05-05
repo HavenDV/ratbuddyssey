@@ -36,6 +36,54 @@ namespace Ratbuddyssey
 
                 context.SetOutput(Unit.Default);
             });
+            Interactions.OpenFile.RegisterHandler(static context =>
+            {
+                var extension = context.Input;
+
+                var dialog = new Microsoft.Win32.OpenFileDialog
+                {
+                    FileName = extension switch
+                    {
+                        ".aud" => "AudysseySniffer.aud",
+                        _ => string.Empty,
+                    },
+                    DefaultExt = extension,
+                    Filter = extension switch
+                    {
+                        ".aud" => "Audyssey sniffer (*.aud)|*.aud",
+                        _ => string.Empty,
+                    },
+                };
+                var fileName = dialog.ShowDialog() == true
+                    ? dialog.FileName
+                    : null;
+
+                context.SetOutput(fileName);
+            });
+            Interactions.SaveFile.RegisterHandler(static context =>
+            {
+                var extension = context.Input;
+
+                var dialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    FileName = extension switch
+                    {
+                        ".aud" => "AudysseySniffer.aud",
+                        _ => string.Empty,
+                    },
+                    DefaultExt = extension,
+                    Filter = extension switch
+                    {
+                        ".aud" => "Audyssey sniffer (.aud)|*.aud",
+                        _ => string.Empty,
+                    },
+                };
+                var fileName = dialog.ShowDialog() == true
+                    ? dialog.FileName
+                    : null;
+
+                context.SetOutput(fileName);
+            });
 
             DispatcherUnhandledException += static (_, e) =>
             {

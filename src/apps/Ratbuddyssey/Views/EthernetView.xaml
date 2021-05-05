@@ -24,27 +24,27 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Panel.ZIndex="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="Receiver IP Address:" VerticalAlignment="Top" ></Label>
-            <ComboBox x:Name="cmbInterfaceClient"  VerticalAlignment="Top" Width="120" IsEditable="True"/>
+            <ComboBox x:Name="InterfaceIpsComboBox"  VerticalAlignment="Top" Width="120" IsEditable="True"/>
             <Label Content="Computer IP Address:" VerticalAlignment="Top" ></Label>
-            <ComboBox x:Name="cmbInterfaceHost" VerticalAlignment="Top" Width="120" DisplayMemberPath="."/>
+            <ComboBox x:Name="IpsComboBox" VerticalAlignment="Top" Width="120" DisplayMemberPath="."/>
         </StackPanel>
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" Grid.Column="0">
             <MenuItem Header="_Ethernet">
-                <MenuItem Header="_Open Project" Name="openProjectFile" Click="openProjectFile_Click"/>
-                <MenuItem Header="_Save Project" Name="saveProjectFile" Click="saveProjectFile_Click"/>
+                <MenuItem Header="_Open Project" Name="OpenFileMenuItem"/>
+                <MenuItem Header="_Save Project" Name="SaveFileMenuItem"/>
                 <Separator/>
-                <MenuItem Header="Connect _Receiver" Name="connectReceiver" Click="ConnectReceiver_OnClick" IsCheckable="True"/>
-                <MenuItem Header="Connect S_niffer" Name="connectSniffer" Click="ConnectSniffer_OnClick" IsCheckable="True"/>
+                <MenuItem Header="Connect _Receiver" Name="ConnectReceiverMenuItem" IsCheckable="True"/>
+                <MenuItem Header="Connect S_niffer" Name="ConnectSnifferMenuItem" IsCheckable="True"/>
                 <Separator/>
-                <MenuItem Header="Get Receiver _Info" Name="getReceiverInfo" Click="getReceiverInfo_Click" />
-                <MenuItem Header="Get Receiver _Status" Name="getReceiverStatus" Click="getReceiverStatus_Click" />
-                <MenuItem Header="Enter _Audyssey" Name="connectAudyssey" Click="ConnectAudyssey_OnClick" IsCheckable="True"/>
-                <MenuItem Header="Set Amp" Name="setAvrSetAmp" Click="setAvrSetAmp_Click" />
-                <MenuItem Header="Set Audy" Name="setAvrSetAudy" Click="setAvrSetAudy_Click" />
-                <MenuItem Header="Set DisFil" Name="setAvrSetDisFil" Click="setAvrSetDisFil_Click" />
-                <MenuItem Header="Init Coefs" Name="setAvrInitCoefs" Click="setAvrInitCoefs_Click" />
-                <MenuItem Header="Set CoefDt" Name="setAvrSetCoefDt" Click="setAvrSetCoefDt_Click" />
-                <MenuItem Header="Set AudyFinFlg" Name="setAudysseyFinishedFlag" Click="setAudysseyFinishedFlag_Click" />
+                <MenuItem Header="Get Receiver _Info" Name="GetReceiverInfoMenuItem" />
+                <MenuItem Header="Get Receiver _Status" Name="GetReceiverStatusMenuItem" />
+                <MenuItem Header="Enter _Audyssey" Name="ConnectAudysseyMenuItem" IsCheckable="True"/>
+                <MenuItem Header="Set Amp" Name="SetAvrSetAmpMenuItem" />
+                <MenuItem Header="Set Audy" Name="SetAvrSetAudyMenuItem" />
+                <MenuItem Header="Set DisFil" Name="SetAvrSetDisFilMenuItem" />
+                <MenuItem Header="Init Coefs" Name="SetAvrInitCoefsMenuItem" />
+                <MenuItem Header="Set CoefDt" Name="SetAvrSetCoefDtMenuItem" />
+                <MenuItem Header="Set AudyFinFlg" Name="SetAudysseyFinishedFlagMenuItem" />
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Grid.Column="0">
@@ -57,7 +57,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <GroupBox Grid.Row="0" Header="Channels">
-                    <ListView Name="ChannelSetupView" ItemsSource="{Binding ChSetup, Mode=TwoWay}" SelectionChanged="ChannelSetupView_SelectionChanged" SelectionMode="Single">
+                    <ListView Name="ChannelSetupView" ItemsSource="{Binding ChSetup, Mode=TwoWay}" SelectionMode="Single">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Channel" Width="auto" DisplayMemberBinding="{Binding Key}" />
@@ -103,7 +103,7 @@
                         <Label Grid.Row="6" Grid.Column="1" Content="{Binding CoefWaitTime.Init}" VerticalAlignment="Center"></Label>
                         <Label Grid.Row="7" Grid.Column="0" Content="CoefWaitTimeFinal"></Label>
                         <Label Grid.Row="7" Grid.Column="1" Content="{Binding CoefWaitTime.Final}" VerticalAlignment="Center"></Label>
-                        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                             <CheckBox Content="SWLvMatch" IsChecked="{Binding SWLvMatch}" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
                             <CheckBox Content="LFC" IsChecked="{Binding LFC}" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
                             <CheckBox Content="Auro" IsChecked="{Binding Auro}" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
@@ -181,7 +181,7 @@
                             <Label Grid.Row="0" Grid.Column="1" Content="{Binding AssignBin}" Grid.ColumnSpan="2" VerticalAlignment="Center"></Label>
                             <Label Grid.Row="1" Grid.Column="0" Content="AmpAssign"></Label>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding AmpAssign}" VerticalAlignment="Center"></TextBlock>
-                            <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Orientation="Horizontal" >
+                            <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" >
                                 <CheckBox Content="HPPlug" IsChecked="{Binding HPPlug}" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
                                 <CheckBox Content="Mic" IsChecked="{Binding Mic}" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
                                 <CheckBox Content="BTTXStatus" IsChecked="{Binding BTTXStatus}" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
