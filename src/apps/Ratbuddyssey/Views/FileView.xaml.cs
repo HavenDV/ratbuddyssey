@@ -3,27 +3,34 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Audyssey;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using Audyssey.MultEQApp;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace Ratbuddyssey
+namespace Ratbuddyssey.Views
 {
-    public partial class RatbuddysseyHome
+    public partial class FileView
     {
         #region Properties
 
+        private AudysseyMultEQReferenceCurveFilter ReferenceCurveFilter { get; } = new();
+        public AudysseyMultEQApp AudysseyApp { get; set; }
+
         private PlotModel PlotModel { get; } = new();
-        
+
         private List<int> Keys { get; } = new();
         private Dictionary<int, Brush> Colors { get; } = new();
-        
+
         private double SmoothingFactor { get; set; }
 
         private List<DetectedChannel> Channels { get; } = new();
@@ -31,13 +38,134 @@ namespace Ratbuddyssey
 
         private Dictionary<string, AxisLimit> AxisLimits { get; } = new()
         {
-            {"rbtnXRangeFull", new AxisLimit { XMin = 10, XMax = 24000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 } },
-            {"rbtnXRangeSubwoofer", new AxisLimit { XMin = 10, XMax = 1000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 } },
-            {"rbtnXRangeChirp", new AxisLimit { XMin = 0, XMax = 350, YMin = -0.1, YMax = 0.1, YShift = 0, MajorStep = 0.01, MinorStep = 0.001 } }
+            { "rbtnXRangeFull", new AxisLimit { XMin = 10, XMax = 24000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 } },
+            { "rbtnXRangeSubwoofer", new AxisLimit { XMin = 10, XMax = 1000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 } },
+            { "rbtnXRangeChirp", new AxisLimit { XMin = 0, XMax = 350, YMin = -0.1, YMax = 0.1, YShift = 0, MajorStep = 0.01, MinorStep = 0.001 } }
         };
         private string SelectedAxisLimits { get; set; } = "rbtnXRangeFull";
 
         #endregion
+
+        public FileView()
+        {
+            InitializeComponent();
+
+            channelsView.SelectionChanged += ChannelsView_SelectionChanged;
+            plot.PreviewMouseWheel += Plot_PreviewMouseWheel;
+        }
+
+
+        public void HandleDroppedFile(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Note that you can have more than one file.
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                // Assuming you have one file that you care about, pass it off to whatever
+                // handling code you have defined.
+                if (files != null && files.Length > 0)
+                    OpenFile(files[0]);
+            }
+        }
+
+        public void OpenFile_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                DefaultExt = ".ady",
+                Filter = "Audyssey files (*.ady)|*.ady",
+            };
+            var result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                OpenFile(dlg.FileName);
+            }
+        }
+
+        public void ReloadFile_OnClick(object sender, RoutedEventArgs e)
+        {
+            var messageBoxResult = MessageBox.Show("This will reload the .ady file and discard all changes since last save", "Are you sure?", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                if (File.Exists(currentFile.Content.ToString()))
+                {
+                    LoadApp(currentFile.Content.ToString());
+                    if ((AudysseyApp != null))
+                    {
+                        DataContext = AudysseyApp;
+                    }
+                }
+            }
+        }
+
+        public void SaveFile_OnClick(object sender, RoutedEventArgs e)
+        {
+#if DEBUG
+            currentFile.Content = Path.ChangeExtension(currentFile.Content.ToString(), ".json");
+#endif
+            SaveApp(currentFile.Content.ToString());
+        }
+
+        public void SaveFileAs_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = currentFile.Content.ToString(),
+                DefaultExt = ".ady",
+                Filter = "Audyssey calibration (.ady)|*.ady"
+            };
+            var result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                currentFile.Content = dlg.FileName;
+                SaveApp(currentFile.Content.ToString());
+            }
+        }
+
+        private void OpenFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                return;
+            }
+
+            currentFile.Content = filePath;
+            LoadApp(currentFile.Content.ToString());
+            if ((AudysseyApp != null))
+            {
+                DataContext = AudysseyApp;
+            }
+        }
+
+        private void LoadApp(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                var json = File.ReadAllText(fileName);
+                AudysseyApp = JsonConvert.DeserializeObject<AudysseyMultEQApp>(json, new JsonSerializerSettings
+                {
+                    FloatParseHandling = FloatParseHandling.Decimal
+                });
+            }
+        }
+
+        private void SaveApp(string fileName)
+        {
+            if (AudysseyApp != null)
+            {
+                var json = JsonConvert.SerializeObject(AudysseyApp, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                });
+                if ((!string.IsNullOrEmpty(fileName)))
+                {
+                    File.WriteAllText(fileName, json);
+                }
+            }
+        }
 
         private void DrawChart()
         {
@@ -50,7 +178,7 @@ namespace Ratbuddyssey
                 }
                 if (Channels != null)
                 {
-                    foreach(var channel in Channels)
+                    foreach (var channel in Channels)
                     {
                         if (channel.Sticky)
                         {
@@ -396,7 +524,7 @@ namespace Ratbuddyssey
         }
         private void ButtonClickAddTargetCurvePoint(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(keyTbx.Text) && !string.IsNullOrEmpty(valueTbx.Text))
+            if (!string.IsNullOrEmpty(keyTbx.Text) && !string.IsNullOrEmpty(valueTbx.Text))
             {
                 ((DetectedChannel)channelsView.SelectedValue).CustomTargetCurvePointsDictionary.Add(new MyKeyValuePair(keyTbx.Text, valueTbx.Text));
             }
@@ -405,7 +533,7 @@ namespace Ratbuddyssey
         {
             var b = sender as Button;
             var pair = b.DataContext as MyKeyValuePair;
-            ((DetectedChannel)channelsView.SelectedValue).CustomTargetCurvePointsDictionary.Remove(pair);            
+            ((DetectedChannel)channelsView.SelectedValue).CustomTargetCurvePointsDictionary.Remove(pair);
         }
         private void RadioButtonSmoothingFactorChecked(object sender, RoutedEventArgs e)
         {

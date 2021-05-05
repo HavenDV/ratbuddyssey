@@ -114,7 +114,7 @@ namespace Ratbuddyssey
 
                             DataContext = tabControl.SelectedIndex switch
                             {
-                                0 when (AudysseyApp == null) => AvrAdapter,
+                                0 when (FileView.AudysseyApp == null) => AvrAdapter,
                                 1 => Avr,
                                 _ => DataContext
                             };
@@ -168,7 +168,7 @@ namespace Ratbuddyssey
                         // create adapter to interface MultEQAvr properties as if they were MultEQApp properties 
                         AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
                         // data Binding to adapter
-                        if ((tabControl.SelectedIndex == 0) && (AudysseyApp == null))
+                        if ((tabControl.SelectedIndex == 0) && (FileView.AudysseyApp == null))
                         {
                             this.DataContext = AvrAdapter;
                         }
