@@ -3,24 +3,69 @@ using Audyssey.MultEQAvr;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using Audyssey.MultEQAvrAdapter;
 using Audyssey.MultEQTcp;
 
-namespace Ratbuddyssey
+namespace Ratbuddyssey.Views
 {
-    public partial class RatbuddysseyHome
+    public partial class EthernetView
     {
         #region Properties
 
-        private AudysseyMultEQAvr Avr { get; set; }
+        public AudysseyMultEQAvr Avr { get; set; }
+        public AudysseyMultEQAvrAdapter AvrAdapter { get; set; }
+
         private AudysseyMultEQAvrTcp AvrTcp { get; set; }
-        private AudysseyMultEQAvrAdapter AvrAdapter { get; set; }
         private AudysseyMultEQTcpSniffer TcpSniffer { get; set; }
 
+        private static string TcpClientFileName { get; } = "TcpClient.json";
+
         #endregion
+
+        #region Constructors
+
+        public EthernetView()
+        {
+            InitializeComponent();
+
+            var hostEntry = System.Net.Dns.GetHostEntry((System.Net.Dns.GetHostName()));
+            if (hostEntry.AddressList.Length > 0)
+            {
+                foreach (var ip in hostEntry.AddressList)
+                {
+                    cmbInterfaceHost.Items.Add(ip.ToString());
+                }
+                cmbInterfaceHost.SelectedIndex = cmbInterfaceHost.Items.Count - 1;
+            }
+
+            if (File.Exists(Environment.CurrentDirectory + "\\" + TcpClientFileName))
+            {
+                var text = File.ReadAllText(Environment.CurrentDirectory + "\\" + TcpClientFileName);
+                if (text.Length > 0)
+                {
+                    var tcpClient = JsonConvert.DeserializeObject<TcpIP>(text);
+                    if (tcpClient != null)
+                    {
+                        cmbInterfaceClient.Items.Add(tcpClient.Address);
+                        cmbInterfaceClient.SelectedIndex = cmbInterfaceClient.Items.Count - 1;
+                    }
+                }
+            }
+
+            for (var x = 0; x < 61; x++)
+            {
+                var fcentre = Math.Pow(10.0, 3.0) * Math.Pow(2.0, (x - 34.0) / 6.0);
+                Console.Write(x); Console.Write(" ");
+                Console.WriteLine("{0:N1}", fcentre);
+            }
+        }
+
+        #endregion
+
 
         #region Methods
 
@@ -47,14 +92,46 @@ namespace Ratbuddyssey
             File.WriteAllText(fileName, json);
         }
 
+        private static void RunAsAdmin()
+        {
+            try
+            {
+                var path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                using var process = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path, "/run_elevated_action")
+                {
+                    Verb = "runas"
+                });
+                process?.WaitForExit();
+            }
+            catch (Win32Exception ex)
+            {
+                if (ex.NativeErrorCode == 1223)
+                {
+                    System.Windows.Forms.MessageBox.Show("Sniffer needs elevated rights for raw socket!", "Warning");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private static bool IsElevated()
+        {
+            using var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            var principal = new System.Security.Principal.WindowsPrincipal(identity);
+
+            return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
+        }
+
         #endregion
 
         private void openProjectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
-                FileName = "AudysseySniffer.aud", 
-                DefaultExt = ".aud", 
+                FileName = "AudysseySniffer.aud",
+                DefaultExt = ".aud",
                 Filter = "Audyssey sniffer (*.aud)|*.aud",
             };
             if (dialog.ShowDialog() != true)
@@ -63,14 +140,10 @@ namespace Ratbuddyssey
             }
 
             LoadAvr(dialog.FileName);
+
             if (Avr != null)
             {
-                DataContext = tabControl.SelectedIndex switch
-                {
-                    0 => AvrAdapter,
-                    1 => Avr,
-                    _ => DataContext
-                };
+                DataContext = Avr;
             }
         }
 
@@ -78,8 +151,8 @@ namespace Ratbuddyssey
         {
             var dialog = new Microsoft.Win32.SaveFileDialog
             {
-                FileName = "AudysseySniffer.aud", 
-                DefaultExt = ".aud", 
+                FileName = "AudysseySniffer.aud",
+                DefaultExt = ".aud",
                 Filter = "Audyssey sniffer (.aud)|*.aud",
             };
             if (dialog.ShowDialog() != true)
@@ -112,12 +185,7 @@ namespace Ratbuddyssey
                             // create adapter to interface MultEQAvr properties as if they were MultEQApp properties 
                             AvrAdapter ??= new AudysseyMultEQAvrAdapter(Avr);
 
-                            DataContext = tabControl.SelectedIndex switch
-                            {
-                                0 when (FileView.AudysseyApp == null) => AvrAdapter,
-                                1 => Avr,
-                                _ => DataContext
-                            };
+                            DataContext = Avr;
                         }
                         AvrTcp.Connect();
                         // attach sniffer
@@ -134,7 +202,7 @@ namespace Ratbuddyssey
                             else
                             {
                                 TcpSniffer ??= new AudysseyMultEQTcpSniffer(
-                                    Avr, 
+                                    Avr,
                                     cmbInterfaceHost.SelectedItem.ToString(),
                                     cmbInterfaceClient.SelectedItem.ToString());
                             }
@@ -168,14 +236,8 @@ namespace Ratbuddyssey
                         // create adapter to interface MultEQAvr properties as if they were MultEQApp properties 
                         AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
                         // data Binding to adapter
-                        if ((tabControl.SelectedIndex == 0) && (FileView.AudysseyApp == null))
-                        {
-                            this.DataContext = AvrAdapter;
-                        }
-                        if (tabControl.SelectedIndex == 1)
-                        {
-                            this.DataContext = Avr;
-                        }
+
+                        DataContext = Avr;
                     }
                     // sniffer must be elevated to capture raw packets
                     if (!IsElevated())
@@ -189,7 +251,7 @@ namespace Ratbuddyssey
                     {
                         // onyl create sniffer if it not already exists
                         TcpSniffer ??= new AudysseyMultEQTcpSniffer(
-                            Avr, 
+                            Avr,
                             cmbInterfaceHost.SelectedItem.ToString(),
                             cmbInterfaceClient.SelectedItem.ToString());
                     }

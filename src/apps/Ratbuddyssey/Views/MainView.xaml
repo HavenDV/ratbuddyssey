@@ -1,0 +1,50 @@
+﻿<Page 
+    x:Class="Ratbuddyssey.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:views="clr-namespace:Ratbuddyssey.Views"
+    mc:Ignorable="d" 
+    d:DesignHeight="800" 
+    d:DesignWidth="1200" 
+    Background="White"
+    Title="Ratbuddyssey - Home"
+    ShowsNavigationUI="false"
+    >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TabControl 
+            Grid.Row="0" 
+            x:Name="TabControl" 
+            SelectionChanged="TabControl_SelectionChanged"
+            >
+            <TabItem 
+                x:Name="TabFile" 
+                Header="App"
+                >
+                <views:FileView x:Name="FileView"/>
+            </TabItem>
+            <TabItem 
+                x:Name="TabEthernet" 
+                Header="Ethernet"
+                >
+                <views:EthernetView x:Name="EthernetView"/>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="1">
+            <StatusBarItem>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock 
+                        Text="{Binding Serialized}" 
+                        TextWrapping="Wrap"
+                        />
+                </ScrollViewer>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Page>

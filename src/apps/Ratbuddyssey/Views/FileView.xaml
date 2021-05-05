@@ -6,18 +6,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:oxy="http://oxyplot.org/wpf"
     mc:Ignorable="d" 
-    d:DesignHeight="800" 
     d:DesignWidth="1200"
+    d:DesignHeight="800" 
     Background="White"
+    Drop="HandleDroppedFile" 
+    AllowDrop="true"
     >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="_Commands">
+                <MenuItem Header="_Open Audyssey file" Name="openFile" Click="OpenFile_OnClick"/>
+                <MenuItem Header="_Reload (discard unsaved changes)" Name="reloadFile" Click="ReloadFile_OnClick"/>
+                <Separator/>
+                <MenuItem Header="_Save" Name="saveFile" Click="SaveFile_OnClick"/>
+                <MenuItem Header="Save _As" Name="saveFileAs" Click="SaveFileAs_OnClick"/>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="Auto"/>
@@ -67,8 +83,8 @@
                 </ScrollViewer>
             </GroupBox>
         </Grid>
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
-        <Grid Grid.Column="2">
+        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
