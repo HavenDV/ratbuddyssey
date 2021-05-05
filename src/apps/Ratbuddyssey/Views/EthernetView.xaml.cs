@@ -93,6 +93,11 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.SetAudysseyFinishedFlag,
                         static view => view.SetAudysseyFinishedFlagMenuItem)
                     .DisposeWith(disposable);
+
+                this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.Avr.ChSetup,
+                        static view => view.ChannelSetupView.ItemsSource)
+                    .DisposeWith(disposable);
             });
         }
 

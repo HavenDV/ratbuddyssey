@@ -57,7 +57,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <GroupBox Grid.Row="0" Header="Channels">
-                    <ListView Name="ChannelSetupView" ItemsSource="{Binding ChSetup, Mode=TwoWay}" SelectionMode="Single">
+                    <ListView Name="ChannelSetupView" SelectionMode="Single">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Channel" Width="auto" DisplayMemberBinding="{Binding Key}" />

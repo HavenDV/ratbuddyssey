@@ -21,8 +21,11 @@ namespace Audyssey.ViewModels
     {
         #region Properties
 
-        private AudysseyMultEQAvr? Avr { get; set; }
-        private AudysseyMultEQAvrAdapter? AvrAdapter { get; set; }
+        [Reactive]
+        public AudysseyMultEQAvr Avr { get; set; } = new();
+
+        [Reactive]
+        public AudysseyMultEQAvrAdapter AvrAdapter { get; set; }
 
         private AudysseyMultEQAvrTcp? AvrTcp { get; set; }
         private AudysseyMultEQTcpSniffer? TcpSniffer { get; set; }
@@ -73,6 +76,8 @@ namespace Audyssey.ViewModels
 
         public EthernetViewModel()
         {
+            AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
+
             OpenFile = ReactiveCommand.CreateFromTask(async _ =>
             {
                 var fileName = await Interactions.OpenFile.Handle(".aud");
