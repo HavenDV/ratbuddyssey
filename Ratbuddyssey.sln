@@ -24,7 +24,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{BAA5012B-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Core", "src\libs\Ratbuddyssey.Core\Ratbuddyssey.Core.csproj", "{A53DA76F-0057-4533-832E-3B4FC57967F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{BA76CFC8-6CD7-434C-A613-769C29EEF3D9}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Shared", "src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.shproj", "{264A09D3-F3F5-4A21-92E6-CBFEAA604FFE}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems*{264a09d3-f3f5-4a21-92e6-cbfeaa604ffe}*SharedItemsImports = 13
+		src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems*{31fd73f9-dd37-423d-8e07-94e223837df2}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -45,6 +53,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{31FD73F9-DD37-423D-8E07-94E223837DF2} = {6A1A1E25-CA93-446C-9677-70E2B00A70FC}
 		{A53DA76F-0057-4533-832E-3B4FC57967F4} = {BAA5012B-8770-4776-A793-C9890F7A0BC3}
+		{264A09D3-F3F5-4A21-92E6-CBFEAA604FFE} = {BA76CFC8-6CD7-434C-A613-769C29EEF3D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2CA889BA-4A9A-40FB-8D1C-91B9C5D1F87E}
