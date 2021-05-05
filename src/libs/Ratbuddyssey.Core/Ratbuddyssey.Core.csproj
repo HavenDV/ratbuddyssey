@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net4.6.1</TargetFrameworks>
+    <RootNamespace>Ratbuddyssey</RootNamespace>
+    <NoWarn>$(NoWarn)</NoWarn>
+  </PropertyGroup>
+
+  <!--<ItemGroup Label="MVVM">
+    <PackageReference Include="ReactiveUI.Fody" Version="13.2.18" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="11.0.1" />
+    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="11.0.1" />
+  </ItemGroup>-->
+  
+</Project>
