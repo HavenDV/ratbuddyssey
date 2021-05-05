@@ -8,19 +8,19 @@ using Newtonsoft.Json.Serialization;
 using Audyssey;
 using Audyssey.MultEQApp;
 using Audyssey.MultEQAvr;
-using System.Globalization;
 
 namespace Ratbuddyssey
 {
-    /// <summary>
-    /// Interaction logic for RatbuddysseyHome.xaml
-    /// </summary>
-    public partial class RatbuddysseyHome : Page
+    public partial class RatbuddysseyHome
     {
-        private AudysseyMultEQReferenceCurveFilter audysseyMultEQReferenceCurveFilter = new AudysseyMultEQReferenceCurveFilter();
-        private AudysseyMultEQApp audysseyMultEQApp = null;
+        #region Properties
 
-        private string TcpClientFileName = "TcpClient.json";
+        private AudysseyMultEQReferenceCurveFilter ReferenceCurveFilter { get; } = new();
+        private AudysseyMultEQApp AudysseyApp { get; set; }
+
+        private static string TcpClientFileName { get; } = "TcpClient.json";
+
+        #endregion
 
         public RatbuddysseyHome()
         {
@@ -28,88 +28,87 @@ namespace Ratbuddyssey
             channelsView.SelectionChanged += ChannelsView_SelectionChanged;
             plot.PreviewMouseWheel += Plot_PreviewMouseWheel;
 
-            System.Net.IPHostEntry HostEntry = System.Net.Dns.GetHostEntry((System.Net.Dns.GetHostName()));
-            if (HostEntry.AddressList.Length > 0)
+            var hostEntry = System.Net.Dns.GetHostEntry((System.Net.Dns.GetHostName()));
+            if (hostEntry.AddressList.Length > 0)
             {
-                foreach (System.Net.IPAddress ip in HostEntry.AddressList)
+                foreach (var ip in hostEntry.AddressList)
                 {
                     cmbInterfaceHost.Items.Add(ip.ToString());
                 }
                 cmbInterfaceHost.SelectedIndex = cmbInterfaceHost.Items.Count - 1;
             }
 
-             if (File.Exists(Environment.CurrentDirectory + "\\" + TcpClientFileName))
+            if (File.Exists(Environment.CurrentDirectory + "\\" + TcpClientFileName))
             {
-                String ClientTcpIPFile = File.ReadAllText(Environment.CurrentDirectory + "\\" + TcpClientFileName);
-                if (ClientTcpIPFile.Length > 0)
+                var text = File.ReadAllText(Environment.CurrentDirectory + "\\" + TcpClientFileName);
+                if (text.Length > 0)
                 {
-                    TcpIP TcpClient = JsonConvert.DeserializeObject<TcpIP>(ClientTcpIPFile,
-                        new JsonSerializerSettings { });
-                    cmbInterfaceClient.Items.Add(TcpClient.Address.ToString());
-                    cmbInterfaceClient.SelectedIndex = cmbInterfaceClient.Items.Count - 1;
+                    var tcpClient = JsonConvert.DeserializeObject<TcpIP>(text);
+                    if (tcpClient != null)
+                    {
+                        cmbInterfaceClient.Items.Add(tcpClient.Address);
+                        cmbInterfaceClient.SelectedIndex = cmbInterfaceClient.Items.Count - 1;
+                    }
                 }
             }
 
-            for(int x=0; x<61; x++)
+            for(var x=0; x<61; x++)
             {
-                var fcentre = Math.Pow(10.0, 3.0) * Math.Pow(2.0, ((float)x-34.0)/6.0);
+                var fcentre = Math.Pow(10.0, 3.0) * Math.Pow(2.0, (x-34.0)/6.0);
                 Console.Write(x); Console.Write(" ");
                 Console.WriteLine("{0:N1}", fcentre);
             }
         }
 
-        ~RatbuddysseyHome()
-        {
-        }
-
         private void HandleDroppedFile(object sender, DragEventArgs e)
         {
-
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 // Note that you can have more than one file.
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 // Assuming you have one file that you care about, pass it off to whatever
                 // handling code you have defined.
-                if (files.Length > 0)
+                if (files != null && files.Length > 0)
                     OpenFile(files[0]);
             }
         }
 
-        private void ParseFileToAudysseyMultEQApp(string FileName)
+        private void LoadApp(string fileName)
         {
-            if (File.Exists(FileName))
+            if (File.Exists(fileName))
             {
-                string Serialized = File.ReadAllText(FileName);
-                audysseyMultEQApp = JsonConvert.DeserializeObject<AudysseyMultEQApp>(Serialized, new JsonSerializerSettings
+                var json = File.ReadAllText(fileName);
+                AudysseyApp = JsonConvert.DeserializeObject<AudysseyMultEQApp>(json, new JsonSerializerSettings
                 {
                     FloatParseHandling = FloatParseHandling.Decimal
                 });
             }
         }
 
-        private void ParseAudysseyMultEQAppToFile(string FileName)
+        private void SaveApp(string fileName)
         {
-            if(audysseyMultEQApp != null)
+            if(AudysseyApp != null)
             {
-                string Serialized = JsonConvert.SerializeObject(audysseyMultEQApp, new JsonSerializerSettings
+                var json = JsonConvert.SerializeObject(AudysseyApp, new JsonSerializerSettings
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 });
-                if ((Serialized != null) && (!string.IsNullOrEmpty(FileName)))
+                if ((!string.IsNullOrEmpty(fileName)))
                 {
-                    File.WriteAllText(FileName, Serialized);
+                    File.WriteAllText(fileName, json);
                 }
             }
         }
 
         private void OpenFile_OnClick(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.DefaultExt = ".ady";
-            dlg.Filter = "Audyssey files (*.ady)|*.ady";
-            Nullable<bool> result = dlg.ShowDialog();
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                DefaultExt = ".ady", 
+                Filter = "Audyssey files (*.ady)|*.ady",
+            };
+            var result = dlg.ShowDialog();
 
             if (result == true)
             {
@@ -119,15 +118,15 @@ namespace Ratbuddyssey
 
         private void ReloadFile_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("This will reload the .ady file and discard all changes since last save", "Are you sure?", MessageBoxButton.YesNo);
+            var messageBoxResult = MessageBox.Show("This will reload the .ady file and discard all changes since last save", "Are you sure?", MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 if (File.Exists(currentFile.Content.ToString()))
                 {
-                    ParseFileToAudysseyMultEQApp(currentFile.Content.ToString());
-                    if ((audysseyMultEQApp != null) && (tabControl.SelectedIndex == 0))
+                    LoadApp(currentFile.Content.ToString());
+                    if ((AudysseyApp != null) && (tabControl.SelectedIndex == 0))
                     {
-                        this.DataContext = audysseyMultEQApp;
+                        DataContext = AudysseyApp;
                     }
                 }
             }
@@ -136,64 +135,48 @@ namespace Ratbuddyssey
         private void SaveFile_OnClick(object sender, RoutedEventArgs e)
         {
 #if DEBUG
-            currentFile.Content = System.IO.Path.ChangeExtension(currentFile.Content.ToString(), ".json");
+            currentFile.Content = Path.ChangeExtension(currentFile.Content.ToString(), ".json");
 #endif
-            ParseAudysseyMultEQAppToFile(currentFile.Content.ToString());
+            SaveApp(currentFile.Content.ToString());
         }
 
         private void SaveFileAs_OnClick(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = currentFile.Content.ToString();
-            dlg.DefaultExt = ".ady";
-            dlg.Filter = "Audyssey calibration (.ady)|*.ady";
-            Nullable<bool> result = dlg.ShowDialog();
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = currentFile.Content.ToString(),
+                DefaultExt = ".ady",
+                Filter = "Audyssey calibration (.ady)|*.ady"
+            };
+            var result = dlg.ShowDialog();
 
             if (result == true)
             {
                 currentFile.Content = dlg.FileName;
-                ParseAudysseyMultEQAppToFile(currentFile.Content.ToString());
+                SaveApp(currentFile.Content.ToString());
             }
         }
 
-
         private void ExitProgram_OnClick(object sender, RoutedEventArgs e)
         {
-            App.Current.MainWindow.Close();
+            Application.Current.MainWindow?.Close();
         }
 
         private void About_OnClick(object sender, RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Shout out to AVS Forum, use at your own risk!");
+            MessageBox.Show("Shout out to AVS Forum, use at your own risk!");
         }
-
-        #region INotifyPropertyChanged implementation
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        #endregion
-
-        #region methods
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
 
         private static void RunAsAdmin()
         {
             try
             {
                 var path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                using (var process = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path, "/run_elevated_action")
+                using var process = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path, "/run_elevated_action")
                 {
                     Verb = "runas"
-                }))
-                {
-                    process?.WaitForExit();
-                }
-
+                });
+                process?.WaitForExit();
             }
             catch (Win32Exception ex)
             {
@@ -210,37 +193,35 @@ namespace Ratbuddyssey
 
         private static bool IsElevated()
         {
-            using (var identity = System.Security.Principal.WindowsIdentity.GetCurrent())
-            {
-                var principal = new System.Security.Principal.WindowsPrincipal(identity);
+            using var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            var principal = new System.Security.Principal.WindowsPrincipal(identity);
 
-                return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
-            }
+            return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
         }
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int currentTab = (sender as TabControl).SelectedIndex;
+            var currentTab = ((TabControl)sender).SelectedIndex;
 
             switch (currentTab)
             {
                 case 0:
-                    if (audysseyMultEQApp == null)
+                    if (AudysseyApp == null)
                     {
-                        if (audysseyMultEQAvrAdapter != null)
+                        if (AvrAdapter != null)
                         {
-                            this.DataContext = audysseyMultEQAvrAdapter;
+                            DataContext = AvrAdapter;
                         }
                     }
                     else
                     {
-                        this.DataContext = audysseyMultEQApp;
+                        DataContext = AudysseyApp;
                     }
                     break;
                 case 1:
-                    if (audysseyMultEQAvr != null)
+                    if (Avr != null)
                     {
-                        this.DataContext = audysseyMultEQAvr;
+                        DataContext = Avr;
                     }
                     break;
             }
@@ -248,14 +229,16 @@ namespace Ratbuddyssey
 
         private void OpenFile(string filePath)
         {
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
-                currentFile.Content = filePath;
-                ParseFileToAudysseyMultEQApp(currentFile.Content.ToString());
-                if ((audysseyMultEQApp != null) && (tabControl.SelectedIndex == 0))
-                {
-                    this.DataContext = audysseyMultEQApp;
-                }
+                return;
+            }
+
+            currentFile.Content = filePath;
+            LoadApp(currentFile.Content.ToString());
+            if ((AudysseyApp != null) && (tabControl.SelectedIndex == 0))
+            {
+                DataContext = AudysseyApp;
             }
         }
     }

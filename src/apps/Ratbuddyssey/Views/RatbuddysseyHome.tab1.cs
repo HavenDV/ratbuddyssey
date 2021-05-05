@@ -15,48 +15,52 @@ using Audyssey.MultEQApp;
 
 namespace Ratbuddyssey
 {
-    public partial class RatbuddysseyHome : Page
+    public partial class RatbuddysseyHome
     {
-        private PlotModel plotModel = new PlotModel();
-        
-        private List<int> keys = new List<int>();
-        private Dictionary<int, Brush> colors = new Dictionary<int, Brush>();
-        
-        private double smoothingFactor = 0;
-        
-        private DetectedChannel selectedChannel = null;
-        private List<DetectedChannel> stickyChannel = new List<DetectedChannel>();
+        #region Properties
 
-        private string selectedAxisLimits = "rbtnXRangeFull";
-        private Dictionary<string, AxisLimit> AxisLimits = new Dictionary<string, AxisLimit>()
+        private PlotModel PlotModel { get; } = new();
+        
+        private List<int> Keys { get; } = new();
+        private Dictionary<int, Brush> Colors { get; } = new();
+        
+        private double SmoothingFactor { get; set; }
+
+        private List<DetectedChannel> Channels { get; } = new();
+        private DetectedChannel SelectedChannel { get; set; }
+
+        private Dictionary<string, AxisLimit> AxisLimits { get; } = new()
         {
             {"rbtnXRangeFull", new AxisLimit { XMin = 10, XMax = 24000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 } },
             {"rbtnXRangeSubwoofer", new AxisLimit { XMin = 10, XMax = 1000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 } },
             {"rbtnXRangeChirp", new AxisLimit { XMin = 0, XMax = 350, YMin = -0.1, YMax = 0.1, YShift = 0, MajorStep = 0.01, MinorStep = 0.001 } }
         };
+        private string SelectedAxisLimits { get; set; } = "rbtnXRangeFull";
+
+        #endregion
 
         private void DrawChart()
         {
             if (plot != null)
             {
                 ClearPlot();
-                if (selectedChannel != null)
+                if (SelectedChannel != null)
                 {
-                    PlotLine(selectedChannel);
+                    PlotLine(SelectedChannel);
                 }
-                if (stickyChannel != null)
+                if (Channels != null)
                 {
-                    foreach(var channel in stickyChannel)
+                    foreach(var channel in Channels)
                     {
-                        if (channel.Sticky == true)
+                        if (channel.Sticky)
                         {
                             PlotLine(channel, true);
                         }
                     }
                 }
-                if (audysseyMultEQApp != null)
+                if (AudysseyApp != null)
                 {
-                    switch (audysseyMultEQApp.EnTargetCurveType)
+                    switch (AudysseyApp.EnTargetCurveType)
                     {
                         case 0:
                             break;
@@ -87,26 +91,26 @@ namespace Ratbuddyssey
         }
         private void PlotChart()
         {
-            plot.Model = plotModel;
+            plot.Model = PlotModel;
         }
         private void PlotAxis()
         {
-            plotModel.Axes.Clear();
-            AxisLimit Limits = AxisLimits[selectedAxisLimits];
-            if (selectedAxisLimits == "rbtnXRangeChirp")
+            PlotModel.Axes.Clear();
+            var limits = AxisLimits[SelectedAxisLimits];
+            if (SelectedAxisLimits == "rbtnXRangeChirp")
             {
                 if (chbxLogarithmicAxis != null)
                 {
                     if (chbxLogarithmicAxis.IsChecked == true)
                     {
-                        plotModel.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = Limits.XMin, Maximum = Limits.XMax, MajorGridlineStyle = LineStyle.Dot });
+                        PlotModel.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
                     }
                     else
                     {
-                        plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = Limits.XMin, Maximum = Limits.XMax, MajorGridlineStyle = LineStyle.Dot });
+                        PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
                     }
                 }
-                plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "", Minimum = Limits.YMin, Maximum = Limits.YMax, MajorStep = Limits.MajorStep, MinorStep = Limits.MinorStep, MajorGridlineStyle = LineStyle.Solid });
+                PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "", Minimum = limits.YMin, Maximum = limits.YMax, MajorStep = limits.MajorStep, MinorStep = limits.MinorStep, MajorGridlineStyle = LineStyle.Solid });
             }
             else
             {
@@ -114,41 +118,41 @@ namespace Ratbuddyssey
                 {
                     if (chbxLogarithmicAxis.IsChecked == true)
                     {
-                        plotModel.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = Limits.XMin, Maximum = Limits.XMax, MajorGridlineStyle = LineStyle.Dot });
+                        PlotModel.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
                     }
                     else
                     {
-                        plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = Limits.XMin, Maximum = Limits.XMax, MajorGridlineStyle = LineStyle.Dot });
+                        PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
                     }
                 }
-                plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "dB", Minimum = Limits.YMin + Limits.YShift, Maximum = Limits.YMax + Limits.YShift, MajorStep = Limits.MajorStep, MinorStep = Limits.MinorStep, MajorGridlineStyle = LineStyle.Solid });
+                PlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "dB", Minimum = limits.YMin + limits.YShift, Maximum = limits.YMax + limits.YShift, MajorStep = limits.MajorStep, MinorStep = limits.MinorStep, MajorGridlineStyle = LineStyle.Solid });
             }
         }
         private void PlotLine(DetectedChannel selectedChannel, bool secondaryChannel = false)
         {
             if (selectedChannel == null)
             {
-                Collection<DataPoint> points = null;
                 //time domain data
-                if (selectedAxisLimits == "rbtnXRangeChirp")
+                if (SelectedAxisLimits == "rbtnXRangeChirp")
                 {
                 }
                 //frequency domain data
                 else
                 {
+                    Collection<DataPoint> points = null;
                     if (secondaryChannel)
                     {
-                        points = audysseyMultEQReferenceCurveFilter.High_Frequency_Roll_Off_2();
+                        points = ReferenceCurveFilter.High_Frequency_Roll_Off_2();
                     }
                     else
                     {
-                        points = audysseyMultEQReferenceCurveFilter.High_Frequency_Roll_Off_1();
+                        points = ReferenceCurveFilter.High_Frequency_Roll_Off_1();
                     }
 
                     if (points != null)
                     {
-                        OxyColor color = OxyColor.FromRgb(255, 0, 0);
-                        LineSeries lineserie = new LineSeries
+                        var color = OxyColor.FromRgb(255, 0, 0);
+                        var lineserie = new LineSeries
                         {
                             ItemsSource = points,
                             DataFieldX = "X",
@@ -159,79 +163,79 @@ namespace Ratbuddyssey
                             Color = color,
                             MarkerType = MarkerType.None,
                         };
-                        plotModel.Series.Add(lineserie);
+                        PlotModel.Series.Add(lineserie);
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < keys.Count; i++)
+                for (var i = 0; i < Keys.Count; i++)
                 {
-                    Collection<DataPoint> points = new Collection<DataPoint>();
+                    var points = new Collection<DataPoint>();
 
-                    string s = keys[i].ToString();
+                    var s = Keys[i].ToString();
                     if (!selectedChannel.ResponseData.ContainsKey(s))
                         continue;
 
-                    string[] values = selectedChannel.ResponseData[s];
-                    int count = values.Length;
-                    Complex[] cValues = new Complex[count];
-                    double[] Xs = new double[count];
+                    var values = selectedChannel.ResponseData[s];
+                    var count = values.Length;
+                    var cValues = new Complex[count];
+                    var xs = new double[count];
 
                     float sample_rate = 48000;
-                    float total_time = count / sample_rate;
+                    var totalTime = count / sample_rate;
 
-                    AxisLimit Limits = AxisLimits[selectedAxisLimits];
-                    if (selectedAxisLimits == "rbtnXRangeChirp")
+                    var limits = AxisLimits[SelectedAxisLimits];
+                    if (SelectedAxisLimits == "rbtnXRangeChirp")
                     {
-                        Limits.XMax = 1000 * total_time; // horizotal scale: s to ms
-                        for (int j = 0; j < count; j++)
+                        limits.XMax = 1000 * totalTime; // horizotal scale: s to ms
+                        for (var j = 0; j < count; j++)
                         {
-                            double d = Double.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
-                            points.Add(new DataPoint(1000 * j * total_time / count, d));
+                            var d = Double.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
+                            points.Add(new DataPoint(1000 * j * totalTime / count, d));
                         }
                     }
                     else
                     {
-                        for (int j = 0; j < count; j++)
+                        for (var j = 0; j < count; j++)
                         {
-                            decimal d = Decimal.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
-                            Complex cValue = (Complex)d;
+                            var d = Decimal.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
+                            var cValue = (Complex)d;
                             cValues[j] = 100 * cValue;
-                            Xs[j] = (double)j / count * sample_rate;
+                            xs[j] = (double)j / count * sample_rate;
                         }
 
                         MathNet.Numerics.IntegralTransforms.Fourier.Forward(cValues);
 
-                        int x = 0;
+                        var x = 0;
                         if (radioButtonSmoothingFactorNone.IsChecked.Value)
                         {
-                            foreach (Complex cValue in cValues)
+                            foreach (var cValue in cValues)
                             {
-                                points.Add(new DataPoint(Xs[x++], Limits.YShift + 20 * Math.Log10(cValue.Magnitude)));
+                                points.Add(new DataPoint(xs[x++], limits.YShift + 20 * Math.Log10(cValue.Magnitude)));
                                 if (x == count / 2) break;
                             }
                         }
                         else
                         {
-                            double[] smoothed = new double[count];
-                            for (int j = 0; j < count; j++)
+                            var smoothed = new double[count];
+                            for (var j = 0; j < count; j++)
                             {
                                 smoothed[j] = cValues[j].Magnitude;
                             }
 
-                            LinSpacedFracOctaveSmooth(smoothingFactor, ref smoothed, 1, 1d / 48);
+                            LinSpacedFracOctaveSmooth(SmoothingFactor, ref smoothed, 1, 1d / 48);
 
-                            foreach (double smoothetResult in smoothed)
+                            foreach (var smoothetResult in smoothed)
                             {
-                                points.Add(new DataPoint(Xs[x++], Limits.YShift + 20 * Math.Log10(smoothetResult)));
+                                points.Add(new DataPoint(xs[x++], limits.YShift + 20 * Math.Log10(smoothetResult)));
                                 if (x == count / 2) break;
                             }
                         }
                     }
 
-                    OxyColor color = OxyColor.Parse(colors[keys[i]].ToString());
-                    LineSeries lineserie = new LineSeries
+                    var color = OxyColor.Parse(Colors[Keys[i]].ToString());
+                    var lineserie = new LineSeries
                     {
                         ItemsSource = points,
                         DataFieldX = "X",
@@ -243,38 +247,39 @@ namespace Ratbuddyssey
                         MarkerType = MarkerType.None,
                     };
 
-                    plotModel.Series.Add(lineserie);
+                    PlotModel.Series.Add(lineserie);
                 }
             }
         }
-        private void LinSpacedFracOctaveSmooth(double frac, ref double[] smoothed, float startFreq, double freqStep)
+
+        private static void LinSpacedFracOctaveSmooth(double frac, ref double[] smoothed, float startFreq, double freqStep)
         {
-            int passes = 8;
+            var passes = 8;
             // Scale octave frac to allow for number of passes
-            double scaledFrac = 7.5 * frac; //Empirical tweak to better match Gaussian smoothing
-            double octMult = Math.Pow(2, 0.5 / scaledFrac);
-            double bwFactor = (octMult - 1 / octMult);
-            double b = 0.5 + bwFactor * startFreq / freqStep;
-            int N = smoothed.Length;
+            var scaledFrac = 7.5 * frac; //Empirical tweak to better match Gaussian smoothing
+            var octMult = Math.Pow(2, 0.5 / scaledFrac);
+            var bwFactor = (octMult - 1 / octMult);
+            var b = 0.5 + bwFactor * startFreq / freqStep;
+            var N = smoothed.Length;
             double xp;
             double yp;
             // Smooth from HF to LF to avoid artificial elevation of HF data
-            for (int pass = 0; pass < passes; pass++)
+            for (var pass = 0; pass < passes; pass++)
             {
                 xp = smoothed[N - 1];
                 yp = xp;
                 // reverse pass
-                for (int i = N - 2; i >= 0; i--)
+                for (var i = N - 2; i >= 0; i--)
                 {
-                    double a = 1 / (b + i * bwFactor);
+                    var a = 1 / (b + i * bwFactor);
                     yp += ((xp + smoothed[i]) / 2 - yp) * a;
                     xp = smoothed[i];
                     smoothed[i] = (float)yp;
                 }
                 // forward pass
-                for (int i = 1; i < N; i++)
+                for (var i = 1; i < N; i++)
                 {
-                    double a = 1 / (b + i * bwFactor);
+                    var a = 1 / (b + i * bwFactor);
                     yp += ((xp + smoothed[i]) / 2 - yp) * a;
                     xp = smoothed[i];
                     smoothed[i] = (float)yp;
@@ -287,28 +292,28 @@ namespace Ratbuddyssey
         }
         private void CheckBoxMeasurementPositionUnchecked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = sender as CheckBox;
-            int val = int.Parse(checkBox.Content.ToString()) - 1;
-            if (keys.Contains(val))
+            var checkBox = sender as CheckBox;
+            var val = int.Parse(checkBox.Content.ToString()) - 1;
+            if (Keys.Contains(val))
             {
-                keys.Remove(val);
-                colors.Remove(val);
+                Keys.Remove(val);
+                Colors.Remove(val);
                 DrawChart();
             }
         }
         private void CheckBoxMeasurementPositionChecked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = sender as CheckBox;
-            int val = int.Parse(checkBox.Content.ToString()) - 1;
-            if (selectedChannel != null && !selectedChannel.ResponseData.ContainsKey(val.ToString()))
+            var checkBox = sender as CheckBox;
+            var val = int.Parse(checkBox.Content.ToString()) - 1;
+            if (SelectedChannel != null && !SelectedChannel.ResponseData.ContainsKey(val.ToString()))
             {
                 // This channel has not been measured in this Audyssey calibration. Don't attempt to plot it, and clear the checkbox.
                 checkBox.IsChecked = false;
             }
-            else if (!keys.Contains(val))
+            else if (!Keys.Contains(val))
             {
-                keys.Add(val);
-                colors.Add(val, checkBox.Foreground);
+                Keys.Add(val);
+                Colors.Add(val, checkBox.Foreground);
                 DrawChart();
             }
         }
@@ -338,7 +343,7 @@ namespace Ratbuddyssey
         }
         private void ChannelsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<CheckBox> checkBoxes = new List<CheckBox> {
+            var checkBoxes = new List<CheckBox> {
                 chbx1, chbx2, chbx3, chbx4, chbx5, chbx6, chbx7, chbx8
             };
 
@@ -354,14 +359,14 @@ namespace Ratbuddyssey
                 // Enable the check boxes corresponding to those positions for which the measurement is available
                 foreach (var measurementPosition in selectedValue.ResponseData)
                 {
-                    int positionIndex = int.Parse(measurementPosition.Key);
+                    var positionIndex = int.Parse(measurementPosition.Key);
                     Debug.Assert(positionIndex >= 0 && positionIndex < checkBoxes.Count);
                     checkBoxes[positionIndex].IsEnabled = true;
                 }
 
                 if (selectedValue.ResponseData.Count > 0)
                 {
-                    selectedChannel = (DetectedChannel)channelsView.SelectedValue;
+                    SelectedChannel = (DetectedChannel)channelsView.SelectedValue;
                     DrawChart();
                 }
             }
@@ -375,16 +380,16 @@ namespace Ratbuddyssey
         }
         private void ChannelsView_OnClickSticky(object sender, RoutedEventArgs e)
         {
-            foreach (var channel in audysseyMultEQApp.DetectedChannels)
+            foreach (var channel in AudysseyApp.DetectedChannels)
             {
                 if (channel.Sticky)
                 {
-                    stickyChannel.Add(channel);
+                    Channels.Add(channel);
                     DrawChart();
                 }
-                else if (stickyChannel.Contains(channel))
+                else if (Channels.Contains(channel))
                 {
-                    stickyChannel.Remove(channel);
+                    Channels.Remove(channel);
                     DrawChart();
                 }
             }
@@ -398,35 +403,35 @@ namespace Ratbuddyssey
         }
         private void ButtonClickRemoveTargetCurvePoint(object sender, RoutedEventArgs e)
         {
-            Button b = sender as Button;
-            MyKeyValuePair pair = b.DataContext as MyKeyValuePair;
+            var b = sender as Button;
+            var pair = b.DataContext as MyKeyValuePair;
             ((DetectedChannel)channelsView.SelectedValue).CustomTargetCurvePointsDictionary.Remove(pair);            
         }
         private void RadioButtonSmoothingFactorChecked(object sender, RoutedEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
+            var radioButton = sender as RadioButton;
             switch (radioButton.Name)
             {
                 case "radioButtonSmoothingFactorNone":
-                    smoothingFactor = 1;
+                    SmoothingFactor = 1;
                     break;
                 case "radioButtonSmoothingFactor2":
-                    smoothingFactor = 2;
+                    SmoothingFactor = 2;
                     break;
                 case "radioButtonSmoothingFactor3":
-                    smoothingFactor = 3;
+                    SmoothingFactor = 3;
                     break;
                 case "radioButtonSmoothingFactor6":
-                    smoothingFactor = 6;
+                    SmoothingFactor = 6;
                     break;
                 case "radioButtonSmoothingFactor12":
-                    smoothingFactor = 12;
+                    SmoothingFactor = 12;
                     break;
                 case "radioButtonSmoothingFactor24":
-                    smoothingFactor = 24;
+                    SmoothingFactor = 24;
                     break;
                 case "radioButtonSmoothingFactor48":
-                    smoothingFactor = 48;
+                    SmoothingFactor = 48;
                     break;
                 default:
                     break;
@@ -435,8 +440,8 @@ namespace Ratbuddyssey
         }
         private void rbtnXRange_Checked(object sender, RoutedEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
-            selectedAxisLimits = radioButton.Name;
+            var radioButton = sender as RadioButton;
+            SelectedAxisLimits = radioButton.Name;
             DrawChart();
         }
         private void chbxStickSubwoofer_Checked(object sender, RoutedEventArgs e)
