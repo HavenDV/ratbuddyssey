@@ -1,6 +1,8 @@
 # ratbuddyssey
 Audyssey .ady file editor
 
+![Example](docs/example.png)
+
 https://www.avsforum.com/forum/90-receivers-amps-processors/3006886-announcing-ratbuddyssey-tool-tweaking-audyssey-multeq-app-files.html
 
 Preview/early alpha release, for testing functionality of the .aud file parameter editing.
