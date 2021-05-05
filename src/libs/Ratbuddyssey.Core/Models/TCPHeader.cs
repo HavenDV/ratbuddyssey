@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Windows.Forms;
 
 namespace Audyssey
 {
@@ -73,9 +72,11 @@ namespace Audyssey
                     byTCPData = null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message, "TCP HeaderReceived: " + nReceived + " HeaderLength: " + byHeaderLength, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Interactions.Exception.Handle(new InvalidOperationException(
+                    $"TCP HeaderReceived: {nReceived} HeaderLength: {byHeaderLength}", 
+                    exception)).Subscribe();
             }
         }
 

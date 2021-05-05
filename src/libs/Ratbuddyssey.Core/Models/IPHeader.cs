@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Windows.Forms;
 using Audyssey.MultEQTcp;
 
 namespace Audyssey
@@ -95,10 +94,11 @@ namespace Audyssey
                     byIPData = null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message, "IPHeader Received: " + nReceived + " TotalLength: " + usTotalLength + " HeaderLength: " + byHeaderLength, MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                Interactions.Exception.Handle(new InvalidOperationException(
+                    $"IPHeader Received: {nReceived} TotalLength: {usTotalLength} HeaderLength: {byHeaderLength}",
+                    exception)).Subscribe();
             }
         }
 

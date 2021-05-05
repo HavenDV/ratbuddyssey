@@ -13,7 +13,7 @@ namespace Audyssey
         // Adapter class needed as long as ethernet traffic uses the file GUI
         // TODO: design GUI TAB dedicated to ethernet traffic which makes this
         // adapter redundant -> directly access avr class and sniffer class!
-        class AudysseyMultEQAvrAdapter : MultEQList, INotifyPropertyChanged
+        public class AudysseyMultEQAvrAdapter : MultEQList, INotifyPropertyChanged
         {
             private AudysseyMultEQAvr _audysseyMultEQAvr;
 

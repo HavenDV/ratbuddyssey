@@ -2,15 +2,11 @@
 
   <Import Project="..\Directory.Build.props" />
 
-  <ItemGroup Label="CLSCompliant">
-    <Compile Include="$(SolutionDir)src\CLSCompliantTrue.cs" />
-  </ItemGroup>
-
-  <PropertyGroup Label="Analyzers">
+  <!--<PropertyGroup Label="Analyzers">
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <NoWarn>$(NoWarn)</NoWarn>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
 </Project>

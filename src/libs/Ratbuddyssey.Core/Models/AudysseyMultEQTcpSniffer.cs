@@ -4,13 +4,11 @@ using System.Net;
 using System.Text;
 using System.Linq;
 using System.Net.Sockets;
-using System.Windows.Forms;
 using System.Buffers.Binary;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Audyssey.MultEQAvr;
-using System.Windows.Controls;
 
 namespace Audyssey
 {
@@ -69,7 +67,7 @@ namespace Audyssey
             #endregion
         }
 
-        class AudysseyMultEQTcpSniffer
+        public class AudysseyMultEQTcpSniffer
         {
             static readonly object _locker = new object();
 
@@ -128,9 +126,11 @@ namespace Audyssey
                 catch (ObjectDisposedException)
                 {
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    MessageBox.Show(ex.Message, "AudysseyMultEQTcpSniffer::TcpSniffer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Interactions.Exception.Handle(new InvalidOperationException(
+                        $"{nameof(AudysseyMultEQTcpSniffer)}::constructor",
+                        exception)).Subscribe();
                 }
             }
 
@@ -166,9 +166,11 @@ namespace Audyssey
                 catch (ObjectDisposedException)
                 {
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    MessageBox.Show(ex.Message, "AudysseyMultEQTcpSniffer::OnReceive", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Interactions.Exception.Handle(new InvalidOperationException(
+                        $"{nameof(AudysseyMultEQTcpSniffer)}::{nameof(OnReceive)}",
+                        exception)).Subscribe();
                 }
             }
 
@@ -294,9 +296,11 @@ namespace Audyssey
                 catch (ObjectDisposedException)
                 {
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    MessageBox.Show(ex.Message, "AudysseyMultEQTcpSniffer::ParseAvrData", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Interactions.Exception.Handle(new InvalidOperationException(
+                        $"{nameof(AudysseyMultEQTcpSniffer)}::{nameof(ParseAvrData)}",
+                        exception)).Subscribe();
                 }
             }
 

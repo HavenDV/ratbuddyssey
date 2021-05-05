@@ -9,7 +9,7 @@ namespace Audyssey
 {
     namespace MultEQAvr
     {
-        interface IAmp
+        public interface IAmp
         {
             #region Properties
             public string AmpAssign { get; set; }
@@ -24,7 +24,7 @@ namespace Audyssey
             #endregion
         }
 
-        interface IAudy
+        public interface IAudy
         {
             #region Properties
             bool? AudyDynVol { get; set; }

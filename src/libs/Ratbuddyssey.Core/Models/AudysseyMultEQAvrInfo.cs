@@ -51,7 +51,7 @@ namespace Audyssey
             #endregion
         }
 
-        interface IInfo
+        public interface IInfo
         {
             #region Properties
             public string Ifver { get; set; }

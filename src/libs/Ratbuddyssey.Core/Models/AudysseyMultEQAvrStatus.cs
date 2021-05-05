@@ -9,7 +9,7 @@ namespace Audyssey
 {
     namespace MultEQAvr
     {
-        interface IStatus
+        public interface IStatus
         {
             #region Properties
             public bool? HPPlug { get; set; }
