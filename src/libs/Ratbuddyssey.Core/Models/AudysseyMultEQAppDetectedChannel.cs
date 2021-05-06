@@ -19,7 +19,7 @@ namespace Ratbuddyssey
         {
             // according to JSON .ady file
             private string _customCrossover = null;
-            private int? _enChannelType = null;
+            private int _enChannelType;
             private bool? _isSkipMeasurement = null;
             private string _customLevel = null;
             private decimal? _customDistance = null;
@@ -39,10 +39,8 @@ namespace Ratbuddyssey
             private int _customCrossoverIndex = -1;
 
             #region Properties
-            [JsonIgnore]
-            public bool Sticky
-            { get; set; } = false;
-            public int? EnChannelType
+            
+            public int EnChannelType
             {
                 get
                 {

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reactive;
 using System.Reactive.Linq;
+using DynamicData;
 using Ratbuddyssey.Models;
 using Ratbuddyssey.MultEQApp;
 using Newtonsoft.Json;
@@ -34,10 +35,10 @@ namespace Ratbuddyssey.ViewModels
         public PlotModel PlotModel { get; set; } = new();
 
         [Reactive]
-        public List<DetectedChannel> Channels { get; set; } = new();
+        public IReadOnlyCollection<ChannelViewModel> Channels { get; set; } = Array.Empty<ChannelViewModel>();
 
         [Reactive]
-        public DetectedChannel? SelectedChannel { get; set; }
+        public ChannelViewModel? SelectedChannel { get; set; }
 
         private Dictionary<FrequencyRange, AxisLimit> AxisLimits { get; } = new()
         {
@@ -57,9 +58,6 @@ namespace Ratbuddyssey.ViewModels
 
         [Reactive] 
         public bool LogarithmicAxisIsChecked { get; set; } = true;
-
-        [Reactive]
-        public bool ChannelsViewIsChecked { get; set; }
 
         [Reactive]
         public string AddTargetCurvePointKey { get; set; } = string.Empty;
@@ -176,23 +174,12 @@ namespace Ratbuddyssey.ViewModels
                 if (!string.IsNullOrEmpty(AddTargetCurvePointKey) && 
                     !string.IsNullOrEmpty(AddTargetCurvePointValue))
                 {
-                    SelectedChannel?.CustomTargetCurvePointsDictionary.Add(
+                    SelectedChannel?.Data?.CustomTargetCurvePointsDictionary.Add(
                         new MyKeyValuePair(
                             AddTargetCurvePointKey,
                             AddTargetCurvePointValue));
                 }
             });
-
-            this.WhenAnyValue(static x => x.ChannelsViewIsChecked)
-                .Subscribe(isChecked =>
-                {
-                    if (isChecked)
-                    {
-                    }
-                    else
-                    {
-                    }
-                });
 
             this.WhenAnyValue(static x => x.SelectAllMeasurementPositionsIsChecked)
                 .Skip(1)
@@ -227,7 +214,7 @@ namespace Ratbuddyssey.ViewModels
                         position.IsEnabled = false;
                     }
 
-                    var data = channel?.ResponseData;
+                    var data = channel?.Data?.ResponseData;
                     if (data != null)
                     {
                         // Enable the check boxes corresponding to those positions for which the measurement is available
@@ -281,7 +268,16 @@ namespace Ratbuddyssey.ViewModels
             {
                 FloatParseHandling = FloatParseHandling.Decimal
             }) ?? throw new InvalidOperationException("Invalid file.");
-            Channels = AudysseyApp.DetectedChannels.ToList();
+            Channels = AudysseyApp.DetectedChannels
+                .Select(static channel => new ChannelViewModel(channel))
+                .ToArray();
+            Channels
+                .AsObservableChangeSet()
+                .WhenPropertyChanged(static x => x.Sticky, false)
+                .Subscribe(_ =>
+                {
+                    DrawChart();
+                });
         }
 
         private void SaveApp(string fileName)
@@ -302,14 +298,11 @@ namespace Ratbuddyssey.ViewModels
             
             if (SelectedChannel != null)
             {
-                PlotLine(model, SelectedChannel);
+                PlotLine(model, SelectedChannel?.Data);
             }
-            foreach (var channel in Channels)
+            foreach (var channel in Channels.Where(static channel => channel.Sticky))
             {
-                if (channel.Sticky)
-                {
-                    PlotLine(model, channel, true);
-                }
+                PlotLine(model, channel.Data, true);
             }
             switch (AudysseyApp.EnTargetCurveType)
             {
@@ -526,23 +519,6 @@ namespace Ratbuddyssey.ViewModels
                 }
             }
         }
-
-        //private void ChannelsView_OnClickSticky()
-        //{
-        //    foreach (var channel in AudysseyApp.DetectedChannels)
-        //    {
-        //        if (channel.Sticky)
-        //        {
-        //            Channels.Add(channel);
-        //            DrawChart();
-        //        }
-        //        else if (Channels.Contains(channel))
-        //        {
-        //            Channels.Remove(channel);
-        //            DrawChart();
-        //        }
-        //    }
-        //}
 
         //private void ButtonClickRemoveTargetCurvePoint()
         //{

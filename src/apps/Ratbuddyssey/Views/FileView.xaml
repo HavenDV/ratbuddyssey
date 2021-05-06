@@ -47,15 +47,18 @@
             </Grid.RowDefinitions>
 
             <GroupBox Header="Channels">
-                <ListView x:Name="ChannelsView">
+                <ListView 
+                    x:Name="ChannelsView"
+                    ItemsSource="{Binding Channels}"
+                    >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding EnChannelType}" />
-                            <GridViewColumn Header="commandId" DisplayMemberBinding="{Binding CommandId}" />
+                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
+                            <GridViewColumn Header="CommandId" DisplayMemberBinding="{Binding CommandId}" />
                             <GridViewColumn Header="Sticky">
                                 <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <!--<CheckBox IsChecked="{Binding Path=Sticky}" Checked="ChannelsView_OnClickSticky" Unchecked="ChannelsView_OnClickSticky"/>-->
+                                    <DataTemplate DataType="{x:Type viewModels:ChannelViewModel}">
+                                        <CheckBox IsChecked="{Binding Sticky}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
