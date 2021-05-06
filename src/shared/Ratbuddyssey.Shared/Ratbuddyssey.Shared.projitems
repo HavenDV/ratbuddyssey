@@ -12,5 +12,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BaseConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToIconConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HostBuilderExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EthernetView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\FileView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainView.xaml.cs" />
   </ItemGroup>
 </Project>
