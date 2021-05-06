@@ -64,13 +64,29 @@
                 </ListView>
             </GroupBox>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="5" />
-            <GroupBox Header="Target Curve Points" Grid.Row="2" DataContext="{Binding SelectedValue, ElementName=ChannelsView}">
+            <GroupBox 
+                Grid.Row="2" 
+                Header="Target Curve Points" 
+                DataContext="{Binding SelectedValue, ElementName=ChannelsView}"
+                >
                 <ScrollViewer>
                     <StackPanel>
-                        <DataGrid x:Name="DataGrid" ItemsSource="{Binding CustomTargetCurvePointsDictionary}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                        <DataGrid 
+                            x:Name="DataGrid" 
+                            ItemsSource="{Binding CustomTargetCurvePointsDictionary}" 
+                            AutoGenerateColumns="False" 
+                            CanUserAddRows="True" 
+                            CanUserDeleteRows="True"
+                            >
                             <DataGrid.Columns >
-                                <DataGridTextColumn Header="Frequency" Binding="{Binding Key}" Width="70"/>
-                                <DataGridTextColumn Header="Boost/Cut dB" Binding="{Binding Value}" Width="80"/>
+                                <DataGridTextColumn 
+                                    Header="Frequency" 
+                                    Binding="{Binding Key}" 
+                                    />
+                                <DataGridTextColumn 
+                                    Header="Boost/Cut dB" 
+                                    Binding="{Binding Value}"
+                                    />
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -81,10 +97,18 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="6" Height="auto"/>
-                            <TextBox x:Name="AddTargetCurvePointKeyTextBox" Width="30"/>
-                            <TextBox x:Name="AddTargetCurvePointValueTextBox" Width="30"/>
-                            <Button Content="Add" x:Name="AddTargetCurvePointButton" Width="60"/>
+                            <TextBox 
+                                x:Name="AddTargetCurvePointKeyTextBox" 
+                                Width="100"
+                                />
+                            <TextBox 
+                                x:Name="AddTargetCurvePointValueTextBox"
+                                Width="100"
+                                />
+                            <Button 
+                                x:Name="AddTargetCurvePointButton"
+                                Content="Add" 
+                                />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

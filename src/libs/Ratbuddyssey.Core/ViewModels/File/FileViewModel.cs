@@ -543,6 +543,7 @@ namespace Audyssey.ViewModels
         //        }
         //    }
         //}
+
         //private void ButtonClickRemoveTargetCurvePoint()
         //{
         //    var b = sender as Button;
