@@ -9,6 +9,8 @@
     <Import_RootNamespace>Ratbuddyssey.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BaseConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToIconConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HostBuilderExtensions.cs" />
   </ItemGroup>
 </Project>
