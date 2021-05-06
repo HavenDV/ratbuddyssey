@@ -21,6 +21,13 @@
     <PackageReference Include="ReactiveUI.WPF" Version="13.2.18" />
   </ItemGroup>
 
+  <ItemGroup Label="Linking">
+    <Compile Remove="Views\*.xaml.cs"/>
+    <None Include="..\..\shared\Ratbuddyssey.Shared\*.cs" Link="%(FileName).cs"/>
+    <None Include="..\..\shared\Ratbuddyssey.Shared\Views\*.cs" Link="Views\%(FileName).cs"/>
+    <None Include="..\..\shared\Ratbuddyssey.Shared\Converters\*.cs" Link="Converters\%(FileName).cs"/>
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\libs\Ratbuddyssey.Core\Ratbuddyssey.Core.csproj" />
   </ItemGroup>
