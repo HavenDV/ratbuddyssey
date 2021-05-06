@@ -2,8 +2,6 @@ using System;
 using System.IO;
 using System.Net;
 
-#nullable disable
-
 namespace Audyssey
 {
     public class TCPHeader
@@ -22,7 +20,7 @@ namespace Audyssey
 
         private byte byHeaderLength;            //Header length
         private ushort usMessageLength;           //Length of the data being carried
-        private byte[] byTCPData;//Data carried by the TCP packet
+        private byte[] byTCPData = Array.Empty<byte>();//Data carried by the TCP packet
 
         public TCPHeader(byte[] byBuffer, int nReceived)
         {
@@ -71,7 +69,7 @@ namespace Audyssey
                 else
                 {
                     usMessageLength = 0;
-                    byTCPData = null;
+                    byTCPData = Array.Empty<byte>();
                 }
             }
             catch (Exception exception)

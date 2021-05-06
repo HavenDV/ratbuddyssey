@@ -3,8 +3,6 @@ using System.IO;
 using System.Net;
 using Audyssey.MultEQTcp;
 
-#nullable disable
-
 namespace Audyssey
 {
     public class IPHeader
@@ -24,7 +22,7 @@ namespace Audyssey
                                                     //End IP Header fields
 
         private byte byHeaderLength;             //Header length
-        private byte[] byIPData;                   //Data carried by the datagram
+        private byte[] byIPData = Array.Empty<byte>();                   //Data carried by the datagram
 
         private ushort usMessageLength;           //Length of the data being carried
 
@@ -93,7 +91,7 @@ namespace Audyssey
                 else
                 {
                     usMessageLength = 0;
-                    byIPData = null;
+                    byIPData = Array.Empty<byte>();
                 }
             }
             catch (Exception exception)
