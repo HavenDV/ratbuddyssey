@@ -32,11 +32,6 @@ namespace Audyssey.ViewModels
 
         #region Constructors
 
-        public MainViewModel()
-        {
-            SelectedTab = Tabs.First();
-        }
-
         public MainViewModel(IServiceProvider services)
         {
             Services = services ?? throw new ArgumentNullException(nameof(services));

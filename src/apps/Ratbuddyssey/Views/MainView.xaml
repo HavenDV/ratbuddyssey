@@ -14,7 +14,7 @@
     Background="White"
     Title="Ratbuddyssey - Home"
     d:DataContext="{d:DesignInstance 
-        viewModels:MainViewModel,
+        viewModels:DesignTimeMainViewModel,
         IsDesignTimeCreatable=True}"
     >
     <Window.Resources>
