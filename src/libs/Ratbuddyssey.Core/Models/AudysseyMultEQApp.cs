@@ -13,9 +13,9 @@ namespace Audyssey
         public class AudysseyMultEQApp : MultEQList, INotifyPropertyChanged
         {
             // according to JSON .ady file
-            private int? _enAmpAssignType = null;
+            private int _enAmpAssignType;
             private bool? _dynamicVolume = null;
-            private int? _enTargetCurveType = null;
+            private int _enTargetCurveType;
             private bool? _lfcSupport = null;
             private ObservableCollection<DetectedChannel> _detectedChannels = null;
             private string _targetModelName = null;
@@ -27,7 +27,7 @@ namespace Audyssey
             private int? _systemDelay = null;
             private bool? _auro = null;
             private string _upgradeInfo = null;
-            private int? _enMultEQType = null;
+            private int _enMultEQType;
             private decimal? _adcLineup = null;
 
             #region Properties
@@ -149,7 +149,7 @@ namespace Audyssey
                 }
             }
             [JsonProperty(Order = 10)]
-            public int? EnTargetCurveType
+            public int EnTargetCurveType
             {
                 get
                 {
@@ -175,7 +175,7 @@ namespace Audyssey
                 }
             }
             [JsonProperty(Order = 11)]
-            public int? EnAmpAssignType
+            public int EnAmpAssignType
             {
                 get
                 {
@@ -201,7 +201,7 @@ namespace Audyssey
                 }
             }
             [JsonProperty(Order = 12)]
-            public int? EnMultEQType
+            public int EnMultEQType
             {
                 get
                 {

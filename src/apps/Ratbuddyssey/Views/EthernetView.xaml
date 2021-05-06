@@ -29,7 +29,7 @@
             <ComboBox x:Name="IpsComboBox" VerticalAlignment="Top" Width="120" DisplayMemberPath="."/>
         </StackPanel>
         <Menu Grid.Row="0" Grid.Column="0">
-            <MenuItem Header="_Ethernet">
+            <MenuItem Header="Commands">
                 <MenuItem Header="_Open Project" Name="OpenFileMenuItem"/>
                 <MenuItem Header="_Save Project" Name="SaveFileMenuItem"/>
                 <Separator/>
