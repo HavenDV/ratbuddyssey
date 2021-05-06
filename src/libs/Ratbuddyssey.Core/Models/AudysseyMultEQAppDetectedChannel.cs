@@ -324,12 +324,24 @@ namespace Ratbuddyssey
 
         public class MyKeyValuePair : ReactiveObject
         {
-            private double KeyMin = 10; //10Hz Chris Kyriakakis
-            private double KeyMax = 24000; //24000Hz Chris Kyriakakis
-            private double ValueMin = -20; //-12dB Ratbuddyssey MultiEQ app -> -20dB Chris Kyriakakis
-            private double ValueMax = 12; //12dB Ratbuddyssey MultiEQ app -> +9dB Chris Kyriakakis -> +12 dB in ady afile!
+            #region Constants
+
+            private const double KeyMin = 10; //10Hz Chris Kyriakakis
+            private const double KeyMax = 24000; //24000Hz Chris Kyriakakis
+            private const double ValueMin = -20; //-12dB Ratbuddyssey MultiEQ app -> -20dB Chris Kyriakakis
+            private const double ValueMax = 12; //12dB Ratbuddyssey MultiEQ app -> +9dB Chris Kyriakakis -> +12 dB in ady afile!
+
+            #endregion
+
+            #region Fields
+
             string _key = string.Empty;
             string _value = string.Empty;
+
+            #endregion
+
+            #region Properties
+
             public string Key
             {
                 get
@@ -346,6 +358,7 @@ namespace Ratbuddyssey
                     this.RaisePropertyChanged(nameof(Key));
                 }
             }
+
             public string Value
             {
                 get
@@ -363,6 +376,11 @@ namespace Ratbuddyssey
                     this.RaisePropertyChanged(nameof(Value));
                 }
             }
+
+            #endregion
+
+            #region Constructors
+
             public MyKeyValuePair(string key, string value)
             {
                 Key = key.Trim();
@@ -373,10 +391,17 @@ namespace Ratbuddyssey
                 Key = key.ToString(CultureInfo.InvariantCulture);
                 Value = value.ToString(CultureInfo.InvariantCulture);
             }
+
+            #endregion
+
+            #region Methods
+
             public override string ToString()
             {
                 return "{" + Key + ", " + Value + "}";
             }
+
+            #endregion
         }
     }
 }
