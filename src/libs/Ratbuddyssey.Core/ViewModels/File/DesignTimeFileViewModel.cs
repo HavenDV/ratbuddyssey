@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using Audyssey.Models;
 
 #nullable enable
 
@@ -34,9 +35,9 @@ namespace Audyssey.ViewModels
 
         public IReadOnlyCollection<RangeViewModel> Ranges { get; set; } = new RangeViewModel[]
         {
-            new("0-350ms", Range.Chirp),
-            new("10-1000Hz", Range.Subwoofer),
-            new("10Hz-24kHz", Range.Full, true),
+            new("0-350ms", FrequencyRange.Chirp),
+            new("10-1000Hz", FrequencyRange.Subwoofer),
+            new("10Hz-24kHz", FrequencyRange.Full, true),
         };
 
         #endregion

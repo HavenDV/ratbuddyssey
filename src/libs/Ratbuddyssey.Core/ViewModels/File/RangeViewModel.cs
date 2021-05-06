@@ -1,4 +1,5 @@
 ﻿using System;
+using Audyssey.Models;
 using ReactiveUI.Fody.Helpers;
 
 namespace Audyssey.ViewModels
@@ -10,24 +11,17 @@ namespace Audyssey.ViewModels
 
         public string Title { get; set; }
 
-        public Range Value { get; set; }
+        public FrequencyRange Value { get; set; }
 
         public RangeViewModel()
         {
         }
 
-        public RangeViewModel(string title, Range value, bool isChecked = false)
+        public RangeViewModel(string title, FrequencyRange value, bool isChecked = false)
         {
-            Title = title ?? throw new ArgumentNullException(nameof(Title));
+            Title = title ?? throw new ArgumentNullException(nameof(title));
             Value = value;
             IsChecked = isChecked;
         }
-    }
-
-    public enum Range
-    {
-        Chirp,
-        Subwoofer,
-        Full,
     }
 }

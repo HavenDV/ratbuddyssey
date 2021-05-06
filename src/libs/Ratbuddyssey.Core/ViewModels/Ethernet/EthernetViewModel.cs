@@ -17,7 +17,7 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Audyssey.ViewModels
 {
-    public class EthernetViewModel : ViewModelBase
+    public class EthernetViewModel : RoutableViewModel
     {
         #region Properties
 
@@ -74,7 +74,7 @@ namespace Audyssey.ViewModels
 
         #region Constructors
 
-        public EthernetViewModel()
+        public EthernetViewModel(IScreen hostScreen) : base(hostScreen, "Ethernet")
         {
             AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
 

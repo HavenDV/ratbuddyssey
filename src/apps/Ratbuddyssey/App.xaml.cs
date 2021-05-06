@@ -3,7 +3,11 @@ using System.Reactive;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Linq;
 using Audyssey.Initialization;
+using Audyssey.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
 using HostBuilder = Audyssey.Initialization.HostBuilder;
 
 namespace Ratbuddyssey
@@ -119,6 +123,7 @@ namespace Ratbuddyssey
             Host = HostBuilder
                 .Create()
                 .AddViews()
+                .AddConverters()
                 .AddPlatformSpecificLoggers()
                 .Build();
         }
@@ -127,36 +132,35 @@ namespace Ratbuddyssey
 
         #region Event Handlers
 
-        //private IViewFor GetView<T>(out T viewModel) where T : notnull
-        //{
-        //    viewModel = Host.Services.GetRequiredService<T>();
-        //    var view = Host.Services
-        //                   .GetRequiredService<IViewLocator>()
-        //                   .ResolveView(viewModel) ??
-        //               throw new InvalidOperationException("view is null.");
+        private IViewFor GetView<T>(out T viewModel) where T : notnull
+        {
+            viewModel = Host.Services.GetRequiredService<T>();
+            var view = Host.Services
+                           .GetRequiredService<IViewLocator>()
+                           .ResolveView(viewModel) ??
+                       throw new InvalidOperationException("View is null.");
 
-        //    view.ViewModel = viewModel;
-        //    return view;
-        //}
+            view.ViewModel = viewModel;
+            return view;
+        }
 
         private void Application_Startup(object _, StartupEventArgs e)
         {
-            //var view = (Window)GetView<MainViewModel>(out var _);
+            var mainView = (Window)GetView<MainViewModel>(out var _);
 
-            //if (e.Args.Any())
-            //{
-            //    var fileName = e.Args.ElementAtOrDefault(0);
+            if (e.Args.Any())
+            {
+                var fileName = e.Args.ElementAtOrDefault(0);
 
-            //    if (!string.IsNullOrWhiteSpace(fileName))
-            //    {
-            //        //var loginViewModel = Host.Services
-            //        //    .GetRequiredService<LoginViewModel>();
+                if (!string.IsNullOrWhiteSpace(fileName))
+                {
+                    var fileViewModel = Host.Services.GetRequiredService<FileViewModel>();
 
-            //        //loginViewModel.PerformLogin(username, password);
-            //    }
-            //}
+                    fileViewModel.Open(fileName);
+                }
+            }
 
-            //view.ShowDialog();
+            mainView.ShowDialog();
         }
 
         #endregion

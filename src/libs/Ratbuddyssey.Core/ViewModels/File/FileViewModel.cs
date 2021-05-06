@@ -23,7 +23,7 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Audyssey.ViewModels
 {
-    public class FileViewModel : ViewModelBase
+    public class FileViewModel : RoutableViewModel
     {
         #region Properties
 
@@ -41,16 +41,16 @@ namespace Audyssey.ViewModels
         [Reactive]
         public DetectedChannel? SelectedChannel { get; set; }
 
-        private Dictionary<Range, AxisLimit> AxisLimits { get; } = new()
+        private Dictionary<FrequencyRange, AxisLimit> AxisLimits { get; } = new()
         {
             {
-                Range.Full, new AxisLimit { XMin = 10, XMax = 24000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 }
+                FrequencyRange.Full, new AxisLimit { XMin = 10, XMax = 24000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 }
             },
             {
-                Range.Subwoofer, new AxisLimit { XMin = 10, XMax = 1000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 }
+                FrequencyRange.Subwoofer, new AxisLimit { XMin = 10, XMax = 1000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 }
             },
             {
-                Range.Chirp, new AxisLimit { XMin = 0, XMax = 350, YMin = -0.1, YMax = 0.1, YShift = 0, MajorStep = 0.01, MinorStep = 0.001 }
+                FrequencyRange.Chirp, new AxisLimit { XMin = 0, XMax = 350, YMin = -0.1, YMax = 0.1, YShift = 0, MajorStep = 0.01, MinorStep = 0.001 }
             }
         };
 
@@ -97,9 +97,9 @@ namespace Audyssey.ViewModels
 
         public IReadOnlyCollection<RangeViewModel> Ranges { get; set; } = new RangeViewModel[]
         {
-            new("0-350ms", Range.Chirp),
-            new("10-1000Hz", Range.Subwoofer),
-            new("10Hz-24kHz", Range.Full, true),
+            new("0-350ms", FrequencyRange.Chirp),
+            new("10-1000Hz", FrequencyRange.Subwoofer),
+            new("10Hz-24kHz", FrequencyRange.Full, true),
         };
 
         public RangeViewModel SelectedRange => Ranges.First(static value => value.IsChecked);
@@ -124,7 +124,7 @@ namespace Audyssey.ViewModels
 
         #region Constructors
 
-        public FileViewModel()
+        public FileViewModel(IScreen hostScreen) : base(hostScreen, "App")
         {
             OpenFile = ReactiveCommand.CreateFromTask(async _ =>
             {
@@ -260,7 +260,7 @@ namespace Audyssey.ViewModels
 
         #region Methods
 
-        private void Open(string filePath)
+        public void Open(string filePath)
         {
             if (!File.Exists(filePath))
             {
@@ -339,7 +339,7 @@ namespace Audyssey.ViewModels
             model.Axes.Clear();
             var selectedRange = SelectedRange.Value;
             var limits = AxisLimits[selectedRange];
-            if (selectedRange == Range.Chirp)
+            if (selectedRange == FrequencyRange.Chirp)
             {
                 if (LogarithmicAxisIsChecked)
                 {
@@ -371,7 +371,7 @@ namespace Audyssey.ViewModels
             if (selectedChannel == null)
             {
                 //time domain data
-                if (selectedRange == Range.Chirp)
+                if (selectedRange == FrequencyRange.Chirp)
                 {
                 }
                 //frequency domain data
@@ -423,7 +423,7 @@ namespace Audyssey.ViewModels
                     var totalTime = count / sample_rate;
 
                     var limits = AxisLimits[selectedRange];
-                    if (selectedRange == Range.Chirp)
+                    if (selectedRange == FrequencyRange.Chirp)
                     {
                         limits.XMax = 1000 * totalTime; // horizotal scale: s to ms
                         for (var j = 0; j < count; j++)

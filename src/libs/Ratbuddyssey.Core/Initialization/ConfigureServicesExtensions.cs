@@ -1,5 +1,7 @@
 ﻿using System;
+using Audyssey.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
 
 namespace Audyssey.Initialization
 {
@@ -9,15 +11,6 @@ namespace Audyssey.Initialization
         {
             services = services ?? throw new ArgumentNullException(nameof(services));
 
-            //services
-            //    .AddSingleton(_ =>
-            //    {
-            //        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            //        return new HttpClient();
-            //    })
-            //    ;
-
             return services;
         }
 
@@ -25,12 +18,13 @@ namespace Audyssey.Initialization
         {
             services = services ?? throw new ArgumentNullException(nameof(services));
 
-            //services
-            //    .AddTransient<MainViewModel>()
+            services
+                .AddSingleton<MainViewModel>()
+                .AddSingleton<IScreen, MainViewModel>(provider => provider.GetRequiredService<MainViewModel>())
 
-            //    .AddSingleton<NavigationViewModel>()
-            //    .AddSingleton<IScreen, NavigationViewModel>(provider => provider.GetRequiredService<NavigationViewModel>())
-            //    ;
+                .AddSingleton<FileViewModel>()
+                .AddSingleton<EthernetViewModel>()
+                ;
 
             return services;
         }

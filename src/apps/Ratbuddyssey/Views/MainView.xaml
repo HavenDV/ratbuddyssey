@@ -5,48 +5,189 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:views="clr-namespace:Ratbuddyssey.Views"
     xmlns:reactiveUi="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Audyssey.ViewModels;assembly=Ratbuddyssey.Core"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignHeight="800" 
     d:DesignWidth="1200" 
     Background="White"
     Title="Ratbuddyssey - Home"
+    d:DataContext="{d:DesignInstance 
+        viewModels:MainViewModel,
+        IsDesignTimeCreatable=True}"
     >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <TabControl 
-            Grid.Row="0" 
-            x:Name="TabControl" 
-            SelectionChanged="TabControl_SelectionChanged"
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimation 
+                Storyboard.TargetProperty="(FrameworkElement.Width)" 
+                Storyboard.TargetName="MenuGrid"
+                From="70"
+                To="200"
+                Duration="00:00:00.200"
+                />
+            <ObjectAnimationUsingKeyFrames 
+                Storyboard.TargetName="ButtonOpenMenu" 
+                Storyboard.TargetProperty="(UIElement.Visibility)"
+                >
+                <DiscreteObjectKeyFrame 
+                    KeyTime="00:00:00.000" 
+                    Value="{x:Static Visibility.Collapsed}"
+                    />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames 
+                Storyboard.TargetName="ButtonCloseMenu" 
+                Storyboard.TargetProperty="(UIElement.Visibility)"
+                >
+                <DiscreteObjectKeyFrame 
+                    KeyTime="00:00:00.000" 
+                    Value="{x:Static Visibility.Visible}"
+                    />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimation 
+                Storyboard.TargetProperty="(FrameworkElement.Width)" 
+                Storyboard.TargetName="MenuGrid"
+                From="200"
+                To="70"
+                Duration="00:00:00.200"
+                />
+            <ObjectAnimationUsingKeyFrames 
+                Storyboard.TargetName="ButtonOpenMenu" 
+                Storyboard.TargetProperty="(UIElement.Visibility)"
+                >
+                <DiscreteObjectKeyFrame 
+                    KeyTime="00:00:00.200" 
+                    Value="{x:Static Visibility.Visible}"
+                    />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames 
+                Storyboard.TargetName="ButtonCloseMenu" 
+                Storyboard.TargetProperty="(UIElement.Visibility)"
+                >
+                <DiscreteObjectKeyFrame 
+                    KeyTime="00:00:00.200" 
+                    Value="{x:Static Visibility.Collapsed}"
+                    />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger 
+            RoutedEvent="ButtonBase.Click" 
+            SourceName="ButtonOpenMenu"
             >
-            <TabItem 
-                x:Name="TabFile" 
-                Header="App"
-                >
-                <views:FileView x:Name="FileView"/>
-            </TabItem>
-            <TabItem 
-                x:Name="TabEthernet" 
-                Header="Ethernet"
-                >
-                <views:EthernetView x:Name="EthernetView"/>
-            </TabItem>
-        </TabControl>
-        <StatusBar Grid.Row="1">
-            <StatusBarItem>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <TextBlock 
-                        Text="{Binding Serialized}" 
-                        TextWrapping="Wrap"
-                        />
-                </ScrollViewer>
-            </StatusBarItem>
-        </StatusBar>
+            <BeginStoryboard 
+                Storyboard="{StaticResource OpenMenu}"
+                />
+        </EventTrigger>
+        <EventTrigger 
+            RoutedEvent="ButtonBase.Click" 
+            SourceName="ButtonCloseMenu"
+            >
+            <BeginStoryboard 
+                Storyboard="{StaticResource CloseMenu}"
+                />
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid 
+            Grid.Column="0" 
+            x:Name="MenuGrid" 
+            Width="70" 
+            Background="#536dfe"
+            >
+            <Grid.Effect>
+                <DropShadowEffect 
+                    BlurRadius="2" 
+                    ShadowDepth="1" 
+                    Color="#FFAEAEAE"
+                    />
+            </Grid.Effect>
+            <StackPanel>
+                <Grid 
+                    Height="150"
+                    Background="White" 
+                    >
+                    <Button
+                        x:Name="ButtonOpenMenu" 
+                        Width="60"
+                        Height="60"
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Foreground="#536dfe"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        >
+                        <materialDesign:PackIcon 
+                            Kind="Menu"
+                            Width="25"
+                            Height="25"
+                            />
+                    </Button>
+                    <Button
+                        x:Name="ButtonCloseMenu" 
+                        Visibility="Collapsed" 
+                        Width="60"
+                        Height="60"
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        >
+                        <materialDesign:PackIcon 
+                            Kind="ArrowLeft"
+                            Width="25"
+                            Height="25"
+                            />
+                    </Button>
+                </Grid>
+                <ListView 
+                    x:Name="TabsListView" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                    ItemsSource="{Binding Tabs}"
+                    SelectedItem="{Binding SelectedTab}"
+                    >
+                    <ListView.ItemTemplate>
+                        <DataTemplate
+                            DataType="{x:Type viewModels:TabViewModel}"
+                            >
+                            <StackPanel 
+                                Orientation="Horizontal"
+                                >
+                                <materialDesign:PackIcon 
+                                    x:Name="IconTextBlock" 
+                                    Height="25" 
+                                    Width="25" 
+                                    Margin="10"
+                                    Kind="{Binding Type, Converter={StaticResource TypeToIconConverter}}"
+                                    Foreground="White"
+                                    />
+                                <TextBlock 
+                                    x:Name="TitleTextBlock" 
+                                    VerticalAlignment="Center" 
+                                    Margin="20, 10"
+                                    Text="{Binding Header}"
+                                    Foreground="White"
+                                    />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <reactiveUi:RoutedViewHost
+            Grid.Column="1" 
+            x:Name="RoutedViewHost" 
+            Transition="Slide"
+            />
     </Grid>
 </reactiveUi:ReactiveWindow>

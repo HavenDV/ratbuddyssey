@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using Audyssey.ViewModels;
+﻿using System.Reactive.Disposables;
+using ReactiveUI;
 
 #nullable enable
 
@@ -13,41 +13,27 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
-            ViewModel = new MainViewModel();
-            FileView.ViewModel = ViewModel.File;
-            EthernetView.ViewModel = ViewModel.Ethernet;
-        }
+            this.WhenActivated(disposable =>
+            {
+                if (ViewModel == null)
+                {
+                    return;
+                }
 
-        #endregion
+                this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.Tabs,
+                        static view => view.TabsListView.ItemsSource)
+                    .DisposeWith(disposable);
+                this.Bind(ViewModel,
+                        static viewModel => viewModel.SelectedTab,
+                        static view => view.TabsListView.SelectedItem)
+                    .DisposeWith(disposable);
 
-        #region Event Handlers
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //var currentTab = ((TabControl)sender).SelectedIndex;
-
-            //switch (currentTab)
-            //{
-            //    case 0:
-            //        if (FileView.AudysseyApp == null)
-            //        {
-            //            if (EthernetView.AvrAdapter != null)
-            //            {
-            //                FileView.DataContext = EthernetView.AvrAdapter;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            FileView.DataContext = FileView.AudysseyApp;
-            //        }
-            //        break;
-            //    case 1:
-            //        if (EthernetView.Avr != null)
-            //        {
-            //            EthernetView.DataContext = EthernetView.Avr;
-            //        }
-            //        break;
-            //}
+                this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.Router,
+                        static view => view.RoutedViewHost.Router)
+                    .DisposeWith(disposable);
+            });
         }
 
         #endregion
