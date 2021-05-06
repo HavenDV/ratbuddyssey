@@ -14,6 +14,9 @@
     Background="White"
     Drop="HandleDroppedFile" 
     AllowDrop="true"
+    d:DataContext="{d:DesignInstance 
+        viewModels:DesignTimeFileViewModel,
+        IsDesignTimeCreatable=True}"
     >
     <Grid>
         <Grid.RowDefinitions>
@@ -29,11 +32,11 @@
 
         <Menu Grid.Row="0" Grid.Column="0">
             <MenuItem Header="_Commands">
-                <MenuItem Header="_Open Audyssey file" Name="openFile" Click="OpenFile_OnClick"/>
-                <MenuItem Header="_Reload (discard unsaved changes)" Name="reloadFile" Click="ReloadFile_OnClick"/>
+                <MenuItem Header="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
+                <MenuItem Header="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
                 <Separator/>
-                <MenuItem Header="_Save" Name="saveFile" Click="SaveFile_OnClick"/>
-                <MenuItem Header="Save _As" Name="saveFileAs" Click="SaveFileAs_OnClick"/>
+                <MenuItem Header="_Save" x:Name="SaveFileMenuItem"/>
+                <MenuItem Header="Save _As" x:Name="SaveFileAsMenuItem"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Grid.Column="0">
@@ -42,16 +45,17 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
+
             <GroupBox Header="Channels">
-                <ListView x:Name="channelsView" ItemsSource="{Binding DetectedChannels}">
+                <ListView x:Name="ChannelsView">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Type" Width="auto" DisplayMemberBinding="{Binding EnChannelType}" />
-                            <GridViewColumn Header="commandId" Width="auto" DisplayMemberBinding="{Binding CommandId}" />
-                            <GridViewColumn Header="Sticky" Width="auto">
+                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding EnChannelType}" />
+                            <GridViewColumn Header="commandId" DisplayMemberBinding="{Binding CommandId}" />
+                            <GridViewColumn Header="Sticky">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding Path=Sticky}" Checked="ChannelsView_OnClickSticky" Unchecked="ChannelsView_OnClickSticky"/>
+                                        <!--<CheckBox IsChecked="{Binding Path=Sticky}" Checked="ChannelsView_OnClickSticky" Unchecked="ChannelsView_OnClickSticky"/>-->
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -60,27 +64,27 @@
                 </ListView>
             </GroupBox>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="5" />
-            <GroupBox Header="Target Curve Points" Grid.Row="2" DataContext="{Binding SelectedValue, ElementName=channelsView}">
+            <GroupBox Header="Target Curve Points" Grid.Row="2" DataContext="{Binding SelectedValue, ElementName=ChannelsView}">
                 <ScrollViewer>
                     <StackPanel>
-                        <DataGrid x:Name="dataGrid"  ItemsSource="{Binding CustomTargetCurvePointsDictionary}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
+                        <DataGrid x:Name="DataGrid" ItemsSource="{Binding CustomTargetCurvePointsDictionary}" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Header="Frequency" Binding="{Binding Key}" Width="70"/>
                                 <DataGridTextColumn Header="Boost/Cut dB" Binding="{Binding Value}" Width="80"/>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="Delete" Click="ButtonClickRemoveTargetCurvePoint" Width="auto"/>
+                                            <!--<Button Content="Delete" Click="ButtonClickRemoveTargetCurvePoint" Width="auto"/>-->
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel  Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
                             <TextBox Width="6" Height="auto"/>
-                            <TextBox x:Name="keyTbx" Width="30"/>
-                            <TextBox x:Name="valueTbx" Width="30"/>
-                            <Button Content="Add" Click="ButtonClickAddTargetCurvePoint" Width="60"/>
+                            <TextBox x:Name="AddTargetCurvePointKeyTextBox" Width="30"/>
+                            <TextBox x:Name="AddTargetCurvePointValueTextBox" Width="30"/>
+                            <Button Content="Add" x:Name="AddTargetCurvePointButton" Width="60"/>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -112,33 +116,97 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="label" Content="Current File:" Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="currentFile" Content="" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Margin="-7,0,0,0"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Current File:"/>
+                    <Label x:Name="CurrentFileLabel" Content="" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Margin="-7,0,0,0"/>
                     <Label Grid.Row="1" Grid.Column="0" Content="Amp Assign Info" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding AmpAssignInfo}" VerticalAlignment="Center" Grid.ColumnSpan="5"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="AmpAssignInfoTextBox" VerticalAlignment="Center" Grid.ColumnSpan="5"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Title" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="TitleTextBox" VerticalAlignment="Center"/>
                     <Label Grid.Row="3" Grid.Column="0" Content="Target Model Name" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding TargetModelName}" Margin="0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="TargetModelNameTextBox" Margin="0" VerticalAlignment="Center"/>
                     <Label Content="Interface Version" Grid.Row="4" Grid.Column="0" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding InterfaceVersion}" Margin="0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="InterfaceVersionTextBox" Margin="0" VerticalAlignment="Center"/>
                     <Label Grid.Row="2" Grid.Column="2" Content="Upgrade Info" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding UpgradeInfo}" Margin="0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Grid.Column="3" x:Name="UpgradeInfoTextBox" Margin="0" VerticalAlignment="Center"/>
                     <Label Grid.Row="3" Grid.Column="2" Content="Adc Lineup" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding AdcLineup}" Margin="0" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="3" Grid.Column="3" x:Name="AdcLineupTextBox" Margin="0" VerticalAlignment="Center"/>
                     <Label Grid.Row="4" Grid.Column="2" Content="System Delay" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding SystemDelay}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="4" Grid.Column="3" x:Name="SystemDelayTextBox" VerticalAlignment="Center"/>
                     <Label Grid.Row="2" Grid.Column="4"  Content="Amp Assign Type" VerticalContentAlignment="Center" />
-                    <ComboBox Grid.Row="2" Grid.Column="5" ItemsSource="{Binding AmpAssignTypeList}" SelectedIndex="{Binding EnAmpAssignType, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
-                    <Label Grid.Row="3" Grid.Column="4" Content="MultEQ Type" VerticalContentAlignment="Center"/>
-                    <ComboBox Grid.Row="3" Grid.Column="5" ItemsSource="{Binding MultEQTypeList}" SelectedIndex="{Binding EnMultEQType}" VerticalAlignment="Center"/>
-                    <Label Grid.Row="4" Grid.Column="4" Content="Target Curve Type" VerticalContentAlignment="Center"/>
-                    <ComboBox Grid.Row="4" Grid.Column="5" x:Name = "TargetCurveType" SelectedIndex="{Binding EnTargetCurveType}" ItemsSource="{Binding TargetCurveTypeList}" VerticalAlignment="Center" SelectionChanged="TargetCurveTypeSelectionChanged"/>
-                    <CheckBox Content="Dynamic Eq" IsChecked="{Binding DynamicEq}" Grid.Row="0" Grid.Column="8" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <CheckBox Content="Dynamic Volume" IsChecked="{Binding DynamicVolume}" Grid.Row="1" Grid.Column="8" Margin="5" VerticalAlignment="Center"/>
-                    <CheckBox Content="Auro" IsChecked="{Binding Auro}" Grid.Row="2" Grid.Column="8"  Margin="5" VerticalAlignment="Center"/>
-                    <CheckBox Content="Lfc Support" IsChecked="{Binding LfcSupport}" Grid.Row="3" Grid.Column="8" Margin="5" VerticalAlignment="Center"/>
-                    <CheckBox Content ="Lfc"  IsChecked="{Binding Lfc}" Grid.Row="4" Grid.Column="8"  Margin="5" VerticalAlignment="Center"/>
+                    <ComboBox 
+                        Grid.Row="2" 
+                        Grid.Column="5" 
+                        x:Name="AmpAssignTypeListComboBox" 
+                        VerticalAlignment="Center"
+                        DisplayMemberPath="."
+                        />
+                    <Label 
+                        Grid.Row="3" 
+                        Grid.Column="4" 
+                        Content="MultEQ Type" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <ComboBox 
+                        Grid.Row="3" 
+                        Grid.Column="5" 
+                        x:Name="MultEqTypeListComboBox" 
+                        VerticalAlignment="Center"
+                        DisplayMemberPath="."
+                        />
+                    <Label 
+                        Grid.Row="4" 
+                        Grid.Column="4" 
+                        Content="Target Curve Type" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <ComboBox 
+                        Grid.Row="4" 
+                        Grid.Column="5" 
+                        x:Name="TargetCurveTypeComboBox" 
+                        VerticalAlignment="Center" 
+                        DisplayMemberPath="."
+                        />
+                    <CheckBox
+                        Grid.Row="0" 
+                        Grid.Column="6"  
+                        x:Name="DynamicEqCheckBox" 
+                        Content="Dynamic Eq" 
+                        Margin="5" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        />
+                    <CheckBox 
+                        Grid.Row="1" 
+                        Grid.Column="6" 
+                        x:Name="DynamicVolumeCheckBox" 
+                        Content="Dynamic Volume" 
+                        Margin="5" 
+                        VerticalAlignment="Center"
+                        />
+                    <CheckBox 
+                        Grid.Row="2" 
+                        Grid.Column="6"  
+                        x:Name="AuroCheckBox" 
+                        Content="Auro" 
+                        Margin="5" 
+                        VerticalAlignment="Center"
+                        />
+                    <CheckBox 
+                        Grid.Row="3" 
+                        Grid.Column="6" 
+                        x:Name="LfcSupportCheckBox"
+                        Content="Lfc Support" 
+                        Margin="5" 
+                        VerticalAlignment="Center"
+                        />
+                    <CheckBox 
+                        Grid.Row="4" 
+                        Grid.Column="6"  
+                        x:Name="LfcCheckBox" 
+                        Content="Lfc" 
+                        Margin="5" 
+                        VerticalAlignment="Center"
+                        />
                 </Grid>
             </GroupBox>
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
@@ -161,7 +229,7 @@
                         <!--channel report-->
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <GroupBox Header="Channel Info" DataContext="{Binding SelectedValue, ElementName=channelsView}">
+                        <GroupBox Header="Channel Info" DataContext="{Binding SelectedValue, ElementName=ChannelsView}">
                             <Grid>
                                 <Grid Grid.ColumnSpan="2">
                                     <Grid.RowDefinitions>
@@ -203,7 +271,7 @@
                         </GroupBox>
                     </Grid>
                     <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"/>
-                    <Grid Grid.Row="2" DataContext="{Binding SelectedValue, ElementName=channelsView}">
+                    <Grid Grid.Row="2" DataContext="{Binding SelectedValue, ElementName=ChannelsView}">
                         <GroupBox Header="Channel Report" DataContext="{Binding ChannelReport}">
                             <Grid>
                                 <Grid>
@@ -232,46 +300,113 @@
                 <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
                 <Grid Grid.Column="2">
                     <GroupBox Header="Graph View">
-                        <Grid DataContext="{Binding SelectedValue, ElementName=channelsView}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="100*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Label Content="Measurement position:" VerticalAlignment="Center"/>
-                                <CheckBox Content="1" x:Name="chbx1" Foreground="Black" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0" IsChecked="True"/>
-                                <CheckBox Content="2" x:Name="chbx2" Foreground="Blue" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="3" x:Name="chbx3" Foreground="Violet" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="4" x:Name="chbx4" Foreground="Green" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="5" x:Name="chbx5" Foreground="Orange" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="6" x:Name="chbx6" Foreground="Red" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="7" x:Name="chbx7" Foreground="Cyan" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="8" x:Name="chbx8" Foreground="DeepPink" Checked="CheckBoxMeasurementPositionChecked" Unchecked="CheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
-                                <CheckBox Content="Select/Unselect all" x:Name="allChbx" Foreground="Black" Checked="AllCheckBoxMeasurementPositionChecked" Unchecked="AllCheckBoxMeasurementPositionUnchecked" VerticalAlignment="Center" Margin="3,0,0,0"/>
+
+                            <StackPanel 
+                                Grid.Row="0" 
+                                Orientation="Horizontal"
+                                >
+                                <Label Content="Measurement position:"/>
+                                <ListView 
+                                    x:Name="MeasurementPositionsListView"
+                                    ItemsSource="{Binding MeasurementPositions}"
+                                    BorderThickness="0"
+                                    >
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type viewModels:MeasurementPositionViewModel}">
+                                            <CheckBox 
+                                                Content="{Binding Value}" 
+                                                Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" 
+                                                IsChecked="{Binding IsChecked}"
+                                                IsEnabled="{Binding IsEnabled}"
+                                                />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <CheckBox 
+                                    Content="Select/Unselect all" 
+                                    x:Name="SelectAllMeasurementPositionsCheckBox" 
+                                    VerticalAlignment="Center" 
+                                    Margin="3,0,0,0"
+                                    />
                             </StackPanel>
-                            <oxy:PlotView Grid.Row="1" x:Name="plot" DataContext="{Binding SelectedValue, ElementName=channelsView}"/>
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <RadioButton Content="No Smoothing" x:Name="radioButtonSmoothingFactorNone" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0" IsChecked="True"/>
-                                <RadioButton Content="1/2" x:Name="radioButtonSmoothingFactor2" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0"/>
-                                <RadioButton Content="1/3" x:Name="radioButtonSmoothingFactor3" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0"/>
-                                <RadioButton Content="1/6" x:Name="radioButtonSmoothingFactor6" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0"/>
-                                <RadioButton Content="1/12" x:Name="radioButtonSmoothingFactor12" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0"/>
-                                <RadioButton Content="1/24" x:Name="radioButtonSmoothingFactor24" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0"/>
-                                <RadioButton Content="1/48" x:Name="radioButtonSmoothingFactor48" Checked="RadioButtonSmoothingFactorChecked" Margin="0,0,10,0"/>
+                            <oxy:PlotView 
+                                Grid.Row="1" 
+                                x:Name="PlotView" 
+                                />
+                            <StackPanel 
+                                Grid.Row="2" 
+                                Orientation="Horizontal"
+                                >
+                                <ListView 
+                                    x:Name="SmoothingFactorsListView"
+                                    ItemsSource="{Binding SmoothingFactors}"
+                                    BorderThickness="0"
+                                    >
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type viewModels:SmoothingFactorViewModel}">
+                                            <RadioButton 
+                                                GroupName="SmoothingFactors"
+                                                Content="{Binding Title}" 
+                                                IsChecked="{Binding IsChecked}"
+                                                />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </StackPanel>
-                            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <RadioButton x:Name="rbtnXRangeChirp" Content="0-350ms" Checked="rbtnXRange_Checked" Margin="0,0,10,0"/>
-                                <RadioButton x:Name="rbtnXRangeSubwoofer" Content="10-1000Hz" Checked="rbtnXRange_Checked" Margin="0,0,10,0"/>
-                                <RadioButton x:Name="rbtnXRangeFull" Content="10Hz-24kHz" Checked="rbtnXRange_Checked" Margin="0,0,10,0" IsChecked="True"/>
+                            <StackPanel 
+                                Grid.Row="3" 
+                                Orientation="Horizontal" 
+                                >
+                                <ListView 
+                                    x:Name="RangesListView"
+                                    ItemsSource="{Binding Ranges}"
+                                    BorderThickness="0"
+                                    >
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type viewModels:RangeViewModel}">
+                                            <RadioButton 
+                                                GroupName="Ranges"
+                                                Content="{Binding Title}" 
+                                                IsChecked="{Binding IsChecked}"
+                                            />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </StackPanel>
-                            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <CheckBox Content="Logarithmic Axis" x:Name="chbxLogarithmicAxis" IsChecked="true"  HorizontalAlignment="Left" Checked="chbxLogarithmicAxis_Checked" Unchecked="chbxLogarithmicAxis_Unchecked" />
+                            <StackPanel 
+                                Grid.Row="4" 
+                                Orientation="Horizontal" 
+                                >
+                                <CheckBox 
+                                    x:Name="LogarithmicAxisCheckBox" 
+                                    Content="Logarithmic Axis" 
+                                    />
                             </StackPanel>
                         </Grid>
                     </GroupBox>

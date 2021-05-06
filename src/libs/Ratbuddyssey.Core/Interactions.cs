@@ -12,5 +12,6 @@ namespace Audyssey
         public static Interaction<Exception, Unit> Exception { get; } = new();
         public static Interaction<string, string?> OpenFile { get; } = new();
         public static Interaction<string, string?> SaveFile { get; } = new();
+        public static Interaction<string, bool> Question { get; } = new();
     }
 }

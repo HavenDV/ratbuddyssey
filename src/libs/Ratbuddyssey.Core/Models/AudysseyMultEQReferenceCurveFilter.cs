@@ -13,59 +13,59 @@ namespace Audyssey
 {
     public class AudysseyMultEQReferenceCurveFilter
     {
-        readonly string high_frequency_roll_off_1_points_filename = "high_frequency_roll_off_1";
-        readonly string high_frequency_roll_off_2_points_filename = "high_frequency_roll_off_2";
+        readonly string filename1 = "high_frequency_roll_off_1";
+        readonly string filename2 = "high_frequency_roll_off_2";
 
-        Collection<DataPoint> high_frequency_roll_off_1_points = null;
-        Collection<DataPoint> high_frequency_roll_off_2_points = null;
+        Collection<DataPoint> points1 = null;
+        Collection<DataPoint> points2 = null;
 
-        public AudysseyMultEQReferenceCurveFilter()
+        public void Load()
         {
-            high_frequency_roll_off_1_points_filename = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), high_frequency_roll_off_1_points_filename), "json");
-            high_frequency_roll_off_1_points = ReadPointsFromJsonFile(high_frequency_roll_off_1_points_filename);
-            if (high_frequency_roll_off_1_points == null)
+            var path1 = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), filename1), "json");
+            points1 = ReadPointsFromJsonFile(path1);
+            if (points1 == null)
             {
-                string warning = high_frequency_roll_off_1_points_filename + " missing";
-                Interactions.Warning.Handle($"Json file reader: {warning}").Subscribe();
-                high_frequency_roll_off_1_points_filename = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), high_frequency_roll_off_1_points_filename), "png");
-                high_frequency_roll_off_1_points = GeneratePointsFromBitmap(high_frequency_roll_off_1_points_filename);
+                Interactions.Warning
+                    .Handle($"Json file reader: {path1} missing")
+                    .Subscribe();
+
+                path1 = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), filename1), "png");
+                points1 = GeneratePointsFromBitmap(path1);
             }
-            if (high_frequency_roll_off_1_points != null)
+            if (points1 != null)
             {
-                WritePointsToJsonFile(high_frequency_roll_off_1_points_filename, high_frequency_roll_off_1_points);
+                WritePointsToJsonFile(path1, points1);
             }
             else
             {
-                string warning = high_frequency_roll_off_1_points_filename + " missing";
-                Interactions.Warning.Handle($"Bitmap file reader: {warning}").Subscribe();
+                Interactions.Warning.Handle($"Bitmap file reader: {path1} missing").Subscribe();
             }
 
-            high_frequency_roll_off_2_points_filename = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), high_frequency_roll_off_2_points_filename), "json");
-            high_frequency_roll_off_2_points = ReadPointsFromJsonFile(high_frequency_roll_off_2_points_filename);
-            if (high_frequency_roll_off_2_points == null)
+            var path2 = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), filename2), "json");
+            points2 = ReadPointsFromJsonFile(path2);
+            if (points2 == null)
             {
-                string warning = high_frequency_roll_off_2_points_filename + " missing";
-                Interactions.Warning.Handle($"Json file reader: {warning}").Subscribe();
-                high_frequency_roll_off_2_points_filename = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), high_frequency_roll_off_2_points_filename), "png");
-                high_frequency_roll_off_2_points = GeneratePointsFromBitmap(high_frequency_roll_off_2_points_filename);
+                Interactions.Warning.Handle($"Json file reader: {path2} missing").Subscribe();
+                path2 = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), filename2), "png");
+                points2 = GeneratePointsFromBitmap(path2);
             }
-            if (high_frequency_roll_off_2_points != null)
+            if (points2 != null)
             {
-                WritePointsToJsonFile(high_frequency_roll_off_2_points_filename, high_frequency_roll_off_2_points);
+                WritePointsToJsonFile(path2, points2);
             }
             else
             {
-                string warning = high_frequency_roll_off_2_points_filename + " missing";
-                Interactions.Warning.Handle($"Bitmap file reader: {warning}").Subscribe();
+                Interactions.Warning.Handle($"Bitmap file reader: {path2} missing").Subscribe();
             }
         }
+
         public Collection<DataPoint> High_Frequency_Roll_Off_1()
         {
-            return high_frequency_roll_off_1_points;
+            return points1;
         }
         public Collection<DataPoint> High_Frequency_Roll_Off_2()
         {
-            return high_frequency_roll_off_2_points;
+            return points2;
         }
         public Collection<DataPoint> ReadPointsFromJsonFile(string filename)
         {

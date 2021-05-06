@@ -24,7 +24,11 @@ namespace Ratbuddyssey
             {
                 var message = context.Input;
 
-                MessageBox.Show(message, "Warning:", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(
+                    message, 
+                    "Warning:", 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Warning);
 
                 context.SetOutput(Unit.Default);
             });
@@ -32,7 +36,11 @@ namespace Ratbuddyssey
             {
                 var exception = context.Input;
 
-                MessageBox.Show($"{exception}", "Error:", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    $"{exception}", 
+                    "Error:", 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Error);
 
                 context.SetOutput(Unit.Default);
             });
@@ -45,12 +53,14 @@ namespace Ratbuddyssey
                     FileName = extension switch
                     {
                         ".aud" => "AudysseySniffer.aud",
+                        ".ady" => string.Empty,
                         _ => string.Empty,
                     },
                     DefaultExt = extension,
                     Filter = extension switch
                     {
                         ".aud" => "Audyssey sniffer (*.aud)|*.aud",
+                        ".ady" => "Audyssey files (*.ady)|*.ady",
                         _ => string.Empty,
                     },
                 };
@@ -75,6 +85,7 @@ namespace Ratbuddyssey
                     Filter = extension switch
                     {
                         ".aud" => "Audyssey sniffer (.aud)|*.aud",
+                        ".ady" => "Audyssey calibration (.ady)|*.ady",
                         _ => string.Empty,
                     },
                 };
@@ -83,6 +94,19 @@ namespace Ratbuddyssey
                     : null;
 
                 context.SetOutput(fileName);
+            });
+            Interactions.Question.RegisterHandler(static context =>
+            {
+                var message = context.Input;
+                
+                var result = MessageBox.Show(
+                    message, 
+                    "Are you sure?", 
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question,
+                    MessageBoxResult.No);
+                
+                context.SetOutput(result == MessageBoxResult.Yes);
             });
 
             DispatcherUnhandledException += static (_, e) =>
