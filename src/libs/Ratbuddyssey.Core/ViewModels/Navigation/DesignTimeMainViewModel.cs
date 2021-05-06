@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-#nullable enable
-
 namespace Audyssey.ViewModels
 {
     public class DesignTimeMainViewModel

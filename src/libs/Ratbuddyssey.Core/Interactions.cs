@@ -2,8 +2,6 @@
 using System.Reactive;
 using ReactiveUI;
 
-#nullable enable
-
 namespace Audyssey
 {
     public static class Interactions

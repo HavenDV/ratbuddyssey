@@ -6,6 +6,8 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Buffers.Binary;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvr

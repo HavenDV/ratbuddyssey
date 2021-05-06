@@ -2,7 +2,7 @@
 
   <PropertyGroup Label="Common">
     <LangVersion>preview</LangVersion>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   
 </Project>

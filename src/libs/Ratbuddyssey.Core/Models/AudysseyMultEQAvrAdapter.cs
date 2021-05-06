@@ -6,6 +6,8 @@ using Audyssey.MultEQ;
 using Audyssey.MultEQApp;
 using Audyssey.MultEQAvr;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvrAdapter

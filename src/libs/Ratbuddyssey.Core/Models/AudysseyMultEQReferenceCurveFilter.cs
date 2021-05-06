@@ -9,6 +9,8 @@ using MathNet.Numerics.Interpolation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
+#nullable disable
+
 namespace Audyssey
 {
     public class AudysseyMultEQReferenceCurveFilter

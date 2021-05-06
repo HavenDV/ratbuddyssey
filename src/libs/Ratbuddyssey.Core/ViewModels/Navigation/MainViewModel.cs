@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-#nullable enable
-
 namespace Audyssey.ViewModels
 {
     public class MainViewModel : ActivatableViewModel, IScreen

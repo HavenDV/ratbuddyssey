@@ -2,8 +2,6 @@
 using System.Drawing;
 using Audyssey.Models;
 
-#nullable enable
-
 namespace Audyssey.ViewModels
 {
     public class DesignTimeFileViewModel
@@ -41,6 +39,5 @@ namespace Audyssey.ViewModels
         };
 
         #endregion
-
     }
 }

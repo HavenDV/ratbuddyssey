@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using System.ComponentModel;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQApp

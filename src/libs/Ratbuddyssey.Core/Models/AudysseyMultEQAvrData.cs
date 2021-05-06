@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using Audyssey.MultEQ;
 using System;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvr

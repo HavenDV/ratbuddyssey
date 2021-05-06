@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvr

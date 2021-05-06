@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Audyssey.MultEQAvr;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQTcp

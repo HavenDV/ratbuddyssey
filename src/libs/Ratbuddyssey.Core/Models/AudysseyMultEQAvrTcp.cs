@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvr

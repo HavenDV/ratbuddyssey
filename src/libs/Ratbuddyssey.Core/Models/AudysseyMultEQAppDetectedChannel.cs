@@ -4,8 +4,12 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using Newtonsoft.Json;
 using Audyssey.MultEQ;
+using ReactiveUI;
+
+#nullable disable
 
 namespace Audyssey
 {
@@ -320,14 +324,14 @@ namespace Audyssey
             #endregion
         }
 
-        public class MyKeyValuePair : INotifyPropertyChanged
+        public class MyKeyValuePair : ReactiveObject
         {
             private double KeyMin = 10; //10Hz Chris Kyriakakis
             private double KeyMax = 24000; //24000Hz Chris Kyriakakis
             private double ValueMin = -20; //-12dB AUDYSSEY MultiEQ app -> -20dB Chris Kyriakakis
             private double ValueMax = 12; //12dB AUDYSSEY MultiEQ app -> +9dB Chris Kyriakakis -> +12 dB in ady afile!
-            string _key;
-            string _value;
+            string _key = string.Empty;
+            string _value = string.Empty;
             public string Key
             {
                 get
@@ -336,12 +340,12 @@ namespace Audyssey
                 }
                 set
                 {
-                    double dValue = Double.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                    double dValue = Double.Parse(value, CultureInfo.InvariantCulture);
                     if (dValue >= KeyMin && dValue <= KeyMax)
                     {
                         _key = value;
                     }
-                    RaisePropertyChanged("Key");
+                    this.RaisePropertyChanged(nameof(Key));
                 }
             }
             public string Value
@@ -352,12 +356,13 @@ namespace Audyssey
                 }
                 set
                 {
-                    double dValue = Double.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                    double dValue = Double.Parse(value, CultureInfo.InvariantCulture);
                     if (dValue >= ValueMin && dValue <= ValueMax)
                     {
                         _value = value;
                     }
-                    RaisePropertyChanged("Value");
+
+                    this.RaisePropertyChanged(nameof(Value));
                 }
             }
             public MyKeyValuePair(string key, string value)
@@ -367,20 +372,12 @@ namespace Audyssey
             }
             public MyKeyValuePair(decimal key, decimal value)
             {
-                Key = key.ToString();
-                Value = value.ToString();
+                Key = key.ToString(CultureInfo.InvariantCulture);
+                Value = value.ToString(CultureInfo.InvariantCulture);
             }
             public override string ToString()
             {
                 return "{" + Key + ", " + Value + "}";
-            }
-            public event PropertyChangedEventHandler PropertyChanged;
-            protected void RaisePropertyChanged(string propertyName)
-            {
-                if (this.PropertyChanged != null)
-                {
-                    this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
             }
         }
     }

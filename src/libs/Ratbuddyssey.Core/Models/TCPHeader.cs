@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Net;
 
+#nullable disable
+
 namespace Audyssey
 {
     public class TCPHeader

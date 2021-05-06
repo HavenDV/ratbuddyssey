@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvr

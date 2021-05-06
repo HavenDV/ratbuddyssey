@@ -19,8 +19,6 @@ using OxyPlot.Series;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-#nullable enable
-
 namespace Audyssey.ViewModels
 {
     public class FileViewModel : RoutableViewModel

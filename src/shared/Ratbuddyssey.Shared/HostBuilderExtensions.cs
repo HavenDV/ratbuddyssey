@@ -7,6 +7,8 @@ using Ratbuddyssey.Converters;
 using Ratbuddyssey.Views;
 using ReactiveUI;
 
+#nullable enable
+
 namespace Audyssey.Initialization
 {
     public static class HostBuilderExtensions

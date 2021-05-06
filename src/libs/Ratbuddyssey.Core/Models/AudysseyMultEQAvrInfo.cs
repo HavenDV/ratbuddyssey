@@ -1,5 +1,7 @@
 using System.ComponentModel;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQAvr

@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using Audyssey.MultEQTcp;
 
+#nullable disable
+
 namespace Audyssey
 {
     public class IPHeader

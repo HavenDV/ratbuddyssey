@@ -13,8 +13,6 @@ using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-#nullable enable
-
 namespace Audyssey.ViewModels
 {
     public class EthernetViewModel : RoutableViewModel

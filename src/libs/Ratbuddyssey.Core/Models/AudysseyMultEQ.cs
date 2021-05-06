@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQ

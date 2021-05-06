@@ -5,6 +5,8 @@ using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Collections.Concurrent;
 
+#nullable disable
+
 namespace Audyssey
 {
     public class InterfaceContractResolver : DefaultContractResolver

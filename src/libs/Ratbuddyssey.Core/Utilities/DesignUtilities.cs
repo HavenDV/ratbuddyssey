@@ -5,8 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-#nullable enable
-
 namespace Audyssey.Utilities
 {
     public static class DesignUtilities

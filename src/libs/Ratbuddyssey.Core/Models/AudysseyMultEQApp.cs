@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using Audyssey.MultEQ;
 
+#nullable disable
+
 namespace Audyssey
 {
     namespace MultEQApp

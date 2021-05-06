@@ -2,8 +2,6 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-#nullable enable
-
 namespace Audyssey.ViewModels
 {
     public abstract class ViewModelBase : ReactiveObject
