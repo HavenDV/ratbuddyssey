@@ -98,7 +98,7 @@ namespace Audyssey.ViewModels
             });
             GetReceiverInfo = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp == null || Avr == null)
+                if (AvrTcp == null)
                 {
                     return;
                 }
@@ -117,7 +117,7 @@ namespace Audyssey.ViewModels
             });
             GetReceiverStatus = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp == null || Avr == null)
+                if (AvrTcp == null)
                 {
                     return;
                 }
@@ -136,7 +136,7 @@ namespace Audyssey.ViewModels
             });
             SetAvrSetAmp = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp == null || Avr == null)
+                if (AvrTcp == null)
                 {
                     return;
                 }
@@ -155,7 +155,7 @@ namespace Audyssey.ViewModels
             });
             SetAvrSetAudy = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp == null || Avr == null)
+                if (AvrTcp == null)
                 {
                     return;
                 }
@@ -174,7 +174,7 @@ namespace Audyssey.ViewModels
             });
             SetAvrSetDisFil = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp == null || Avr == null)
+                if (AvrTcp == null)
                 {
                     return;
                 }
@@ -190,14 +190,14 @@ namespace Audyssey.ViewModels
             });
             SetAvrInitCoefs = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp != null && Avr != null)
+                if (AvrTcp != null)
                 {
                     AvrTcp.SetAvrInitCoefs();
                 }
             });
             SetAvrSetCoefDt = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp == null || Avr == null)
+                if (AvrTcp == null)
                 {
                     return;
                 }
@@ -213,10 +213,7 @@ namespace Audyssey.ViewModels
             });
             SetAudysseyFinishedFlag = ReactiveCommand.Create(() =>
             {
-                if (AvrTcp != null && Avr != null)
-                {
-                    AvrTcp.SetAudysseyFinishedFlag();
-                }
+                AvrTcp?.SetAudysseyFinishedFlag();
             });
 
             this.WhenAnyValue(static x => x.ConnectReceiverIsChecked)
@@ -233,12 +230,8 @@ namespace Audyssey.ViewModels
                             // if there is no Tcp client
                             if (AvrTcp == null)
                             {
-                                // create receiver instance
-                                Avr ??= new AudysseyMultEQAvr();
                                 // create receiver tcp instance
                                 AvrTcp = new AudysseyMultEQAvrTcp(Avr, SelectedInterfaceIp);
-                                // create adapter to interface MultEQAvr properties as if they were MultEQApp properties 
-                                AvrAdapter ??= new AudysseyMultEQAvrAdapter(Avr);
                             }
                             AvrTcp.Connect();
                             // attach sniffer
@@ -344,10 +337,7 @@ namespace Audyssey.ViewModels
                 .WhereNotNull()
                 .Subscribe(value =>
                 {
-                    if (Avr != null)
-                    {
-                        Avr.SelectedItem = value;
-                    }
+                    Avr.SelectedItem = value;
                 });
 
             Ips = Dns.GetHostEntry(Dns.GetHostName()).AddressList
@@ -388,16 +378,11 @@ namespace Audyssey.ViewModels
 
             Avr = JsonConvert.DeserializeObject<AudysseyMultEQAvr>(json) ?? 
                   throw new InvalidOperationException("Invalid json.");
-            AvrAdapter ??= new AudysseyMultEQAvrAdapter(Avr); // TODO: Bug after second load different file?
+            AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
         }
 
         public void SaveAvr(string fileName)
         {
-            if (Avr == null)
-            {
-                return;
-            }
-
             var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
