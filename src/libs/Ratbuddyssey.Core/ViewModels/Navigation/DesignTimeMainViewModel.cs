@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class DesignTimeMainViewModel
     {

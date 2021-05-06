@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net4.6.1</TargetFrameworks>
-    <RootNamespace>Audyssey</RootNamespace>
+    <RootNamespace>Ratbuddyssey</RootNamespace>
     <NoWarn>$(NoWarn)</NoWarn>
   </PropertyGroup>
 

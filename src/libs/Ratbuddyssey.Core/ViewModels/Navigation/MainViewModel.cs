@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class MainViewModel : ActivatableViewModel, IScreen
     {

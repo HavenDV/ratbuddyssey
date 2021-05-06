@@ -2,13 +2,13 @@
 using System.Linq;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using Audyssey.MultEQ;
-using Audyssey.MultEQApp;
-using Audyssey.MultEQAvr;
+using Ratbuddyssey.MultEQ;
+using Ratbuddyssey.MultEQApp;
+using Ratbuddyssey.MultEQAvr;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQAvrAdapter
     {

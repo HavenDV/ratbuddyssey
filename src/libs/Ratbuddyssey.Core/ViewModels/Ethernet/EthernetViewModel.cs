@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Reactive;
 using System.Reactive.Linq;
-using Audyssey.MultEQAvr;
-using Audyssey.MultEQAvrAdapter;
-using Audyssey.MultEQTcp;
+using Ratbuddyssey.MultEQAvr;
+using Ratbuddyssey.MultEQAvrAdapter;
+using Ratbuddyssey.MultEQTcp;
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class EthernetViewModel : RoutableViewModel
     {

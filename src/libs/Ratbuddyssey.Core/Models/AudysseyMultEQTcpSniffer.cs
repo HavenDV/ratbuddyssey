@@ -8,11 +8,11 @@ using System.Buffers.Binary;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
-using Audyssey.MultEQAvr;
+using Ratbuddyssey.MultEQAvr;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQTcp
     {

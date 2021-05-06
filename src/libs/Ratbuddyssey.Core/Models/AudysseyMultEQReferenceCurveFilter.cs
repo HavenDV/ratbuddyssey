@@ -11,7 +11,7 @@ using Newtonsoft.Json.Serialization;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     public class AudysseyMultEQReferenceCurveFilter
     {

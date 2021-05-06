@@ -1,9 +1,9 @@
 ﻿using System;
-using Audyssey.ViewModels;
+using Ratbuddyssey.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 
-namespace Audyssey.Initialization
+namespace Ratbuddyssey.Initialization
 {
     public static class ConfigureServicesExtensions
     {

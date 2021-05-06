@@ -8,7 +8,7 @@ using System.Buffers.Binary;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQAvr
     {

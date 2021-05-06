@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
-using Audyssey.MultEQ;
+using Ratbuddyssey.MultEQ;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQApp
     {

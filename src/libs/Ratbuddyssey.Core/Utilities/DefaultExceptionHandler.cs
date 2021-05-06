@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reactive.Linq;
 
-namespace Audyssey.Utilities
+namespace Ratbuddyssey.Utilities
 {
     public class DefaultExceptionHandler : IObserver<Exception>
     {

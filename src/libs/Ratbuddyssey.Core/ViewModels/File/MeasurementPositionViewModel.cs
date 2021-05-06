@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using ReactiveUI.Fody.Helpers;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class MeasurementPositionViewModel : ViewModelBase
     {

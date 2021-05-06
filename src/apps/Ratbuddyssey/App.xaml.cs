@@ -1,14 +1,13 @@
-﻿using Audyssey;
-using System.Reactive;
+﻿using System.Reactive;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
-using Audyssey.Initialization;
-using Audyssey.ViewModels;
+using Ratbuddyssey.Initialization;
+using Ratbuddyssey.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
-using HostBuilder = Audyssey.Initialization.HostBuilder;
+using HostBuilder = Ratbuddyssey.Initialization.HostBuilder;
 
 namespace Ratbuddyssey
 {

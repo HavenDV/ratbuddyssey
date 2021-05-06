@@ -1,5 +1,5 @@
 ﻿using System;
-using Audyssey.ViewModels;
+using Ratbuddyssey.ViewModels;
 using Icon = MaterialDesignThemes.Wpf.PackIconKind;
 
 #nullable enable

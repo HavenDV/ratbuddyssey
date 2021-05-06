@@ -2,7 +2,7 @@
 using System.Reactive;
 using ReactiveUI;
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     public static class Interactions
     {

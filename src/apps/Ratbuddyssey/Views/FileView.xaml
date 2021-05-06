@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:reactiveUi="http://reactiveui.net"
-    xmlns:viewModels="clr-namespace:Audyssey.ViewModels;assembly=Ratbuddyssey.Core"
+    xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     mc:Ignorable="d" 
     d:DesignWidth="1200"
     d:DesignHeight="800" 

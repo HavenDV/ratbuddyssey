@@ -7,7 +7,7 @@ using System.Windows;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQAvr
     {

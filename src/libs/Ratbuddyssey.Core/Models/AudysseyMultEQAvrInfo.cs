@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQAvr
     {

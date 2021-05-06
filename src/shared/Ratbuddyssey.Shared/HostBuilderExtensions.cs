@@ -1,5 +1,5 @@
 ﻿using System;
-using Audyssey.ViewModels;
+using Ratbuddyssey.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ using ReactiveUI;
 
 #nullable enable
 
-namespace Audyssey.Initialization
+namespace Ratbuddyssey.Initialization
 {
     public static class HostBuilderExtensions
     {

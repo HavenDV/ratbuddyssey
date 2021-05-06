@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Audyssey.Utilities
+namespace Ratbuddyssey.Utilities
 {
     public static class DesignUtilities
     {

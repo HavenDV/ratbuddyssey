@@ -6,7 +6,7 @@ using System.Linq;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQAvr
     {

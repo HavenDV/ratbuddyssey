@@ -1,4 +1,4 @@
-﻿using Audyssey.Utilities;
+﻿using Ratbuddyssey.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,7 @@ using Splat.Microsoft.Extensions.DependencyInjection;
 using Splat.Microsoft.Extensions.Logging;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
-namespace Audyssey.Initialization
+namespace Ratbuddyssey.Initialization
 {
     public static class HostBuilder
     {

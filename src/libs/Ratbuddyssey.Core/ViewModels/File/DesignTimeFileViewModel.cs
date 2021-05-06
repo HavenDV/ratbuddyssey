@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using Audyssey.Models;
+using Ratbuddyssey.Models;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class DesignTimeFileViewModel
     {

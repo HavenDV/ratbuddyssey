@@ -9,8 +9,8 @@ using System.Linq;
 using System.Numerics;
 using System.Reactive;
 using System.Reactive.Linq;
-using Audyssey.Models;
-using Audyssey.MultEQApp;
+using Ratbuddyssey.Models;
+using Ratbuddyssey.MultEQApp;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OxyPlot;
@@ -19,7 +19,7 @@ using OxyPlot.Series;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class FileViewModel : RoutableViewModel
     {

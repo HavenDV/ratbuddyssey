@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using Newtonsoft.Json;
-using Audyssey.MultEQ;
+using Ratbuddyssey.MultEQ;
 using ReactiveUI;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQApp
     {
@@ -328,8 +328,8 @@ namespace Audyssey
         {
             private double KeyMin = 10; //10Hz Chris Kyriakakis
             private double KeyMax = 24000; //24000Hz Chris Kyriakakis
-            private double ValueMin = -20; //-12dB AUDYSSEY MultiEQ app -> -20dB Chris Kyriakakis
-            private double ValueMax = 12; //12dB AUDYSSEY MultiEQ app -> +9dB Chris Kyriakakis -> +12 dB in ady afile!
+            private double ValueMin = -20; //-12dB Ratbuddyssey MultiEQ app -> -20dB Chris Kyriakakis
+            private double ValueMax = 12; //12dB Ratbuddyssey MultiEQ app -> +9dB Chris Kyriakakis -> +12 dB in ady afile!
             string _key = string.Empty;
             string _value = string.Empty;
             public string Key

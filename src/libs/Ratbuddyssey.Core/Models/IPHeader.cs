@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Net;
-using Audyssey.MultEQTcp;
+using Ratbuddyssey.MultEQTcp;
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     public class IPHeader
     {

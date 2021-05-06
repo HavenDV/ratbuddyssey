@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 #nullable disable
 
-namespace Audyssey
+namespace Ratbuddyssey
 {
     namespace MultEQ
     {

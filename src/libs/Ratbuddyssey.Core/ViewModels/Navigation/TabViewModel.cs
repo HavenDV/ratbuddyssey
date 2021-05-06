@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Audyssey.ViewModels
+namespace Ratbuddyssey.ViewModels
 {
     public class TabViewModel : ViewModelBase
     {

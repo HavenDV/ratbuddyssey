@@ -1,4 +1,4 @@
-﻿namespace Audyssey.Models
+﻿namespace Ratbuddyssey.Models
 {
     public enum FrequencyRange
     {
