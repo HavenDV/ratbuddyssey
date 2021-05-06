@@ -264,9 +264,9 @@ namespace Audyssey.ViewModels
                     }
                     else
                     {
-                        AvrAdapter = null;
+                        Avr = new AudysseyMultEQAvr();
+                        AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
                         AvrTcp = null;
-                        Avr = null;
                         // immediately clean up the object
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
@@ -278,14 +278,6 @@ namespace Audyssey.ViewModels
                 {
                     if (value)
                     {
-                        // can only attach sniffer to receiver if receiver object exists 
-                        if (Avr == null)
-                        {
-                            // create receiver instance
-                            Avr = new AudysseyMultEQAvr();
-                            // create adapter to interface MultEQAvr properties as if they were MultEQApp properties 
-                            AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
-                        }
                         // sniffer must be elevated to capture raw packets
                         if (!IsElevated())
                         {
@@ -311,8 +303,8 @@ namespace Audyssey.ViewModels
                             // if not interested in receiver then close connection and delete objects
                             if (ConnectReceiverIsChecked == false)
                             {
-                                AvrAdapter = null;
-                                Avr = null;
+                                Avr = new AudysseyMultEQAvr();
+                                AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
                             }
                             // immediately clean up the object
                             GC.Collect();
@@ -394,7 +386,8 @@ namespace Audyssey.ViewModels
         {
             var json = File.ReadAllText(fileName);
 
-            Avr = JsonConvert.DeserializeObject<AudysseyMultEQAvr>(json);
+            Avr = JsonConvert.DeserializeObject<AudysseyMultEQAvr>(json) ?? 
+                  throw new InvalidOperationException("Invalid json.");
             AvrAdapter ??= new AudysseyMultEQAvrAdapter(Avr); // TODO: Bug after second load different file?
         }
 

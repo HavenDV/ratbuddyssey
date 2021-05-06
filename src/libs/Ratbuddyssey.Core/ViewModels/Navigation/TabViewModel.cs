@@ -8,10 +8,6 @@ namespace Audyssey.ViewModels
 
         public string Header { get; set; }
 
-        public TabViewModel()
-        {
-        }
-
         public TabViewModel(Type type, string header)
         {
             Type = type ?? throw new ArgumentNullException(nameof(type));

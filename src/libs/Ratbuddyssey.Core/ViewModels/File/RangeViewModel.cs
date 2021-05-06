@@ -13,10 +13,6 @@ namespace Audyssey.ViewModels
 
         public FrequencyRange Value { get; set; }
 
-        public RangeViewModel()
-        {
-        }
-
         public RangeViewModel(string title, FrequencyRange value, bool isChecked = false)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));

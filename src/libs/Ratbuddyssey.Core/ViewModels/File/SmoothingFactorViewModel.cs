@@ -12,10 +12,6 @@ namespace Audyssey.ViewModels
 
         public double Value { get; set; }
 
-        public SmoothingFactorViewModel()
-        {
-        }
-
         public SmoothingFactorViewModel(string title, double value, bool isChecked = false)
         {
             Title = title ?? throw new ArgumentNullException(nameof(Title));
