@@ -13,16 +13,7 @@ namespace Ratbuddyssey.ViewModels
             new(typeof(EthernetViewModel), "Ethernet"),
         };
 
-        public TabViewModel? SelectedTab { get; set; }
-
-        #endregion
-
-        #region Constructors
-
-        public DesignTimeMainViewModel()
-        {
-            SelectedTab = Tabs.First();
-        }
+        public TabViewModel SelectedTab => Tabs.First();
 
         #endregion
     }
