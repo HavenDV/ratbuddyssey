@@ -2,9 +2,9 @@
 using System.Linq;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using Ratbuddyssey.MultEQ;
 using Ratbuddyssey.MultEQApp;
 using Ratbuddyssey.MultEQAvr;
+using ReactiveUI;
 
 #nullable disable
 
@@ -15,7 +15,7 @@ namespace Ratbuddyssey
         // Adapter class needed as long as ethernet traffic uses the file GUI
         // TODO: design GUI TAB dedicated to ethernet traffic which makes this
         // adapter redundant -> directly access avr class and sniffer class!
-        public class AudysseyMultEQAvrAdapter : MultEQList, INotifyPropertyChanged
+        public class AudysseyMultEQAvrAdapter : ReactiveObject
         {
             private AudysseyMultEQAvr _audysseyMultEQAvr;
 
@@ -32,7 +32,7 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.Ifver = value;
-                    RaisePropertyChanged("InterfaceVersion");
+                    this.RaisePropertyChanged("InterfaceVersion");
                 }
             }
             // different: name
@@ -45,7 +45,7 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.ADC = value;
-                    RaisePropertyChanged("AdcLineup");
+                    this.RaisePropertyChanged("AdcLineup");
                 }
             }
             // same
@@ -58,22 +58,22 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.SysDelay = value;
-                    RaisePropertyChanged("SystemDelay");
+                    this.RaisePropertyChanged("SystemDelay");
                 }
             }
-            // different: enum in file but string in eth
-            public int EnMultEQType
-            {
-                get
-                {
-                    return MultEQTypeList.IndexOf(_audysseyMultEQAvr.EQType);
-                }
-                set
-                {
-                    _audysseyMultEQAvr.EQType = MultEQTypeList.ElementAt(value);
-                    RaisePropertyChanged("EnMultEQType");
-                }
-            }
+            //// different: enum in file but string in eth
+            //public int EnMultEQType
+            //{
+            //    get
+            //    {
+            //        return MultEQTypeList.IndexOf(_audysseyMultEQAvr.EQType);
+            //    }
+            //    set
+            //    {
+            //        _audysseyMultEQAvr.EQType = MultEQTypeList.ElementAt(value);
+            //        this.RaisePropertyChanged("EnMultEQType");
+            //    }
+            //}
             // same (but capitals)
             public bool? Lfc
             {
@@ -84,7 +84,7 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.LFC = value;
-                    RaisePropertyChanged("Lfc");
+                    this.RaisePropertyChanged("Lfc");
                 }
             }
             // same
@@ -97,7 +97,7 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.Auro = value;
-                    RaisePropertyChanged("Auro");
+                    this.RaisePropertyChanged("Auro");
                 }
             }
             // different: name
@@ -110,22 +110,22 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.Upgrade = value;
-                    RaisePropertyChanged("UpgradeInfo");
+                    this.RaisePropertyChanged("UpgradeInfo");
                 }
             }
-            // different: type in file but string in eth
-            public int EnAmpAssignType
-            {
-                get
-                {
-                    return AmpAssignTypeList.IndexOf(_audysseyMultEQAvr.AmpAssign);
-                }
-                set
-                {
-                    _audysseyMultEQAvr.AmpAssign = AmpAssignTypeList.ElementAt(value);
-                    RaisePropertyChanged("EnAmpAssignType");
-                }
-            }
+            //// different: type in file but string in eth
+            //public int EnAmpAssignType
+            //{
+            //    get
+            //    {
+            //        return AmpAssignTypeList.IndexOf(_audysseyMultEQAvr.AmpAssign);
+            //    }
+            //    set
+            //    {
+            //        _audysseyMultEQAvr.AmpAssign = AmpAssignTypeList.ElementAt(value);
+            //        this.RaisePropertyChanged("EnAmpAssignType");
+            //    }
+            //}
             // different: name
             public string AmpAssignInfo
             {
@@ -136,7 +136,7 @@ namespace Ratbuddyssey
                 set
                 {
                     _audysseyMultEQAvr.AssignBin = value;
-                    RaisePropertyChanged("AmpAssignInfo");
+                    this.RaisePropertyChanged("AmpAssignInfo");
                 }
             }
             // different: !!!
@@ -175,7 +175,7 @@ namespace Ratbuddyssey
                 }
                 set
                 {
-                    RaisePropertyChanged("DetectedChannels");
+                    this.RaisePropertyChanged("DetectedChannels");
                 }
             }
             #endregion
@@ -187,21 +187,7 @@ namespace Ratbuddyssey
                 audysseyMultEQAvr.PropertyChanged += _PropertyChanged;
             }
 
-            ~AudysseyMultEQAvrAdapter()
-            {
-            }
-
             #region INotifyPropertyChanged members
-            public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-            protected void RaisePropertyChanged(string propertyName)
-            {
-                if (this.PropertyChanged != null)
-                {
-                    Console.WriteLine("Changed: " + propertyName);
-                    this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
 
             public void _PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
@@ -210,18 +196,18 @@ namespace Ratbuddyssey
                 switch (e.PropertyName)
                 {
                     case "Info":
-                        RaisePropertyChanged("InterfaceVersion");
-                        RaisePropertyChanged("AdcLineup");
-                        RaisePropertyChanged("SystemDelay");
-                        RaisePropertyChanged("EnMultEQType");
-                        RaisePropertyChanged("Lfc");
-                        RaisePropertyChanged("Auro");
-                        RaisePropertyChanged("UpgradeInfo");
+                        this.RaisePropertyChanged("InterfaceVersion");
+                        this.RaisePropertyChanged("AdcLineup");
+                        this.RaisePropertyChanged("SystemDelay");
+                        this.RaisePropertyChanged("EnMultEQType");
+                        this.RaisePropertyChanged("Lfc");
+                        this.RaisePropertyChanged("Auro");
+                        this.RaisePropertyChanged("UpgradeInfo");
                         break;
                     case "Status":
-                        RaisePropertyChanged("DetectedChannels");
-                        RaisePropertyChanged("EnAmpAssignType");
-                        RaisePropertyChanged("AmpAssignInfo");
+                        this.RaisePropertyChanged("DetectedChannels");
+                        this.RaisePropertyChanged("EnAmpAssignType");
+                        this.RaisePropertyChanged("AmpAssignInfo");
                         break;
                 }
             }

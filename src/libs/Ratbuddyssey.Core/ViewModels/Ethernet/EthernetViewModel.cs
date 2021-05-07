@@ -51,7 +51,25 @@ namespace Ratbuddyssey.ViewModels
 
         [Reactive]
         public Dictionary<string, string>? SelectedChannelSetupView { get; set; }
-        
+
+        public IReadOnlyCollection<string> ChannelSetupList { get; } = new[] { "N", "S", "E" };
+
+        public IReadOnlyCollection<string> AudyDynSetList { get; } = new[] { "H", "M", "L" };
+
+        public IReadOnlyCollection<string> AudyEqSetList { get; } = new[] { "Audy", "Flat" };
+
+        public IReadOnlyCollection<int> AudyEqRefList { get; } = new[] { 0, 5, 10, 15 };
+
+        public IReadOnlyCollection<int> AudyLfcLevList { get; } = new[] { 1, 2, 3, 4, 5, 6, 7 };
+
+        public IReadOnlyCollection<decimal> SelectedChLevelList { get; } = new[] { 
+            -12m, -11.5m, -11m, -10.5m, -10m, -9.5m, -9m, -8.5m, -8m, -7.5m, -7m, -6.5m, 
+            -6m, -5.5m, -5m, -4.5m, -4m, -3.5m, -3m, -2.5m, -2m, -1.5m, -1m, -0.5m, 
+            0m, 0.5m, 1.0m, 1.5m, 2.0m, 2.5m, 3m, 3.5m, 4m, 4.5m, 5m, 5.5m, 
+            6m, 6.5m, 7m, 7.5m, 9m, 8.5m, 9m, 9.5m, 10m, 10.5m, 11m, 11.5m, 12m,
+        };
+
+        public IReadOnlyCollection<string> AudyFinFlgList { get; } = new[] { "Fin", "NotFin" };
 
         #region Commands
 

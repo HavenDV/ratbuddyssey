@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Newtonsoft.Json;
-using Ratbuddyssey.MultEQ;
 using System;
 
 #nullable disable
@@ -38,7 +37,7 @@ namespace Ratbuddyssey
             #endregion
         }
 
-        public partial class AudysseyMultEQAvr : MultEQList, IAmp, IAudy, INotifyPropertyChanged
+        public partial class AudysseyMultEQAvr : IAmp, IAudy, INotifyPropertyChanged
         {
             // IAmp
             private UniqueObservableCollection<Dictionary<string, int>> _ChLevel = null;
