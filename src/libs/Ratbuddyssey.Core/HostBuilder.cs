@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Ratbuddyssey.ViewModels;
 using ReactiveUI;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
@@ -18,7 +20,8 @@ namespace Ratbuddyssey.Initialization
             return Host
               .CreateDefaultBuilder()
               .ConfigureServices(ConfigureServices)
-              .ConfigureLogging(ConfigureLogging);
+              .ConfigureLogging(ConfigureLogging)
+              .AddViewModels();
         }
 
         private static void ConfigureServices(IServiceCollection services)
@@ -28,10 +31,6 @@ namespace Ratbuddyssey.Initialization
             var resolver = Locator.CurrentMutable;
             resolver.InitializeSplat();
             resolver.InitializeReactiveUI();
-
-            services
-                .AddServices()
-                .AddViewModels();
         }
 
         private static void ConfigureLogging(ILoggingBuilder builder)
@@ -44,6 +43,24 @@ namespace Ratbuddyssey.Initialization
                 .SetMinimumLevel(LogLevel.Information)
 #endif
                 ;
+        }
+
+        public static IHostBuilder AddViewModels(this IHostBuilder builder)
+        {
+            builder = builder ?? throw new ArgumentNullException(nameof(builder));
+
+            builder.ConfigureServices(static services =>
+            {
+                services
+                    .AddSingleton<MainViewModel>()
+                    .AddSingleton<IScreen, MainViewModel>(provider => provider.GetRequiredService<MainViewModel>())
+
+                    .AddSingleton<FileViewModel>()
+                    .AddSingleton<EthernetViewModel>()
+                    ;
+            });
+
+            return builder;
         }
     }
 }
