@@ -101,7 +101,7 @@
             Grid.Column="0" 
             x:Name="MenuGrid" 
             Width="70" 
-            Background="#536dfe"
+            Background="#FF3F51B5"
             >
             <Grid.Effect>
                 <DropShadowEffect 
@@ -122,7 +122,7 @@
                         Margin="5"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
-                        Foreground="#536dfe"
+                        Foreground="#FF3F51B5"
                         Background="Transparent"
                         BorderThickness="0"
                         >
@@ -140,6 +140,7 @@
                         Margin="5"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
+                        Foreground="#FF3F51B5"
                         Background="Transparent"
                         BorderThickness="0"
                         >
