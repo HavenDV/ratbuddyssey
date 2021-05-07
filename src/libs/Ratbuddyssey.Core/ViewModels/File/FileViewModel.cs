@@ -475,10 +475,9 @@ namespace Ratbuddyssey.ViewModels
                 else
                 {
                     var points = secondaryChannel 
-                        ? ReferenceCurveFilter.High_Frequency_Roll_Off_2() 
-                        : ReferenceCurveFilter.High_Frequency_Roll_Off_1();
-
-                    if (points == null)
+                        ? ReferenceCurveFilter.HighFrequencyRollOff2Points 
+                        : ReferenceCurveFilter.HighFrequencyRollOff1Points;
+                    if (!points.Any())
                     {
                         return;
                     }
