@@ -66,7 +66,11 @@
                     </ListView.View>
                 </ListView>
             </GroupBox>
-            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="5" />
+            <GridSplitter 
+                Grid.Row="1" 
+                HorizontalAlignment="Stretch" 
+                Height="5" 
+                />
             <GroupBox 
                 Grid.Row="2" 
                 x:Name="TargetCurvePointsGroupBox"
@@ -104,49 +108,150 @@
                 </ScrollViewer>
             </GroupBox>
         </Grid>
-        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
-        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
+        <GridSplitter 
+            Grid.Row="0" 
+            Grid.RowSpan="2" 
+            Grid.Column="1" 
+            Width="5" 
+            HorizontalAlignment="Stretch"
+            />
+        <Grid 
+            Grid.Row="0" 
+            Grid.RowSpan="2" 
+            Grid.Column="2"
+            >
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <!--splitter-->
                 <RowDefinition/>
             </Grid.RowDefinitions>
+
             <GroupBox Header="Status">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Current File:"/>
-                    <Label x:Name="CurrentFileLabel" Content="" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Margin="-7,0,0,0"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Amp Assign Info" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="AmpAssignInfoTextBox" VerticalAlignment="Center" Grid.ColumnSpan="5"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Title" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="TitleTextBox" VerticalAlignment="Center"/>
-                    <Label Grid.Row="3" Grid.Column="0" Content="Target Model Name" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="TargetModelNameTextBox" Margin="0" VerticalAlignment="Center"/>
-                    <Label Content="Interface Version" Grid.Row="4" Grid.Column="0" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="InterfaceVersionTextBox" Margin="0" VerticalAlignment="Center"/>
-                    <Label Grid.Row="2" Grid.Column="2" Content="Upgrade Info" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" x:Name="UpgradeInfoTextBox" Margin="0" VerticalAlignment="Center"/>
-                    <Label Grid.Row="3" Grid.Column="2" Content="Adc Lineup" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="3" Grid.Column="3" x:Name="AdcLineupTextBox" Margin="0" VerticalAlignment="Center"/>
-                    <Label Grid.Row="4" Grid.Column="2" Content="System Delay" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Row="4" Grid.Column="3" x:Name="SystemDelayTextBox" VerticalAlignment="Center"/>
-                    <Label Grid.Row="2" Grid.Column="4"  Content="Amp Assign Type" VerticalContentAlignment="Center" />
+
+                    <Label 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Content="Current File:"
+                        />
+                    <Label 
+                        x:Name="CurrentFileLabel" 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="5"
+                        />
+                    <Label 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        Content="Amp Assign Info" 
+                        VerticalAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="5"
+                        x:Name="AmpAssignInfoTextBox" 
+                        VerticalAlignment="Center" 
+                        />
+                    <Label 
+                        Grid.Row="2" 
+                        Grid.Column="0" 
+                        Content="Title" 
+                        VerticalAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="2" 
+                        Grid.Column="1" 
+                        x:Name="TitleTextBox" 
+                        VerticalAlignment="Center"
+                        />
+                    <Label 
+                        Grid.Row="3" 
+                        Grid.Column="0" 
+                        Content="Target Model Name" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="3" 
+                        Grid.Column="1" 
+                        x:Name="TargetModelNameTextBox"
+                        Margin="0" 
+                        VerticalAlignment="Center"
+                        />
+                    <Label 
+                        Content="Interface Version" 
+                        Grid.Row="4" 
+                        Grid.Column="0" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="4" 
+                        Grid.Column="1" 
+                        x:Name="InterfaceVersionTextBox" 
+                        Margin="0" 
+                        VerticalAlignment="Center"
+                        />
+                    <Label 
+                        Grid.Row="2" 
+                        Grid.Column="2" 
+                        Content="Upgrade Info" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="2" 
+                        Grid.Column="3" 
+                        x:Name="UpgradeInfoTextBox" 
+                        Margin="0" 
+                        VerticalAlignment="Center"
+                        />
+                    <Label 
+                        Grid.Row="3" 
+                        Grid.Column="2" 
+                        Content="Adc Lineup" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="3" 
+                        Grid.Column="3" 
+                        x:Name="AdcLineupTextBox" 
+                        Margin="0" 
+                        VerticalAlignment="Center"
+                        />
+                    <Label 
+                        Grid.Row="4" 
+                        Grid.Column="2" 
+                        Content="System Delay" 
+                        VerticalContentAlignment="Center"
+                        />
+                    <TextBox 
+                        Grid.Row="4" 
+                        Grid.Column="3" 
+                        x:Name="SystemDelayTextBox" 
+                        VerticalAlignment="Center"
+                        />
+                    <Label 
+                        Grid.Row="2" 
+                        Grid.Column="4"  
+                        Content="Amp Assign Type" 
+                        VerticalContentAlignment="Center" 
+                        />
                     <ComboBox 
                         Grid.Row="2" 
                         Grid.Column="5" 
@@ -223,25 +328,31 @@
                         />
                 </Grid>
             </GroupBox>
-            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+            <GridSplitter 
+                Grid.Row="1" 
+                Height="5" 
+                HorizontalAlignment="Stretch" 
+                />
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <!--channel info|report-->
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <!--splitter-->
                     <ColumnDefinition Width="*"/>
                     <!--graph-->
                 </Grid.ColumnDefinitions>
+
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <!--channel info-->
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
                         <!--splitter-->
                         <RowDefinition Height="*"/>
                         <!--channel report-->
                     </Grid.RowDefinitions>
+
                     <Grid Grid.Row="0">
                         <GroupBox 
                             x:Name="ChannelInfoGroupBox" 
@@ -558,7 +669,7 @@
                                                 GroupName="Ranges"
                                                 Content="{Binding Title}" 
                                                 IsChecked="{Binding IsChecked}"
-                                            />
+                                                />
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
