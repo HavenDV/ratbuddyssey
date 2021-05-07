@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using HostBuilder = Ratbuddyssey.Initialization.HostBuilder;
 
-#nullable enable
-
 namespace Ratbuddyssey
 {
     public partial class App
