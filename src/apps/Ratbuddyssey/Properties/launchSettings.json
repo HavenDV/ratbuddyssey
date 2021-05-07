@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Ratbuddyssey": {
+      "commandName": "Project",
+      "commandLineArgs": "$(SolutionDir)docs\\tv36ipal.ady"
+    }
+  }
+}
