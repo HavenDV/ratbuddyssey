@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -10,6 +9,7 @@ using System.Numerics;
 using System.Reactive;
 using System.Reactive.Linq;
 using DynamicData;
+using DynamicData.Binding;
 using Ratbuddyssey.Models;
 using Ratbuddyssey.MultEQApp;
 using Newtonsoft.Json;
@@ -17,8 +17,11 @@ using Newtonsoft.Json.Serialization;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using Ratbuddyssey.Models.MultEQApp;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+
+// ReSharper disable UnassignedGetOnlyAutoProperty
 
 namespace Ratbuddyssey.ViewModels
 {
@@ -26,13 +29,59 @@ namespace Ratbuddyssey.ViewModels
     {
         #region Properties
 
+        #region Private
+
         private AudysseyMultEQReferenceCurveFilter ReferenceCurveFilter { get; } = new();
+
+        private Dictionary<FrequencyRange, AxisLimit> AxisLimits { get; } = new()
+        {
+            {
+                FrequencyRange.Full,
+                new AxisLimit
+                {
+                    XMin = 10,
+                    XMax = 24000,
+                    YMin = -35,
+                    YMax = 20,
+                    YShift = 0,
+                    MajorStep = 5,
+                    MinorStep = 1,
+                }
+            },
+            {
+                FrequencyRange.Subwoofer,
+                new AxisLimit
+                {
+                    XMin = 10,
+                    XMax = 1000,
+                    YMin = -35,
+                    YMax = 20,
+                    YShift = 0,
+                    MajorStep = 5,
+                    MinorStep = 1,
+                }
+            },
+            {
+                FrequencyRange.Chirp,
+                new AxisLimit
+                {
+                    XMin = 0,
+                    XMax = 350,
+                    YMin = -0.1,
+                    YMax = 0.1,
+                    YShift = 0,
+                    MajorStep = 0.01,
+                    MinorStep = 0.001,
+                }
+            }
+        };
+
+        #endregion
+
+        #region Public
 
         [Reactive] 
         public AudysseyMultEQApp AudysseyApp { get; set; } = new();
-
-        [Reactive]
-        public PlotModel PlotModel { get; set; } = new();
 
         [Reactive]
         public IReadOnlyCollection<ChannelViewModel> Channels { get; set; } = Array.Empty<ChannelViewModel>();
@@ -40,30 +89,45 @@ namespace Ratbuddyssey.ViewModels
         [Reactive]
         public ChannelViewModel? SelectedChannel { get; set; }
 
-        private Dictionary<FrequencyRange, AxisLimit> AxisLimits { get; } = new()
-        {
-            {
-                FrequencyRange.Full, new AxisLimit { XMin = 10, XMax = 24000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 }
-            },
-            {
-                FrequencyRange.Subwoofer, new AxisLimit { XMin = 10, XMax = 1000, YMin = -35, YMax = 20, YShift = 0, MajorStep = 5, MinorStep = 1 }
-            },
-            {
-                FrequencyRange.Chirp, new AxisLimit { XMin = 0, XMax = 350, YMin = -0.1, YMax = 0.1, YShift = 0, MajorStep = 0.01, MinorStep = 0.001 }
-            }
-        };
+        [ObservableAsProperty]
+        public ChannelViewModel Channel { get; } = new();
+
+        [ObservableAsProperty]
+        public bool IsChannelSelected { get; }
+
+        [Reactive]
+        public ObservableCollection<TargetCurvePointViewModel> CustomTargetCurvePoints { get; set; } = new();
 
         [Reactive] 
         public string CurrentFile { get; set; } = string.Empty;
 
-        [Reactive] 
-        public bool LogarithmicAxisIsChecked { get; set; } = true;
+        public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[] { 
+            "FrontA", "FrontB", "Type3", "Type4",
+            "Type5", "Type6", "Type7", "Type8",
+            "Type9", "Type10", "Type11", "Type12",
+            "Type13", "Type14", "Type15", "Type16",
+            "Type17", "Type18", "Type19", "Type20",
+        };
 
-        [Reactive]
-        public string AddTargetCurvePointKey { get; set; } = string.Empty;
+        public IReadOnlyCollection<string> TargetCurveTypeList { get; } = new[]
+        {
+            " ", "High Frequency Roll Off 1", "High Frequency Roll Off 2",
+        };
 
-        [Reactive]
-        public string AddTargetCurvePointValue { get; set; } = string.Empty;
+        public IReadOnlyCollection<string> MultEQTypeList { get; } = new[]
+        {
+            "MultEQ", "MultEQXT", "MultEQXT32",
+        };
+
+        public IReadOnlyCollection<string> CrossoverList { get; } = new[]
+        {
+            " ", "40", "60", "80", "90", "100", "110", "120", "150", "180", "200", "250", "F",
+        };
+
+        public IReadOnlyCollection<string> SpeakerTypeList { get; } = new[]
+        {
+            " ", "S", "L",
+        };
 
         [Reactive]
         public IReadOnlyCollection<MeasurementPositionViewModel> MeasurementPositions { get; set; } = new MeasurementPositionViewModel[]
@@ -77,6 +141,12 @@ namespace Ratbuddyssey.ViewModels
             new(7, Color.Cyan),
             new(8, Color.DeepPink),
         };
+
+        [Reactive]
+        public bool SelectAllMeasurementPositionsIsChecked { get; set; }
+
+        [Reactive]
+        public PlotModel PlotModel { get; set; } = new();
 
         public IReadOnlyCollection<SmoothingFactorViewModel> SmoothingFactors { get; set; } = new SmoothingFactorViewModel[]
         {
@@ -101,7 +171,9 @@ namespace Ratbuddyssey.ViewModels
         public RangeViewModel SelectedRange => Ranges.First(static value => value.IsChecked);
 
         [Reactive]
-        public bool SelectAllMeasurementPositionsIsChecked { get; set; }
+        public bool LogarithmicAxisIsChecked { get; set; } = true;
+
+        #endregion
 
         #region Commands
 
@@ -112,7 +184,7 @@ namespace Ratbuddyssey.ViewModels
 
         public ReactiveCommand<string[], Unit> DragFiles { get; }
 
-        public ReactiveCommand<Unit, Unit> AddTargetCurvePoint { get; }
+        public ReactiveCommand<TargetCurvePointViewModel, Unit> DeleteTargetCurvePoint { get; }
 
         #endregion
 
@@ -169,17 +241,35 @@ namespace Ratbuddyssey.ViewModels
                     Open(paths.First());
                 }
             });
-            AddTargetCurvePoint = ReactiveCommand.Create(() =>
+            DeleteTargetCurvePoint = ReactiveCommand.Create<TargetCurvePointViewModel>(viewModel =>
             {
-                if (!string.IsNullOrEmpty(AddTargetCurvePointKey) && 
-                    !string.IsNullOrEmpty(AddTargetCurvePointValue))
-                {
-                    SelectedChannel?.Data?.CustomTargetCurvePointsDictionary.Add(
-                        new MyKeyValuePair(
-                            AddTargetCurvePointKey,
-                            AddTargetCurvePointValue));
-                }
+                CustomTargetCurvePoints.Remove(viewModel);
             });
+
+            MeasurementPositions
+                .AsObservableChangeSet()
+                .WhenPropertyChanged(static x => x.IsChecked, false)
+                .Throttle(TimeSpan.FromMilliseconds(10), RxApp.MainThreadScheduler)
+                .Subscribe(_ =>
+                {
+                    DrawChart();
+                });
+            SmoothingFactors
+                .AsObservableChangeSet()
+                .WhenPropertyChanged(static x => x.IsChecked, false)
+                .Where(static value => !value.Value)
+                .Subscribe(_ =>
+                {
+                    DrawChart();
+                });
+            Ranges
+                .AsObservableChangeSet()
+                .WhenPropertyChanged(static x => x.IsChecked, false)
+                .Where(static value => !value.Value)
+                .Subscribe(_ =>
+                {
+                    DrawChart();
+                });
 
             this.WhenAnyValue(static x => x.SelectAllMeasurementPositionsIsChecked)
                 .Skip(1)
@@ -199,6 +289,41 @@ namespace Ratbuddyssey.ViewModels
                     DrawChart();
                 });
 
+            this.WhenAnyValue(static x => x.SelectedChannel)
+                .WhereNotNull()
+                .ToPropertyEx(this, static x => x.Channel, new ChannelViewModel());
+
+            this.WhenAnyValue(static x => x.SelectedChannel)
+                .Select(static value => value != null)
+                .ToPropertyEx(this, static x => x.IsChannelSelected);
+
+            this.WhenAnyValue(static x => x.Channel)
+                .Subscribe(channel =>
+                {
+                    CustomTargetCurvePoints = new ObservableCollection<TargetCurvePointViewModel>(channel.Data.CustomTargetCurvePoints
+                        .Select(static value => value.Trim('{', '}').Split(','))
+                        .Select(static values => new TargetCurvePointViewModel(
+                            double.TryParse(values[0].Trim(), out var result1) ? result1 : default,
+                            double.TryParse(values[1].Trim(), out var result2) ? result2 : default))
+                        .Select(point =>
+                        {
+                            point.Delete
+                                .InvokeCommand(DeleteTargetCurvePoint);
+
+                            return point;
+                        })
+                        .OrderBy(static x => x.Key));
+
+                    CustomTargetCurvePoints
+                        .ToObservableChangeSet()
+                        .Subscribe(_ =>
+                        {
+                            channel.Data.CustomTargetCurvePoints = CustomTargetCurvePoints
+                                .Select(static value => $"{{{value.Key}, {value.Value}}}")
+                                .ToArray();
+                        });
+                });
+
             this.WhenAnyValue(static x => x.LogarithmicAxisIsChecked)
                 .Subscribe(_ =>
                 {
@@ -206,36 +331,15 @@ namespace Ratbuddyssey.ViewModels
                 });
 
             this.WhenAnyValue(static x => x.SelectedChannel)
-                .WhereNotNull()
                 .Subscribe(channel =>
                 {
+                    var data = channel?.Data.ResponseData;
                     foreach (var position in MeasurementPositions)
                     {
-                        position.IsEnabled = false;
+                        position.IsEnabled = data != null && data.ContainsKey($"{position.Value - 1}");
                     }
 
-                    var data = channel?.Data?.ResponseData;
-                    if (data != null)
-                    {
-                        // Enable the check boxes corresponding to those positions for which the measurement is available
-                        foreach (var measurementPosition in data)
-                        {
-                            var positionIndex = int.Parse(measurementPosition.Key);
-                            Debug.Assert(positionIndex >= 0 && positionIndex < MeasurementPositions.Count);
-                            MeasurementPositions.ElementAt(positionIndex).IsEnabled = true;
-                        }
-
-                        if (data.Any())
-                        {
-                            DrawChart();
-                        }
-                    }
-
-                    foreach (var position in MeasurementPositions
-                        .Where(static position => !position.IsEnabled && position.IsChecked))
-                    {
-                        position.IsChecked = false;
-                    }
+                    DrawChart();
                 });
 
             ReferenceCurveFilter.Load();
@@ -286,7 +390,7 @@ namespace Ratbuddyssey.ViewModels
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
-            if ((!string.IsNullOrEmpty(fileName)))
+            if (!string.IsNullOrEmpty(fileName))
             {
                 File.WriteAllText(fileName, json);
             }
@@ -394,24 +498,21 @@ namespace Ratbuddyssey.ViewModels
             }
             else
             {
-                foreach (var position in MeasurementPositions.Where(x => x.IsChecked))
+                foreach (var position in MeasurementPositions
+                    .Where(static x => x.IsEnabled && x.IsChecked))
                 {
-                    var points = new Collection<DataPoint>();
-
-                    var s = position.Value.ToString();
-                    if (!selectedChannel.ResponseData.ContainsKey(s))
+                    if (!selectedChannel.ResponseData.TryGetValue($"{position.Value - 1}", out var values))
                     {
                         position.IsChecked = false;
                         continue;
                     }
 
-                    var values = selectedChannel.ResponseData[s];
+                    var points = new Collection<DataPoint>();
                     var count = values.Length;
                     var cValues = new Complex[count];
                     var xs = new double[count];
-
-                    float sample_rate = 48000;
-                    var totalTime = count / sample_rate;
+                    const float sampleRate = 48000;
+                    var totalTime = count / sampleRate;
 
                     var limits = AxisLimits[selectedRange];
                     if (selectedRange == FrequencyRange.Chirp)
@@ -430,7 +531,7 @@ namespace Ratbuddyssey.ViewModels
                             var d = Decimal.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
                             var cValue = (Complex)d;
                             cValues[j] = 100 * cValue;
-                            xs[j] = (double)j / count * sample_rate;
+                            xs[j] = (double)j / count * sampleRate;
                         }
 
                         MathNet.Numerics.IntegralTransforms.Fourier.Forward(cValues);
@@ -518,25 +619,6 @@ namespace Ratbuddyssey.ViewModels
                     smoothed[i] = (float)yp;
                 }
             }
-        }
-
-        //private void ButtonClickRemoveTargetCurvePoint()
-        //{
-        //    var b = sender as Button;
-        //    var pair = b.DataContext as MyKeyValuePair;
-        //    SelectedChannel?.CustomTargetCurvePointsDictionary.Remove(pair);
-        //}
-        //private void RadioButtonSmoothingFactorChecked()
-        //{
-        //    DrawChart();
-        //}
-        //private void rbtnXRange_Checked()
-        //{
-        //    DrawChart();
-        //}
-        private void chbxStickSubwoofer_Checked()
-        {
-            DrawChart();
         }
 
         #endregion
