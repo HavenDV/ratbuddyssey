@@ -226,7 +226,7 @@ namespace Ratbuddyssey.Views
                     .DisposeWith(disposable);
                 this.Bind(ViewModel,
                         static viewModel => viewModel.Channel.Data.MidrangeCompensation,
-                        static view => view.IsSkipMeasurementCheckBox.IsChecked)
+                        static view => view.MidrangeCompensationCheckBox.IsChecked)
                     .DisposeWith(disposable);
 
                 // Channel Report.
