@@ -284,6 +284,7 @@ namespace Ratbuddyssey.ViewModels
                 });
 
             this.WhenAnyValue(static x => x.AudysseyApp.EnTargetCurveType)
+                .Skip(1)
                 .Subscribe(_ =>
                 {
                     DrawChart();
@@ -325,6 +326,7 @@ namespace Ratbuddyssey.ViewModels
                 });
 
             this.WhenAnyValue(static x => x.LogarithmicAxisIsChecked)
+                .Skip(1)
                 .Subscribe(_ =>
                 {
                     DrawChart();
