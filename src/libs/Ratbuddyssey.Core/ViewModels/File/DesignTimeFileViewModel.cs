@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Ratbuddyssey.Models;
 
 namespace Ratbuddyssey.ViewModels
@@ -21,6 +22,8 @@ namespace Ratbuddyssey.ViewModels
             new(39, "TFL"),
             new(42, "SW1"),
         };
+
+        public ChannelViewModel? SelectedChannel => Channels.First();
 
         public IReadOnlyCollection<MeasurementPositionViewModel> MeasurementPositions { get; set; } = new MeasurementPositionViewModel[]
         {
@@ -50,6 +53,13 @@ namespace Ratbuddyssey.ViewModels
             new("0-350ms", FrequencyRange.Chirp),
             new("10-1000Hz", FrequencyRange.Subwoofer),
             new("10Hz-24kHz", FrequencyRange.Full, true),
+        };
+
+        public List<TargetCurvePointViewModel> CustomTargetCurvePoints { get; set; } = new List<TargetCurvePointViewModel>()
+        {
+            new(0.0, 1.0),
+            new(1.0, 2.0),
+            new(2.0, 3.0),
         };
 
         #endregion
