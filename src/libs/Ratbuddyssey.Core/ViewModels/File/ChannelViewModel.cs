@@ -6,10 +6,21 @@ namespace Ratbuddyssey.ViewModels
 {
     public class ChannelViewModel : ViewModelBase
     {
+        #region Properties
+
         public DetectedChannel Data { get; set; }
 
         [Reactive]
         public bool Sticky { get; set; }
+        
+        #endregion
+
+        #region Constructors
+
+        public ChannelViewModel()
+        {
+            Data = new DetectedChannel();
+        }
 
         public ChannelViewModel(int type, string commandId, bool sticky = false)
         {
@@ -26,5 +37,7 @@ namespace Ratbuddyssey.ViewModels
         {
             Data = data ?? throw new ArgumentNullException(nameof(data));
         }
+
+        #endregion
     }
 }
