@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using HostBuilder = Ratbuddyssey.Initialization.HostBuilder;
 
+#nullable enable
+
 namespace Ratbuddyssey
 {
     public partial class App
@@ -149,13 +151,12 @@ namespace Ratbuddyssey
 
             if (e.Args.Any())
             {
-                var fileName = e.Args.ElementAtOrDefault(0);
-
-                if (!string.IsNullOrWhiteSpace(fileName))
+                var path = e.Args.ElementAtOrDefault(0);
+                if (path != null && !string.IsNullOrWhiteSpace(path))
                 {
                     var fileViewModel = Host.Services.GetRequiredService<FileViewModel>();
 
-                    fileViewModel.Open(fileName);
+                    fileViewModel.Open(path);
                 }
             }
 
