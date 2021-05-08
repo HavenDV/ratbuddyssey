@@ -73,6 +73,11 @@ namespace Ratbuddyssey
 
             #region Serialization
 
+            /// <summary>
+            /// Do not serialize second subwoofer (channeltype 55) custom curve points since they are not used by Audyssey.
+            /// TODO: I think it's worth transferring this logic to the ViewModel with the additional disabling of the UI when necessary, additionally commenting.
+            /// </summary>
+            /// <returns></returns>
             public bool ShouldSerializeCustomTargetCurvePoints()
             {
                 return EnChannelType != 55;
