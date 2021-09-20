@@ -33,7 +33,7 @@
         <Grid
             Grid.Row="1"
             Grid.Column="0"
-            e:GridExtensions.Rows="*,A,*"
+            e:GridExtensions.Rows="*,A,A,A,A"
             >
             <views:ChannelsView
                 Grid.Row="0"
@@ -44,9 +44,18 @@
                 HorizontalAlignment="Stretch" 
                 Height="5" 
                 />
-            <views:TargetCurvePointsView 
-                Grid.Row="2" 
-                x:Name="TargetCurvePointsView"
+            <views:ChannelInformationView
+                Grid.Row="2"
+                x:Name="ChannelInformationView"
+                />
+            <GridSplitter
+                Grid.Row="3"
+                Height="5"
+                HorizontalAlignment="Stretch"
+                />
+            <views:ChannelReportView
+                Grid.Row="4"
+                x:Name="ChannelReportView"
                 />
         </Grid>
         <GridSplitter 
@@ -75,24 +84,10 @@
                 Grid.Row="2"
                 e:GridExtensions.Columns="A,A,*"
                 >
-                <Grid
+                <views:TargetCurvePointsView 
                     Grid.Column="0"
-                    e:GridExtensions.Rows="*,A,*"
-                    >
-                    <views:ChannelInformationView
-                        Grid.Row="0"
-                        x:Name="ChannelInformationView"
-                        />
-                    <GridSplitter
-                        Grid.Row="1"
-                        Height="5"
-                        HorizontalAlignment="Stretch"
-                        />
-                    <views:ChannelReportView
-                        Grid.Row="2"
-                        x:Name="ChannelReportView"
-                        />
-                </Grid>
+                    x:Name="TargetCurvePointsView"
+                    />
                 <GridSplitter
                     Grid.Column="1"
                     Width="5"
