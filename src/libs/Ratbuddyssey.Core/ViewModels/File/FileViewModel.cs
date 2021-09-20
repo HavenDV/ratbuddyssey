@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using DynamicData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Ratbuddyssey.Models.MultEQApp;
@@ -213,13 +212,6 @@ namespace Ratbuddyssey.ViewModels
             ChannelsViewModel.Channels = AudysseyApp.DetectedChannels
                 .Select(static channel => new ChannelViewModel(channel))
                 .ToArray();
-            _ = ChannelsViewModel.Channels
-                .AsObservableChangeSet()
-                .WhenPropertyChanged(static x => x.Sticky, false)
-                .Subscribe(_ =>
-                {
-                    GraphViewModel.DrawChart();
-                });
         }
 
         private void SaveApp(string fileName)

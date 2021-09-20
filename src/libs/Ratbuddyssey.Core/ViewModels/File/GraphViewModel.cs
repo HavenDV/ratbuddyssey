@@ -210,6 +210,15 @@ namespace Ratbuddyssey.ViewModels
                         DrawChart();
                     })
                     .DisposeWith(disposables);
+
+                _ = Channels
+                    .AsObservableChangeSet()
+                    .WhenPropertyChanged(static x => x.Sticky, false)
+                    .Subscribe(_ =>
+                    {
+                        DrawChart();
+                    })
+                    .DisposeWith(disposables);
             });
         }
 
@@ -217,7 +226,7 @@ namespace Ratbuddyssey.ViewModels
 
         #region Methods
 
-        public void DrawChart()
+        private void DrawChart()
         {
             var model = new PlotModel();
 
