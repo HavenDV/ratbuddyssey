@@ -330,7 +330,7 @@ namespace Ratbuddyssey.ViewModels
 
         private static void PlotLine(
             PlotModel model,
-            AudysseyMultEQReferenceCurveFilter referenceCurveFilter,
+            AudysseyMultEQReferenceCurveFilter filter,
             IReadOnlyCollection<MeasurementPositionViewModel> positions,
             DetectedChannel? selectedChannel,
             FrequencyRange selectedRange,
@@ -346,27 +346,19 @@ namespace Ratbuddyssey.ViewModels
                 //frequency domain data
                 else
                 {
-                    var points = secondaryChannel
-                        ? referenceCurveFilter.HighFrequencyRollOff2Points
-                        : referenceCurveFilter.HighFrequencyRollOff1Points;
-                    if (!points.Any())
+                    model.Series.Add(new LineSeries
                     {
-                        return;
-                    }
-
-                    var color = OxyColor.FromRgb(255, 0, 0);
-                    var lineserie = new LineSeries
-                    {
-                        ItemsSource = points,
+                        ItemsSource = secondaryChannel
+                            ? filter.HighFrequencyRollOff2Points
+                            : filter.HighFrequencyRollOff1Points,
                         DataFieldX = "X",
                         DataFieldY = "Y",
                         StrokeThickness = 2,
                         MarkerSize = 0,
                         LineStyle = LineStyle.Solid,
-                        Color = color,
+                        Color = OxyColor.FromRgb(255, 0, 0),
                         MarkerType = MarkerType.None,
-                    };
-                    model.Series.Add(lineserie);
+                    });
                 }
             }
             else
@@ -374,7 +366,8 @@ namespace Ratbuddyssey.ViewModels
                 foreach (var position in positions
                     .Where(static x => x.IsEnabled && x.IsChecked))
                 {
-                    if (!selectedChannel.ResponseData.TryGetValue($"{position.Value - 1}", out var values))
+                    if (!selectedChannel.ResponseData.TryGetValue(
+                        $"{position.Value - 1}", out var values))
                     {
                         position.IsChecked = false;
                         continue;
@@ -393,15 +386,18 @@ namespace Ratbuddyssey.ViewModels
                         limits.XMax = 1000 * totalTime; // horizotal scale: s to ms
                         for (var j = 0; j < count; j++)
                         {
-                            var d = Double.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
-                            points.Add(new DataPoint(1000 * j * totalTime / count, d));
+                            var d = double.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
+                            
+                            points.Add(new DataPoint(
+                                1000 * j * totalTime / count, 
+                                d));
                         }
                     }
                     else
                     {
                         for (var j = 0; j < count; j++)
                         {
-                            var d = Decimal.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
+                            var d = decimal.Parse(values[j], NumberStyles.AllowExponent | NumberStyles.Float, CultureInfo.InvariantCulture);
                             var cValue = (Complex)d;
                             cValues[j] = 100 * cValue;
                             xs[j] = (double)j / count * sampleRate;
@@ -430,18 +426,19 @@ namespace Ratbuddyssey.ViewModels
 
                             foreach (var smoothetResult in smoothed)
                             {
-                                points.Add(new DataPoint(xs[x++], limits.YShift + 20 * Math.Log10(smoothetResult)));
-                                if (x == count / 2) break;
+                                points.Add(new DataPoint(
+                                    xs[x++], 
+                                    limits.YShift + 20 * Math.Log10(smoothetResult)));
+
+                                if (x == count / 2)
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
 
-                    var color = OxyColor.FromArgb(
-                        position.Color.A,
-                        position.Color.R,
-                        position.Color.G,
-                        position.Color.B);
-                    var lineserie = new LineSeries
+                    model.Series.Add(new LineSeries
                     {
                         ItemsSource = points,
                         DataFieldX = "X",
@@ -449,11 +446,13 @@ namespace Ratbuddyssey.ViewModels
                         StrokeThickness = 1,
                         MarkerSize = 0,
                         LineStyle = secondaryChannel ? LineStyle.Dot : LineStyle.Solid,
-                        Color = color,
+                        Color = OxyColor.FromArgb(
+                            position.Color.A,
+                            position.Color.R,
+                            position.Color.G,
+                            position.Color.B),
                         MarkerType = MarkerType.None,
-                    };
-
-                    model.Series.Add(lineserie);
+                    });
                 }
             }
         }
