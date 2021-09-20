@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net4.6.1;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net4.6.1;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <DefineConstants>$(DefineConstants);WPF_APP</DefineConstants>
@@ -14,18 +14,15 @@
   
   <ItemGroup>
     <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
-    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-    <PackageReference Include="ReactiveUI.Events.WPF" Version="13.2.18" />
-    <PackageReference Include="ReactiveUI.WPF" Version="13.2.18" />
+    <PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="15.1.1" />
   </ItemGroup>
 
   <ItemGroup Label="Linking">
-    <Compile Remove="Views\*.xaml.cs"/>
-    <None Include="..\..\shared\Ratbuddyssey.Shared\*.cs" Link="%(FileName).cs"/>
-    <None Include="..\..\shared\Ratbuddyssey.Shared\Views\*.cs" Link="Views\%(FileName).cs"/>
-    <None Include="..\..\shared\Ratbuddyssey.Shared\Converters\*.cs" Link="Converters\%(FileName).cs"/>
+    <None Include="..\..\shared\Ratbuddyssey.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)"/>
   </ItemGroup>
 
   <ItemGroup>

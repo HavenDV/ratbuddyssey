@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup Label="MVVM">
-    <PackageReference Include="ReactiveUI.Fody" Version="13.2.18" />
+    <PackageReference Include="ReactiveUI.Fody" Version="15.1.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="11.0.1" />
-    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="11.0.1" />
+    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="13.1.10" />
+    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="13.1.10" />
   </ItemGroup>
   
 </Project>
