@@ -20,7 +20,7 @@ namespace Ratbuddyssey.ViewModels
         public IReadOnlyCollection<TabViewModel> Tabs { get; } = new TabViewModel[]
         {
             new(typeof(FileViewModel), "App"),
-            new(typeof(EthernetViewModel), "Ethernet"),
+            //new(typeof(EthernetViewModel), "Ethernet"),
         };
 
         [Reactive]
