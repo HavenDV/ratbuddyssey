@@ -17,9 +17,9 @@ namespace Ratbuddyssey.Initialization
         {
             hostBuilder = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
 
-            hostBuilder.ConfigureServices(static services =>
+            _ = hostBuilder.ConfigureServices(static services =>
             {
-                services
+                _ = services
                     .AddSingleton<IViewFor<MainViewModel>, MainView>()
                     .AddSingleton<IViewFor<FileViewModel>, FileView>()
                     .AddSingleton<IViewFor<EthernetViewModel>, EthernetView>()
@@ -36,9 +36,9 @@ namespace Ratbuddyssey.Initialization
         {
             hostBuilder = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
 
-            hostBuilder.ConfigureServices(static services =>
+            _ = hostBuilder.ConfigureServices(static services =>
             {
-                services
+                _ = services
                     .AddSingleton<IBindingTypeConverter, TypeToIconConverter>()
 #if WPF_APP
 #else
@@ -53,9 +53,9 @@ namespace Ratbuddyssey.Initialization
         {
             hostBuilder = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
 
-            hostBuilder.ConfigureLogging(static builder =>
+            _ = hostBuilder.ConfigureLogging(static builder =>
             {
-                builder
+                _ = builder
                     .AddConsole();
             });
 
