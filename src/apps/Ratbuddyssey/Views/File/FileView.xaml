@@ -8,6 +8,7 @@
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:reactiveUi="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
+    xmlns:views="clr-namespace:Ratbuddyssey.Views"
     mc:Ignorable="d" 
     d:DesignWidth="1200"
     d:DesignHeight="800" 
@@ -353,157 +354,10 @@
                         <!--channel report-->
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <GroupBox 
-                            x:Name="ChannelInfoGroupBox" 
-                            Header="Channel Info" 
-                            >
-                            <Grid>
-                                <Grid Grid.ColumnSpan="2">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="50*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="50*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label 
-                                        Grid.Row="0" 
-                                        Grid.Column="0" 
-                                        Content="Trim Adjustment" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="0" 
-                                        Grid.Column="1" 
-                                        x:Name="TrimAdjustmentTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="1" 
-                                        Grid.Column="0" 
-                                        Content="Delay Adjustment" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="1" 
-                                        Grid.Column="1" 
-                                        x:Name="DelayAdjustmentTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="2" 
-                                        Grid.Column="0" 
-                                        Content="Frequency Range Rolloff" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="2"
-                                        Grid.Column="1" 
-                                        x:Name="FrequencyRangeRolloffTextBox" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="3" 
-                                        Grid.Column="0" 
-                                        Content="Channel Type"
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="3" 
-                                        Grid.Column="1" 
-                                        x:Name="EnChannelTypeTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="4" 
-                                        Grid.Column="0" 
-                                        Content="Command Id" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="4" 
-                                        Grid.Column="1" 
-                                        x:Name="CommandIdTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="0" 
-                                        Grid.Column="2" 
-                                        Content="Custom Level" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="0" 
-                                        Grid.Column="3" 
-                                        x:Name="CustomLevelTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="1" 
-                                        Grid.Column="2" 
-                                        Content="Custom Distance" 
-                                        VerticalContentAlignment="Center" 
-                                        />
-                                    <TextBox 
-                                        Grid.Row="1" 
-                                        Grid.Column="3" 
-                                        x:Name="CustomDistanceTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="2" 
-                                        Grid.Column="2" 
-                                        Content="Custom Crossover"
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <ComboBox 
-                                        Grid.Row="2" 
-                                        Grid.Column="3" 
-                                        x:Name="CustomCrossoverComboBox" 
-                                        VerticalAlignment="Center"
-                                        DisplayMemberPath="."
-                                        />
-                                    <Label 
-                                        Grid.Row="3" 
-                                        Grid.Column="2" 
-                                        Content="Custom Speaker Type" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <ComboBox 
-                                        Grid.Row="3" 
-                                        Grid.Column="3" 
-                                        x:Name="CustomSpeakerTypeComboBox" 
-                                        VerticalAlignment="Center"
-                                        DisplayMemberPath="."
-                                        />
-                                    <CheckBox
-                                        Grid.Row="5" 
-                                        Grid.Column="0" 
-                                        x:Name="IsSkipMeasurementCheckBox" 
-                                        Content="Skipped Measurement" 
-                                        VerticalAlignment="Center" 
-                                        Margin="5,0,0,0"
-                                        />
-                                    <CheckBox 
-                                        Grid.Row="5" 
-                                        Grid.Column="2" 
-                                        x:Name="MidrangeCompensationCheckBox" 
-                                        Content="Midrange Compensation" 
-                                        VerticalAlignment="Center" 
-                                        Margin="5,0,0,0"
-                                        />
-                                </Grid>
-                            </Grid>
-                        </GroupBox>
-                    </Grid>
+                    <views:ChannelInformationView
+                        Grid.Row="0"
+                        x:Name="ChannelInformationView"
+                        />
                     <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"/>
                     <Grid Grid.Row="2">
                         <GroupBox 

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
 using DynamicData.Binding;
@@ -120,16 +121,6 @@ namespace Ratbuddyssey.ViewModels
             "MultEQ", "MultEQXT", "MultEQXT32",
         };
 
-        public IReadOnlyCollection<string> CrossoverList { get; } = new[]
-        {
-            " ", "40", "60", "80", "90", "100", "110", "120", "150", "180", "200", "250", "F",
-        };
-
-        public IReadOnlyCollection<string> SpeakerTypeList { get; } = new[]
-        {
-            " ", "S", "L",
-        };
-
         [Reactive]
         public IReadOnlyCollection<MeasurementPositionViewModel> MeasurementPositions { get; set; } = new MeasurementPositionViewModel[]
         {
@@ -173,6 +164,8 @@ namespace Ratbuddyssey.ViewModels
 
         [Reactive]
         public bool LogarithmicAxisIsChecked { get; set; } = true;
+
+        public ChannelInformationViewModel ChannelInformationViewModel { get; } = new();
 
         #endregion
 
@@ -297,12 +290,19 @@ namespace Ratbuddyssey.ViewModels
             _ = this
                 .WhenAnyValue(static x => x.SelectedChannel)
                 .WhereNotNull()
-                .ToPropertyEx(this, static x => x.Channel, new ChannelViewModel());
+                .ToPropertyEx(
+                    this,
+                    static x => x.Channel,
+                    new ChannelViewModel());
 
             _ = this
                 .WhenAnyValue(static x => x.SelectedChannel)
                 .Select(static value => value != null)
-                .ToPropertyEx(this, static x => x.IsChannelSelected);
+                .ToPropertyEx(
+                    this,
+                    static x => x.IsChannelSelected,
+                    false,
+                    false);
 
             _ = this
                 .WhenAnyValue(static x => x.Channel)
@@ -354,6 +354,18 @@ namespace Ratbuddyssey.ViewModels
                 });
 
             ReferenceCurveFilter.Load();
+
+            this.WhenActivated(disposables =>
+            {
+                _ = this
+                    .WhenAnyValue(static x => x.Channel)
+                    .ToPropertyEx(ChannelInformationViewModel, static x => x.Channel, new ChannelViewModel())
+                    .DisposeWith(disposables);
+                _ = this
+                    .WhenAnyValue(static x => x.IsChannelSelected)
+                    .ToPropertyEx(ChannelInformationViewModel, static x => x.IsChannelSelected)
+                    .DisposeWith(disposables);
+            });
         }
 
         #endregion
