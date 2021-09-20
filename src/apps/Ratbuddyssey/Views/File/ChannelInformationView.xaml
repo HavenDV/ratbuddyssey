@@ -8,7 +8,8 @@
     xmlns:reactiveUi="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
-    d:DataContext="{d:DesignInstance Type={x:Type viewModels:ChannelInformationViewModel}}"
+    d:DesignWidth="500"
+    d:DataContext="{d:DesignInstance viewModels:ChannelInformationViewModel}"
     mc:Ignorable="d"
     >
     <GroupBox 

@@ -1,29 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Ratbuddyssey.Models;
 
 namespace Ratbuddyssey.ViewModels
 {
-    public class DesignTimeFileViewModel
+    public class DesignTimeGraphViewModel
     {
         #region Properties
-
-        public IReadOnlyCollection<ChannelViewModel> Channels { get; set; } = new ChannelViewModel[]
-        {
-            new(0, "FL"),
-            new(1, "C"),
-            new(2, "FR"),
-            new(5, "SRA"),
-            new(13, "SLA"),
-            new(19, "TFR"),
-            new(22, "TRR"),
-            new(36, "TRL"),
-            new(39, "TFL"),
-            new(42, "SW1"),
-        };
-
-        public ChannelViewModel? SelectedChannel => Channels.First();
 
         public IReadOnlyCollection<MeasurementPositionViewModel> MeasurementPositions { get; set; } = new MeasurementPositionViewModel[]
         {
@@ -53,13 +36,6 @@ namespace Ratbuddyssey.ViewModels
             new("0-350ms", FrequencyRange.Chirp),
             new("10-1000Hz", FrequencyRange.Subwoofer),
             new("10Hz-24kHz", FrequencyRange.Full, true),
-        };
-
-        public List<TargetCurvePointViewModel> CustomTargetCurvePoints { get; set; } = new List<TargetCurvePointViewModel>()
-        {
-            new(0.0, 1.0),
-            new(1.0, 2.0),
-            new(2.0, 3.0),
         };
 
         #endregion

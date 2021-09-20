@@ -9,15 +9,10 @@
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:views="clr-namespace:Ratbuddyssey.Views"
     xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
-    mc:Ignorable="d" 
-    d:DesignWidth="1200"
-    d:DesignHeight="800" 
-    Background="White"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:FileViewModel}"
     Drop="HandleDroppedFile" 
     AllowDrop="true"
-    d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeFileViewModel,
-        IsDesignTimeCreatable=True}"
     >
     <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
         <Menu Grid.Row="0" Grid.Column="0">
@@ -38,6 +33,9 @@
             <views:ChannelsView
                 Grid.Row="0"
                 x:Name="ChannelsView"
+                d:DataContext="{d:DesignInstance
+                    viewModels:DesignTimeChannelsViewModel, 
+                    IsDesignTimeCreatable=True}"
                 />
             <GridSplitter 
                 Grid.Row="1" 
@@ -87,6 +85,9 @@
                 <views:TargetCurvePointsView 
                     Grid.Column="0"
                     x:Name="TargetCurvePointsView"
+                    d:DataContext="{d:DesignInstance
+                        viewModels:DesignTimeTargetCurvePointsViewModel, 
+                        IsDesignTimeCreatable=True}"
                     />
                 <GridSplitter
                     Grid.Column="1"
@@ -96,6 +97,9 @@
                 <views:GraphView
                     Grid.Column="2"
                     x:Name="GraphView"
+                    d:DataContext="{d:DesignInstance
+                        viewModels:DesignTimeGraphViewModel, 
+                        IsDesignTimeCreatable=True}"
                     />
             </Grid>
         </Grid>

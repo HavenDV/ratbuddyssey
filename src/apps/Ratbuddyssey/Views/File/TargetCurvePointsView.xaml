@@ -8,9 +8,8 @@
     xmlns:reactiveUi="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     mc:Ignorable="d" 
-    Background="White"
     d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeFileViewModel,
+        viewModels:DesignTimeTargetCurvePointsViewModel,
         IsDesignTimeCreatable=True}"
     >
     <GroupBox

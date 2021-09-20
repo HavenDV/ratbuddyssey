@@ -13,7 +13,7 @@
     d:DesignWidth="1200"
     d:DesignHeight="800" 
     d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeFileViewModel,
+        viewModels:DesignTimeGraphViewModel,
         IsDesignTimeCreatable=True}"
     >
     <GroupBox Header="Graph View">

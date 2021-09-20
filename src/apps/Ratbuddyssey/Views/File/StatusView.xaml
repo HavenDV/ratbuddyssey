@@ -9,11 +9,8 @@
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
     mc:Ignorable="d" 
-    d:DesignWidth="1200"
-    d:DesignHeight="800"
-    d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeFileViewModel,
-        IsDesignTimeCreatable=True}"
+    d:DesignWidth="800"
+    d:DataContext="{d:DesignInstance viewModels:StatusViewModel}"
     >
     <GroupBox Header="Status">
         <Grid e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A">

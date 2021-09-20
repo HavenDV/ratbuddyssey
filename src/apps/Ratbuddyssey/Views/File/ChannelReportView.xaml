@@ -9,6 +9,8 @@
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
     mc:Ignorable="d"
+    d:DesignWidth="500"
+    d:DataContext="{d:DesignInstance viewModels:ChannelReportViewModel}"
     >
     <GroupBox 
         x:Name="ChannelReportGroupBox" 
