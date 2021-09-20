@@ -9,6 +9,7 @@
     xmlns:reactiveUi="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:views="clr-namespace:Ratbuddyssey.Views"
+    xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
     mc:Ignorable="d" 
     d:DesignWidth="1200"
     d:DesignHeight="800" 
@@ -334,99 +335,33 @@
                 Height="5" 
                 HorizontalAlignment="Stretch" 
                 />
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <!--channel info|report-->
-                    <ColumnDefinition Width="Auto"/>
-                    <!--splitter-->
-                    <ColumnDefinition Width="*"/>
-                    <!--graph-->
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <!--channel info-->
-                        <RowDefinition Height="Auto"/>
-                        <!--splitter-->
-                        <RowDefinition Height="*"/>
-                        <!--channel report-->
-                    </Grid.RowDefinitions>
-
+            <Grid
+                Grid.Row="2"
+                e:GridExtensions.Columns="A,A,*"
+                >
+                <Grid
+                    Grid.Column="0"
+                    e:GridExtensions.Rows="*,A,*"
+                    >
                     <views:ChannelInformationView
                         Grid.Row="0"
                         x:Name="ChannelInformationView"
                         />
-                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"/>
-                    <Grid Grid.Row="2">
-                        <GroupBox 
-                            x:Name="ChannelReportGroupBox" 
-                            Header="Channel Report"
-                            >
-                            <Grid>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Label 
-                                        Grid.Row="0" 
-                                        Grid.Column="0" 
-                                        Content="EnSpeakerConnect" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="0" 
-                                        Grid.Column="1" 
-                                        x:Name="EnSpeakerConnectTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label
-                                        Grid.Row="1" 
-                                        Grid.Column="0" 
-                                        Content="CustomEnSpeakerConnect" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="1" 
-                                        Grid.Column="1" 
-                                        x:Name="CustomEnSpeakerConnectTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <Label 
-                                        Grid.Row="2" 
-                                        Grid.Column="0"
-                                        Content="Distance" 
-                                        VerticalContentAlignment="Center"
-                                        />
-                                    <TextBox 
-                                        Grid.Row="2" 
-                                        Grid.Column="1" 
-                                        x:Name="DistanceTextBox" 
-                                        VerticalAlignment="Center"
-                                        />
-                                    <CheckBox 
-                                        Grid.Row="3" 
-                                        Grid.Column="0" 
-                                        x:Name="IsReversePolarityCheckBox" 
-                                        Content="Reverse Polarity" 
-                                        VerticalAlignment="Center" 
-                                        Margin="5,0,0,0"
-                                        />
-                                </Grid>
-                            </Grid>
-                        </GroupBox>
-                    </Grid>
+                    <GridSplitter
+                        Grid.Row="1"
+                        Height="5"
+                        HorizontalAlignment="Stretch"
+                        />
+                    <views:ChannelReportView
+                        Grid.Row="2"
+                        x:Name="ChannelReportView"
+                        />
                 </Grid>
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+                <GridSplitter
+                    Grid.Column="1"
+                    Width="5"
+                    HorizontalAlignment="Stretch"
+                    />
                 <Grid Grid.Column="2">
                     <GroupBox Header="Graph View">
                         <Grid>

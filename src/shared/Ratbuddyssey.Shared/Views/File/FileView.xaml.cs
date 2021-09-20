@@ -175,27 +175,9 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.ChannelInformationViewModel,
                         static view => view.ChannelInformationView.ViewModel)
                     .DisposeWith(disposable);
-                
-                // Channel Report.
                 _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.IsChannelSelected,
-                        static view => view.ChannelReportGroupBox.IsEnabled)
-                    .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.Channel.Data.ChannelReport.EnSpeakerConnect,
-                        static view => view.EnSpeakerConnectTextBox.Text)
-                    .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.Channel.Data.ChannelReport.CustomEnSpeakerConnect,
-                        static view => view.CustomEnSpeakerConnectTextBox.Text)
-                    .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.Channel.Data.ChannelReport.Distance,
-                        static view => view.DistanceTextBox.Text)
-                    .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.Channel.Data.ChannelReport.IsReversePolarity,
-                        static view => view.IsReversePolarityCheckBox.IsChecked)
+                        static viewModel => viewModel.ChannelReportViewModel,
+                        static view => view.ChannelReportView.ViewModel)
                     .DisposeWith(disposable);
 
                 // Graph View.

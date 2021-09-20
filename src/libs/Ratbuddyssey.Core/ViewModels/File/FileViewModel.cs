@@ -166,6 +166,7 @@ namespace Ratbuddyssey.ViewModels
         public bool LogarithmicAxisIsChecked { get; set; } = true;
 
         public ChannelInformationViewModel ChannelInformationViewModel { get; } = new();
+        public ChannelReportViewModel ChannelReportViewModel { get; } = new();
 
         #endregion
 
@@ -359,11 +360,30 @@ namespace Ratbuddyssey.ViewModels
             {
                 _ = this
                     .WhenAnyValue(static x => x.Channel)
-                    .ToPropertyEx(ChannelInformationViewModel, static x => x.Channel, new ChannelViewModel())
+                    .ToPropertyEx(
+                        ChannelInformationViewModel,
+                        static x => x.Channel,
+                        new ChannelViewModel())
                     .DisposeWith(disposables);
                 _ = this
                     .WhenAnyValue(static x => x.IsChannelSelected)
-                    .ToPropertyEx(ChannelInformationViewModel, static x => x.IsChannelSelected)
+                    .ToPropertyEx(
+                        ChannelInformationViewModel,
+                        static x => x.IsChannelSelected)
+                    .DisposeWith(disposables);
+
+                _ = this
+                    .WhenAnyValue(static x => x.Channel)
+                    .ToPropertyEx(
+                        ChannelReportViewModel,
+                        static x => x.Channel,
+                        new ChannelViewModel())
+                    .DisposeWith(disposables);
+                _ = this
+                    .WhenAnyValue(static x => x.IsChannelSelected)
+                    .ToPropertyEx(
+                        ChannelReportViewModel,
+                        static x => x.IsChannelSelected)
                     .DisposeWith(disposables);
             });
         }
