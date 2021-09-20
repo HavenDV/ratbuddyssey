@@ -18,8 +18,6 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
-            PlotView.PreviewMouseWheel += (_, args) => args.Handled = true;
-
             _ = this.WhenActivated(disposable =>
             {
                 if (ViewModel == null)
@@ -179,31 +177,9 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.ChannelReportViewModel,
                         static view => view.ChannelReportView.ViewModel)
                     .DisposeWith(disposable);
-
-                // Graph View.
                 _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.MeasurementPositions,
-                        static view => view.MeasurementPositionsListView.ItemsSource)
-                    .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.SelectAllMeasurementPositionsIsChecked,
-                        static view => view.SelectAllMeasurementPositionsCheckBox.IsChecked)
-                    .DisposeWith(disposable);
-                _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.PlotModel,
-                        static view => view.PlotView.Model)
-                    .DisposeWith(disposable);
-                _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.SmoothingFactors,
-                        static view => view.SmoothingFactorsListView.ItemsSource)
-                    .DisposeWith(disposable);
-                _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.Ranges,
-                        static view => view.RangesListView.ItemsSource)
-                    .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.LogarithmicAxisIsChecked,
-                        static view => view.LogarithmicAxisCheckBox.IsChecked)
+                        static viewModel => viewModel.GraphViewModel,
+                        static view => view.GraphView.ViewModel)
                     .DisposeWith(disposable);
             });
         }
