@@ -6,7 +6,12 @@ namespace Ratbuddyssey.Converters
 {
     public class ColorToBrushConverter : BaseConverter<System.Drawing.Color, Brush>
     {
-        public ColorToBrushConverter() : base(static color => new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B)))
+        public static SolidColorBrush Convert(System.Drawing.Color value)
+        {
+            return new SolidColorBrush(Color.FromArgb(value.A, value.R, value.G, value.B));
+        }
+
+        public ColorToBrushConverter() : base(Convert)
         {
         }
     }
