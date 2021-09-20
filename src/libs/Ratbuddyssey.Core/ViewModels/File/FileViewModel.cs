@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
-using DynamicData.Binding;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Ratbuddyssey.Models.MultEQApp;
@@ -40,9 +38,6 @@ namespace Ratbuddyssey.ViewModels
         public bool IsChannelSelected { get; }
 
         [Reactive]
-        public ObservableCollection<TargetCurvePointViewModel> CustomTargetCurvePoints { get; set; } = new();
-
-        [Reactive]
         public string CurrentFile { get; set; } = string.Empty;
 
         public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
@@ -64,6 +59,7 @@ namespace Ratbuddyssey.ViewModels
             "MultEQ", "MultEQXT", "MultEQXT32",
         };
 
+        public TargetCurvePointsViewModel TargetCurvePointsViewModel { get; } = new();
         public ChannelInformationViewModel ChannelInformationViewModel { get; } = new();
         public ChannelReportViewModel ChannelReportViewModel { get; } = new();
         public GraphViewModel GraphViewModel { get; } = new();
@@ -78,8 +74,6 @@ namespace Ratbuddyssey.ViewModels
         public ReactiveCommand<Unit, Unit> ReloadFile { get; }
 
         public ReactiveCommand<string[], Unit> DragFiles { get; }
-
-        public ReactiveCommand<TargetCurvePointViewModel, Unit> DeleteTargetCurvePoint { get; }
 
         #endregion
 
@@ -137,58 +131,41 @@ namespace Ratbuddyssey.ViewModels
                     Open(paths.First());
                 }
             });
-            DeleteTargetCurvePoint = ReactiveCommand.Create<TargetCurvePointViewModel>(viewModel =>
-            {
-                CustomTargetCurvePoints.Remove(viewModel);
-            });
-
-            _ = this
-                .WhenAnyValue(static x => x.SelectedChannel)
-                .WhereNotNull()
-                .ToPropertyEx(
-                    this,
-                    static x => x.Channel,
-                    new ChannelViewModel());
-
-            _ = this
-                .WhenAnyValue(static x => x.SelectedChannel)
-                .Select(static value => value != null)
-                .ToPropertyEx(
-                    this,
-                    static x => x.IsChannelSelected,
-                    false,
-                    false);
-
-            _ = this
-                .WhenAnyValue(static x => x.Channel)
-                .Subscribe(channel =>
-                {
-                    CustomTargetCurvePoints = new ObservableCollection<TargetCurvePointViewModel>(channel.Data.CustomTargetCurvePoints
-                        .Select(static value => value.Trim('{', '}').Split(','))
-                        .Select(static values => new TargetCurvePointViewModel(
-                            double.TryParse(values[0].Trim(), out var result1) ? result1 : default,
-                            double.TryParse(values[1].Trim(), out var result2) ? result2 : default))
-                        .Select(point =>
-                        {
-                            point.Delete
-                                .InvokeCommand(DeleteTargetCurvePoint);
-
-                            return point;
-                        })
-                        .OrderBy(static x => x.Key));
-
-                    CustomTargetCurvePoints
-                        .ToObservableChangeSet()
-                        .Subscribe(_ =>
-                        {
-                            channel.Data.CustomTargetCurvePoints = CustomTargetCurvePoints
-                                .Select(static value => $"{{{value.Key}, {value.Value}}}")
-                                .ToArray();
-                        });
-                });
 
             this.WhenActivated(disposables =>
             {
+                _ = this
+                    .WhenAnyValue(static x => x.SelectedChannel)
+                    .WhereNotNull()
+                    .ToPropertyEx(
+                        this,
+                        static x => x.Channel,
+                        new ChannelViewModel())
+                    .DisposeWith(disposables);
+                _ = this
+                    .WhenAnyValue(static x => x.SelectedChannel)
+                    .Select(static value => value != null)
+                    .ToPropertyEx(
+                        this,
+                        static x => x.IsChannelSelected,
+                        false,
+                        false)
+                    .DisposeWith(disposables);
+
+                _ = this
+                    .WhenAnyValue(static x => x.Channel)
+                    .ToPropertyEx(
+                        TargetCurvePointsViewModel,
+                        static x => x.Channel,
+                        new ChannelViewModel())
+                    .DisposeWith(disposables);
+                _ = this
+                    .WhenAnyValue(static x => x.IsChannelSelected)
+                    .ToPropertyEx(
+                        TargetCurvePointsViewModel,
+                        static x => x.IsChannelSelected)
+                    .DisposeWith(disposables);
+
                 _ = this
                     .WhenAnyValue(static x => x.Channel)
                     .ToPropertyEx(
