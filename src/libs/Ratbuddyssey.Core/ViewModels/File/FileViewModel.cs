@@ -40,25 +40,7 @@ namespace Ratbuddyssey.ViewModels
         [Reactive]
         public string CurrentFile { get; set; } = string.Empty;
 
-        public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
-        {
-            "FrontA", "FrontB", "Type3", "Type4",
-            "Type5", "Type6", "Type7", "Type8",
-            "Type9", "Type10", "Type11", "Type12",
-            "Type13", "Type14", "Type15", "Type16",
-            "Type17", "Type18", "Type19", "Type20",
-        };
-
-        public IReadOnlyCollection<string> TargetCurveTypeList { get; } = new[]
-        {
-            " ", "High Frequency Roll Off 1", "High Frequency Roll Off 2",
-        };
-
-        public IReadOnlyCollection<string> MultEQTypeList { get; } = new[]
-        {
-            "MultEQ", "MultEQXT", "MultEQXT32",
-        };
-
+        public StatusViewModel StatusViewModel { get; } = new();
         public TargetCurvePointsViewModel TargetCurvePointsViewModel { get; } = new();
         public ChannelInformationViewModel ChannelInformationViewModel { get; } = new();
         public ChannelReportViewModel ChannelReportViewModel { get; } = new();
@@ -150,6 +132,21 @@ namespace Ratbuddyssey.ViewModels
                         static x => x.IsChannelSelected,
                         false,
                         false)
+                    .DisposeWith(disposables);
+
+                _ = this
+                    .WhenAnyValue(static x => x.AudysseyApp)
+                    .ToPropertyEx(
+                        StatusViewModel,
+                        static x => x.AudysseyApp,
+                        new AudysseyMultEQApp())
+                    .DisposeWith(disposables);
+                _ = this
+                    .WhenAnyValue(static x => x.CurrentFile)
+                    .ToPropertyEx(
+                        StatusViewModel,
+                        static x => x.CurrentFile,
+                        string.Empty)
                     .DisposeWith(disposables);
 
                 _ = this
