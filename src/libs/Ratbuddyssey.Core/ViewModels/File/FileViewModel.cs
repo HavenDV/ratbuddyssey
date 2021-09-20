@@ -80,7 +80,7 @@ namespace Ratbuddyssey.ViewModels
 
         #region Public
 
-        [Reactive] 
+        [Reactive]
         public AudysseyMultEQApp AudysseyApp { get; set; } = new();
 
         [Reactive]
@@ -98,10 +98,11 @@ namespace Ratbuddyssey.ViewModels
         [Reactive]
         public ObservableCollection<TargetCurvePointViewModel> CustomTargetCurvePoints { get; set; } = new();
 
-        [Reactive] 
+        [Reactive]
         public string CurrentFile { get; set; } = string.Empty;
 
-        public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[] { 
+        public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
+        {
             "FrontA", "FrontB", "Type3", "Type4",
             "Type5", "Type6", "Type7", "Type8",
             "Type9", "Type10", "Type11", "Type12",
@@ -224,7 +225,8 @@ namespace Ratbuddyssey.ViewModels
             });
             ReloadFile = ReactiveCommand.CreateFromTask(async _ =>
             {
-                var value = await Interactions.Question.Handle("This will reload the .ady file and discard all changes since last save");
+                var value = await Interactions.Question.Handle(
+                    "This will reload the .ady file and discard all changes since last save");
                 if (!value)
                 {
                     return;
@@ -246,7 +248,7 @@ namespace Ratbuddyssey.ViewModels
                 CustomTargetCurvePoints.Remove(viewModel);
             });
 
-            MeasurementPositions
+            _ = MeasurementPositions
                 .AsObservableChangeSet()
                 .WhenPropertyChanged(static x => x.IsChecked, false)
                 .Throttle(TimeSpan.FromMilliseconds(10), RxApp.MainThreadScheduler)
@@ -254,7 +256,7 @@ namespace Ratbuddyssey.ViewModels
                 {
                     DrawChart();
                 });
-            SmoothingFactors
+            _ = SmoothingFactors
                 .AsObservableChangeSet()
                 .WhenPropertyChanged(static x => x.IsChecked, false)
                 .Where(static value => !value.Value)
@@ -262,7 +264,7 @@ namespace Ratbuddyssey.ViewModels
                 {
                     DrawChart();
                 });
-            Ranges
+            _ = Ranges
                 .AsObservableChangeSet()
                 .WhenPropertyChanged(static x => x.IsChecked, false)
                 .Where(static value => !value.Value)
@@ -271,7 +273,8 @@ namespace Ratbuddyssey.ViewModels
                     DrawChart();
                 });
 
-            this.WhenAnyValue(static x => x.SelectAllMeasurementPositionsIsChecked)
+            _ = this
+                .WhenAnyValue(static x => x.SelectAllMeasurementPositionsIsChecked)
                 .Skip(1)
                 .Subscribe(isChecked =>
                 {
@@ -283,22 +286,26 @@ namespace Ratbuddyssey.ViewModels
                     DrawChart();
                 });
 
-            this.WhenAnyValue(static x => x.AudysseyApp.EnTargetCurveType)
+            _ = this
+                .WhenAnyValue(static x => x.AudysseyApp.EnTargetCurveType)
                 .Skip(1)
                 .Subscribe(_ =>
                 {
                     DrawChart();
                 });
 
-            this.WhenAnyValue(static x => x.SelectedChannel)
+            _ = this
+                .WhenAnyValue(static x => x.SelectedChannel)
                 .WhereNotNull()
                 .ToPropertyEx(this, static x => x.Channel, new ChannelViewModel());
 
-            this.WhenAnyValue(static x => x.SelectedChannel)
+            _ = this
+                .WhenAnyValue(static x => x.SelectedChannel)
                 .Select(static value => value != null)
                 .ToPropertyEx(this, static x => x.IsChannelSelected);
 
-            this.WhenAnyValue(static x => x.Channel)
+            _ = this
+                .WhenAnyValue(static x => x.Channel)
                 .Subscribe(channel =>
                 {
                     CustomTargetCurvePoints = new ObservableCollection<TargetCurvePointViewModel>(channel.Data.CustomTargetCurvePoints
@@ -325,14 +332,16 @@ namespace Ratbuddyssey.ViewModels
                         });
                 });
 
-            this.WhenAnyValue(static x => x.LogarithmicAxisIsChecked)
+            _ = this
+                .WhenAnyValue(static x => x.LogarithmicAxisIsChecked)
                 .Skip(1)
                 .Subscribe(_ =>
                 {
                     DrawChart();
                 });
 
-            this.WhenAnyValue(static x => x.SelectedChannel)
+            _ = this
+                .WhenAnyValue(static x => x.SelectedChannel)
                 .Subscribe(channel =>
                 {
                     var data = channel?.Data.ResponseData;
@@ -377,7 +386,7 @@ namespace Ratbuddyssey.ViewModels
             Channels = AudysseyApp.DetectedChannels
                 .Select(static channel => new ChannelViewModel(channel))
                 .ToArray();
-            Channels
+            _ = Channels
                 .AsObservableChangeSet()
                 .WhenPropertyChanged(static x => x.Sticky, false)
                 .Subscribe(_ =>

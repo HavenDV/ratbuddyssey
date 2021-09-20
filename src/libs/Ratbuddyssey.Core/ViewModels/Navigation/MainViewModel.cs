@@ -36,16 +36,12 @@ namespace Ratbuddyssey.ViewModels
 
             this.WhenActivated(disposables =>
             {
-                this
+                _ = this
                     .WhenAnyValue(static viewModel => viewModel.SelectedTab)
                     .WhereNotNull()
                     .Select(static item => item.Type)
-                    .Subscribe(type =>
-                    {
-                        var viewModel = (IRoutableViewModel)Services.GetRequiredService(type);
-
-                        Router.Navigate.Execute(viewModel).Subscribe();
-                    })
+                    .Select(type => (IRoutableViewModel)Services.GetRequiredService(type))
+                    .InvokeCommand(Router.Navigate)
                     .DisposeWith(disposables);
 
                 SelectedTab = Tabs.First();
