@@ -1,0 +1,35 @@
+﻿<reactiveUi:ReactiveUserControl
+    x:TypeArguments="viewModels:ChannelsViewModel"
+    x:Class="Ratbuddyssey.Views.ChannelsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:reactiveUi="http://reactiveui.net"
+    xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance 
+        viewModels:DesignTimeFileViewModel,
+        IsDesignTimeCreatable=True}"
+    >
+    <GroupBox Header="Channels">
+        <ListView
+            x:Name="ChannelsListView"
+            ItemsSource="{Binding Channels}"
+            >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Data.EnChannelType}" />
+                    <GridViewColumn Header="CommandId" DisplayMemberBinding="{Binding Data.CommandId}" />
+                    <GridViewColumn Header="Sticky">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:ChannelViewModel}">
+                                <CheckBox IsChecked="{Binding Sticky}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </GroupBox>
+</reactiveUi:ReactiveUserControl>

@@ -19,18 +19,7 @@
         viewModels:DesignTimeFileViewModel,
         IsDesignTimeCreatable=True}"
     >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="100*"/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="100*"/>
-        </Grid.ColumnDefinitions>
-
+    <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
         <Menu Grid.Row="0" Grid.Column="0">
             <MenuItem Header="_Commands">
                 <MenuItem Header="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
@@ -40,33 +29,16 @@
                 <MenuItem Header="Save _As" x:Name="SaveFileAsMenuItem"/>
             </MenuItem>
         </Menu>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="50*"/>
-            </Grid.RowDefinitions>
 
-            <GroupBox Header="Channels">
-                <ListView 
-                    x:Name="ChannelsView"
-                    ItemsSource="{Binding Channels}"
-                    >
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Data.EnChannelType}" />
-                            <GridViewColumn Header="CommandId" DisplayMemberBinding="{Binding Data.CommandId}" />
-                            <GridViewColumn Header="Sticky">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate DataType="{x:Type viewModels:ChannelViewModel}">
-                                        <CheckBox IsChecked="{Binding Sticky}"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </GroupBox>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            e:GridExtensions.Rows="*,A,*"
+            >
+            <views:ChannelsView
+                Grid.Row="0"
+                x:Name="ChannelsView"
+                />
             <GridSplitter 
                 Grid.Row="1" 
                 HorizontalAlignment="Stretch" 

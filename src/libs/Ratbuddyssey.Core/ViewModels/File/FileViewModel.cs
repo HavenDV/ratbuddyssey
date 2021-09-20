@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reactive;
@@ -26,20 +25,9 @@ namespace Ratbuddyssey.ViewModels
         public AudysseyMultEQApp AudysseyApp { get; set; } = new();
 
         [Reactive]
-        public IReadOnlyCollection<ChannelViewModel> Channels { get; set; } = Array.Empty<ChannelViewModel>();
-
-        [Reactive]
-        public ChannelViewModel? SelectedChannel { get; set; }
-
-        [ObservableAsProperty]
-        public ChannelViewModel Channel { get; } = new();
-
-        [ObservableAsProperty]
-        public bool IsChannelSelected { get; }
-
-        [Reactive]
         public string CurrentFile { get; set; } = string.Empty;
 
+        public ChannelsViewModel ChannelsViewModel { get; } = new();
         public StatusViewModel StatusViewModel { get; } = new();
         public TargetCurvePointsViewModel TargetCurvePointsViewModel { get; } = new();
         public ChannelInformationViewModel ChannelInformationViewModel { get; } = new();
@@ -117,24 +105,6 @@ namespace Ratbuddyssey.ViewModels
             this.WhenActivated(disposables =>
             {
                 _ = this
-                    .WhenAnyValue(static x => x.SelectedChannel)
-                    .WhereNotNull()
-                    .ToPropertyEx(
-                        this,
-                        static x => x.Channel,
-                        new ChannelViewModel())
-                    .DisposeWith(disposables);
-                _ = this
-                    .WhenAnyValue(static x => x.SelectedChannel)
-                    .Select(static value => value != null)
-                    .ToPropertyEx(
-                        this,
-                        static x => x.IsChannelSelected,
-                        false,
-                        false)
-                    .DisposeWith(disposables);
-
-                _ = this
                     .WhenAnyValue(static x => x.AudysseyApp)
                     .ToPropertyEx(
                         StatusViewModel,
@@ -149,42 +119,42 @@ namespace Ratbuddyssey.ViewModels
                         string.Empty)
                     .DisposeWith(disposables);
 
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.Channel)
                     .ToPropertyEx(
                         TargetCurvePointsViewModel,
                         static x => x.Channel,
                         new ChannelViewModel())
                     .DisposeWith(disposables);
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.IsChannelSelected)
                     .ToPropertyEx(
                         TargetCurvePointsViewModel,
                         static x => x.IsChannelSelected)
                     .DisposeWith(disposables);
 
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.Channel)
                     .ToPropertyEx(
                         ChannelInformationViewModel,
                         static x => x.Channel,
                         new ChannelViewModel())
                     .DisposeWith(disposables);
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.IsChannelSelected)
                     .ToPropertyEx(
                         ChannelInformationViewModel,
                         static x => x.IsChannelSelected)
                     .DisposeWith(disposables);
 
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.Channel)
                     .ToPropertyEx(
                         ChannelReportViewModel,
                         static x => x.Channel,
                         new ChannelViewModel())
                     .DisposeWith(disposables);
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.IsChannelSelected)
                     .ToPropertyEx(
                         ChannelReportViewModel,
@@ -197,14 +167,14 @@ namespace Ratbuddyssey.ViewModels
                         GraphViewModel,
                         static x => x.EnTargetCurveType)
                     .DisposeWith(disposables);
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.Channels)
                     .ToPropertyEx(
                         GraphViewModel,
                         static x => x.Channels,
                         Array.Empty<ChannelViewModel>())
                     .DisposeWith(disposables);
-                _ = this
+                _ = ChannelsViewModel
                     .WhenAnyValue(static x => x.SelectedChannel)
                     .ToPropertyEx(
                         GraphViewModel,
@@ -240,10 +210,10 @@ namespace Ratbuddyssey.ViewModels
             {
                 FloatParseHandling = FloatParseHandling.Decimal
             }) ?? throw new InvalidOperationException("Invalid file.");
-            Channels = AudysseyApp.DetectedChannels
+            ChannelsViewModel.Channels = AudysseyApp.DetectedChannels
                 .Select(static channel => new ChannelViewModel(channel))
                 .ToArray();
-            _ = Channels
+            _ = ChannelsViewModel.Channels
                 .AsObservableChangeSet()
                 .WhenPropertyChanged(static x => x.Sticky, false)
                 .Subscribe(_ =>

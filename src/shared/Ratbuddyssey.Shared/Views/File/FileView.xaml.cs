@@ -21,8 +21,7 @@ namespace Ratbuddyssey.Views
                 {
                     return;
                 }
-
-                // Commands.
+                
                 _ = this.BindCommand(ViewModel,
                         static viewModel => viewModel.OpenFile,
                         static view => view.OpenFileMenuItem)
@@ -40,16 +39,10 @@ namespace Ratbuddyssey.Views
                         static view => view.ReloadFileMenuItem)
                     .DisposeWith(disposable);
 
-                // Channels.
                 _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.Channels,
-                        static view => view.ChannelsView.ItemsSource)
+                        static viewModel => viewModel.ChannelsViewModel,
+                        static view => view.ChannelsView.ViewModel)
                     .DisposeWith(disposable);
-                _ = this.Bind(ViewModel,
-                        static viewModel => viewModel.SelectedChannel,
-                        static view => view.ChannelsView.SelectedItem)
-                    .DisposeWith(disposable);
-
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.StatusViewModel,
                         static view => view.StatusView.ViewModel)
