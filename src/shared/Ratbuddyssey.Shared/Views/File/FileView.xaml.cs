@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using Ratbuddyssey.ViewModels;
 using ReactiveUI;
 
 #nullable enable
@@ -131,44 +128,10 @@ namespace Ratbuddyssey.Views
                         static view => view.LfcCheckBox.IsChecked)
                     .DisposeWith(disposable);
 
-                // Target Curve Points.
                 _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.IsChannelSelected,
-                        static view => view.TargetCurvePointsGroupBox.IsEnabled)
+                        static viewModel => viewModel.TargetCurvePointsViewModel,
+                        static view => view.TargetCurvePointsView.ViewModel)
                     .DisposeWith(disposable);
-                _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.CustomTargetCurvePoints,
-                        static view => view.TargetCurvePointsDataGrid.ItemsSource)
-                    .DisposeWith(disposable);
-                _ = Observable.FromEventPattern<InitializingNewItemEventArgs>(
-                        TargetCurvePointsDataGrid,
-                        nameof(TargetCurvePointsDataGrid.InitializingNewItem))
-                    .Subscribe(value =>
-                    {
-                        if (value.EventArgs.NewItem is not TargetCurvePointViewModel point)
-                        {
-                            return;
-                        }
-
-                        point.Delete
-                            .InvokeCommand(ViewModel.DeleteTargetCurvePoint);
-                    })
-                    .DisposeWith(disposable);
-                _ = Observable.FromEventPattern<DataGridRowEditEndingEventArgs>(
-                        TargetCurvePointsDataGrid,
-                        nameof(TargetCurvePointsDataGrid.RowEditEnding))
-                    .Subscribe(static value =>
-                    {
-                        if (!value.EventArgs.Row.IsNewItem ||
-                            value.EventArgs.Row.Item is not TargetCurvePointViewModel point)
-                        {
-                            return;
-                        }
-
-                        point.IsNew = false;
-                    })
-                    .DisposeWith(disposable);
-
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.ChannelInformationViewModel,
                         static view => view.ChannelInformationView.ViewModel)

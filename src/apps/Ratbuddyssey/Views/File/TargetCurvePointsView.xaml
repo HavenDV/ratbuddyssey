@@ -1,0 +1,49 @@
+﻿<reactiveUi:ReactiveUserControl
+    x:TypeArguments="viewModels:TargetCurvePointsViewModel"
+    x:Class="Ratbuddyssey.Views.TargetCurvePointsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:reactiveUi="http://reactiveui.net"
+    xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
+    mc:Ignorable="d" 
+    Background="White"
+    d:DataContext="{d:DesignInstance 
+        viewModels:DesignTimeFileViewModel,
+        IsDesignTimeCreatable=True}"
+    >
+    <GroupBox
+        x:Name="TargetCurvePointsGroupBox"
+        Header="Target Curve Points"
+        >
+        <ScrollViewer>
+            <DataGrid
+                x:Name="TargetCurvePointsDataGrid"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding CustomTargetCurvePoints}"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="Frequency" 
+                        Binding="{Binding Key}" 
+                        />
+                    <DataGridTextColumn 
+                        Header="Boost/Cut dB" 
+                        Binding="{Binding Value}"
+                        />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type viewModels:TargetCurvePointViewModel}">
+                                <Button 
+                                    Content="Delete"
+                                    Command="{Binding Delete}"
+                                    />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </GroupBox>
+</reactiveUi:ReactiveUserControl>

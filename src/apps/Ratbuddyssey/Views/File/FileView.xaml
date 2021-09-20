@@ -72,42 +72,10 @@
                 HorizontalAlignment="Stretch" 
                 Height="5" 
                 />
-            <GroupBox 
+            <views:TargetCurvePointsView 
                 Grid.Row="2" 
-                x:Name="TargetCurvePointsGroupBox"
-                Header="Target Curve Points"
-                >
-                <ScrollViewer>
-                    <StackPanel>
-                        <DataGrid 
-                            x:Name="TargetCurvePointsDataGrid" 
-                            AutoGenerateColumns="False" 
-                            ItemsSource="{Binding CustomTargetCurvePoints}"
-                            >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn 
-                                    Header="Frequency" 
-                                    Binding="{Binding Key}" 
-                                    />
-                                <DataGridTextColumn 
-                                    Header="Boost/Cut dB" 
-                                    Binding="{Binding Value}"
-                                    />
-                                <DataGridTemplateColumn>
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate DataType="{x:Type viewModels:TargetCurvePointViewModel}">
-                                            <Button 
-                                                Content="Delete"
-                                                Command="{Binding Delete}"
-                                                />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
-                </ScrollViewer>
-            </GroupBox>
+                x:Name="TargetCurvePointsView"
+                />
         </Grid>
         <GridSplitter 
             Grid.Row="0" 
