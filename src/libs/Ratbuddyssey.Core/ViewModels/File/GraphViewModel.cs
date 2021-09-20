@@ -26,7 +26,7 @@ namespace Ratbuddyssey.ViewModels
 
         private AudysseyMultEQReferenceCurveFilter ReferenceCurveFilter { get; } = new();
 
-        private Dictionary<FrequencyRange, AxisLimit> AxisLimits { get; } = new()
+        private static Dictionary<FrequencyRange, AxisLimit> AxisLimits { get; } = new()
         {
             {
                 FrequencyRange.Full,
@@ -228,45 +228,69 @@ namespace Ratbuddyssey.ViewModels
 
         private void DrawChart()
         {
+            PlotModel = DrawChart(
+                ReferenceCurveFilter,
+                MeasurementPositions,
+                Channels,
+                SelectedChannel?.Data,
+                SelectedRange.Value,
+                SelectedSmoothingFactor.Value,
+                LogarithmicAxisIsChecked,
+                EnTargetCurveType);
+        }
+
+        private static PlotModel DrawChart(
+            AudysseyMultEQReferenceCurveFilter filter,
+            IReadOnlyCollection<MeasurementPositionViewModel> positions,
+            IReadOnlyCollection<ChannelViewModel> channels,
+            DetectedChannel? selectedChannel,
+            FrequencyRange selectedRange,
+            double selectedFactor,
+            bool logarithmicAxisIsChecked,
+            int enTargetCurveType)
+        {
             var model = new PlotModel();
 
-            if (SelectedChannel != null)
+            if (selectedChannel != null)
             {
-                PlotLine(model, SelectedChannel?.Data);
+                PlotLine(model, filter, positions, selectedChannel, selectedRange, selectedFactor);
             }
-            foreach (var channel in Channels.Where(static channel => channel.Sticky))
+            foreach (var channel in channels.Where(static channel => channel.Sticky))
             {
-                PlotLine(model, channel.Data, true);
+                PlotLine(model, filter, positions, channel.Data, selectedRange, selectedFactor, true);
             }
-            switch (EnTargetCurveType)
+            switch (enTargetCurveType)
             {
                 case 0:
                     break;
                 case 1:
-                    PlotLine(model, null);
+                    PlotLine(model, filter, positions, null, selectedRange, selectedFactor);
                     break;
                 case 2:
-                    PlotLine(model, null, true);
+                    PlotLine(model, filter, positions, null, selectedRange, selectedFactor, true);
                     break;
                 default:
-                    PlotLine(model, null);
-                    PlotLine(model, null, true);
+                    PlotLine(model, filter, positions, null, selectedRange, selectedFactor);
+                    PlotLine(model, filter, positions, null, selectedRange, selectedFactor, true);
                     break;
 
             }
-            PlotAxis(model);
+            PlotAxis(model, selectedRange, logarithmicAxisIsChecked);
 
-            PlotModel = model;
+            return model;
         }
 
-        private void PlotAxis(PlotModel model)
+        private static void PlotAxis(
+            PlotModel model,
+            FrequencyRange selectedRange,
+            bool logarithmicAxisIsChecked)
         {
             model.Axes.Clear();
-            var selectedRange = SelectedRange.Value;
+
             var limits = AxisLimits[selectedRange];
             if (selectedRange == FrequencyRange.Chirp)
             {
-                if (LogarithmicAxisIsChecked)
+                if (logarithmicAxisIsChecked)
                 {
                     model.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
                 }
@@ -278,7 +302,7 @@ namespace Ratbuddyssey.ViewModels
             }
             else
             {
-                if (LogarithmicAxisIsChecked)
+                if (logarithmicAxisIsChecked)
                 {
                     model.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
                 }
@@ -290,9 +314,15 @@ namespace Ratbuddyssey.ViewModels
             }
         }
 
-        private void PlotLine(PlotModel model, DetectedChannel? selectedChannel, bool secondaryChannel = false)
+        private static void PlotLine(
+            PlotModel model,
+            AudysseyMultEQReferenceCurveFilter referenceCurveFilter,
+            IReadOnlyCollection<MeasurementPositionViewModel> positions,
+            DetectedChannel? selectedChannel,
+            FrequencyRange selectedRange,
+            double selectedFactor,
+            bool secondaryChannel = false)
         {
-            var selectedRange = SelectedRange.Value;
             if (selectedChannel == null)
             {
                 //time domain data
@@ -303,8 +333,8 @@ namespace Ratbuddyssey.ViewModels
                 else
                 {
                     var points = secondaryChannel
-                        ? ReferenceCurveFilter.HighFrequencyRollOff2Points
-                        : ReferenceCurveFilter.HighFrequencyRollOff1Points;
+                        ? referenceCurveFilter.HighFrequencyRollOff2Points
+                        : referenceCurveFilter.HighFrequencyRollOff1Points;
                     if (!points.Any())
                     {
                         return;
@@ -327,7 +357,7 @@ namespace Ratbuddyssey.ViewModels
             }
             else
             {
-                foreach (var position in MeasurementPositions
+                foreach (var position in positions
                     .Where(static x => x.IsEnabled && x.IsChecked))
                 {
                     if (!selectedChannel.ResponseData.TryGetValue($"{position.Value - 1}", out var values))
@@ -366,8 +396,7 @@ namespace Ratbuddyssey.ViewModels
                         MathNet.Numerics.IntegralTransforms.Fourier.Forward(cValues);
 
                         var x = 0;
-                        var factor = SelectedSmoothingFactor.Value;
-                        if (factor < 2.0)
+                        if (selectedFactor < 2.0)
                         {
                             foreach (var cValue in cValues)
                             {
@@ -383,7 +412,7 @@ namespace Ratbuddyssey.ViewModels
                                 smoothed[j] = cValues[j].Magnitude;
                             }
 
-                            LinSpacedFracOctaveSmooth(factor, ref smoothed, 1, 1d / 48);
+                            LinSpacedFracOctaveSmooth(selectedFactor, ref smoothed, 1, 1d / 48);
 
                             foreach (var smoothetResult in smoothed)
                             {
