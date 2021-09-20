@@ -288,30 +288,44 @@ namespace Ratbuddyssey.ViewModels
             model.Axes.Clear();
 
             var limits = AxisLimits[selectedRange];
-            if (selectedRange == FrequencyRange.Chirp)
+
+            Axis xAxis = logarithmicAxisIsChecked
+                ? new LogarithmicAxis()
+                : new LinearAxis();
+            xAxis.Position = AxisPosition.Bottom;
+            xAxis.Title = selectedRange switch
             {
-                if (logarithmicAxisIsChecked)
-                {
-                    model.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
-                }
-                else
-                {
-                    model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "ms", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
-                }
-                model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "", Minimum = limits.YMin, Maximum = limits.YMax, MajorStep = limits.MajorStep, MinorStep = limits.MinorStep, MajorGridlineStyle = LineStyle.Solid });
-            }
-            else
+                FrequencyRange.Chirp => "ms",
+                _ => "Hz",
+            };
+            xAxis.Minimum = limits.XMin;
+            xAxis.Maximum = limits.XMax;
+            xAxis.MajorGridlineStyle = LineStyle.Dot;
+
+            model.Axes.Add(xAxis);
+
+            model.Axes.Add(new LinearAxis
             {
-                if (logarithmicAxisIsChecked)
+                Position = AxisPosition.Left,
+                Title = selectedRange switch
                 {
-                    model.Axes.Add(new LogarithmicAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
-                }
-                else
+                    FrequencyRange.Chirp => string.Empty,
+                    _ => "dB",
+                },
+                Minimum = selectedRange switch
                 {
-                    model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Hz", Minimum = limits.XMin, Maximum = limits.XMax, MajorGridlineStyle = LineStyle.Dot });
-                }
-                model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "dB", Minimum = limits.YMin + limits.YShift, Maximum = limits.YMax + limits.YShift, MajorStep = limits.MajorStep, MinorStep = limits.MinorStep, MajorGridlineStyle = LineStyle.Solid });
-            }
+                    FrequencyRange.Chirp => limits.YMin,
+                    _ => limits.YMin + limits.YShift,
+                },
+                Maximum = selectedRange switch
+                {
+                    FrequencyRange.Chirp => limits.YMax,
+                    _ => limits.YMax + limits.YShift,
+                },
+                MajorStep = limits.MajorStep,
+                MinorStep = limits.MinorStep,
+                MajorGridlineStyle = LineStyle.Solid,
+            });
         }
 
         private static void PlotLine(
