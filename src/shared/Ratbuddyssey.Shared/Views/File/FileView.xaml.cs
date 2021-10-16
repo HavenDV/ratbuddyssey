@@ -72,18 +72,15 @@ namespace Ratbuddyssey.Views
 
         public void HandleDroppedFile(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop) ||
+                e.Data.GetData(DataFormats.FileDrop) is not string[] files)
             {
                 return;
             }
 
-            // Note that you can have more than one file.
-            if (e.Data.GetData(DataFormats.FileDrop) is not string[] files)
-            {
-                return;
-            }
-
-            ViewModel?.DragFiles.Execute(files).Subscribe();
+            _ = ViewModel?.Drop
+                .Execute(files)
+                .Subscribe();
         }
 
         #endregion

@@ -42,7 +42,7 @@ namespace Ratbuddyssey.ViewModels
         public ReactiveCommand<Unit, Unit> SaveFileAs { get; }
         public ReactiveCommand<Unit, Unit> ReloadFile { get; }
 
-        public ReactiveCommand<string[], Unit> DragFiles { get; }
+        public ReactiveCommand<string[], Unit> Drop { get; }
 
         #endregion
 
@@ -91,10 +91,8 @@ namespace Ratbuddyssey.ViewModels
 
                 LoadApp(CurrentFile);
             });
-            DragFiles = ReactiveCommand.Create<string[]>(paths =>
+            Drop = ReactiveCommand.Create<string[]>(paths =>
             {
-                // Assuming you have one file that you care about, pass it off to whatever
-                // handling code you have defined.
                 if (paths.Any())
                 {
                     Open(paths.First());
