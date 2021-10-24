@@ -1,22 +1,18 @@
-﻿using System;
-using ReactiveUI.Fody.Helpers;
+﻿namespace Ratbuddyssey.ViewModels;
 
-namespace Ratbuddyssey.ViewModels
+public class SmoothingFactorViewModel : ViewModelBase
 {
-    public class SmoothingFactorViewModel : ViewModelBase
+    [Reactive]
+    public bool IsChecked { get; set; }
+
+    public string Title { get; set; }
+
+    public double Value { get; set; }
+
+    public SmoothingFactorViewModel(string title, double value, bool isChecked = false)
     {
-        [Reactive]
-        public bool IsChecked { get; set; }
-
-        public string Title { get; set; }
-
-        public double Value { get; set; }
-
-        public SmoothingFactorViewModel(string title, double value, bool isChecked = false)
-        {
-            Title = title ?? throw new ArgumentNullException(nameof(Title));
-            Value = value;
-            IsChecked = isChecked;
-        }
+        Title = title ?? throw new ArgumentNullException(nameof(Title));
+        Value = value;
+        IsChecked = isChecked;
     }
 }

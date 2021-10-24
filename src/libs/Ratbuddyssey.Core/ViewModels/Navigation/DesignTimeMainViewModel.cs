@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace Ratbuddyssey.ViewModels;
 
-namespace Ratbuddyssey.ViewModels
+public class DesignTimeMainViewModel
 {
-    public class DesignTimeMainViewModel
-    {
-        #region Properties
+    #region Properties
 
-        public IReadOnlyCollection<TabViewModel> Tabs { get; } = new TabViewModel[]
-        {
+    public IReadOnlyCollection<TabViewModel> Tabs { get; } = new TabViewModel[]
+    {
             new(typeof(FileViewModel), "App"),
             new(typeof(EthernetViewModel), "Ethernet"),
-        };
+    };
 
-        public TabViewModel SelectedTab => Tabs.First();
+    public TabViewModel SelectedTab => Tabs.First();
 
-        #endregion
-    }
+    #endregion
 }

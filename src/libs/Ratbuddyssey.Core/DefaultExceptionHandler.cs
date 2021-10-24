@@ -1,33 +1,30 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reactive.Linq;
+﻿using System.Diagnostics;
 
-namespace Ratbuddyssey
+namespace Ratbuddyssey;
+
+public class DefaultExceptionHandler : IObserver<Exception>
 {
-    public class DefaultExceptionHandler : IObserver<Exception>
+    private static async void OnException(Exception value)
     {
-        private static async void OnException(Exception value)
+        if (Debugger.IsAttached)
         {
-            if (Debugger.IsAttached)
-            {
-                Debugger.Break();
-            }
-
-            await Interactions.Exception.Handle(value);
+            Debugger.Break();
         }
 
-        public void OnNext(Exception value)
-        {
-            OnException(value);
-        }
+        await Interactions.Exception.Handle(value);
+    }
 
-        public void OnError(Exception error)
-        {
-            OnException(error);
-        }
+    public void OnNext(Exception value)
+    {
+        OnException(value);
+    }
 
-        public void OnCompleted()
-        {
-        }
+    public void OnError(Exception error)
+    {
+        OnException(error);
+    }
+
+    public void OnCompleted()
+    {
     }
 }

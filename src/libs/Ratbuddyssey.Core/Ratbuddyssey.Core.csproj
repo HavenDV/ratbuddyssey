@@ -6,6 +6,18 @@
     <NoWarn>$(NoWarn)</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup Label="GlobalUsings">
+    <Using Include="System.Reactive" />
+    <Using Include="System.Reactive.Disposables" />
+    <Using Include="System.Reactive.Linq" />
+    <Using Include="DynamicData" />
+    <Using Include="DynamicData.Binding" />
+    <Using Include="DynamicData.Kernel" />
+    <Using Include="ReactiveUI" />
+    <Using Include="ReactiveUI.Fody.Helpers" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

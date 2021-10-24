@@ -1,9 +1,8 @@
-﻿namespace Ratbuddyssey.Models
+﻿namespace Ratbuddyssey.Models;
+
+public enum FrequencyRange
 {
-    public enum FrequencyRange
-    {
-        Chirp,
-        Subwoofer,
-        Full,
-    }
+    Chirp,
+    Subwoofer,
+    Full,
 }

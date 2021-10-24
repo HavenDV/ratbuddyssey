@@ -1,6 +1,4 @@
-﻿using ReactiveUI.Fody.Helpers;
-
-// ReSharper disable UnassignedGetOnlyAutoProperty
+﻿// ReSharper disable UnassignedGetOnlyAutoProperty
 
 namespace Ratbuddyssey.ViewModels
 {

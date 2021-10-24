@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace Ratbuddyssey.ViewModels;
 
-namespace Ratbuddyssey.ViewModels
+public class DesignTimeChannelsViewModel
 {
-    public class DesignTimeChannelsViewModel
-    {
-        #region Properties
+    #region Properties
 
-        public IReadOnlyCollection<ChannelViewModel> Channels { get; set; } = new ChannelViewModel[]
-        {
+    public IReadOnlyCollection<ChannelViewModel> Channels { get; set; } = new ChannelViewModel[]
+    {
             new(0, "FL"),
             new(1, "C"),
             new(2, "FR"),
@@ -19,10 +16,9 @@ namespace Ratbuddyssey.ViewModels
             new(36, "TRL"),
             new(39, "TFL"),
             new(42, "SW1"),
-        };
+    };
 
-        public ChannelViewModel? SelectedChannel => Channels.First();
+    public ChannelViewModel? SelectedChannel => Channels.First();
 
-        #endregion
-    }
+    #endregion
 }
