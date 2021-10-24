@@ -13,16 +13,16 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
-    <PackageReference Include="MaterialDesignColors" Version="2.0.1" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.4-ci62" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci62" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
-    <PackageReference Include="ReactiveUI.WPF" Version="15.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="16.2.6" />
   </ItemGroup>
 
   <ItemGroup Label="Linking">
-    <None Include="..\..\shared\Ratbuddyssey.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)"/>
+    <None Include="..\..\shared\Ratbuddyssey.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
   </ItemGroup>
 
   <ItemGroup>
