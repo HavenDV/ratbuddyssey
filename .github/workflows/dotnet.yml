@@ -1,5 +1,7 @@
 name: Build, test and publish
-on: [ push ]
+on:
+  push:
+    branches: [ master ]   
 
 jobs:
   build-test-publish:
