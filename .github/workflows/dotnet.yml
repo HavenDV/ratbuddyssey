@@ -9,7 +9,7 @@ jobs:
       os: windows-latest
       asset-path1: src/apps/Ratbuddyssey/bin/Release/Ratbuddyssey_net4.6.1.zip
       asset-name1: Ratbuddyssey_net4.6.1.zip
-      asset_content_type1: application/zip
+      asset-content-type1: application/zip
       asset-path2: src/apps/Ratbuddyssey/bin/Release/Ratbuddyssey_net5.0-windows.zip
       asset-name2: Ratbuddyssey_net5.0-windows.zip
-      asset_content_type2: application/zip
+      asset-content-type2: application/zip
