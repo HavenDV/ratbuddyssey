@@ -6,7 +6,7 @@
     <SharedGUID>264a09d3-f3f5-4a21-92e6-cbfeaa604ffe</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Ratbuddyssey.Shared</Import_RootNamespace>
+    <Import_RootNamespace>Ratbuddyssey.Apps.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BaseConverter.cs" />

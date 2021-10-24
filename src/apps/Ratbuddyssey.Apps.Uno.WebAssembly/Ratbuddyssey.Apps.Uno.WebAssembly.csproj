@@ -30,7 +30,7 @@
     <LinkerDescriptor Include="LinkerConfig.xml" />
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
-    <UpToDateCheckInput Include="..\..\shared\Ratbuddyssey.Uno.Shared\**\*.xaml" />
+    <UpToDateCheckInput Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\**\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +50,7 @@
     <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Uno.Core\Ratbuddyssey.Apps.Uno.Core.Standard\Ratbuddyssey.Apps.Uno.Core.Standard.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems" Label="Shared" />
 
 </Project>

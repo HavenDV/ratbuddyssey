@@ -22,15 +22,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{BAA5012B-8
 		src\libs\Directory.Build.props = src\libs\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Core", "src\libs\Ratbuddyssey.Core\Ratbuddyssey.Core.csproj", "{A53DA76F-0057-4533-832E-3B4FC57967F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Apps.Core", "src\libs\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj", "{A53DA76F-0057-4533-832E-3B4FC57967F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{BA76CFC8-6CD7-434C-A613-769C29EEF3D9}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Shared", "src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.shproj", "{264A09D3-F3F5-4A21-92E6-CBFEAA604FFE}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Apps.Shared", "src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.shproj", "{264A09D3-F3F5-4A21-92E6-CBFEAA604FFE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Apps.Wpf", "src\apps\Ratbuddyssey.Apps.Wpf\Ratbuddyssey.Apps.Wpf.csproj", "{D73146AD-2465-40AE-9856-5A416328400F}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Uno.Shared", "src\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Apps.Uno.Shared", "src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratbuddyssey.Apps.Uno.Uwp", "src\apps\Ratbuddyssey.Apps.Uno.Uwp\Ratbuddyssey.Apps.Uno.Uwp.csproj", "{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4}"
 EndProject
@@ -45,13 +45,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ratbuddyssey.Apps.Uno.Core"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems*{264a09d3-f3f5-4a21-92e6-cbfeaa604ffe}*SharedItemsImports = 13
-		src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
-		src\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
-		src\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
-		src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems*{d73146ad-2465-40ae-9856-5a416328400f}*SharedItemsImports = 5
-		src\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems*{ecbb9d30-4fff-4098-9ca0-2d047784134a}*SharedItemsImports = 5
-		src\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.projitems*{ecbb9d30-4fff-4098-9ca0-2d047784134a}*SharedItemsImports = 5
+		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{264a09d3-f3f5-4a21-92e6-cbfeaa604ffe}*SharedItemsImports = 13
+		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{d73146ad-2465-40ae-9856-5a416328400f}*SharedItemsImports = 5
+		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{ecbb9d30-4fff-4098-9ca0-2d047784134a}*SharedItemsImports = 5
+		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{ecbb9d30-4fff-4098-9ca0-2d047784134a}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -134,9 +134,9 @@
     <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
   </PropertyGroup>
   <ItemGroup Label="ViewBase">
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Shared\Views\**\*.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
-    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Shared\Views\MainView.xaml.cs" />
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Shared\Views\MainView.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Shared\Views\**\*.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Apps.Shared\Views\MainView.xaml.cs" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Shared\Views\MainView.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,13 +152,13 @@
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\libs\Ratbuddyssey.Core\Ratbuddyssey.Core.csproj">
+    <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj">
       <Project>{50f14d91-0dfb-4ce8-b252-830c7fea1538}</Project>
       <Name>Ratbuddyssey.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\..\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

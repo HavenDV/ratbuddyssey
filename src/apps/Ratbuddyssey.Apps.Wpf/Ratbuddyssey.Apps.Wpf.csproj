@@ -22,14 +22,14 @@
   </ItemGroup>
 
   <ItemGroup Label="Linking">
-    <None Include="..\..\shared\Ratbuddyssey.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
+    <None Include="..\..\shared\Ratbuddyssey.Apps.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\libs\Ratbuddyssey.Core\Ratbuddyssey.Core.csproj" />
+    <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
 
   <Target Name="Release" AfterTargets="Build" Condition=" '$(Configuration)' == 'Release' AND '$(TargetDir)' != '' ">
     <ZipDirectory SourceDirectory="$(TargetDir)" DestinationFile="$(TargetDir)../$(AssemblyName)_$(TargetFramework).zip" Overwrite="True" />
