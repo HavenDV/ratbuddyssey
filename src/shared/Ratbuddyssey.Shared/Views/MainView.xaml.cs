@@ -13,6 +13,7 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
+#if WPF_APP
             _ = this.WhenActivated(disposable =>
             {
                 if (ViewModel == null)
@@ -34,6 +35,7 @@ namespace Ratbuddyssey.Views
                         static view => view.RoutedViewHost.Router)
                     .DisposeWith(disposable);
             });
+#endif
         }
 
         #endregion

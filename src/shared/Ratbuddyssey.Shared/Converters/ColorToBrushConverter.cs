@@ -1,4 +1,9 @@
-﻿using System.Windows.Media;
+﻿#if WPF_APP
+using System.Windows.Media;
+#else
+using Windows.UI;
+using Windows.UI.Xaml.Media;
+#endif
 
 #nullable enable
 

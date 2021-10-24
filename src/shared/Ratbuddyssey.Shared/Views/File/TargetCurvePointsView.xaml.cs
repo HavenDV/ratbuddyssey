@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WPF_APP
+using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Controls;
@@ -67,3 +68,4 @@ namespace Ratbuddyssey.Views
         #endregion
     }
 }
+#endif

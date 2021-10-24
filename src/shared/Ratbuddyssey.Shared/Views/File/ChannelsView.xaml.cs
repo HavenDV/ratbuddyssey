@@ -1,4 +1,5 @@
-﻿using System.Reactive.Disposables;
+﻿#if WPF_APP
+using System.Reactive.Disposables;
 using ReactiveUI;
 
 #nullable enable
@@ -34,3 +35,4 @@ namespace Ratbuddyssey.Views
         #endregion
     }
 }
+#endif
