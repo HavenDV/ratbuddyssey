@@ -24,7 +24,6 @@ jobs:
       os: windows-2022
       project-path: /target:apps\Ratbuddyssey_Apps_Uno_Uwp
       use-msbuild: true
-      run-tests: false
 
   web-assembly:
     name: WebAssembly
