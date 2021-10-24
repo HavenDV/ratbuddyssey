@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Globalization;
 using System.Numerics;
-using Ratbuddyssey.Models;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using Ratbuddyssey.Models;
 using Ratbuddyssey.MultEQApp;
 
 // ReSharper disable UnassignedGetOnlyAutoProperty
@@ -119,7 +119,6 @@ public class GraphViewModel : ActivatableViewModel
     #endregion
 
     #endregion
-
 
     #region Constructors
 

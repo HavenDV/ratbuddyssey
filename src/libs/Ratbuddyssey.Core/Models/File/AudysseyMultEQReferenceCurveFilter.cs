@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Drawing;
-using OxyPlot;
 using MathNet.Numerics.Interpolation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using OxyPlot;
 
 namespace Ratbuddyssey;
 

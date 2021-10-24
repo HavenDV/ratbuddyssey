@@ -16,13 +16,13 @@ public class ChannelInformationViewModel : ActivatableViewModel
 
     public IReadOnlyCollection<string> CrossoverList { get; } = new[]
     {
-            " ", "40", "60", "80", "90", "100", "110", "120", "150", "180", "200", "250", "F",
-        };
+        " ", "40", "60", "80", "90", "100", "110", "120", "150", "180", "200", "250", "F",
+    };
 
     public IReadOnlyCollection<string> SpeakerTypeList { get; } = new[]
     {
-            " ", "S", "L",
-        };
+        " ", "S", "L",
+    };
 
     #endregion
 

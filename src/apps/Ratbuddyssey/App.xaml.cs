@@ -1,11 +1,11 @@
-﻿using System.Reactive;
-using System.Windows;
-using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Linq;
+using System.Reactive;
+using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Initialization;
 using Ratbuddyssey.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using HostBuilder = Ratbuddyssey.Initialization.HostBuilder;
 
@@ -28,9 +28,9 @@ namespace Ratbuddyssey
                 var message = context.Input;
 
                 MessageBox.Show(
-                    message, 
-                    "Warning:", 
-                    MessageBoxButton.OK, 
+                    message,
+                    "Warning:",
+                    MessageBoxButton.OK,
                     MessageBoxImage.Warning);
 
                 context.SetOutput(Unit.Default);
@@ -40,9 +40,9 @@ namespace Ratbuddyssey
                 var exception = context.Input;
 
                 MessageBox.Show(
-                    $"{exception}", 
-                    "Error:", 
-                    MessageBoxButton.OK, 
+                    $"{exception}",
+                    "Error:",
+                    MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
                 context.SetOutput(Unit.Default);
@@ -101,14 +101,14 @@ namespace Ratbuddyssey
             Interactions.Question.RegisterHandler(static context =>
             {
                 var message = context.Input;
-                
+
                 var result = MessageBox.Show(
-                    message, 
-                    "Are you sure?", 
+                    message,
+                    "Are you sure?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question,
                     MessageBoxResult.No);
-                
+
                 context.SetOutput(result == MessageBoxResult.Yes);
             });
 

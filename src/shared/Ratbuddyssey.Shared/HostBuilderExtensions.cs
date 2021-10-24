@@ -1,9 +1,9 @@
 ﻿using System;
-using Ratbuddyssey.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ratbuddyssey.Converters;
+using Ratbuddyssey.ViewModels;
 using Ratbuddyssey.Views;
 using ReactiveUI;
 

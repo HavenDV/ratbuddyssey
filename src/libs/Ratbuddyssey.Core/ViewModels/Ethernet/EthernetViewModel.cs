@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Net;
+using Newtonsoft.Json;
 using Ratbuddyssey.MultEQAvr;
 using Ratbuddyssey.MultEQAvrAdapter;
 using Ratbuddyssey.MultEQTcp;
-using Newtonsoft.Json;
 
 namespace Ratbuddyssey.ViewModels;
 
@@ -118,13 +118,13 @@ public class EthernetViewModel : RoutableViewModel
             }
 
 #if DEBUG
-                var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
+            var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IInfo))
             });
             File.WriteAllText(Environment.CurrentDirectory + "\\AvrInfo.json", json);
 #endif
-            });
+        });
         GetReceiverStatus = ReactiveCommand.Create(() =>
         {
             if (AvrTcp == null)
@@ -137,13 +137,13 @@ public class EthernetViewModel : RoutableViewModel
             }
 
 #if DEBUG
-                var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
+            var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IStatus))
             });
             File.WriteAllText(Environment.CurrentDirectory + "\\AvrStatus.json", json);
 #endif
-            });
+        });
         SetAvrSetAmp = ReactiveCommand.Create(() =>
         {
             if (AvrTcp == null)
@@ -156,13 +156,13 @@ public class EthernetViewModel : RoutableViewModel
             }
 
 #if DEBUG
-                var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
+            var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IAmp))
             });
             File.WriteAllText(Environment.CurrentDirectory + "\\AvrSetDataAmp.json", json);
 #endif
-            });
+        });
         SetAvrSetAudy = ReactiveCommand.Create(() =>
         {
             if (AvrTcp == null)
@@ -175,13 +175,13 @@ public class EthernetViewModel : RoutableViewModel
             }
 
 #if DEBUG
-                var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
+            var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IAudy))
             });
             File.WriteAllText(Environment.CurrentDirectory + "\\AvrSetDataAud.json", json);
 #endif
-            });
+        });
         SetAvrSetDisFil = ReactiveCommand.Create(() =>
         {
             if (AvrTcp == null)
@@ -194,10 +194,10 @@ public class EthernetViewModel : RoutableViewModel
             }
 
 #if DEBUG
-                var json = JsonConvert.SerializeObject(Avr.DisFil);
+            var json = JsonConvert.SerializeObject(Avr.DisFil);
             File.WriteAllText(Environment.CurrentDirectory + "\\AvrDisFil.json", json);
 #endif
-            });
+        });
         SetAvrInitCoefs = ReactiveCommand.Create(() =>
         {
             if (AvrTcp != null)
@@ -217,10 +217,10 @@ public class EthernetViewModel : RoutableViewModel
             }
 
 #if DEBUG
-                var json = JsonConvert.SerializeObject(Avr.CoefData);
+            var json = JsonConvert.SerializeObject(Avr.CoefData);
             File.WriteAllText(Environment.CurrentDirectory + "\\AvrCoefDafa.json", json);
 #endif
-            });
+        });
         SetAudysseyFinishedFlag = ReactiveCommand.Create(() =>
         {
             AvrTcp?.SetAudysseyFinishedFlag();
@@ -237,23 +237,23 @@ public class EthernetViewModel : RoutableViewModel
                     }
                     else
                     {
-                            // if there is no Tcp client
-                            if (AvrTcp == null)
+                        // if there is no Tcp client
+                        if (AvrTcp == null)
                         {
-                                // create receiver tcp instance
-                                AvrTcp = new AudysseyMultEQAvrTcp(Avr, SelectedInterfaceIp);
+                            // create receiver tcp instance
+                            AvrTcp = new AudysseyMultEQAvrTcp(Avr, SelectedInterfaceIp);
                         }
                         AvrTcp.Connect();
-                            // attach sniffer
-                            if (ConnectSnifferIsChecked)
+                        // attach sniffer
+                        if (ConnectSnifferIsChecked)
                         {
-                                // sniffer must be elevated to capture raw packets
-                                if (!IsElevated())
+                            // sniffer must be elevated to capture raw packets
+                            if (!IsElevated())
                             {
-                                    // we cannot create the sniffer...
-                                    ConnectSnifferIsChecked = false;
-                                    // but we can ask the user to elevate the program!
-                                    RunAsAdmin();
+                                // we cannot create the sniffer...
+                                ConnectSnifferIsChecked = false;
+                                // but we can ask the user to elevate the program!
+                                RunAsAdmin();
                             }
                             else
                             {
@@ -270,8 +270,8 @@ public class EthernetViewModel : RoutableViewModel
                     Avr = new AudysseyMultEQAvr();
                     AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
                     AvrTcp = null;
-                        // immediately clean up the object
-                        GC.Collect();
+                    // immediately clean up the object
+                    GC.Collect();
                     GC.WaitForPendingFinalizers();
                 }
             });
@@ -281,21 +281,21 @@ public class EthernetViewModel : RoutableViewModel
             {
                 if (value)
                 {
-                        // sniffer must be elevated to capture raw packets
-                        if (!IsElevated())
+                    // sniffer must be elevated to capture raw packets
+                    if (!IsElevated())
                     {
-                            // we cannot create the sniffer...
-                            ConnectSnifferIsChecked = false;
-                            // but we can ask the user to elevate the program!
-                            RunAsAdmin();
+                        // we cannot create the sniffer...
+                        ConnectSnifferIsChecked = false;
+                        // but we can ask the user to elevate the program!
+                        RunAsAdmin();
                     }
                     else
                     {
-                            // onyl create sniffer if it not already exists
-                            TcpSniffer ??= new AudysseyMultEQTcpSniffer(
-                            Avr,
-                            SelectedIp,
-                            SelectedInterfaceIp);
+                        // onyl create sniffer if it not already exists
+                        TcpSniffer ??= new AudysseyMultEQTcpSniffer(
+                        Avr,
+                        SelectedIp,
+                        SelectedInterfaceIp);
                     }
                 }
                 else
@@ -303,14 +303,14 @@ public class EthernetViewModel : RoutableViewModel
                     if (TcpSniffer != null)
                     {
                         TcpSniffer = null;
-                            // if not interested in receiver then close connection and delete objects
-                            if (ConnectReceiverIsChecked == false)
+                        // if not interested in receiver then close connection and delete objects
+                        if (ConnectReceiverIsChecked == false)
                         {
                             Avr = new AudysseyMultEQAvr();
                             AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
                         }
-                            // immediately clean up the object
-                            GC.Collect();
+                        // immediately clean up the object
+                        GC.Collect();
                         GC.WaitForPendingFinalizers();
                     }
                 }
@@ -338,8 +338,8 @@ public class EthernetViewModel : RoutableViewModel
                     }
                     else
                     {
-                            // if we end up here we have a problem
-                        }
+                        // if we end up here we have a problem
+                    }
                 }
             });
 

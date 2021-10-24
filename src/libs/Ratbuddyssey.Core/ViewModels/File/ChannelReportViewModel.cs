@@ -1,21 +1,20 @@
 ﻿// ReSharper disable UnassignedGetOnlyAutoProperty
 
-namespace Ratbuddyssey.ViewModels
+namespace Ratbuddyssey.ViewModels;
+
+public class ChannelReportViewModel : ActivatableViewModel
 {
-    public class ChannelReportViewModel : ActivatableViewModel
-    {
-        #region Properties
+    #region Properties
 
-        #region Public
+    #region Public
 
-        [ObservableAsProperty]
-        public ChannelViewModel Channel { get; } = new();
+    [ObservableAsProperty]
+    public ChannelViewModel Channel { get; } = new();
 
-        [ObservableAsProperty]
-        public bool IsChannelSelected { get; }
+    [ObservableAsProperty]
+    public bool IsChannelSelected { get; }
 
-        #endregion
+    #endregion
 
-        #endregion
-    }
+    #endregion
 }

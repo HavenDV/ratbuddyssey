@@ -1,6 +1,6 @@
+using System.Collections.Concurrent;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Collections.Concurrent;
 
 namespace Ratbuddyssey;
 

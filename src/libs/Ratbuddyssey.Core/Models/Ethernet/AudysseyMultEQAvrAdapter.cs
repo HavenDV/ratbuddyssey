@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Ratbuddyssey.MultEQApp;
 using Ratbuddyssey.MultEQAvr;
 

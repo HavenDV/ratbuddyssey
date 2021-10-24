@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿using System.Buffers.Binary;
 using System.Net.Sockets;
-using System.Buffers.Binary;
+using System.Text;
 
 #nullable disable
 

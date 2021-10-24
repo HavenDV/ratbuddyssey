@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.ComponentModel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 #nullable disable
 
@@ -377,4 +377,4 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
         }
     }
     #endregion
-}       
+}

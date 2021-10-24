@@ -21,7 +21,7 @@ namespace Ratbuddyssey.Views
                 {
                     return;
                 }
-                
+
                 _ = this.BindCommand(ViewModel,
                         static viewModel => viewModel.OpenFile,
                         static view => view.OpenFileMenuItem)

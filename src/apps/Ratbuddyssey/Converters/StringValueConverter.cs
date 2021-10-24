@@ -10,7 +10,7 @@ namespace Ratbuddyssey.Converters
         {
             if (!string.IsNullOrEmpty((string)value))
             {
-                if((string)value=="U")
+                if ((string)value == "U")
                 {
                     return "Unlimited";
                 }

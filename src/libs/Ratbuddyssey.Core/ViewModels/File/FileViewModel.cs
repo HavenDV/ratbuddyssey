@@ -57,9 +57,9 @@ public class FileViewModel : RoutableViewModel
         SaveFile = ReactiveCommand.Create(() =>
         {
 #if DEBUG
-                CurrentFile = Path.ChangeExtension(CurrentFile, ".json");
+            CurrentFile = Path.ChangeExtension(CurrentFile, ".json");
 #endif
-                SaveApp(CurrentFile);
+            SaveApp(CurrentFile);
         });
         SaveFileAs = ReactiveCommand.CreateFromTask(async _ =>
         {
