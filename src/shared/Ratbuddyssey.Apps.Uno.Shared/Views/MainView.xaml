@@ -16,6 +16,7 @@
         IsDesignTimeCreatable=True}"
     >
     <muxc:NavigationView
+        x:Name="NavigationControl"
         MenuItemsSource="{Binding Tabs}"
         SelectedItem="{Binding SelectedTab}"
         >

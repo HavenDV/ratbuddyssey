@@ -23,11 +23,11 @@ namespace Ratbuddyssey.Views
 #if WPF_APP
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.Tabs,
-                        static view => view.TabsListView.ItemsSource)
+                        static view => view.NavigationControl.MenuItemsSource)
                     .DisposeWith(disposable);
                 _ = this.Bind(ViewModel,
                         static viewModel => viewModel.SelectedTab,
-                        static view => view.TabsListView.SelectedItem)
+                        static view => view.NavigationControl.SelectedItem)
                     .DisposeWith(disposable);
 #endif
 
