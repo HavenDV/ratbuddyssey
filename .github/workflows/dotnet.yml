@@ -4,18 +4,32 @@ on:
     branches: [ master ]   
 
 jobs:
-  build-test-publish:
-    name: Build, test and publish
+  wpf:
+    name: WPF
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
-      os: windows-2022
-      additional-dotnet-version: 5.0.x
-      use-msbuild: true
-      run-tests: false
+      os: windows-latest
+      project-path: src/apps/Ratbuddyssey.Apps.Wpf
       asset-path1: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net4.6.1.zip
       asset-name1: Ratbuddyssey.Apps.Wpf_net4.6.1.zip
       asset-content-type1: application/zip
       asset-path2: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-name2: Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-content-type2: application/zip
+
+  uwp:
+    name: UWP
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      os: windows-2022
+      project-path: /target:apps\Ratbuddyssey_Apps_Uno_Uwp
+      use-msbuild: true
+      run-tests: false
+
+  web-assembly:
+    name: WebAssembly
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      project-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly
+      additional-dotnet-version: 5.0.x
       deploy-web-assembly-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
