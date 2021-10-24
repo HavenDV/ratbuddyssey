@@ -20,7 +20,6 @@ namespace Ratbuddyssey.Views
                     return;
                 }
 
-#if WPF_APP
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.Tabs,
                         static view => view.NavigationControl.MenuItemsSource)
@@ -29,7 +28,6 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.SelectedTab,
                         static view => view.NavigationControl.SelectedItem)
                     .DisposeWith(disposable);
-#endif
 
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.Router,
