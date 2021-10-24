@@ -1,11 +1,11 @@
-﻿<reactiveUi:ReactiveWindow 
+﻿<rx:ReactiveWindow 
     x:TypeArguments="viewModels:MainViewModel"
     x:Class="Ratbuddyssey.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:reactiveUi="http://reactiveui.net"
+    xmlns:rx="http://reactiveui.net"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -186,10 +186,10 @@
                 </ListView>
             </StackPanel>
         </Grid>
-        <reactiveUi:RoutedViewHost
+        <rx:RoutedViewHost
             Grid.Column="1" 
             x:Name="RoutedViewHost" 
             Transition="Slide"
             />
     </Grid>
-</reactiveUi:ReactiveWindow>
+</rx:ReactiveWindow>
