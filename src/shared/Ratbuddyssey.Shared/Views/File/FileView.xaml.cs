@@ -1,5 +1,4 @@
-﻿#if WPF_APP
-using System;
+﻿using System;
 using System.Reactive.Disposables;
 using System.Windows;
 using ReactiveUI;
@@ -16,6 +15,7 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
+#if WPF_APP
             _ = this.WhenActivated(disposable =>
             {
                 if (ViewModel == null)
@@ -65,12 +65,14 @@ namespace Ratbuddyssey.Views
                         static view => view.GraphView.ViewModel)
                     .DisposeWith(disposable);
             });
+#endif
         }
 
         #endregion
 
         #region Event Handlers
 
+#if WPF_APP
         public void HandleDroppedFile(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop) ||
@@ -83,8 +85,8 @@ namespace Ratbuddyssey.Views
                 .Execute(files)
                 .Subscribe();
         }
+#endif
 
         #endregion
     }
 }
-#endif

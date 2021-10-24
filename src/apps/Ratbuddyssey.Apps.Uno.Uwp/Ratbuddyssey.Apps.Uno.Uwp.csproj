@@ -10,16 +10,7 @@
 			-->
       <Version>6.2.13</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
-      <Version>7.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.Core">
-      <Version>7.1.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <Version>7.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.Layout">
       <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
@@ -30,7 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="ReactiveUI.Uno">
+    <PackageReference Include="ReactiveUI.Uwp">
       <Version>16.2.6</Version>
     </PackageReference>
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
@@ -143,9 +134,9 @@
     <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
   </PropertyGroup>
   <ItemGroup Label="ViewBase">
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Shared\Views\**\*.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
-    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Apps.Shared\Views\Navigation\MainView.xaml.cs" />
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Shared\Views\Navigation\MainView.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Shared\Views\**\*.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Shared\Views\MainView.xaml.cs" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Shared\Views\MainView.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

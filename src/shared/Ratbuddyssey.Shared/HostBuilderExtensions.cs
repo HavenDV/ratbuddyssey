@@ -24,8 +24,8 @@ public static class HostBuilderExtensions
         {
             _ = services
                 .AddSingleton<IViewFor<MainViewModel>, MainView>()
-#if WPF_APP
                 .AddSingleton<IViewFor<FileViewModel>, FileView>()
+#if WPF_APP
                 .AddSingleton<IViewFor<EthernetViewModel>, EthernetView>()
 #else
 #endif

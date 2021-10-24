@@ -13,7 +13,6 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
-#if WPF_APP
             _ = this.WhenActivated(disposable =>
             {
                 if (ViewModel == null)
@@ -21,6 +20,7 @@ namespace Ratbuddyssey.Views
                     return;
                 }
 
+#if WPF_APP
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.Tabs,
                         static view => view.TabsListView.ItemsSource)
@@ -29,13 +29,13 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.SelectedTab,
                         static view => view.TabsListView.SelectedItem)
                     .DisposeWith(disposable);
+#endif
 
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.Router,
                         static view => view.RoutedViewHost.Router)
                     .DisposeWith(disposable);
             });
-#endif
         }
 
         #endregion

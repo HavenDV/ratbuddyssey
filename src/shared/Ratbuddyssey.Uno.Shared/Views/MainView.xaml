@@ -4,9 +4,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:rxuno="using:ReactiveUI.Uno"
+    xmlns:rx="using:ReactiveUI"
     xmlns:views="using:Ratbuddyssey.Views"
+    xmlns:viewModels="using:Ratbuddyssey.ViewModels"
+    xmlns:system="using:System"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance 
+        viewModels:DesignTimeMainViewModel,
+        IsDesignTimeCreatable=True}"
     >
+    <muxc:NavigationView
+        MenuItemsSource="{Binding Tabs}"
+        SelectedItem="{Binding SelectedTab}"
+        >
+        <muxc:NavigationView.MenuItemTemplate>
+            <DataTemplate x:DataType="system:Type">
+                <StackPanel 
+                    Orientation="Horizontal"
+                    >
+                    <SymbolIcon 
+                        x:Name="IconTextBlock" 
+                        Height="25" 
+                        Width="25" 
+                        Margin="10"
+                        Symbol="{Binding Converter={StaticResource TypeToIconConverter}}"
+                        Foreground="White"
+                        />
+                    <TextBlock 
+                        x:Name="TitleTextBlock" 
+                        VerticalAlignment="Center" 
+                        Margin="20, 10"
+                        Text="{Binding Converter={StaticResource TypeToNameConverter}}"
+                        Foreground="White"
+                        />
+                </StackPanel>
+            </DataTemplate>
+        </muxc:NavigationView.MenuItemTemplate>
+        
+        <rx:RoutedViewHost 
+            x:Name="RoutedViewHost" 
+            />
+    </muxc:NavigationView>
 </views:MainViewBase>
