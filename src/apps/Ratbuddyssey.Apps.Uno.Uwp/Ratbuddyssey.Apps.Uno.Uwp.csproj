@@ -66,12 +66,12 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Ratbuddyssey.Apps.Uno.Uwp_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>4E5CC2BEC28D539A22CD8B8557FB5BD2A38AF167</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>BE5886838C08A5F98F55DD7192CCF5F1E3FF4829</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
-    <NoWarn>$(NoWarn);MSB3277;APPX0108</NoWarn>
+    <NoWarn>$(NoWarn);MSB3277;CS8305</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
