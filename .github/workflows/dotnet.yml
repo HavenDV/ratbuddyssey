@@ -16,3 +16,4 @@ jobs:
       asset-path2: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-name2: Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-content-type2: application/zip
+      deploy-web-assembly-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
