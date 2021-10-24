@@ -6,32 +6,32 @@ namespace Ratbuddyssey;
 public class IPHeader
 {
     //IP Header fields
-    private byte byVersionAndHeaderLength;   //Eight bits for version and header length
-    private byte byDifferentiatedServices;    //Eight bits for differentiated services (TOS)
-    private ushort usTotalLength;              //Sixteen bits for total length of the datagram (header + message)
-    private ushort usIdentification;           //Sixteen bits for identification
-    private ushort usFlagsAndOffset;           //Eight bits for flags and fragmentation offset
-    private byte byTTL;                      //Eight bits for TTL (Time To Live)
-    private byte byProtocol;                 //Eight bits for the underlying protocol
-    private short sChecksum;                  //Sixteen bits containing the checksum of the header
+    private readonly byte byVersionAndHeaderLength;   //Eight bits for version and header length
+    private readonly byte byDifferentiatedServices;    //Eight bits for differentiated services (TOS)
+    private readonly ushort usTotalLength;              //Sixteen bits for total length of the datagram (header + message)
+    private readonly ushort usIdentification;           //Sixteen bits for identification
+    private readonly ushort usFlagsAndOffset;           //Eight bits for flags and fragmentation offset
+    private readonly byte byTTL;                      //Eight bits for TTL (Time To Live)
+    private readonly byte byProtocol;                 //Eight bits for the underlying protocol
+    private readonly short sChecksum;                  //Sixteen bits containing the checksum of the header
                                               //(checksum can be negative so taken as short)
-    private uint uiSourceIPAddress;          //Thirty two bit source IP Address
-    private uint uiDestinationIPAddress;     //Thirty two bit destination IP Address
+    private readonly uint uiSourceIPAddress;          //Thirty two bit source IP Address
+    private readonly uint uiDestinationIPAddress;     //Thirty two bit destination IP Address
                                              //End IP Header fields
 
-    private byte byHeaderLength;             //Header length
-    private byte[] byIPData = Array.Empty<byte>();                   //Data carried by the datagram
+    private readonly byte byHeaderLength;             //Header length
+    private readonly byte[] byIPData = Array.Empty<byte>();                   //Data carried by the datagram
 
-    private ushort usMessageLength;           //Length of the data being carried
+    private readonly ushort usMessageLength;           //Length of the data being carried
 
     public IPHeader(byte[] byBuffer, int nReceived)
     {
         try
         {
             //Create MemoryStream out of the received bytes
-            MemoryStream memoryStream = new MemoryStream(byBuffer, 0, nReceived);
+            var memoryStream = new MemoryStream(byBuffer, 0, nReceived);
             //Next we create a BinaryReader out of the MemoryStream
-            BinaryReader binaryReader = new BinaryReader(memoryStream);
+            var binaryReader = new BinaryReader(memoryStream);
 
             //The first eight bits of the IP header contain the version and
             //header length so we read them
@@ -156,7 +156,7 @@ public class IPHeader
             //The first three bits of the flags and fragmentation field 
             //represent the flags (which indicate whether the data is 
             //fragmented or not)
-            int nFlags = usFlagsAndOffset >> 13;
+            var nFlags = usFlagsAndOffset >> 13;
             if (nFlags == 2)
             {
                 return "Don't fragment";
@@ -178,7 +178,7 @@ public class IPHeader
         {
             //The last thirteen bits of the flags and fragmentation field 
             //contain the fragmentation offset
-            int nOffset = usFlagsAndOffset << 3;
+            var nOffset = usFlagsAndOffset << 3;
             nOffset >>= 3;
 
             return nOffset.ToString();

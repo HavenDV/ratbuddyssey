@@ -25,38 +25,38 @@ public class TcpIP
 public class AudysseyMultEQAvrTcpClientWithTimeout
 {
     // TCPIP
-    private string _hostname;
-    private int _port;
-    private int _timeout_milliseconds;
+    private readonly string _hostname;
+    private readonly int _port;
+    private readonly int _timeout_milliseconds;
     private TcpClient _connection;
     private bool _connected;
     private Exception _exception;
     private NetworkStream _stream = null;
     // CLIENT
     private byte TransmitReceive;
-    private UInt16 TotalLength;
+    private ushort TotalLength;
     private byte[] Command;
-    private UInt16 CommandLength;
-    private UInt16 DataLength;
-    private const UInt16 HeaderLength = 9;
+    private ushort CommandLength;
+    private ushort DataLength;
+    private const ushort HeaderLength = 9;
     private byte Check;
-    private Int32[] ByteToInt32(byte[] Byte)
+    private int[] ByteToInt32(byte[] Byte)
     {
-        Int32[] Int32s = null;
+        int[] Int32s = null;
         if (Byte.Length % 4 == 0)
         {
-            Int32s = new Int32[Byte.Length / 4];
-            for (int i = 0; i < Byte.Length / 4; i++)
+            Int32s = new int[Byte.Length / 4];
+            for (var i = 0; i < Byte.Length / 4; i++)
             {
                 Int32s[i] = BinaryPrimitives.ReverseEndianness(BitConverter.ToInt32(Byte, i * 4));
             }
         }
         return Int32s;
     }
-    public byte[] Int32ToByte(Int32[] Int32s)
+    public byte[] Int32ToByte(int[] Int32s)
     {
-        byte[] Byte = new byte[4 * Int32s.Length];
-        for (int i = 0; i < Int32s.Length; i++)
+        var Byte = new byte[4 * Int32s.Length];
+        for (var i = 0; i < Int32s.Length; i++)
         {
             Array.Copy(BitConverter.GetBytes(BinaryPrimitives.ReverseEndianness(Int32s[i])), 0, Byte, i * 4, 4);
         }
@@ -76,7 +76,7 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
 
         if (Cmd != null)
         {
-            CommandLength = (UInt16)Encoding.ASCII.GetByteCount(Cmd);
+            CommandLength = (ushort)Encoding.ASCII.GetByteCount(Cmd);
             Command = Encoding.ASCII.GetBytes(Cmd);
         }
         else
@@ -87,17 +87,17 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
 
         if (Data != null)
         {
-            DataLength = (UInt16)Data.Length;
+            DataLength = (ushort)Data.Length;
         }
         else
         {
             DataLength = 0;
         }
 
-        TotalLength = (UInt16)(HeaderLength + CommandLength + DataLength);
+        TotalLength = (ushort)(HeaderLength + CommandLength + DataLength);
 
-        MemoryStream memoryStream = new MemoryStream();
-        BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+        var memoryStream = new MemoryStream();
+        var binaryWriter = new BinaryWriter(memoryStream);
 
         binaryWriter.Write(TransmitReceive);
         binaryWriter.Write(BinaryPrimitives.ReverseEndianness(TotalLength));
@@ -106,7 +106,11 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
         binaryWriter.Write(Command);
         binaryWriter.Write((byte)0);
         binaryWriter.Write(BinaryPrimitives.ReverseEndianness(DataLength));
-        if (DataLength > 0) binaryWriter.Write(Data);
+        if (DataLength > 0)
+        {
+            binaryWriter.Write(Data);
+        }
+
         binaryWriter.Write(CalculateChecksum(memoryStream.GetBuffer()));
 
         _stream.Write(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
@@ -121,7 +125,7 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
 
         if (Cmd != null)
         {
-            CommandLength = (UInt16)Encoding.ASCII.GetByteCount(Cmd);
+            CommandLength = (ushort)Encoding.ASCII.GetByteCount(Cmd);
             Command = Encoding.ASCII.GetBytes(Cmd);
         }
         else
@@ -133,11 +137,11 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
         MemoryStream memoryStream = null;
         Data = null;
 
-        int nBufSize = 2048;
-        byte[] byBuffer = new byte[nBufSize];
+        var nBufSize = 2048;
+        var byBuffer = new byte[nBufSize];
         _stream.ReadTimeout = 10000;
 
-        int nReceived = 0;
+        var nReceived = 0;
         try
         {
             nReceived = _stream.Read(byBuffer, 0, nBufSize);
@@ -152,13 +156,13 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
         {
             memoryStream = new MemoryStream(byBuffer, 0, nReceived);
 
-            byte[] array = memoryStream.ToArray();
+            var array = memoryStream.ToArray();
             Array.Resize<byte>(ref array, array.Length - 1);
-            byte CheckSum = CalculateChecksum(array);
+            var CheckSum = CalculateChecksum(array);
 
             if (memoryStream.Length > 0)
             {
-                BinaryReader binaryReader = new BinaryReader(memoryStream);
+                var binaryReader = new BinaryReader(memoryStream);
                 if (TransmitReceive == binaryReader.ReadByte())
                 {
                     TotalLength = BinaryPrimitives.ReverseEndianness(binaryReader.ReadUInt16());
@@ -178,7 +182,7 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
             }
         }
     }
-    public void ReceiveTcpAvrStream(ref string Cmd, out Int32[] Data, out bool ValidCheckSum)
+    public void ReceiveTcpAvrStream(ref string Cmd, out int[] Data, out bool ValidCheckSum)
     {
         byte[] DataByte;
         ReceiveTcpAvrStream(ref Cmd, out DataByte, out ValidCheckSum);
@@ -188,7 +192,14 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
     {
         byte[] DataByte;
         ReceiveTcpAvrStream(ref Cmd, out DataByte, out ValidCheckSum);
-        if (DataByte != null) Data = Encoding.ASCII.GetString(DataByte); else Data = string.Empty;
+        if (DataByte != null)
+        {
+            Data = Encoding.ASCII.GetString(DataByte);
+        }
+        else
+        {
+            Data = string.Empty;
+        }
     }
     public AudysseyMultEQAvrTcpClientWithTimeout(string hostname, int port, int timeout_milliseconds)
     {
@@ -214,7 +225,7 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
         // kick off the thread that tries to connect
         _connected = false;
         _exception = null;
-        Thread thread = new Thread(new ThreadStart(BeginConnect));
+        var thread = new Thread(new ThreadStart(BeginConnect));
         thread.IsBackground = true; // So that a failed connection attempt 
                                     // wont prevent the process from terminating while it does the long timeout
         thread.Start();
@@ -243,7 +254,7 @@ public class AudysseyMultEQAvrTcpClientWithTimeout
         {
             // if it gets here, it timed out, so abort the thread and throw an exception
             thread.Abort();
-            string message = string.Format("TcpClient connection to {0}:{1} timed out", _hostname, _port);
+            var message = string.Format("TcpClient connection to {0}:{1} timed out", _hostname, _port);
             throw new TimeoutException(message);
         }
     }

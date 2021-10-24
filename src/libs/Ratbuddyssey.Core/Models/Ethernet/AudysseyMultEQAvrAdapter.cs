@@ -12,9 +12,9 @@ namespace Ratbuddyssey.MultEQAvrAdapter;
 // adapter redundant -> directly access avr class and sniffer class!
 public class AudysseyMultEQAvrAdapter : ReactiveObject
 {
-    private AudysseyMultEQAvr _audysseyMultEQAvr;
+    private readonly AudysseyMultEQAvr _audysseyMultEQAvr;
 
-    private ObservableCollection<DetectedChannel> _detectedChannels = new ObservableCollection<DetectedChannel>();
+    private ObservableCollection<DetectedChannel> _detectedChannels = new();
 
     #region Properties
     // same
@@ -151,7 +151,9 @@ public class AudysseyMultEQAvrAdapter : ReactiveObject
                             foreach (var channel in _detectedChannels)
                             {
                                 if (channel.CommandId == ch.Key.ToUpper())
+                                {
                                     break;
+                                }
                             }
                             _detectedChannels.Add(new DetectedChannel());
                             _detectedChannels.Last().CommandId = ch.Key;
@@ -179,12 +181,12 @@ public class AudysseyMultEQAvrAdapter : ReactiveObject
     {
         _audysseyMultEQAvr = audysseyMultEQAvr;
         // bind parent to nofify property changed
-        audysseyMultEQAvr.PropertyChanged += _PropertyChanged;
+        audysseyMultEQAvr.PropertyChanged += OnPropertyChanged;
     }
 
     #region INotifyPropertyChanged members
 
-    public void _PropertyChanged(object sender, PropertyChangedEventArgs e)
+    public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         // simple adapter forward notification of class 
         Console.WriteLine("Changed: e." + e.PropertyName);

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Ratbuddyssey.MultEQAvr;
 
-interface IDis
+internal interface IDis
 {
     #region Properties
     string EqType { get; set; }
@@ -14,7 +14,7 @@ interface IDis
     #endregion
 }
 
-interface IFil
+internal interface IFil
 {
     #region Properties
     ObservableCollection<sbyte> FilData { get; set; }
@@ -26,8 +26,8 @@ public class AvrDisFil : IDis, IFil, INotifyPropertyChanged
 {
     private string _EqType = null;
     private string _ChData = null;
-    private ObservableCollection<sbyte> _FilData = new ObservableCollection<sbyte>();
-    private ObservableCollection<sbyte> _DispData = new ObservableCollection<sbyte>();
+    private ObservableCollection<sbyte> _FilData = new();
+    private ObservableCollection<sbyte> _DispData = new();
 
     #region Properties
     public string EqType
@@ -97,8 +97,8 @@ public class AvrDisFil : IDis, IFil, INotifyPropertyChanged
 
 public partial class AudysseyMultEQAvr : INotifyPropertyChanged
 {
-    private ObservableCollection<AvrDisFil> _AvrDisFil = new ObservableCollection<AvrDisFil>();
-    private ObservableCollection<Int32[]> _AvrCoefData = new ObservableCollection<Int32[]>();
+    private ObservableCollection<AvrDisFil> _AvrDisFil = new();
+    private ObservableCollection<int[]> _AvrCoefData = new();
 
     #region Properties
     public ObservableCollection<AvrDisFil> DisFil
@@ -135,7 +135,7 @@ public partial class AudysseyMultEQAvr : INotifyPropertyChanged
         {
         }
     }
-    public ObservableCollection<Int32[]> CoefData
+    public ObservableCollection<int[]> CoefData
     {
         get
         {
@@ -148,7 +148,7 @@ public partial class AudysseyMultEQAvr : INotifyPropertyChanged
         }
     }
     [JsonIgnore]
-    public Int32[] SelectedCoefData
+    public int[] SelectedCoefData
     {
         get
         {

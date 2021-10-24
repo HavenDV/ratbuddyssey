@@ -94,7 +94,7 @@ public partial class AudysseyMultEQAvr : IStatus, INotifyPropertyChanged
         {
             if ((_SelectedChannel != null) && (_ChSetup != null))
             {
-                string selectedItem = _SelectedItem.Keys.ElementAt(0);
+                var selectedItem = _SelectedItem.Keys.ElementAt(0);
                 foreach (var _channel in _ChSetup)
                 {
                     if (_channel.ContainsKey(selectedItem))
@@ -109,7 +109,7 @@ public partial class AudysseyMultEQAvr : IStatus, INotifyPropertyChanged
         {
             if ((_SelectedChannel != null) && (_Distance != null))
             {
-                string selectedItem = _SelectedItem.Keys.ElementAt(0);
+                var selectedItem = _SelectedItem.Keys.ElementAt(0);
                 foreach (var _channel in _ChSetup)
                 {
                     if (_channel.ContainsKey(selectedItem))

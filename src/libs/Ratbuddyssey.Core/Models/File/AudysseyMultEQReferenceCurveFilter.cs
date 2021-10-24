@@ -107,7 +107,10 @@ public class AudysseyMultEQReferenceCurveFilter
                 var pixelColor = iBitmap.GetPixel(x, y);
                 if ((pixelColor.R > 200) && (pixelColor.G < 25) && (pixelColor.B < 25))
                 {
-                    if (first == 0) first = x;
+                    if (first == 0)
+                    {
+                        first = x;
+                    }
                     //else last = x;
                     oBitmap.SetPixel(x, y, Color.FromArgb(255, 0, 0));
                     list.Add(y);
@@ -117,8 +120,15 @@ public class AudysseyMultEQReferenceCurveFilter
             {
                 var a = iBitmap.Height - list.Average();
                 points.Add(new KeyValuePair<int, double>(x, a));
-                if (a < min) min = a;
-                if (a > max) max = a;
+                if (a < min)
+                {
+                    min = a;
+                }
+
+                if (a > max)
+                {
+                    max = a;
+                }
             }
         }
 

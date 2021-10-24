@@ -8,9 +8,13 @@ namespace Ratbuddyssey.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if ((sbyte)value > 0)
+            {
                 return (sbyte)0;
+            }
             else
+            {
                 return -(sbyte)value;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

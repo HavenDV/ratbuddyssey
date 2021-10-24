@@ -402,7 +402,10 @@ public class GraphViewModel : ActivatableViewModel
                         foreach (var cValue in cValues)
                         {
                             points.Add(new DataPoint(xs[x++], limits.YShift + 20 * Math.Log10(cValue.Magnitude)));
-                            if (x == count / 2) break;
+                            if (x == count / 2)
+                            {
+                                break;
+                            }
                         }
                     }
                     else

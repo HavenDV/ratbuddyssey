@@ -11,7 +11,7 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
 {
     private AudysseyMultEQAvr _audysseyMultEQAvr = null;
 
-    private TcpIP TcpClient = null;
+    private readonly TcpIP TcpClient = null;
     private AudysseyMultEQAvrTcpClientWithTimeout audysseyMultEQAvrTcpClientWithTimeout = null;
 
     #region Properties
@@ -66,11 +66,11 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "GET_AVRINF";
+            var CheckSumChecked = false;
+            var CmdString = "GET_AVRINF";
             Console.Write(CmdString);
             // build JSON and replace values with "?"
-            string AvrString = MakeQuery(JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
+            var AvrString = MakeQuery(JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IInfo))
             }));
@@ -102,11 +102,11 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "GET_AVRSTS";
+            var CheckSumChecked = false;
+            var CmdString = "GET_AVRSTS";
             Console.Write(CmdString);
             // build JSON and replace values with "?"
-            string AvrString = MakeQuery(JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
+            var AvrString = MakeQuery(JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IStatus))
             }));
@@ -138,8 +138,8 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "ENTER_AUDY";
+            var CheckSumChecked = false;
+            var CmdString = "ENTER_AUDY";
             Console.WriteLine(CmdString);
             // transmit request
             audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(CmdString, "");
@@ -160,8 +160,8 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "EXIT_AUDMD";
+            var CheckSumChecked = false;
+            var CmdString = "EXIT_AUDMD";
             Console.WriteLine(CmdString);
             // transmit request
             audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(CmdString, "");
@@ -170,15 +170,22 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
             audysseyMultEQAvrTcpClientWithTimeout.ReceiveTcpAvrStream(ref CmdString, out AvrString, out CheckSumChecked);
             Console.Write(CmdString);
             Console.WriteLine(AvrString);
-            if (!(CmdString.Equals("EXIT_AUDMD") && AvrString.Equals(ACK) && CheckSumChecked)) return false;
+            if (!(CmdString.Equals("EXIT_AUDMD") && AvrString.Equals(ACK) && CheckSumChecked))
+            {
+                return false;
+            }
             // transmit request
-            byte[] Data = new byte[] { 0x1b };
+            var Data = new byte[] { 0x1b };
             audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(Data);
             // receive rseponse
             audysseyMultEQAvrTcpClientWithTimeout.ReceiveTcpAvrStream(ref CmdString, out AvrString, out CheckSumChecked);
             Console.Write(CmdString);
             Console.WriteLine(AvrString);
-            if (!(CmdString.Equals("EXIT_AUDMD") && AvrString.Equals(NACK) && CheckSumChecked)) return false;
+            if (!(CmdString.Equals("EXIT_AUDMD") && AvrString.Equals(NACK) && CheckSumChecked))
+            {
+                return false;
+            }
+
             Data[0] = 0x04;
             audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(Data);
             return true;
@@ -193,8 +200,8 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "SET_SETDAT";
+            var CheckSumChecked = false;
+            var CmdString = "SET_SETDAT";
             Console.WriteLine(CmdString);
             // transmit request
             audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(CmdString, AUDYFINFLG);
@@ -215,13 +222,13 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "SET_SETDAT";
+            var CheckSumChecked = false;
+            var CmdString = "SET_SETDAT";
             Console.Write(CmdString);
             // clear finflag
             //_audysseyMultEQAvr.AudyFinFlg = "NotFin";  //TODO what does this flag do?
             // build JSON for class Dat on interface Iamp
-            string AvrString = JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
+            var AvrString = JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IAmp))
             });
@@ -244,11 +251,11 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "SET_SETDAT";
+            var CheckSumChecked = false;
+            var CmdString = "SET_SETDAT";
             Console.Write(CmdString);
             // build JSON for class Dat on interface IAudy
-            string AvrString = JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
+            var AvrString = JsonConvert.SerializeObject(_audysseyMultEQAvr, new JsonSerializerSettings
             {
                 ContractResolver = new InterfaceContractResolver(typeof(IAudy))
             });
@@ -274,11 +281,11 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
             // there are multiple speaker?
             foreach (var AvrDisFil in _audysseyMultEQAvr.DisFil)
             {
-                bool CheckSumChecked = false;
-                string CmdString = "SET_DISFIL";
+                var CheckSumChecked = false;
+                var CmdString = "SET_DISFIL";
                 Console.Write(CmdString);
                 // build JSON
-                string AvrString = JsonConvert.SerializeObject(AvrDisFil, new JsonSerializerSettings { });
+                var AvrString = JsonConvert.SerializeObject(AvrDisFil, new JsonSerializerSettings { });
                 Console.WriteLine(AvrString);
                 // transmit request
                 audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(CmdString, AvrString);
@@ -287,7 +294,10 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
                 Console.Write(CmdString);
                 Console.WriteLine(AvrString);
                 // check every transmission
-                if (!(CmdString.Equals("SET_DISFIL") && AvrString.Equals(ACK) && CheckSumChecked)) return false;
+                if (!(CmdString.Equals("SET_DISFIL") && AvrString.Equals(ACK) && CheckSumChecked))
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -301,8 +311,8 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
     {
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
-            bool CheckSumChecked = false;
-            string CmdString = "INIT_COEFS";
+            var CheckSumChecked = false;
+            var CmdString = "INIT_COEFS";
             Console.WriteLine(CmdString);
             // transmit request
             audysseyMultEQAvrTcpClientWithTimeout.TransmitTcpAvrStream(CmdString, "");
@@ -328,21 +338,24 @@ public class AudysseyMultEQAvrTcp : INotifyPropertyChanged
         if (audysseyMultEQAvrTcpClientWithTimeout != null)
         {
             // data for each speaker... this is a very dumb binary data pump... payload must be SECRET!
-            foreach (Int32[] Coef in _audysseyMultEQAvr.CoefData)
+            foreach (var Coef in _audysseyMultEQAvr.CoefData)
             {
                 // transmit packets in chunks of 512 bytes
-                int total_byte_packets = (Coef.Length * 4) / 512;
+                var total_byte_packets = (Coef.Length * 4) / 512;
                 // the last packet may have less than 512 bytes
-                int last_packet_length = Coef.Length - (total_byte_packets * 128);
+                var last_packet_length = Coef.Length - (total_byte_packets * 128);
                 // count for all packets
-                if (last_packet_length > 0) total_byte_packets++;
-                // transmit all the packets
-                for (int current_packet = 0; current_packet < total_byte_packets; current_packet++)
+                if (last_packet_length > 0)
                 {
-                    Int32[] CopyData = current_packet < total_byte_packets - 1 ? new int[128] : new int[last_packet_length];
+                    total_byte_packets++;
+                }
+                // transmit all the packets
+                for (var current_packet = 0; current_packet < total_byte_packets; current_packet++)
+                {
+                    var CopyData = current_packet < total_byte_packets - 1 ? new int[128] : new int[last_packet_length];
                     Array.Copy(Coef, current_packet * 128, CopyData, 0, current_packet < total_byte_packets - 1 ? 128 : last_packet_length);
-                    bool CheckSumChecked = false;
-                    string CmdString = "SET_COEFDT";
+                    var CheckSumChecked = false;
+                    var CmdString = "SET_COEFDT";
                     Console.Write(CmdString);
                     Console.WriteLine(Coef.ToString());
                     // transmit request
