@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Ratbuddyssey</RootNamespace>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <NoWarn>$(NoWarn);NU1701;CS8669;UXAML0002;CS1030;Uno0001</NoWarn>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Label="WASM">
+    <WasmHead>true</WasmHead>
+    
+    <!-- Enable when will work -->
+    <!--<UnoXamlResourcesTrimming Condition=" '$(Configuration)' == 'Release' ">true</UnoXamlResourcesTrimming>-->
+    
+    <!--<WasmShellEnableLongPathSupport>false</WasmShellEnableLongPathSupport>-->
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+    <MonoRuntimeDebuggerEnabled Condition=" '$(Configuration)' == 'Debug' ">true</MonoRuntimeDebuggerEnabled>
+    <WasmShellILLinkerEnabled Condition=" '$(Configuration)' == 'Debug' ">false</WasmShellILLinkerEnabled>
+    <WasmShellEnableEmccProfiling Condition=" '$(Configuration)' == 'Release' ">true</WasmShellEnableEmccProfiling>
+    <!--<WasmShellMonoRuntimeExecutionMode Condition=" '$(Configuration)' == 'Release' ">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <MonoRuntimeMixedModeExcludedAssembly Include="ReactiveUI" />
+    <MonoRuntimeMixedModeExcludedAssembly Include="System.Reactive" />
+    <MonoRuntimeMixedModeExcludedAssembly Include="DynamicData" />
+    <LinkerDescriptor Include="LinkerConfig.xml" />
+    <EmbeddedResource Include="WasmCSS\Fonts.css" />
+    <EmbeddedResource Include="WasmScripts\AppManifest.js" />
+    <UpToDateCheckInput Include="..\..\shared\Ratbuddyssey.Uno.Shared\**\*.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
+    <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Uno.UI.WebAssembly" Version="3.11.0-dev.367" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.11.0-dev.367" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.0.0" />
+    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.3.0-dev.1" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Uno.Core\Ratbuddyssey.Apps.Uno.Core.Standard\Ratbuddyssey.Apps.Uno.Core.Standard.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\shared\Ratbuddyssey.Shared\Ratbuddyssey.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Uno.Shared\Ratbuddyssey.Uno.Shared.projitems" Label="Shared" />
+
+</Project>

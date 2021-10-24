@@ -1,0 +1,19 @@
+﻿<Application 
+    x:Class="Ratbuddyssey.App"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Ratbuddyssey.Converters"
+    >
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
+                <ResourceDictionary Source="Styles/_Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:TypeToIconConverter x:Key="TypeToIconConverter"/>
+            <converters:TypeToSymbolIconConverter x:Key="TypeToSymbolIconConverter"/>
+            <converters:TypeToNameConverter x:Key="TypeToNameConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,12 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ComboBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Fixes a UWP bug that caused the CheckBox minimum width to be 100 -->
+    <Style TargetType="CheckBox">
+        <Setter Property="MinWidth" Value="0"/>
+    </Style>
+</ResourceDictionary>
