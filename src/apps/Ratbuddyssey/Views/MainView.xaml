@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:reactiveUi="http://reactiveui.net"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Core"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
@@ -155,11 +156,11 @@
                     x:Name="TabsListView" 
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                     ItemsSource="{Binding Tabs}"
-                    SelectedItem="{Binding SelectedTab}"
+                    SelectedItem="{Binding SelectedTab, Mode=OneWay}"
                     >
                     <ListView.ItemTemplate>
                         <DataTemplate
-                            DataType="{x:Type viewModels:TabViewModel}"
+                            DataType="{x:Type system:Type}"
                             >
                             <StackPanel 
                                 Orientation="Horizontal"
@@ -169,14 +170,14 @@
                                     Height="25" 
                                     Width="25" 
                                     Margin="10"
-                                    Kind="{Binding Type, Converter={StaticResource TypeToIconConverter}}"
+                                    Kind="{Binding Converter={StaticResource TypeToIconConverter}}"
                                     Foreground="White"
                                     />
                                 <TextBlock 
                                     x:Name="TitleTextBlock" 
                                     VerticalAlignment="Center" 
                                     Margin="20, 10"
-                                    Text="{Binding Header}"
+                                    Text="{Binding Converter={StaticResource TypeToNameConverter}}"
                                     Foreground="White"
                                     />
                             </StackPanel>

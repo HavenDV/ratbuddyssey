@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BaseConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ColorToBrushConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToNameConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToIconConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GridExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HostBuilderExtensions.cs" />

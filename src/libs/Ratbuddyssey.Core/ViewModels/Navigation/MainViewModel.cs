@@ -8,14 +8,14 @@ public class MainViewModel : ActivatableViewModel, IScreen
 
     public RoutingState Router { get; } = new();
 
-    public IReadOnlyCollection<TabViewModel> Tabs { get; } = new TabViewModel[]
+    public IReadOnlyCollection<Type> Tabs { get; } = new Type[]
     {
-            new(typeof(FileViewModel), "App"),
-        //new(typeof(EthernetViewModel), "Ethernet"),
+        typeof(FileViewModel),
+        //typeof(EthernetViewModel),
     };
 
     [Reactive]
-    public TabViewModel? SelectedTab { get; set; }
+    public Type? SelectedTab { get; set; }
 
     #endregion
 
@@ -30,7 +30,6 @@ public class MainViewModel : ActivatableViewModel, IScreen
             _ = this
                 .WhenAnyValue(static viewModel => viewModel.SelectedTab)
                 .WhereNotNull()
-                .Select(static item => item.Type)
                 .Select(type => (IRoutableViewModel)Services.GetRequiredService(type))
                 .InvokeCommand(Router.Navigate)
                 .DisposeWith(disposables);
