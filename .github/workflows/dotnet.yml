@@ -10,9 +10,9 @@ jobs:
       additional-dotnet-version: 5.0.x
       use-msbuild: true
       run-tests: false
-      asset-path1: src/apps/Ratbuddyssey/bin/Release/Ratbuddyssey_net4.6.1.zip
-      asset-name1: Ratbuddyssey_net4.6.1.zip
+      asset-path1: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net4.6.1.zip
+      asset-name1: Ratbuddyssey.Apps.Wpf_net4.6.1.zip
       asset-content-type1: application/zip
-      asset-path2: src/apps/Ratbuddyssey/bin/Release/Ratbuddyssey_net6.0-windows.zip
-      asset-name2: Ratbuddyssey_net6.0-windows.zip
+      asset-path2: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
+      asset-name2: Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-content-type2: application/zip
