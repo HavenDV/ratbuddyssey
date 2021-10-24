@@ -17,8 +17,15 @@
     >
     <muxc:NavigationView
         x:Name="NavigationControl"
-        MenuItemsSource="{Binding Tabs}"
-        SelectedItem="{Binding SelectedTab}"
+        IsSettingsVisible="False"
+        IsPaneToggleButtonVisible="True" 
+        IsPaneOpen="True" 
+        IsPaneVisible="True"
+        PaneDisplayMode="LeftCompact"
+        IsBackButtonVisible="Collapsed"
+        d:PaneDisplayMode="Left"
+        d:MenuItemsSource="{Binding Tabs}"
+        d:SelectedItem="{Binding SelectedTab}"
         >
         <muxc:NavigationView.MenuItemTemplate>
             <DataTemplate x:DataType="system:Type">
