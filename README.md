@@ -1,4 +1,5 @@
-# ratbuddyssey
+# [<img src="https://raw.githubusercontent.com/HavenDV/ratbuddyssey/master/docs/icon.png" alt="ratbuddyssey" width="24"/>](https://raw.githubusercontent.com/HavenDV/ratbuddyssey/) ratbuddyssey
+
 Audyssey .ady file editor
 
 ![Example](docs/example.png)
