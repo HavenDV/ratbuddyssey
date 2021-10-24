@@ -7,6 +7,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
+      additional-dotnet-version: 5.0.x
       use-msbuild: true
       run-tests: false
       asset-path1: src/apps/Ratbuddyssey/bin/Release/Ratbuddyssey_net4.6.1.zip
