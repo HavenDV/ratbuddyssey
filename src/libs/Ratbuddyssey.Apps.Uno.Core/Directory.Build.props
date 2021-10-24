@@ -1,0 +1,35 @@
+<Project>
+
+  <Import Project="..\Directory.Build.props" />
+
+  <PropertyGroup>
+    <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="ViewBase">
+    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Shared\Views\**\*.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Remove="..\..\..\shared\Ratbuddyssey.Shared\Views\MainView.xaml.cs" />
+    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Shared\Views\MainView.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ViewBaseGenerator" Version="1.3.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI.Uno" Version="16.2.6" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI" Version="7.1.0-build.45.gd2e4192c8c" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.Core" Version="7.1.0-build.45.gd2e4192c8c" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid" Version="7.1.0-build.45.gd2e4192c8c" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.Layout" Version="7.1.0-build.45.gd2e4192c8c" />
+    <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed" Version="2.0.3-uno.95" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ratbuddyssey.Core\Ratbuddyssey.Core.csproj" />
+  </ItemGroup>
+	
+</Project>
