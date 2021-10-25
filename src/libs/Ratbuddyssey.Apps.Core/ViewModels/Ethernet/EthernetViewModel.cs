@@ -2,7 +2,6 @@
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using Ratbuddyssey.DTOs;
 using Ratbuddyssey.MultEQAvr;
 using Ratbuddyssey.MultEQAvrAdapter;
 using Ratbuddyssey.MultEQTcp;

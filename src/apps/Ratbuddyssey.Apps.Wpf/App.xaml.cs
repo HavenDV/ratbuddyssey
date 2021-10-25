@@ -17,6 +17,7 @@ namespace Ratbuddyssey
         #region Properties
 
         public IHost Host { get; }
+        private InteractionManager InteractionManager { get; } = new();
 
         #endregion
 
@@ -24,103 +25,12 @@ namespace Ratbuddyssey
 
         public App()
         {
-            Interactions.Warning.RegisterHandler(static context =>
-            {
-                var message = context.Input;
-
-                MessageBox.Show(
-                    message,
-                    "Warning:",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-
-                context.SetOutput(Unit.Default);
-            });
-            Interactions.Exception.RegisterHandler(static context =>
-            {
-                var exception = context.Input;
-
-                MessageBox.Show(
-                    $"{exception}",
-                    "Error:",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                context.SetOutput(Unit.Default);
-            });
-            Interactions.OpenFile.RegisterHandler(static context =>
-            {
-                var (fileName, extensions, filterName) = context.Input;
-
-                var wildcards = extensions
-                    .Select(static extension => $"*{extension}")
-                    .ToArray();
-                var filter = $@"{filterName} ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
-
-                var dialog = new OpenFileDialog
-                {
-                    FileName = fileName,
-                    CheckFileExists = true,
-                    CheckPathExists = true,
-                    Filter = filter,
-                };
-                if (dialog.ShowDialog() != true)
-                {
-                    context.SetOutput(null);
-                    return;
-                }
-
-                var path = dialog.FileName;
-                var model = path.ToFile();
-
-                context.SetOutput(model);
-            });
-            Interactions.SaveFile.RegisterHandler(static async context =>
-            {
-                var (fileName, extension, filterName, bytesFunc) = context.Input;
-
-                var wildcards = new [] { $"*{extension}" };
-                var filter = $@"{filterName} ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
-
-                var dialog = new SaveFileDialog
-                {
-                    FileName = fileName,
-                    DefaultExt = extension,
-                    AddExtension = true,
-                    Filter = filter,
-                };
-                if (dialog.ShowDialog() != true)
-                {
-                    context.SetOutput(null);
-                    return;
-                }
-
-                var bytes = await bytesFunc().ConfigureAwait(false);
-                var path = dialog.FileName;
-
-                File.WriteAllBytes(path, bytes);
-
-                context.SetOutput(path);
-            });
-            Interactions.Question.RegisterHandler(static context =>
-            {
-                var message = context.Input;
-
-                var result = MessageBox.Show(
-                    message,
-                    "Are you sure?",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question,
-                    MessageBoxResult.No);
-
-                context.SetOutput(result == MessageBoxResult.Yes);
-            });
-
+            InteractionManager.Register();
             DispatcherUnhandledException += static (_, e) =>
             {
                 e.Handled = true;
 
-                Interactions.Exception.Handle(e.Exception).Subscribe();
+                MessageInteractions.Exception.Handle(e.Exception).Subscribe();
             };
 
             Host = HostBuilder
