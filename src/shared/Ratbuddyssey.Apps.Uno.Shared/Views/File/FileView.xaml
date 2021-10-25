@@ -68,10 +68,10 @@
             Grid.Column="2"
             e:GridExtensions.Rows="A,A,*"
             >
-            <!--<views:StatusView
+            <views:StatusView
                 Grid.Row="0"
                 x:Name="StatusView"
-                />-->
+                />
             <mtuuc:GridSplitter 
                 Grid.Row="1" 
                 Height="5" 

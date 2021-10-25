@@ -1,5 +1,4 @@
-﻿#if WPF_APP
-using System.Reactive.Disposables;
+﻿using System.Reactive.Disposables;
 using ReactiveUI;
 
 #nullable enable
@@ -23,7 +22,7 @@ namespace Ratbuddyssey.Views
 
                 _ = this.OneWayBind(ViewModel,
                        static viewModel => viewModel.CurrentFile,
-                       static view => view.CurrentFileLabel.Content)
+                       static view => view.CurrentFileLabel.Text)
                    .DisposeWith(disposable);
                 _ = this.Bind(ViewModel,
                         static viewModel => viewModel.AudysseyApp.AmpAssignInfo,
@@ -103,4 +102,3 @@ namespace Ratbuddyssey.Views
         #endregion
     }
 }
-#endif
