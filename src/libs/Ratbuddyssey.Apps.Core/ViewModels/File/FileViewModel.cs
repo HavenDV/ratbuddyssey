@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Ratbuddyssey.DTOs;
 using Ratbuddyssey.Models.MultEQApp;
 
 // ReSharper disable UnassignedGetOnlyAutoProperty
@@ -48,7 +47,7 @@ public class FileViewModel : RoutableViewModel
     {
         OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var data = await Interactions.OpenFile.Handle(
+            var data = await FileInteractions.OpenFile.Handle(
                 new OpenFileArguments(
                     string.Empty,
                     new[] { ".ady" },
@@ -65,7 +64,7 @@ public class FileViewModel : RoutableViewModel
 #if DEBUG
             CurrentFile = Path.ChangeExtension(CurrentFile, ".json");
 #endif
-            _ = await Interactions.SaveFile.Handle(
+            _ = await FileInteractions.SaveFile.Handle(
                 new SaveFileArguments(
                     CurrentFile,
                     ".ady",
@@ -74,7 +73,7 @@ public class FileViewModel : RoutableViewModel
         });
         SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var fileName = await Interactions.SaveFile.Handle(
+            var fileName = await FileInteractions.SaveFile.Handle(
                 new SaveFileArguments(
                     CurrentFile,
                     ".ady",
@@ -89,8 +88,8 @@ public class FileViewModel : RoutableViewModel
         });
         ReloadFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var value = await Interactions.Question.Handle(
-                "This will reload the .ady file and discard all changes since last save");
+            var value = await MessageInteractions.Question.Handle(new(
+                "This will reload the .ady file and discard all changes since last save"));
             if (!value)
             {
                 return;

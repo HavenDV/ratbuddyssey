@@ -125,7 +125,7 @@ public class AudysseyMultEQTcpSniffer
         }
         catch (Exception exception)
         {
-            Interactions.Exception.Handle(new InvalidOperationException(
+            MessageInteractions.Exception.Handle(new InvalidOperationException(
                 $"{nameof(AudysseyMultEQTcpSniffer)}::constructor",
                 exception)).Subscribe();
         }
@@ -165,7 +165,7 @@ public class AudysseyMultEQTcpSniffer
         }
         catch (Exception exception)
         {
-            Interactions.Exception.Handle(new InvalidOperationException(
+            MessageInteractions.Exception.Handle(new InvalidOperationException(
                 $"{nameof(AudysseyMultEQTcpSniffer)}::{nameof(OnReceive)}",
                 exception)).Subscribe();
         }
@@ -295,7 +295,7 @@ public class AudysseyMultEQTcpSniffer
         }
         catch (Exception exception)
         {
-            Interactions.Exception.Handle(new InvalidOperationException(
+            MessageInteractions.Exception.Handle(new InvalidOperationException(
                 $"{nameof(AudysseyMultEQTcpSniffer)}::{nameof(ParseAvrData)}",
                 exception)).Subscribe();
         }

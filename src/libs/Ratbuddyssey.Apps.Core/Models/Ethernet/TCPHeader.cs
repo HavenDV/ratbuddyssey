@@ -72,7 +72,7 @@ public class TCPHeader
         }
         catch (Exception exception)
         {
-            Interactions.Exception.Handle(new InvalidOperationException(
+            MessageInteractions.Exception.Handle(new InvalidOperationException(
                 $"TCP HeaderReceived: {nReceived} HeaderLength: {byHeaderLength}",
                 exception)).Subscribe();
         }

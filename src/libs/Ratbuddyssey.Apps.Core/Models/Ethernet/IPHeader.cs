@@ -94,7 +94,7 @@ public class IPHeader
         }
         catch (Exception exception)
         {
-            Interactions.Exception.Handle(new InvalidOperationException(
+            MessageInteractions.Exception.Handle(new InvalidOperationException(
                 $"IPHeader Received: {nReceived} TotalLength: {usTotalLength} HeaderLength: {byHeaderLength}",
                 exception)).Subscribe();
         }

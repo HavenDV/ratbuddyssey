@@ -89,7 +89,7 @@ public class EthernetViewModel : RoutableViewModel
 
         OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var data = await Interactions.OpenFile.Handle(
+            var data = await FileInteractions.OpenFile.Handle(
                 new OpenFileArguments(
                     "AudysseySniffer.aud",
                     new[] { ".aud" },
@@ -103,7 +103,7 @@ public class EthernetViewModel : RoutableViewModel
         });
         SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            _ = await Interactions.SaveFile.Handle(
+            _ = await FileInteractions.SaveFile.Handle(
                 new SaveFileArguments(
                     "AudysseySniffer.aud",
                     ".aud",
@@ -237,7 +237,7 @@ public class EthernetViewModel : RoutableViewModel
                 {
                     if (string.IsNullOrEmpty(SelectedInterfaceIp))
                     {
-                        Interactions.Warning.Handle("Please enter receiver IP address.").Subscribe();
+                        MessageInteractions.Warning.Handle("Please enter receiver IP address.").Subscribe();
                     }
                     else
                     {
@@ -416,7 +416,7 @@ public class EthernetViewModel : RoutableViewModel
         {
             if (ex.NativeErrorCode == 1223)
             {
-                Interactions.Warning.Handle("Sniffer needs elevated rights for raw socket!").Subscribe();
+                MessageInteractions.Warning.Handle("Sniffer needs elevated rights for raw socket!").Subscribe();
             }
             else
             {

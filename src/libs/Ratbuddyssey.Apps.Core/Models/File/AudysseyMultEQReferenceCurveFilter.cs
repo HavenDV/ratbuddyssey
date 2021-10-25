@@ -42,7 +42,7 @@ public class AudysseyMultEQReferenceCurveFilter
             points = GeneratePointsFromBitmap(pngStream);
             if (!points.Any())
             {
-                Interactions.Warning.Handle($"GeneratePointsFromBitmap returns empty collection.").Subscribe();
+                MessageInteractions.Warning.Handle($"GeneratePointsFromBitmap returns empty collection.").Subscribe();
 
                 return Array.Empty<DataPoint>();
             }

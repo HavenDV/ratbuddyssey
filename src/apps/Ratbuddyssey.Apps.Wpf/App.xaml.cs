@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reactive;
 using System.Windows;
+using H.ReactiveUI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Win32;

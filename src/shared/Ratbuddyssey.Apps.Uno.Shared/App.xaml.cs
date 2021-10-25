@@ -13,6 +13,7 @@ using Windows.Storage.Pickers;
 using System.Collections.Generic;
 using System.IO;
 using Ratbuddyssey.Extensions;
+using H.ReactiveUI;
 
 #nullable enable
 
@@ -36,7 +37,7 @@ public sealed partial class App
         {
             args.Handled = true;
 
-            _ = Interactions.Exception
+            _ = MessageInteractions.Exception
                 .Handle(args.Exception)
                 .Subscribe();
         };

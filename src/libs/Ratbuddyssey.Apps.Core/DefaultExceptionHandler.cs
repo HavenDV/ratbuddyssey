@@ -11,7 +11,7 @@ public class DefaultExceptionHandler : IObserver<Exception>
             Debugger.Break();
         }
 
-        await Interactions.Exception.Handle(value);
+        await MessageInteractions.Exception.Handle(value);
     }
 
     public void OnNext(Exception value)
