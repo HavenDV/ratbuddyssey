@@ -95,17 +95,11 @@ public class FileViewModel : RoutableViewModel
         {
             _ = this
                 .WhenAnyValue(static x => x.AudysseyApp)
-                .ToPropertyEx(
-                    StatusViewModel,
-                    static x => x.AudysseyApp,
-                    new AudysseyMultEQApp())
+                .BindTo(StatusViewModel, static x => x.AudysseyApp)
                 .DisposeWith(disposables);
             _ = this
                 .WhenAnyValue(static x => x.CurrentFile)
-                .ToPropertyEx(
-                    StatusViewModel,
-                    static x => x.CurrentFile,
-                    string.Empty)
+                .BindTo(StatusViewModel, static x => x.CurrentFile)
                 .DisposeWith(disposables);
 
             _ = ChannelsViewModel

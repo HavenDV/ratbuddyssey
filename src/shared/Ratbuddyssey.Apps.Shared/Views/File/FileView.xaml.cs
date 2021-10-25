@@ -15,7 +15,6 @@ namespace Ratbuddyssey.Views
         {
             InitializeComponent();
 
-#if WPF_APP
             _ = this.WhenActivated(disposable =>
             {
                 if (ViewModel == null)
@@ -41,12 +40,13 @@ namespace Ratbuddyssey.Views
                     .DisposeWith(disposable);
 
                 _ = this.OneWayBind(ViewModel,
-                        static viewModel => viewModel.ChannelsViewModel,
-                        static view => view.ChannelsView.ViewModel)
-                    .DisposeWith(disposable);
-                _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.StatusViewModel,
                         static view => view.StatusView.ViewModel)
+                    .DisposeWith(disposable);
+#if WPF_APP
+                _ = this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.ChannelsViewModel,
+                        static view => view.ChannelsView.ViewModel)
                     .DisposeWith(disposable);
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.TargetCurvePointsViewModel,
@@ -64,8 +64,8 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.GraphViewModel,
                         static view => view.GraphView.ViewModel)
                     .DisposeWith(disposable);
-            });
 #endif
+            });
         }
 
         #endregion

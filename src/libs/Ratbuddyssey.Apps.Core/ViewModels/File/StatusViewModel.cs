@@ -10,11 +10,11 @@ public class StatusViewModel : ActivatableViewModel
 
     #region Public
 
-    [ObservableAsProperty]
-    public AudysseyMultEQApp AudysseyApp { get; } = new();
+    [Reactive]
+    public AudysseyMultEQApp AudysseyApp { get; set; } = new();
 
-    [ObservableAsProperty]
-    public string CurrentFile { get; } = string.Empty;
+    [Reactive]
+    public string CurrentFile { get; set; } = string.Empty;
 
     public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
     {

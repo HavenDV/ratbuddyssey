@@ -14,15 +14,15 @@
     mc:Ignorable="d"
     >
     <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
-        <!--<Menu Grid.Row="0" Grid.Column="0">
-            <MenuItem Header="_Commands">
-                <MenuItem Header="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
-                <MenuItem Header="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
-                <Separator/>
-                <MenuItem Header="_Save" x:Name="SaveFileMenuItem"/>
-                <MenuItem Header="Save _As" x:Name="SaveFileAsMenuItem"/>
-            </MenuItem>
-        </Menu>-->
+        <muxc:MenuBar Grid.Row="0" Grid.Column="0">
+            <muxc:MenuBarItem Title="_Commands">
+                <MenuFlyoutItem Text="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
+                <MenuFlyoutItem Text="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem Text="_Save" x:Name="SaveFileMenuItem"/>
+                <MenuFlyoutItem Text="Save _As" x:Name="SaveFileAsMenuItem"/>
+            </muxc:MenuBarItem>
+        </muxc:MenuBar>
 
         <Grid
             Grid.Row="1"

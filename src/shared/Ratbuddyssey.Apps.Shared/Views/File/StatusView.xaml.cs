@@ -44,6 +44,7 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.AudysseyApp.UpgradeInfo,
                         static view => view.UpgradeInfoTextBox.Text)
                     .DisposeWith(disposable);
+#if WPF_APP
                 _ = this.Bind(ViewModel,
                         static viewModel => viewModel.AudysseyApp.AdcLineup,
                         static view => view.AdcLineupTextBox.Text)
@@ -52,6 +53,7 @@ namespace Ratbuddyssey.Views
                         static viewModel => viewModel.AudysseyApp.SystemDelay,
                         static view => view.SystemDelayTextBox.Text)
                     .DisposeWith(disposable);
+#endif
                 _ = this.OneWayBind(ViewModel,
                         static viewModel => viewModel.AmpAssignTypeList,
                         static view => view.AmpAssignTypeListComboBox.ItemsSource)
