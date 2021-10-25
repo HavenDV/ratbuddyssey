@@ -8,7 +8,99 @@
     xmlns:views="using:Ratbuddyssey.Views"
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:e="using:Ratbuddyssey.Extensions"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     >
+    <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
+        <!--<Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="_Commands">
+                <MenuItem Header="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
+                <MenuItem Header="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
+                <Separator/>
+                <MenuItem Header="_Save" x:Name="SaveFileMenuItem"/>
+                <MenuItem Header="Save _As" x:Name="SaveFileAsMenuItem"/>
+            </MenuItem>
+        </Menu>-->
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            e:GridExtensions.Rows="*,A,A,A,A"
+            >
+            <!--<views:ChannelsView
+                Grid.Row="0"
+                x:Name="ChannelsView"
+                d:DataContext="{d:DesignInstance
+                    viewModels:DesignTimeChannelsViewModel, 
+                    IsDesignTimeCreatable=True}"
+                />-->
+            <mtuuc:GridSplitter 
+                Grid.Row="1" 
+                HorizontalAlignment="Stretch" 
+                Height="5" 
+                />
+            <!--<views:ChannelInformationView
+                Grid.Row="2"
+                x:Name="ChannelInformationView"
+                />-->
+            <mtuuc:GridSplitter
+                Grid.Row="3"
+                Height="5"
+                HorizontalAlignment="Stretch"
+                />
+            <!--<views:ChannelReportView
+                Grid.Row="4"
+                x:Name="ChannelReportView"
+                />-->
+        </Grid>
+        <mtuuc:GridSplitter 
+            Grid.Row="0" 
+            Grid.RowSpan="2" 
+            Grid.Column="1" 
+            Width="5" 
+            HorizontalAlignment="Stretch"
+            />
+        <Grid 
+            Grid.Row="0" 
+            Grid.RowSpan="2" 
+            Grid.Column="2"
+            e:GridExtensions.Rows="A,A,*"
+            >
+            <!--<views:StatusView
+                Grid.Row="0"
+                x:Name="StatusView"
+                />-->
+            <mtuuc:GridSplitter 
+                Grid.Row="1" 
+                Height="5" 
+                HorizontalAlignment="Stretch" 
+                />
+            <Grid
+                Grid.Row="2"
+                e:GridExtensions.Columns="A,A,*"
+                >
+                <!--<views:TargetCurvePointsView 
+                    Grid.Column="0"
+                    x:Name="TargetCurvePointsView"
+                    d:DataContext="{d:DesignInstance
+                        viewModels:DesignTimeTargetCurvePointsViewModel, 
+                        IsDesignTimeCreatable=True}"
+                    />-->
+                <mtuuc:GridSplitter
+                    Grid.Column="1"
+                    Width="5"
+                    HorizontalAlignment="Stretch"
+                    />
+                <!--<views:GraphView
+                    Grid.Column="2"
+                    x:Name="GraphView"
+                    d:DataContext="{d:DesignInstance
+                        viewModels:DesignTimeGraphViewModel, 
+                        IsDesignTimeCreatable=True}"
+                    />-->
+            </Grid>
+        </Grid>
+    </Grid>
 </views:FileViewBase>

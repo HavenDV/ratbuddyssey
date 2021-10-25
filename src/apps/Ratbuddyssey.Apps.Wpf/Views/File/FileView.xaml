@@ -10,7 +10,6 @@
     xmlns:views="clr-namespace:Ratbuddyssey.Views"
     xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance viewModels:FileViewModel}"
     Drop="HandleDroppedFile" 
     AllowDrop="true"
     >
