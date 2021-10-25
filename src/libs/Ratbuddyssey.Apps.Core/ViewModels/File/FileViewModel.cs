@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Ratbuddyssey.DTOs;
 using Ratbuddyssey.Models.MultEQApp;
 
 // ReSharper disable UnassignedGetOnlyAutoProperty
@@ -44,35 +46,48 @@ public class FileViewModel : RoutableViewModel
 
     public FileViewModel(IScreen hostScreen) : base(hostScreen, "App")
     {
-        OpenFile = ReactiveCommand.CreateFromTask(async _ =>
+        OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var fileName = await Interactions.OpenFile.Handle(".ady");
-            if (fileName == null)
+            var data = await Interactions.OpenFile.Handle(
+                new OpenFileArguments(
+                    string.Empty,
+                    new[] { ".ady" },
+                    "Audyssey files"));
+            if (data == null)
             {
                 return;
             }
 
-            Open(fileName);
+            Open(data.Value);
         });
-        SaveFile = ReactiveCommand.Create(() =>
+        SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
 #if DEBUG
             CurrentFile = Path.ChangeExtension(CurrentFile, ".json");
 #endif
-            SaveApp(CurrentFile);
+            _ = await Interactions.SaveFile.Handle(
+                new SaveFileArguments(
+                    CurrentFile,
+                    ".ady",
+                    "Audyssey files",
+                    () => Task.FromResult(Encoding.UTF8.GetBytes(SaveApp()))));
         });
-        SaveFileAs = ReactiveCommand.CreateFromTask(async _ =>
+        SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var fileName = await Interactions.SaveFile.Handle(".ady");
+            var fileName = await Interactions.SaveFile.Handle(
+                new SaveFileArguments(
+                    CurrentFile,
+                    ".ady",
+                    "Audyssey files",
+                    () => Task.FromResult(Encoding.UTF8.GetBytes(SaveApp()))));
             if (fileName == null)
             {
                 return;
             }
 
             CurrentFile = fileName;
-            SaveApp(CurrentFile);
         });
-        ReloadFile = ReactiveCommand.CreateFromTask(async _ =>
+        ReloadFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
             var value = await Interactions.Question.Handle(
                 "This will reload the .ady file and discard all changes since last save");
@@ -87,7 +102,7 @@ public class FileViewModel : RoutableViewModel
         {
             if (paths.Any())
             {
-                Open(paths.First());
+                //Open(paths.First());
             }
         });
 
@@ -170,25 +185,14 @@ public class FileViewModel : RoutableViewModel
 
     #region Methods
 
-    public void Open(string filePath)
+    public void Open(FileData data)
     {
-        if (!File.Exists(filePath))
-        {
-            return;
-        }
-
-        CurrentFile = filePath;
-        LoadApp(CurrentFile);
+        CurrentFile = data.FileNameWithExtension;
+        LoadApp(data.GetString());
     }
 
-    private void LoadApp(string fileName)
+    private void LoadApp(string json)
     {
-        if (!File.Exists(fileName))
-        {
-            return;
-        }
-
-        var json = File.ReadAllText(fileName);
         AudysseyApp = JsonConvert.DeserializeObject<AudysseyMultEQApp>(json, new JsonSerializerSettings
         {
             FloatParseHandling = FloatParseHandling.Decimal
@@ -198,16 +202,12 @@ public class FileViewModel : RoutableViewModel
             .ToArray();
     }
 
-    private void SaveApp(string fileName)
+    private string SaveApp()
     {
-        var json = JsonConvert.SerializeObject(AudysseyApp, new JsonSerializerSettings
+        return JsonConvert.SerializeObject(AudysseyApp, new JsonSerializerSettings
         {
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         });
-        if (!string.IsNullOrEmpty(fileName))
-        {
-            File.WriteAllText(fileName, json);
-        }
     }
 
     #endregion

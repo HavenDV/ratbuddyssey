@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using Ratbuddyssey.Initialization;
 using Ratbuddyssey.ViewModels;
-using Ratbuddyssey.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReactiveUI;
@@ -11,6 +9,10 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Popups;
 using System.Reactive;
+using Windows.Storage.Pickers;
+using System.Collections.Generic;
+using System.IO;
+using Ratbuddyssey.Extensions;
 
 #nullable enable
 
@@ -53,82 +55,71 @@ public sealed partial class App
         });
         _ = Interactions.Question.RegisterHandler(static async context =>
         {
-//            var question = context.Input;
+            var question = context.Input;
 
-//            var message = LocalizationConverter.Convert(question.Message);
-//            var title = LocalizationConverter.Convert(question.Title);
-//            var body = message;
-//            if (!string.IsNullOrWhiteSpace(question.AdditionalData))
-//            {
-//                body += Environment.NewLine + question.AdditionalData;
-//            }
+            Trace.WriteLine($@"Question: {question}");
 
-//            Trace.WriteLine($@"Question: {title}
-//{body}");
+            var dialog = new ContentDialog
+            {
+                Title = "Question",
+                Content = question,
+                PrimaryButtonText = "Yes",
+                CloseButtonText = "No",
+            };
+            var result = await dialog.ShowAsync();
 
-//            var dialog = new ContentDialog
-//            {
-//                Title = title,
-//                Content = body,
-//                PrimaryButtonText = "Yes",
-//                CloseButtonText = "No",
-//            };
-//            var result = await dialog.ShowAsync();
-
-//            context.SetOutput(result == ContentDialogResult.Primary);
+            context.SetOutput(result == ContentDialogResult.Primary);
         });
         _ = Interactions.OpenFile.RegisterHandler(static async context =>
         {
-            //var (extensions, filterName) = context.Input;
+            var (fileName, extensions, filterName) = context.Input;
 
-            //var picker = new FileOpenPicker();
-            //foreach (var extension in extensions)
-            //{
-            //    picker.FileTypeFilter.Add(extension);
-            //}
+            var picker = new FileOpenPicker();
+            foreach (var extension in extensions)
+            {
+                picker.FileTypeFilter.Add(extension);
+            }
 
-            //var file = await picker.PickSingleFileAsync();
-            //if (file == null)
-            //{
-            //    context.SetOutput(new(string.Empty, string.Empty, Array.Empty<byte>()));
-            //    return;
-            //}
+            var file = await picker.PickSingleFileAsync();
+            if (file == null)
+            {
+                context.SetOutput(new(string.Empty, string.Empty, Array.Empty<byte>()));
+                return;
+            }
 
-            //var model = await file.ToFileAsync();
+            var model = await file.ToFileAsync();
 
-            //context.SetOutput(model);
-            context.SetOutput(context.Input);
+            context.SetOutput(model);
         });
         _ = Interactions.SaveFile.RegisterHandler(async context =>
         {
-            //var (fileName, extension, bytes) = context.Input;
+            var (fileName, extension, filterName, bytesTask) = context.Input;
 
-            //var picker = new FileSavePicker
-            //{
-            //    SuggestedStartLocation = PickerLocationId.Downloads,
-            //    SuggestedFileName = fileName,
-            //    FileTypeChoices =
-            //    {
-            //            { extension, new List<string> { extension } },
-            //    },
-            //};
-            //var file = await picker.PickSaveFileAsync();
-            //if (file == null)
-            //{
-            //    context.SetOutput(null);
-            //    return;
-            //}
+            var picker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.Downloads,
+                SuggestedFileName = fileName,
+                FileTypeChoices =
+                {
+                    { extension, new List<string> { extension } },
+                },
+            };
+            var file = await picker.PickSaveFileAsync();
+            if (file == null)
+            {
+                context.SetOutput(null);
+                return;
+            }
 
-            //using (var stream = await file.OpenStreamForWriteAsync().ConfigureAwait(false))
-            //using (var writer = new BinaryWriter(stream))
-            //{
-            //    writer.Write(bytes);
-            //}
+            var bytes = await bytesTask().ConfigureAwait(false);
 
-            //StorageFiles[file.Path] = file;
+            using (var stream = await file.OpenStreamForWriteAsync().ConfigureAwait(false))
+            using (var writer = new BinaryWriter(stream))
+            {
+                writer.Write(bytes);
+            }
 
-            //context.SetOutput(file.Path);
-            context.SetOutput(context.Input);
+            context.SetOutput(file.Path);
         });
 
         //InteractionManager.Register();

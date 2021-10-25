@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.IO;
 using System.Reactive;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Win32;
+using Ratbuddyssey.Extensions;
 using Ratbuddyssey.Initialization;
 using Ratbuddyssey.ViewModels;
 using ReactiveUI;
@@ -49,54 +50,57 @@ namespace Ratbuddyssey
             });
             Interactions.OpenFile.RegisterHandler(static context =>
             {
-                var extension = context.Input;
+                var (fileName, extensions, filterName) = context.Input;
 
-                var dialog = new Microsoft.Win32.OpenFileDialog
+                var wildcards = extensions
+                    .Select(static extension => $"*{extension}")
+                    .ToArray();
+                var filter = $@"{filterName} ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
+
+                var dialog = new OpenFileDialog
                 {
-                    FileName = extension switch
-                    {
-                        ".aud" => "AudysseySniffer.aud",
-                        ".ady" => string.Empty,
-                        _ => string.Empty,
-                    },
-                    DefaultExt = extension,
-                    Filter = extension switch
-                    {
-                        ".aud" => "Audyssey sniffer (*.aud)|*.aud",
-                        ".ady" => "Audyssey files (*.ady)|*.ady",
-                        _ => string.Empty,
-                    },
+                    FileName = fileName,
+                    CheckFileExists = true,
+                    CheckPathExists = true,
+                    Filter = filter,
                 };
-                var fileName = dialog.ShowDialog() == true
-                    ? dialog.FileName
-                    : null;
+                if (dialog.ShowDialog() != true)
+                {
+                    context.SetOutput(null);
+                    return;
+                }
 
-                context.SetOutput(fileName);
+                var path = dialog.FileName;
+                var model = path.ToFile();
+
+                context.SetOutput(model);
             });
-            Interactions.SaveFile.RegisterHandler(static context =>
+            Interactions.SaveFile.RegisterHandler(static async context =>
             {
-                var extension = context.Input;
+                var (fileName, extension, filterName, bytesFunc) = context.Input;
 
-                var dialog = new Microsoft.Win32.SaveFileDialog
+                var wildcards = new [] { $"*{extension}" };
+                var filter = $@"{filterName} ({string.Join(", ", wildcards)})|{string.Join(";", wildcards)}";
+
+                var dialog = new SaveFileDialog
                 {
-                    FileName = extension switch
-                    {
-                        ".aud" => "AudysseySniffer.aud",
-                        _ => string.Empty,
-                    },
+                    FileName = fileName,
                     DefaultExt = extension,
-                    Filter = extension switch
-                    {
-                        ".aud" => "Audyssey sniffer (.aud)|*.aud",
-                        ".ady" => "Audyssey calibration (.ady)|*.ady",
-                        _ => string.Empty,
-                    },
+                    AddExtension = true,
+                    Filter = filter,
                 };
-                var fileName = dialog.ShowDialog() == true
-                    ? dialog.FileName
-                    : null;
+                if (dialog.ShowDialog() != true)
+                {
+                    context.SetOutput(null);
+                    return;
+                }
 
-                context.SetOutput(fileName);
+                var bytes = await bytesFunc().ConfigureAwait(false);
+                var path = dialog.FileName;
+
+                File.WriteAllBytes(path, bytes);
+
+                context.SetOutput(path);
             });
             Interactions.Question.RegisterHandler(static context =>
             {
@@ -154,7 +158,7 @@ namespace Ratbuddyssey
                 {
                     var fileViewModel = Host.Services.GetRequiredService<FileViewModel>();
 
-                    fileViewModel.Open(path);
+                    fileViewModel.Open(path.ToFile());
                 }
             }
 

@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
+using Ratbuddyssey.DTOs;
 using Ratbuddyssey.MultEQAvr;
 using Ratbuddyssey.MultEQAvrAdapter;
 using Ratbuddyssey.MultEQTcp;
@@ -86,25 +88,28 @@ public class EthernetViewModel : RoutableViewModel
     {
         AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
 
-        OpenFile = ReactiveCommand.CreateFromTask(async _ =>
+        OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var fileName = await Interactions.OpenFile.Handle(".aud");
-            if (fileName == null)
+            var data = await Interactions.OpenFile.Handle(
+                new OpenFileArguments(
+                    "AudysseySniffer.aud",
+                    new[] { ".aud" },
+                    "Audyssey sniffer"));
+            if (data == null)
             {
                 return;
             }
 
-            LoadAvr(fileName);
+            LoadAvr(data.Value.GetString());
         });
-        SaveFile = ReactiveCommand.CreateFromTask(async _ =>
+        SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var fileName = await Interactions.SaveFile.Handle(".aud");
-            if (fileName == null)
-            {
-                return;
-            }
-
-            SaveAvr(fileName);
+            _ = await Interactions.SaveFile.Handle(
+                new SaveFileArguments(
+                    "AudysseySniffer.aud",
+                    ".aud",
+                    "Audyssey sniffer",
+                    () => Task.FromResult(Encoding.UTF8.GetBytes(SaveAvr()))));
         });
         GetReceiverInfo = ReactiveCommand.Create(() =>
         {
@@ -382,23 +387,19 @@ public class EthernetViewModel : RoutableViewModel
 
     #region Methods
 
-    public void LoadAvr(string fileName)
+    public void LoadAvr(string json)
     {
-        var json = File.ReadAllText(fileName);
-
         Avr = JsonConvert.DeserializeObject<AudysseyMultEQAvr>(json) ??
               throw new InvalidOperationException("Invalid json.");
         AvrAdapter = new AudysseyMultEQAvrAdapter(Avr);
     }
 
-    public void SaveAvr(string fileName)
+    public string SaveAvr()
     {
-        var json = JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
+        return JsonConvert.SerializeObject(Avr, new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         });
-
-        File.WriteAllText(fileName, json);
     }
 
     private static void RunAsAdmin()
