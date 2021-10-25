@@ -7,10 +7,6 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <DefineConstants>$(DefineConstants);WPF_APP</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="$(SolutionDir)docs\*.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />

@@ -2,7 +2,6 @@
 using System.Drawing;
 using MathNet.Numerics.Interpolation;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using OxyPlot;
 
 namespace Ratbuddyssey;
@@ -20,67 +19,40 @@ public class AudysseyMultEQReferenceCurveFilter
 
     public void Load()
     {
-        var folder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly()?.Location) ?? string.Empty;
-        var path1 = Path.ChangeExtension(Path.Combine(folder, "high_frequency_roll_off_1"), "json");
-        var path2 = Path.ChangeExtension(Path.Combine(folder, "high_frequency_roll_off_2"), "json");
+        using var stream1 = H.Resources.high_frequency_roll_off_1_png.AsStream();
+        using var stream2 = H.Resources.high_frequency_roll_off_2_png.AsStream();
 
-        HighFrequencyRollOff1Points = LoadPoints(path1);
-        HighFrequencyRollOff2Points = LoadPoints(path2);
+        HighFrequencyRollOff1Points = LoadPoints(
+            H.Resources.high_frequency_roll_off_1_json.AsString(),
+            stream1);
+        HighFrequencyRollOff2Points = LoadPoints(
+            H.Resources.high_frequency_roll_off_2_json.AsString(),
+            stream2);
     }
 
-    public IReadOnlyCollection<DataPoint> LoadPoints(string path)
+    public IReadOnlyCollection<DataPoint> LoadPoints(string json, Stream pngStream)
     {
-        var points = LoadJsonFile(path);
+        var points = JsonConvert.DeserializeObject<IReadOnlyCollection<DataPoint>>(json, new JsonSerializerSettings
+        {
+            FloatParseHandling = FloatParseHandling.Decimal
+        }) ?? Array.Empty<DataPoint>();
+
         if (!points.Any())
         {
-            Interactions.Warning.Handle($"Json file reader: {path} missing").Subscribe();
-
-            var pngPath = Path.ChangeExtension(path, "png");
-            points = GeneratePointsFromBitmap(pngPath);
+            points = GeneratePointsFromBitmap(pngStream);
             if (!points.Any())
             {
-                Interactions.Warning.Handle($"Bitmap file reader: {pngPath} missing").Subscribe();
+                Interactions.Warning.Handle($"GeneratePointsFromBitmap returns empty collection.").Subscribe();
 
                 return Array.Empty<DataPoint>();
             }
         }
 
-        SaveJsonFile(path, points);
-
         return points;
     }
 
-    public IReadOnlyCollection<DataPoint> LoadJsonFile(string path)
+    private IReadOnlyCollection<DataPoint> GeneratePointsFromBitmap(Stream stream)
     {
-        if (!File.Exists(path))
-        {
-            return Array.Empty<DataPoint>();
-        }
-
-        var json = File.ReadAllText(path);
-
-        return JsonConvert.DeserializeObject<IReadOnlyCollection<DataPoint>>(json, new JsonSerializerSettings
-        {
-            FloatParseHandling = FloatParseHandling.Decimal
-        }) ?? Array.Empty<DataPoint>();
-    }
-
-    public void SaveJsonFile(string filename, IReadOnlyCollection<DataPoint> points)
-    {
-        var json = JsonConvert.SerializeObject(points, new JsonSerializerSettings
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
-        });
-        File.WriteAllText(Path.ChangeExtension(filename, "json"), json);
-    }
-
-    public IReadOnlyCollection<DataPoint> GeneratePointsFromBitmap(string path)
-    {
-        if (!File.Exists(path))
-        {
-            return Array.Empty<DataPoint>();
-        }
-
         const double fmax = 19000.0;
         const double fmin = 20.0;
         const double dbrange = 16.0;
@@ -89,8 +61,8 @@ public class AudysseyMultEQReferenceCurveFilter
         const int sampleSize = 16384;
 
         // Create a Bitmap object from an image file.
-        var iBitmap = new Bitmap(path);
-        var oBitmap = new Bitmap(iBitmap.Width, iBitmap.Height);
+        using var iBitmap = new Bitmap(stream);
+        //using var oBitmap = new Bitmap(iBitmap.Width, iBitmap.Height);
 
         var first = 0;
         //var last = 0;
@@ -112,7 +84,7 @@ public class AudysseyMultEQReferenceCurveFilter
                         first = x;
                     }
                     //else last = x;
-                    oBitmap.SetPixel(x, y, Color.FromArgb(255, 0, 0));
+                    //oBitmap.SetPixel(x, y, Color.FromArgb(255, 0, 0));
                     list.Add(y);
                 }
             }
@@ -174,7 +146,7 @@ public class AudysseyMultEQReferenceCurveFilter
             }
         }
 
-        oBitmap.Save(Path.ChangeExtension(path, "jpg"), System.Drawing.Imaging.ImageFormat.Jpeg);
+        //oBitmap.Save(Path.ChangeExtension(path, "jpg"), System.Drawing.Imaging.ImageFormat.Jpeg);
 
         return frequencyPoints;
     }

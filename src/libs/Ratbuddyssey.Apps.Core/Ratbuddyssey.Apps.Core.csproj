@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="H.Resources.Generator" Version="1.2.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
@@ -40,6 +44,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0-rc.2.21480.5" />
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="13.1.30" />
     <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="13.1.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   
 </Project>
