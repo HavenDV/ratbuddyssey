@@ -32,7 +32,13 @@
                 FontSize="20"
                 HorizontalAlignment="Center"
                 DisplayMemberPath="."
-                />
+                >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </views:PreviewDropViewBase>

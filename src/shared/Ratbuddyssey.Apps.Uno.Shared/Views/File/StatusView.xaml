@@ -126,8 +126,13 @@
                 Grid.Column="5" 
                 x:Name="AmpAssignTypeListComboBox" 
                 VerticalAlignment="Center"
-                DisplayMemberPath="."
-                />
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock 
                 Grid.Row="3" 
                 Grid.Column="4" 
@@ -139,8 +144,13 @@
                 Grid.Column="5" 
                 x:Name="MultEqTypeListComboBox" 
                 VerticalAlignment="Center"
-                DisplayMemberPath="."
-                />
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock 
                 Grid.Row="4" 
                 Grid.Column="4" 
@@ -152,8 +162,13 @@
                 Grid.Column="5" 
                 x:Name="TargetCurveTypeComboBox" 
                 VerticalAlignment="Center" 
-                DisplayMemberPath="."
-                />
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <CheckBox
                 Grid.Row="0" 
                 Grid.Column="6"  
