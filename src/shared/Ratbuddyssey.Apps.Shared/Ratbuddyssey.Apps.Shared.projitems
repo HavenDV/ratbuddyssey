@@ -9,6 +9,7 @@
     <Import_RootNamespace>Ratbuddyssey.Apps.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BaseConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ColorToBrushConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToNameConverter.cs" />

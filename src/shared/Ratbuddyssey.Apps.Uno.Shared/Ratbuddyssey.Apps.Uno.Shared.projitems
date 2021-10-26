@@ -13,9 +13,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\IntegerTextTypeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\InvertBooleanConverter.cs" />
   </ItemGroup>
