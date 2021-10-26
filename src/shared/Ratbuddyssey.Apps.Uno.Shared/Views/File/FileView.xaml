@@ -13,94 +13,101 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     >
-    <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
-        <muxc:MenuBar Grid.Row="0" Grid.Column="0">
-            <muxc:MenuBarItem Title="_Commands">
-                <MenuFlyoutItem Text="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
-                <MenuFlyoutItem Text="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
-                <MenuFlyoutSeparator />
-                <MenuFlyoutItem Text="_Save" x:Name="SaveFileMenuItem"/>
-                <MenuFlyoutItem Text="Save _As" x:Name="SaveFileAsMenuItem"/>
-            </muxc:MenuBarItem>
-        </muxc:MenuBar>
+    <Grid>
+        <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
+            <muxc:MenuBar Grid.Row="0" Grid.Column="0">
+                <muxc:MenuBarItem Title="_Commands">
+                    <MenuFlyoutItem Text="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
+                    <MenuFlyoutItem Text="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
+                    <MenuFlyoutSeparator />
+                    <MenuFlyoutItem Text="_Save" x:Name="SaveFileMenuItem"/>
+                    <MenuFlyoutItem Text="Save _As" x:Name="SaveFileAsMenuItem"/>
+                </muxc:MenuBarItem>
+            </muxc:MenuBar>
 
-        <Grid
-            Grid.Row="1"
-            Grid.Column="0"
-            e:GridExtensions.Rows="*,A,A,A,A"
-            >
-            <!--<views:ChannelsView
-                Grid.Row="0"
-                x:Name="ChannelsView"
-                d:DataContext="{d:DesignInstance
-                    viewModels:DesignTimeChannelsViewModel, 
-                    IsDesignTimeCreatable=True}"
-                />-->
-            <mtuuc:GridSplitter 
-                Grid.Row="1" 
-                HorizontalAlignment="Stretch" 
-                Height="5" 
-                />
-            <!--<views:ChannelInformationView
-                Grid.Row="2"
-                x:Name="ChannelInformationView"
-                />-->
-            <mtuuc:GridSplitter
-                Grid.Row="3"
-                Height="5"
-                HorizontalAlignment="Stretch"
-                />
-            <!--<views:ChannelReportView
-                Grid.Row="4"
-                x:Name="ChannelReportView"
-                />-->
-        </Grid>
-        <mtuuc:GridSplitter 
-            Grid.Row="0" 
-            Grid.RowSpan="2" 
-            Grid.Column="1" 
-            Width="5" 
-            HorizontalAlignment="Stretch"
-            />
-        <Grid 
-            Grid.Row="0" 
-            Grid.RowSpan="2" 
-            Grid.Column="2"
-            e:GridExtensions.Rows="A,A,*"
-            >
-            <views:StatusView
-                Grid.Row="0"
-                x:Name="StatusView"
-                />
-            <mtuuc:GridSplitter 
-                Grid.Row="1" 
-                Height="5" 
-                HorizontalAlignment="Stretch" 
-                />
             <Grid
-                Grid.Row="2"
-                e:GridExtensions.Columns="A,A,*"
+                Grid.Row="1"
+                Grid.Column="0"
+                e:GridExtensions.Rows="*,A,A,A,A"
                 >
-                <!--<views:TargetCurvePointsView 
-                    Grid.Column="0"
-                    x:Name="TargetCurvePointsView"
+                <!--<views:ChannelsView
+                    Grid.Row="0"
+                    x:Name="ChannelsView"
                     d:DataContext="{d:DesignInstance
-                        viewModels:DesignTimeTargetCurvePointsViewModel, 
+                        viewModels:DesignTimeChannelsViewModel, 
                         IsDesignTimeCreatable=True}"
+                    />-->
+                <mtuuc:GridSplitter 
+                    Grid.Row="1" 
+                    HorizontalAlignment="Stretch" 
+                    Height="5" 
+                    />
+                <!--<views:ChannelInformationView
+                    Grid.Row="2"
+                    x:Name="ChannelInformationView"
                     />-->
                 <mtuuc:GridSplitter
-                    Grid.Column="1"
-                    Width="5"
+                    Grid.Row="3"
+                    Height="5"
                     HorizontalAlignment="Stretch"
                     />
-                <!--<views:GraphView
-                    Grid.Column="2"
-                    x:Name="GraphView"
-                    d:DataContext="{d:DesignInstance
-                        viewModels:DesignTimeGraphViewModel, 
-                        IsDesignTimeCreatable=True}"
+                <!--<views:ChannelReportView
+                    Grid.Row="4"
+                    x:Name="ChannelReportView"
                     />-->
             </Grid>
+            <mtuuc:GridSplitter 
+                Grid.Row="0" 
+                Grid.RowSpan="2" 
+                Grid.Column="1" 
+                Width="5" 
+                HorizontalAlignment="Stretch"
+                />
+            <Grid 
+                Grid.Row="0" 
+                Grid.RowSpan="2" 
+                Grid.Column="2"
+                e:GridExtensions.Rows="A,A,*"
+                >
+                <views:StatusView
+                    Grid.Row="0"
+                    x:Name="StatusView"
+                    />
+                <mtuuc:GridSplitter 
+                    Grid.Row="1" 
+                    Height="5" 
+                    HorizontalAlignment="Stretch" 
+                    />
+                <Grid
+                    Grid.Row="2"
+                    e:GridExtensions.Columns="A,A,*"
+                    >
+                    <!--<views:TargetCurvePointsView 
+                        Grid.Column="0"
+                        x:Name="TargetCurvePointsView"
+                        d:DataContext="{d:DesignInstance
+                            viewModels:DesignTimeTargetCurvePointsViewModel, 
+                            IsDesignTimeCreatable=True}"
+                        />-->
+                    <mtuuc:GridSplitter
+                        Grid.Column="1"
+                        Width="5"
+                        HorizontalAlignment="Stretch"
+                        />
+                    <!--<views:GraphView
+                        Grid.Column="2"
+                        x:Name="GraphView"
+                        d:DataContext="{d:DesignInstance
+                            viewModels:DesignTimeGraphViewModel, 
+                            IsDesignTimeCreatable=True}"
+                        />-->
+                </Grid>
+            </Grid>
         </Grid>
+
+        <views:PreviewDropView
+            x:Name="PreviewDropView"
+            d:Visibility="Collapsed"
+            />
     </Grid>
 </views:FileViewBase>

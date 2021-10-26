@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Disposables;
 using System.Windows;
+using H.ReactiveUI;
 using ReactiveUI;
 
 #nullable enable
@@ -65,27 +66,30 @@ namespace Ratbuddyssey.Views
                         static view => view.GraphView.ViewModel)
                     .DisposeWith(disposable);
 #endif
+
+                // Drag and drop
+                _ = this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.PreviewDropViewModel,
+                        static view => view.PreviewDropView.ViewModel)
+                    .DisposeWith(disposable);
+                _ = this.OneWayBind(ViewModel,
+                        static viewModel => viewModel.PreviewDropViewModel.IsVisible,
+                        static view => view.PreviewDropView.Visibility)
+                    .DisposeWith(disposable);
+                _ = ViewModel
+                    .WhenAnyValue(static x => x.DragEnter)
+                    .Subscribe(command => DragAndDropExtensions.SetDragEnterCommand(this, command))
+                    .DisposeWith(disposable);
+                _ = ViewModel
+                    .WhenAnyValue(static x => x.DragLeave)
+                    .Subscribe(command => DragAndDropExtensions.SetDragLeaveCommand(this, command))
+                    .DisposeWith(disposable);
+                _ = ViewModel
+                    .WhenAnyValue(static x => x.DropFiles)
+                    .Subscribe(command => DragAndDropExtensions.SetDropFilesCommand(this, command))
+                    .DisposeWith(disposable);
             });
         }
-
-        #endregion
-
-        #region Event Handlers
-
-#if WPF_APP
-        public void HandleDroppedFile(object sender, DragEventArgs e)
-        {
-            if (!e.Data.GetDataPresent(DataFormats.FileDrop) ||
-                e.Data.GetData(DataFormats.FileDrop) is not string[] files)
-            {
-                return;
-            }
-
-            _ = ViewModel?.Drop
-                .Execute(files)
-                .Subscribe();
-        }
-#endif
 
         #endregion
     }

@@ -25,6 +25,7 @@ public class FileViewModel : RoutableViewModel
     public ChannelInformationViewModel ChannelInformationViewModel { get; } = new();
     public ChannelReportViewModel ChannelReportViewModel { get; } = new();
     public GraphViewModel GraphViewModel { get; } = new();
+    public PreviewDropViewModel PreviewDropViewModel { get; } = new();
 
     #endregion
 
@@ -35,7 +36,9 @@ public class FileViewModel : RoutableViewModel
     public ReactiveCommand<Unit, Unit> SaveFileAs { get; }
     public ReactiveCommand<Unit, Unit> ReloadFile { get; }
 
-    public ReactiveCommand<string[], Unit> Drop { get; }
+    public ReactiveCommand<IReadOnlyCollection<string>, Unit> DragEnter { get; }
+    public ReactiveCommand<Unit, Unit> DragLeave { get; }
+    public ReactiveCommand<IReadOnlyCollection<FileData>, Unit> DropFiles { get; }
 
     #endregion
 
@@ -97,11 +100,22 @@ public class FileViewModel : RoutableViewModel
 
             LoadApp(CurrentFile);
         });
-        Drop = ReactiveCommand.Create<string[]>(paths =>
+        DragEnter = ReactiveCommand.Create<IReadOnlyCollection<string>>(names =>
         {
-            if (paths.Any())
+            PreviewDropViewModel.Names = new[] { names.First() };
+            PreviewDropViewModel.IsVisible = true;
+        });
+        DragLeave = ReactiveCommand.Create(() =>
+        {
+            PreviewDropViewModel.IsVisible = false;
+        });
+        DropFiles = ReactiveCommand.Create<IReadOnlyCollection<FileData>>(files =>
+        {
+            PreviewDropViewModel.IsVisible = false;
+
+            if (files.Any())
             {
-                //Open(paths.First());
+                Open(files.First());
             }
         });
 
