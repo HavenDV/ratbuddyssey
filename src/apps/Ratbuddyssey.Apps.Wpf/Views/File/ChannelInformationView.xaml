@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:rx="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Apps.Core"
-    xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
+    xmlns:e="clr-namespace:H.XamlExtensions;assembly=H.XamlExtensions.Wpf"
     d:DesignWidth="500"
     d:DataContext="{d:DesignInstance viewModels:ChannelInformationViewModel}"
     mc:Ignorable="d"

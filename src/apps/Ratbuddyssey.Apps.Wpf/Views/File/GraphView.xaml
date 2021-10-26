@@ -8,7 +8,7 @@
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:rx="http://reactiveui.net"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Apps.Core"
-    xmlns:e="clr-namespace:Ratbuddyssey.Extensions"
+    xmlns:e="clr-namespace:H.XamlExtensions;assembly=H.XamlExtensions.Wpf"
     mc:Ignorable="d" 
     d:DesignWidth="1200"
     d:DesignHeight="800" 

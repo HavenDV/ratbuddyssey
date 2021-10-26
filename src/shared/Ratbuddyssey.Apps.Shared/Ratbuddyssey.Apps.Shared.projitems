@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ColorToBrushConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToNameConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeToIconConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GridExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HostBuilderExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Ethernet\EthernetView.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\File\ChannelInformationView.xaml.cs" />

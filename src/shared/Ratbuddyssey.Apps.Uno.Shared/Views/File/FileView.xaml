@@ -9,7 +9,7 @@
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:e="using:Ratbuddyssey.Extensions"
+    xmlns:e="using:H.XamlExtensions"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     AllowDrop="True"
