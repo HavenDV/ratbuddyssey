@@ -31,7 +31,6 @@
                 Foreground="White"
                 FontSize="20"
                 HorizontalAlignment="Center"
-                DisplayMemberPath="."
                 >
                 <ListView.ItemTemplate>
                     <DataTemplate>
