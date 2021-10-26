@@ -109,7 +109,7 @@ public class EthernetViewModel : RoutableViewModel
                 SuggestedFileName = "AudysseySniffer.aud",
                 Extension = ".aud",
                 FilterName = "Audyssey sniffer",
-                BytesFunc = () => Task.FromResult(Encoding.UTF8.GetBytes(SaveAvr())),
+                TextFunc = () => Task.FromResult(SaveAvr()),
             });
         });
         GetReceiverInfo = ReactiveCommand.Create(() =>

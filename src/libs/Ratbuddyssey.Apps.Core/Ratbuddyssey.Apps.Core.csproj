@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Core" Version="0.9.12" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Core" Version="0.9.14" />
     <PackageReference Include="H.Resources.Generator" Version="1.2.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
