@@ -109,11 +109,7 @@ public class FileViewModel : RoutableViewModel
         DropFiles = ReactiveCommand.Create<IReadOnlyCollection<FileData>>(files =>
         {
             PreviewDropViewModel.IsVisible = false;
-
-            if (files.Any())
-            {
-                Open(files.First());
-            }
+            Open(files.First());
         });
 
         this.WhenActivated(disposables =>

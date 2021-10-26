@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Core" Version="0.9.15" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Core" Version="0.9.18" />
     <PackageReference Include="H.Resources.Generator" Version="1.2.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Label="MVVM">
-    <PackageReference Include="ReactiveUI.Fody" Version="16.2.6" />
+	  <PackageReference Include="ReactiveUI.Fody" Version="16.2.6" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0-rc.2.21480.5" />
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="13.1.30" />
     <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="13.1.30" />
