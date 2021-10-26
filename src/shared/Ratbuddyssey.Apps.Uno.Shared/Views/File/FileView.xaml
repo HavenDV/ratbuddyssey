@@ -12,16 +12,17 @@
     xmlns:e="using:Ratbuddyssey.Extensions"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
+    AllowDrop="True"
     >
     <Grid>
         <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
             <muxc:MenuBar Grid.Row="0" Grid.Column="0">
-                <muxc:MenuBarItem Title="_Commands">
-                    <MenuFlyoutItem Text="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
-                    <MenuFlyoutItem Text="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
+                <muxc:MenuBarItem Title="Commands">
+                    <MenuFlyoutItem Text="Open Audyssey file" x:Name="OpenFileMenuItem"/>
+                    <MenuFlyoutItem Text="Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
                     <MenuFlyoutSeparator />
-                    <MenuFlyoutItem Text="_Save" x:Name="SaveFileMenuItem"/>
-                    <MenuFlyoutItem Text="Save _As" x:Name="SaveFileAsMenuItem"/>
+                    <MenuFlyoutItem Text="Save" x:Name="SaveFileMenuItem"/>
+                    <MenuFlyoutItem Text="Save As" x:Name="SaveFileAsMenuItem"/>
                 </muxc:MenuBarItem>
             </muxc:MenuBar>
 
