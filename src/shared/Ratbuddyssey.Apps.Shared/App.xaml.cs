@@ -30,24 +30,7 @@ public sealed partial class App
     public App()
     {
         InteractionManager.Register();
-
-#if WPF_APP
-        DispatcherUnhandledException += static (_, e) =>
-        {
-            e.Handled = true;
-
-            MessageInteractions.Exception.Handle(e.Exception).Subscribe();
-        };
-#else
-        UnhandledException += static (sender, args) =>
-        {
-            args.Handled = true;
-
-            _ = MessageInteractions.Exception
-                .Handle(args.Exception)
-                .Subscribe();
-        };
-#endif
+        InteractionManager.CatchUnhandledExceptions(this);
 
         Host = Initialization.HostBuilder
             .Create()
