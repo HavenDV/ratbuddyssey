@@ -89,26 +89,28 @@ public class EthernetViewModel : RoutableViewModel
 
         OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var data = await FileInteractions.OpenFile.Handle(
-                new OpenFileArguments(
-                    "AudysseySniffer.aud",
-                    new[] { ".aud" },
-                    "Audyssey sniffer"));
+            var data = await FileInteractions.OpenFile.Handle(new OpenFileArguments
+            {
+                SuggestedFileName = "AudysseySniffer.aud",
+                Extensions = new[] { ".aud" },
+                FilterName = "Audyssey sniffer",
+            });
             if (data == null)
             {
                 return;
             }
 
-            LoadAvr(data.Value.GetString());
+            LoadAvr(data.Text);
         });
         SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            _ = await FileInteractions.SaveFile.Handle(
-                new SaveFileArguments(
-                    "AudysseySniffer.aud",
-                    ".aud",
-                    "Audyssey sniffer",
-                    () => Task.FromResult(Encoding.UTF8.GetBytes(SaveAvr()))));
+            _ = await FileInteractions.SaveFile.Handle(new SaveFileArguments
+            {
+                SuggestedFileName = "AudysseySniffer.aud",
+                Extension = ".aud",
+                FilterName = "Audyssey sniffer",
+                BytesFunc = () => Task.FromResult(Encoding.UTF8.GetBytes(SaveAvr())),
+            });
         });
         GetReceiverInfo = ReactiveCommand.Create(() =>
         {

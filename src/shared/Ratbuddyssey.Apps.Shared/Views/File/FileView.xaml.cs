@@ -77,8 +77,8 @@ namespace Ratbuddyssey.Views
                         static view => view.PreviewDropView.Visibility)
                     .DisposeWith(disposable);
                 _ = ViewModel
-                    .WhenAnyValue(static x => x.DragEnter)
-                    .Subscribe(command => DragAndDropExtensions.SetDragEnterCommand(this, command))
+                    .WhenAnyValue(static x => x.DragFilesEnter)
+                    .Subscribe(command => DragAndDropExtensions.SetDragFilesEnterCommand(this, command))
                     .DisposeWith(disposable);
                 _ = ViewModel
                     .WhenAnyValue(static x => x.DragLeave)

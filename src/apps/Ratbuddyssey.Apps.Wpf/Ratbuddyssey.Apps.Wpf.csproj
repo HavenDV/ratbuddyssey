@@ -9,7 +9,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.9" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.12" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci62" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />

@@ -36,7 +36,7 @@ public class FileViewModel : RoutableViewModel
     public ReactiveCommand<Unit, Unit> SaveFileAs { get; }
     public ReactiveCommand<Unit, Unit> ReloadFile { get; }
 
-    public ReactiveCommand<IReadOnlyCollection<string>, Unit> DragEnter { get; }
+    public ReactiveCommand<IReadOnlyCollection<FileData>, Unit> DragFilesEnter { get; }
     public ReactiveCommand<Unit, Unit> DragLeave { get; }
     public ReactiveCommand<IReadOnlyCollection<FileData>, Unit> DropFiles { get; }
 
@@ -50,38 +50,40 @@ public class FileViewModel : RoutableViewModel
     {
         OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var data = await FileInteractions.OpenFile.Handle(
-                new OpenFileArguments(
-                    string.Empty,
-                    new[] { ".ady" },
-                    "Audyssey files"));
+            var data = await FileInteractions.OpenFile.Handle(new OpenFileArguments
+            {
+                Extensions = new[] { ".ady" },
+                FilterName = "Audyssey files",
+            });
             if (data == null)
             {
                 return;
             }
 
-            Open(data.Value);
+            Open(data);
         });
         SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
 #if DEBUG
             CurrentFile = Path.ChangeExtension(CurrentFile, ".json");
 #endif
-            _ = await FileInteractions.SaveFile.Handle(
-                new SaveFileArguments(
-                    CurrentFile,
-                    ".ady",
-                    "Audyssey files",
-                    () => Task.FromResult(Encoding.UTF8.GetBytes(SaveApp()))));
+            _ = await FileInteractions.SaveFile.Handle(new SaveFileArguments
+            {
+                SuggestedFileName = Path.GetFileName(CurrentFile),
+                Extension = ".ady",
+                FilterName = "Audyssey files",
+                BytesFunc = () => Task.FromResult(Encoding.UTF8.GetBytes(SaveApp())),
+            });
         });
         SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var fileName = await FileInteractions.SaveFile.Handle(
-                new SaveFileArguments(
-                    CurrentFile,
-                    ".ady",
-                    "Audyssey files",
-                    () => Task.FromResult(Encoding.UTF8.GetBytes(SaveApp()))));
+            var fileName = await FileInteractions.SaveFile.Handle(new SaveFileArguments
+            {
+                SuggestedFileName = Path.GetFileName(CurrentFile),
+                Extension = ".ady",
+                FilterName = "Audyssey files",
+                BytesFunc = () => Task.FromResult(Encoding.UTF8.GetBytes(SaveApp())),
+            });
             if (fileName == null)
             {
                 return;
@@ -100,9 +102,9 @@ public class FileViewModel : RoutableViewModel
 
             LoadApp(CurrentFile);
         });
-        DragEnter = ReactiveCommand.Create<IReadOnlyCollection<string>>(names =>
+        DragFilesEnter = ReactiveCommand.Create<IReadOnlyCollection<FileData>>(files =>
         {
-            PreviewDropViewModel.Names = new[] { names.First() };
+            PreviewDropViewModel.Names = new[] { files.First().FullPath };
             PreviewDropViewModel.IsVisible = true;
         });
         DragLeave = ReactiveCommand.Create(() =>
@@ -200,8 +202,8 @@ public class FileViewModel : RoutableViewModel
 
     public void Open(FileData data)
     {
-        CurrentFile = data.FileNameWithExtension;
-        LoadApp(data.GetString());
+        CurrentFile = data.FullPath;
+        LoadApp(data.Text);
     }
 
     private void LoadApp(string json)
