@@ -24,6 +24,7 @@ jobs:
       os: windows-2022
       project-path: /target:apps\Ratbuddyssey_Apps_Uno_Uwp
       use-msbuild: true
+      generate-build-number: false
 
   web-assembly:
     name: WebAssembly
@@ -32,3 +33,4 @@ jobs:
       project-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly
       additional-dotnet-version: 5.0.x
       deploy-web-assembly-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
+      generate-build-number: false
