@@ -13,7 +13,7 @@
 			-->
       <Version>6.2.13</Version>
     </PackageReference>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="0.9.18" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="0.9.19" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
       <Version>7.1.1</Version>
     </PackageReference>
