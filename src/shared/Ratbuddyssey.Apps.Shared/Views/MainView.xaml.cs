@@ -1,7 +1,4 @@
-﻿using System.Reactive.Disposables;
-using ReactiveUI;
-
-#nullable enable
+﻿#nullable enable
 
 namespace Ratbuddyssey.Views
 {

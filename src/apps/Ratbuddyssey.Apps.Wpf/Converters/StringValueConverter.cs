@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
-
-namespace Ratbuddyssey.Converters
+﻿namespace Ratbuddyssey.Converters
 {
     public class StringValueConverter : IValueConverter
     {

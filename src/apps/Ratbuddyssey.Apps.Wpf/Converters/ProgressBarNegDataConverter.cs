@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Data;
-
-namespace Ratbuddyssey.Converters
+﻿namespace Ratbuddyssey.Converters
 {
     public class ProgressBarNegDataConverter : IValueConverter
     {

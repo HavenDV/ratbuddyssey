@@ -1,11 +1,4 @@
-﻿using System;
-using Ratbuddyssey.ViewModels;
-#if WPF_APP
-using Icon = MaterialDesignThemes.Wpf.PackIconKind;
-#else
-using Windows.UI.Xaml.Controls;
-using Icon = Windows.UI.Xaml.Controls.Symbol;
-#endif
+﻿using Ratbuddyssey.ViewModels;
 
 #nullable enable
 

@@ -1,9 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-#nullable enable
-
-namespace Ratbuddyssey.Controls;
+﻿namespace Ratbuddyssey.Controls;
 
 /// <summary>
 /// This ListView disallows the SelectedItem to be saved,

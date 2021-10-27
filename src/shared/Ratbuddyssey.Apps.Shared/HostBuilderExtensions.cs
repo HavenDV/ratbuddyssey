@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Ratbuddyssey.Converters;
 using Ratbuddyssey.ViewModels;
 using Ratbuddyssey.Views;
-using ReactiveUI;
 
 #nullable enable
 

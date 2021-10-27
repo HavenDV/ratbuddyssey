@@ -1,15 +1,9 @@
-﻿using ReactiveUI;
-using H.ReactiveUI;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Initialization;
 using Ratbuddyssey.ViewModels;
-#if WPF_APP
-using System.Windows;
-#else
-using System;
+#if !WPF_APP
 using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Controls;
 #endif
 
 #nullable enable

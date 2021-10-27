@@ -1,0 +1,11 @@
+<Project>
+
+  <Import Project="..\Directory.Build.props" />
+
+  <ItemGroup Label="GlobalUsings">
+    <Using Include="ReactiveUI" />
+    <Using Include="H.ReactiveUI" />
+    <Using Include="System.Reactive.Disposables" />
+  </ItemGroup>
+
+</Project>

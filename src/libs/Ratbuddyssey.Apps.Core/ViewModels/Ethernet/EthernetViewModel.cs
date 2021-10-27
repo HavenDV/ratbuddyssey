@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Net;
-using System.Text;
 using Newtonsoft.Json;
 using Ratbuddyssey.MultEQAvr;
 using Ratbuddyssey.MultEQAvrAdapter;
