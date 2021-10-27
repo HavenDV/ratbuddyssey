@@ -14,12 +14,12 @@
       <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="0.9.19" />
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+    <!--<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
       <Version>7.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.Layout">
       <Version>7.1.1</Version>
-    </PackageReference>
+    </PackageReference>-->
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.8.0-prerelease.210927001</Version>
     </PackageReference>
@@ -30,9 +30,6 @@
     </PackageReference>
     <PackageReference Include="ReactiveUI.Uwp">
       <Version>16.2.6</Version>
-    </PackageReference>
-    <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>2.0.3-uno.97</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
       <Version>3.11.0-dev.487</Version>

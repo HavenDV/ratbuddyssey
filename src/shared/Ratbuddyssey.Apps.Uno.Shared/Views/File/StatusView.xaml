@@ -8,12 +8,12 @@
     xmlns:views="using:Ratbuddyssey.Views"
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:e="using:H.XamlExtensions"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     >
-    <mtuuc:HeaderedContentControl Header="Status">
+    <!--xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"-->
+    <!--<mtuuc:HeaderedContentControl Header="Status">-->
         <Grid e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A">
             <TextBlock 
                 Grid.Row="0" 
@@ -211,5 +211,5 @@
                 VerticalAlignment="Center"
                 />
         </Grid>
-    </mtuuc:HeaderedContentControl>
+    <!--</mtuuc:HeaderedContentControl>-->
 </views:StatusViewBase>
