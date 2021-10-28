@@ -10,8 +10,6 @@
     d:DataContext="{d:DesignInstance 
         viewModels:DesignTimePreviewDropViewModel,
         IsDesignTimeCreatable=True}"
-    Background="Black"
-    Foreground="White"
     Opacity="0.5"
     >
     <Grid

@@ -81,8 +81,11 @@ public sealed partial class App
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        // Uno.iOS requires full namespace.
-        var window = Windows.UI.Xaml.Window.Current;
+#if HAS_WINUI
+        var window = new Window();
+#else
+        var window = Window.Current;
+#endif
         if (window.Content is not Frame frame)
         {
             frame = new Frame();
@@ -90,10 +93,12 @@ public sealed partial class App
             window.Content = frame;
         }
 
+#if !HAS_WINUI
         if (args.PrelaunchActivated)
         {
             return;
         }
+#endif
 
         if (frame.Content is null)
         {
@@ -105,5 +110,5 @@ public sealed partial class App
 
 #endif
 
-    #endregion
-}
+#endregion
+    }
