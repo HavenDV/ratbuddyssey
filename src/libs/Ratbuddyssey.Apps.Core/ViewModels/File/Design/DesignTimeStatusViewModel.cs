@@ -1,20 +1,21 @@
 ﻿using Ratbuddyssey.Models.MultEQApp;
 
-// ReSharper disable UnassignedGetOnlyAutoProperty
-
 namespace Ratbuddyssey.ViewModels;
 
-public class StatusViewModel : ActivatableViewModel
+public class DesignTimeStatusViewModel
 {
     #region Properties
 
-    #region Public
+    public AudysseyMultEQApp AudysseyApp { get; set; } = new()
+    {
+        Title = nameof(AudysseyMultEQApp.Title),
+        AmpAssignInfo = nameof(AudysseyMultEQApp.AmpAssignInfo),
+        InterfaceVersion = nameof(AudysseyMultEQApp.InterfaceVersion),
+        TargetModelName = nameof(AudysseyMultEQApp.TargetModelName),
+        UpgradeInfo = nameof(AudysseyMultEQApp.UpgradeInfo),
+    };
 
-    [Reactive]
-    public AudysseyMultEQApp AudysseyApp { get; set; } = new();
-
-    [Reactive]
-    public string CurrentFile { get; set; } = string.Empty;
+    public string CurrentFile { get; set; } = nameof(CurrentFile);
 
     public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
     {
@@ -34,8 +35,6 @@ public class StatusViewModel : ActivatableViewModel
     {
         "MultEQ", "MultEQXT", "MultEQXT32",
     };
-
-    #endregion
 
     #endregion
 }
