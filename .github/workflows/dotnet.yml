@@ -26,6 +26,16 @@ jobs:
       use-msbuild: true
       generate-build-number: false
 
+  windows-app-sdk:
+    name: UWP
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      os: windows-2022
+      project-path: /target:apps\Ratbuddyssey_Apps_WindowsAppSDK_Package
+      use-msbuild: true
+      generate-build-number: false
+      windows-sdk-version: 19041
+
   web-assembly:
     name: WebAssembly
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
