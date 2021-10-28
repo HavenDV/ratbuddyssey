@@ -2,10 +2,26 @@
 
   <Import Project="..\Directory.Build.props" />
 
+  <PropertyGroup>
+    <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
+  </PropertyGroup>
+  
   <ItemGroup Label="GlobalUsings">
     <Using Include="ReactiveUI" />
     <Using Include="H.ReactiveUI" />
     <Using Include="System.Reactive.Disposables" />
+  </ItemGroup>
+
+  <ItemGroup Label="ViewConstructors">
+    <XamlFiles 
+      Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\StatusView.xaml"
+      />
+    <AdditionalFiles
+      Include="@(XamlFiles -> '%(Filename)')"
+      ViewBaseGenerator_GenerateConstructor="True"
+      ViewBaseGenerator_SetReactiveUIDataContext="True"
+      Visible="False"
+      />
   </ItemGroup>
 
 </Project>

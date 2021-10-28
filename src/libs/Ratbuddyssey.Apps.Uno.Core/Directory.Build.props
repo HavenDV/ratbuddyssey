@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="ViewBase">
-    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Apps.Shared\Views\**\*.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
-    <AdditionalFiles Remove="..\..\..\shared\Ratbuddyssey.Apps.Shared\Views\MainView.xaml.cs" />
-    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Apps.Shared\Views\MainView.xaml.cs" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\**\*.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Remove="..\..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" />
+    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
   </ItemGroup>
-	
+
 </Project>
