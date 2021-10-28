@@ -27,7 +27,7 @@ jobs:
       generate-build-number: false
 
   windows-app-sdk:
-    name: UWP
+    name: WindowsAppSDK
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
