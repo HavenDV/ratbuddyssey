@@ -6,20 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:rx="http://reactiveui.net"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Apps.Core"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignHeight="800" 
     d:DesignWidth="1200" 
-    Background="White"
     Title="Ratbuddyssey - Home"
-    d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeMainViewModel,
-        IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     >
-    <rx:RoutedViewHost
-        x:Name="RoutedViewHost" 
-        Transition="Slide"
-        />
+    <rx:RoutedViewHost Router="{Binding Router, Mode=OneWay}"/>
 </rx:ReactiveWindow>

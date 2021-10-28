@@ -9,11 +9,7 @@
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeMainViewModel,
-        IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     >
-    <rx:RoutedViewHost 
-        x:Name="RoutedViewHost" 
-        />
+    <rx:RoutedViewHost Router="{Binding Router, Mode=OneWay}"/>
 </views:MainViewBase>
