@@ -9,7 +9,6 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Apps.Core"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:controls="clr-namespace:Ratbuddyssey.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="800" 
     d:DesignWidth="1200" 
@@ -19,40 +18,8 @@
         viewModels:DesignTimeMainViewModel,
         IsDesignTimeCreatable=True}"
     >
-    <controls:NavigationView
-        x:Name="NavigationControl"
-        MenuItemsSource="{Binding Tabs}"
-        SelectedItem="{Binding SelectedTab}"
-        >
-        <controls:NavigationView.ItemTemplate>
-            <DataTemplate
-                DataType="{x:Type system:Type}"
-                >
-                <StackPanel 
-                    Orientation="Horizontal"
-                    >
-                    <materialDesign:PackIcon 
-                        x:Name="IconTextBlock" 
-                        Height="25" 
-                        Width="25" 
-                        Margin="10"
-                        Kind="{Binding Converter={StaticResource TypeToIconConverter}}"
-                        Foreground="White"
-                        />
-                    <TextBlock 
-                        x:Name="TitleTextBlock" 
-                        VerticalAlignment="Center" 
-                        Margin="20, 10"
-                        Text="{Binding Converter={StaticResource TypeToNameConverter}}"
-                        Foreground="White"
-                        />
-                </StackPanel>
-            </DataTemplate>
-        </controls:NavigationView.ItemTemplate>
-        
-        <rx:RoutedViewHost
-            x:Name="RoutedViewHost" 
-            Transition="Slide"
-            />
-    </controls:NavigationView>
+    <rx:RoutedViewHost
+        x:Name="RoutedViewHost" 
+        Transition="Slide"
+        />
 </rx:ReactiveWindow>

@@ -39,10 +39,8 @@ public static class HostBuilderExtensions
         _ = hostBuilder.ConfigureServices(static services =>
         {
             _ = services
-                .AddSingleton<IBindingTypeConverter, TypeToIconConverter>()
 #if WPF_APP
 #else
-                .AddSingleton<IBindingTypeConverter, TypeToSymbolIconConverter>()
                 .AddSingleton<IBindingTypeConverter, IntegerTextTypeConverter>()
 #endif
                 ;

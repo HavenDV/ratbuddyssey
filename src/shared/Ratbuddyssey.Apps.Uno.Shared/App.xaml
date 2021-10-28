@@ -10,10 +10,6 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
                 <ResourceDictionary Source="Styles/_Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <converters:TypeToIconConverter x:Key="TypeToIconConverter"/>
-            <converters:TypeToSymbolIconConverter x:Key="TypeToSymbolIconConverter"/>
-            <converters:TypeToNameConverter x:Key="TypeToNameConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,6 +1,8 @@
 ﻿#nullable enable
 
+#if !WPF_APP
 using Windows.UI;
+#endif
 
 namespace Ratbuddyssey.Converters;
 

@@ -12,14 +12,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Pink.xaml"/>
-
-                <ResourceDictionary Source="Styles/Controls/ProgressBar.xaml"/>
-                <ResourceDictionary Source="Styles/Controls/NavigationView.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
-            <converters:TypeToIconConverter x:Key="TypeToIconConverter"/>
-            <converters:TypeToNameConverter x:Key="TypeToNameConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
