@@ -13,8 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="ReactiveUI.Uno" Version="16.2.6" />
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uno" Version="0.9.20" />
-    <PackageReference Include="H.XamlExtensions.Uno" Version="0.9.8" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uno" Version="0.9.21" />
+    <PackageReference Include="H.XamlExtensions.Uno" Version="0.9.11" />
     <!--<PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid" Version="7.1.0-build.45.gd2e4192c8c" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.Layout" Version="7.1.0-build.45.gd2e4192c8c" />-->
   </ItemGroup>
