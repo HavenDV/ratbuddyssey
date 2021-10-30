@@ -24,12 +24,14 @@
                 Grid.Row="0" 
                 Grid.Column="0" 
                 Text="Current File:"
+                VerticalAlignment="Center"
                 />
             <TextBlock 
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="5"
                 Text="{Binding CurrentFile, Mode=OneWay}"
+                VerticalAlignment="Center"
                 />
             <TextBlock 
                 Grid.Row="1"

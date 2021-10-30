@@ -23,11 +23,13 @@
                 Grid.Row="0" 
                 Grid.Column="0" 
                 Content="Current File:"
+                VerticalAlignment="Center"
                 />
             <TextBlock 
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="5"
+                VerticalAlignment="Center"
                 Text="{Binding CurrentFile, Mode=OneWay}"
                 />
             <Label 
