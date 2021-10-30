@@ -4,6 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Grid.xaml"/>
         <ResourceDictionary Source="StackPanel.xaml"/>
+        <ResourceDictionary Source="GroupBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Fixes a UWP bug that caused the CheckBox minimum width to be 100 -->

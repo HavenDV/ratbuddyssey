@@ -4,10 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:rx="using:ReactiveUI"
     xmlns:views="using:Ratbuddyssey.Views"
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:Ratbuddyssey.Controls"
     xmlns:e="using:H.XamlExtensions"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance
@@ -16,6 +15,7 @@
     >
     <!--xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"-->
     <!--<mtuuc:HeaderedContentControl Header="Status">-->
+    <controls:GroupBox Header="Status">
         <Grid
             e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A"
             Style="{StaticResource PropertiesGrid}"
@@ -221,5 +221,6 @@
                 IsChecked="{Binding AudysseyApp.Lfc, Mode=TwoWay}"
                 />
         </Grid>
+    </controls:GroupBox>
     <!--</mtuuc:HeaderedContentControl>-->
 </views:StatusViewBase>
