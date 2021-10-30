@@ -5,12 +5,6 @@
   <PropertyGroup>
     <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
   </PropertyGroup>
-  
-  <ItemGroup Label="GlobalUsings">
-    <Using Include="ReactiveUI" />
-    <Using Include="H.ReactiveUI" />
-    <Using Include="System.Reactive.Disposables" />
-  </ItemGroup>
 
   <ItemGroup Label="ViewConstructors">
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" />

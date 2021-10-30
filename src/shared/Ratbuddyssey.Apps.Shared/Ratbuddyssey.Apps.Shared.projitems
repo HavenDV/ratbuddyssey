@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ColorToBrushConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalUsings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HostBuilderExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Ethernet\EthernetView.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\File\ChannelInformationView.xaml.cs" />

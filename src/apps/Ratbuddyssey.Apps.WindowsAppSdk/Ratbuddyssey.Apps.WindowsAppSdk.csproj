@@ -20,16 +20,6 @@
     <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
   </ItemGroup>
 
-  <ItemGroup Label="GlobalUsings">
-    <Using Include="Microsoft.UI" />
-    <Using Include="Microsoft.UI.Xaml" />
-    <Using Include="Microsoft.UI.Xaml.Data" />
-    <Using Include="Microsoft.UI.Xaml.Media" />
-    <Using Include="Microsoft.UI.Xaml.Controls" />
-    <Using Include="Microsoft.UI.Xaml.Controls.Symbol" Alias="Icon" />
-    <Using Include="Microsoft.UI.Xaml.LaunchActivatedEventArgs" Alias="LaunchActivatedEventArgs" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
   </ItemGroup>

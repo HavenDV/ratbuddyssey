@@ -138,7 +138,6 @@
     <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalUsings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

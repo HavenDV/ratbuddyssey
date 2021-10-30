@@ -8,15 +8,6 @@
     <DefineConstants>$(DefineConstants);HAS_WPF</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Label="GlobalUsings">
-    <Using Include="System.Globalization" />
-    <Using Include="System.Windows" />
-    <Using Include="System.Windows.Data" />
-    <Using Include="System.Windows.Media" />
-    <Using Include="System.Windows.Controls" />
-    <Using Include="MaterialDesignThemes.Wpf.PackIconKind" Alias="Icon" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.21" />
     <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.11" />
