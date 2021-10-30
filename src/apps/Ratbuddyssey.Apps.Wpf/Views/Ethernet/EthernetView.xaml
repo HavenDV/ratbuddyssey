@@ -11,6 +11,7 @@
     d:DesignWidth="1200"
     d:DesignHeight="800" 
     Background="White"
+    d:DataContext="{d:DesignInstance viewModels:EthernetViewModel}"
     >
     <Grid>
         <Grid.RowDefinitions>
@@ -24,27 +25,27 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Panel.ZIndex="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="Receiver IP Address:" VerticalAlignment="Top" ></Label>
-            <ComboBox x:Name="InterfaceIpsComboBox"  VerticalAlignment="Top" Width="120" IsEditable="True"/>
+            <ComboBox ItemsSource="{Binding InterfaceIps}" SelectedItem="{Binding SelectedInterfaceIp}" VerticalAlignment="Top" Width="120" IsEditable="True"/>
             <Label Content="Computer IP Address:" VerticalAlignment="Top" ></Label>
-            <ComboBox x:Name="IpsComboBox" VerticalAlignment="Top" Width="120" DisplayMemberPath="."/>
+            <ComboBox ItemsSource="{Binding Ips}" SelectedItem="{Binding SelectedIp}" VerticalAlignment="Top" Width="120" DisplayMemberPath="."/>
         </StackPanel>
         <Menu Grid.Row="0" Grid.Column="0">
             <MenuItem Header="Commands">
-                <MenuItem Header="_Open Project" Name="OpenFileMenuItem"/>
-                <MenuItem Header="_Save Project" Name="SaveFileMenuItem"/>
+                <MenuItem Header="_Open Project" Command="{Binding OpenFile}"/>
+                <MenuItem Header="_Save Project" Command="{Binding SaveFile}"/>
                 <Separator/>
-                <MenuItem Header="Connect _Receiver" Name="ConnectReceiverMenuItem" IsCheckable="True"/>
-                <MenuItem Header="Connect S_niffer" Name="ConnectSnifferMenuItem" IsCheckable="True"/>
+                <MenuItem Header="Connect _Receiver" IsChecked="{Binding ConnectReceiverIsChecked}" IsCheckable="True"/>
+                <MenuItem Header="Connect S_niffer" IsChecked="{Binding ConnectSnifferIsChecked}" IsCheckable="True"/>
                 <Separator/>
-                <MenuItem Header="Get Receiver _Info" Name="GetReceiverInfoMenuItem" />
-                <MenuItem Header="Get Receiver _Status" Name="GetReceiverStatusMenuItem" />
-                <MenuItem Header="Enter _Audyssey" Name="ConnectAudysseyMenuItem" IsCheckable="True"/>
-                <MenuItem Header="Set Amp" Name="SetAvrSetAmpMenuItem" />
-                <MenuItem Header="Set Audy" Name="SetAvrSetAudyMenuItem" />
-                <MenuItem Header="Set DisFil" Name="SetAvrSetDisFilMenuItem" />
-                <MenuItem Header="Init Coefs" Name="SetAvrInitCoefsMenuItem" />
-                <MenuItem Header="Set CoefDt" Name="SetAvrSetCoefDtMenuItem" />
-                <MenuItem Header="Set AudyFinFlg" Name="SetAudysseyFinishedFlagMenuItem" />
+                <MenuItem Header="Get Receiver _Info" Command="{Binding GetReceiverInfo}" />
+                <MenuItem Header="Get Receiver _Status" Command="{Binding GetReceiverStatus}" />
+                <MenuItem Header="Enter _Audyssey" IsChecked="{Binding ConnectAudysseyIsChecked}" IsCheckable="True"/>
+                <MenuItem Header="Set Amp"  Command="{Binding SetAvrSetAmp}" />
+                <MenuItem Header="Set Audy" Command="{Binding SetAvrSetAudy}" />
+                <MenuItem Header="Set DisFil" Command="{Binding SetAvrSetDisFil}" />
+                <MenuItem Header="Init Coefs" Command="{Binding SetAvrInitCoefs}" />
+                <MenuItem Header="Set CoefDt" Command="{Binding SetAvrSetCoefDt}" />
+                <MenuItem Header="Set AudyFinFlg" Command="{Binding SetAudysseyFinishedFlag}" />
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Grid.Column="0">
@@ -57,7 +58,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <GroupBox Grid.Row="0" Header="Channels">
-                    <ListView Name="ChannelSetupView" SelectionMode="Single">
+                    <ListView ItemsSource="{Binding ChannelSetupList}" SelectedItem="{Binding SelectedChannelSetupView}" SelectionMode="Single">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Channel" Width="auto" DisplayMemberBinding="{Binding Key}" />
