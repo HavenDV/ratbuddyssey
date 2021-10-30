@@ -5,7 +5,7 @@
     <TargetFrameworks>net4.6.1;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <DefineConstants>$(DefineConstants);WPF_APP</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_WPF</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Label="GlobalUsings">

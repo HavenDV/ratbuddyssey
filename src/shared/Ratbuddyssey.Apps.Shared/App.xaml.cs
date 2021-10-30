@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Initialization;
 using Ratbuddyssey.ViewModels;
-#if !WPF_APP
+#if !HAS_WPF
 using Windows.ApplicationModel.Activation;
 #endif
 
@@ -36,7 +36,7 @@ public sealed partial class App
 #endif
             .Build();
 
-#if !WPF_APP
+#if !HAS_WPF
         InitializeComponent();
 #endif
     }
@@ -57,7 +57,7 @@ public sealed partial class App
         return view;
     }
 
-#if WPF_APP
+#if HAS_WPF
 
     private void Application_Startup(object _, StartupEventArgs e)
     {

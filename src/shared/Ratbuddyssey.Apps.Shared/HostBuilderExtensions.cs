@@ -22,7 +22,7 @@ public static class HostBuilderExtensions
             _ = services
                 .AddSingleton<IViewFor<MainViewModel>, MainView>()
                 .AddSingleton<IViewFor<FileViewModel>, FileView>()
-#if WPF_APP
+#if HAS_WPF
                 .AddSingleton<IViewFor<EthernetViewModel>, EthernetView>()
 #else
 #endif
@@ -39,7 +39,7 @@ public static class HostBuilderExtensions
         _ = hostBuilder.ConfigureServices(static services =>
         {
             _ = services
-#if WPF_APP
+#if HAS_WPF
 #else
                 .AddSingleton<IBindingTypeConverter, IntegerTextTypeConverter>()
 #endif

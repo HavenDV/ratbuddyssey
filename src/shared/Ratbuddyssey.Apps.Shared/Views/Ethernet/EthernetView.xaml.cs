@@ -1,4 +1,4 @@
-﻿#if WPF_APP
+﻿#if HAS_WPF
 using System.Reactive.Disposables;
 using ReactiveUI;
 

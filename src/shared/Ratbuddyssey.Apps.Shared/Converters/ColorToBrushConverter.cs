@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-#if !WPF_APP
+#if !HAS_WPF
 using Windows.UI;
 #endif
 

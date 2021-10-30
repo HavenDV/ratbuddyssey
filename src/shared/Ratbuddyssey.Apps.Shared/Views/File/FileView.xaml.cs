@@ -42,7 +42,7 @@ public partial class FileView
                     static viewModel => viewModel.ChannelsViewModel,
                     static view => view.ChannelsView.ViewModel)
                 .DisposeWith(disposable);
-#if WPF_APP
+#if HAS_WPF
             _ = this.OneWayBind(ViewModel,
                     static viewModel => viewModel.TargetCurvePointsViewModel,
                     static view => view.TargetCurvePointsView.ViewModel)
