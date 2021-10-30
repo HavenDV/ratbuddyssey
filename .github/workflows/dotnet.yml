@@ -31,7 +31,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
-      project-path: /target:apps\Ratbuddyssey_Apps_WindowsAppSDK_Package
+      project-path: /target:apps\Ratbuddyssey_Apps_WindowsAppSdk
       use-msbuild: true
       generate-build-number: false
       windows-sdk-version: 19041
