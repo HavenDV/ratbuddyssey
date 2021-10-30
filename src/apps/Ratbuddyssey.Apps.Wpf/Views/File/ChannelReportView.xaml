@@ -27,7 +27,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.ChannelReport.EnSpeakerConnect}"
+                Text="{Binding Channel.Data.ChannelReport.EnSpeakerConnect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -39,7 +39,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.ChannelReport.CustomEnSpeakerConnect}"
+                Text="{Binding Channel.Data.ChannelReport.CustomEnSpeakerConnect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -51,13 +51,13 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.ChannelReport.Distance}"
+                Text="{Binding Channel.Data.ChannelReport.Distance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <CheckBox
                 Grid.Row="3"
                 Grid.Column="0"
-                IsChecked="{Binding Channel.Data.ChannelReport.IsReversePolarity}"
+                IsChecked="{Binding Channel.Data.ChannelReport.IsReversePolarity, Mode=TwoWay}"
                 Content="Reverse Polarity"
                 VerticalAlignment="Center"
                 />

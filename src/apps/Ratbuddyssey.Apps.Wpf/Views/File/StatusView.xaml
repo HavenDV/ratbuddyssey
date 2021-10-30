@@ -43,7 +43,7 @@
                 Grid.Column="1" 
                 Grid.ColumnSpan="5"
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.AmpAssignInfo, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.AmpAssignInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Grid.Row="2" 
@@ -55,7 +55,7 @@
                 Grid.Row="2" 
                 Grid.Column="1" 
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.Title, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Grid.Row="3" 
@@ -68,7 +68,7 @@
                 Grid.Column="1" 
                 Margin="0" 
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.TargetModelName, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.TargetModelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Content="Interface Version" 
@@ -81,7 +81,7 @@
                 Grid.Column="1" 
                 Margin="0" 
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.InterfaceVersion, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.InterfaceVersion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Grid.Row="2" 
@@ -94,7 +94,7 @@
                 Grid.Column="3" 
                 Margin="0" 
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.UpgradeInfo, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.UpgradeInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Grid.Row="3" 
@@ -107,7 +107,7 @@
                 Grid.Column="3" 
                 Margin="0" 
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.AdcLineup, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.AdcLineup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Grid.Row="4" 
@@ -119,7 +119,7 @@
                 Grid.Row="4" 
                 Grid.Column="3" 
                 VerticalAlignment="Center"
-                Text="{Binding AudysseyApp.SystemDelay, Mode=TwoWay}"
+                Text="{Binding AudysseyApp.SystemDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Label 
                 Grid.Row="2" 

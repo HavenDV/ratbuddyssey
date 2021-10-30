@@ -53,7 +53,7 @@
                             Width="100"
                             />
                         <CheckBox
-                            IsChecked="{Binding Sticky}"
+                            IsChecked="{Binding Sticky, Mode=TwoWay}"
                             Width="50"
                             />
                     </StackPanel>

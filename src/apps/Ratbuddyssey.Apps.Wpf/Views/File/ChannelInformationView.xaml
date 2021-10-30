@@ -27,7 +27,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.TrimAdjustment}"
+                Text="{Binding Channel.Data.TrimAdjustment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -39,7 +39,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.DelayAdjustment}"
+                Text="{Binding Channel.Data.DelayAdjustment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -51,7 +51,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.FrequencyRangeRolloff}"
+                Text="{Binding Channel.Data.FrequencyRangeRolloff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalContentAlignment="Center"
                 />
             <Label
@@ -63,7 +63,7 @@
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.EnChannelType}"
+                Text="{Binding Channel.Data.EnChannelType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -75,7 +75,7 @@
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding Channel.Data.CommandId}"
+                Text="{Binding Channel.Data.CommandId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -87,7 +87,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="3"
-                Text="{Binding Channel.Data.CustomLevel}"
+                Text="{Binding Channel.Data.CustomLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -99,7 +99,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="3"
-                Text="{Binding Channel.Data.CustomDistance}"
+                Text="{Binding Channel.Data.CustomDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Center"
                 />
             <Label
@@ -112,7 +112,7 @@
                 Grid.Row="2"
                 Grid.Column="3"
                 ItemsSource="{Binding CrossoverList}"
-                SelectedItem="{Binding Channel.Data.CustomCrossover}"
+                SelectedItem="{Binding Channel.Data.CustomCrossover, Mode=TwoWay}"
                 VerticalAlignment="Center"
                 DisplayMemberPath="."
                 />
@@ -126,21 +126,21 @@
                 Grid.Row="3"
                 Grid.Column="3"
                 ItemsSource="{Binding SpeakerTypeList}"
-                SelectedItem="{Binding Channel.Data.CustomSpeakerType}"
+                SelectedItem="{Binding Channel.Data.CustomSpeakerType, Mode=TwoWay}"
                 VerticalAlignment="Center"
                 DisplayMemberPath="."
                 />
             <CheckBox
                 Grid.Row="5"
                 Grid.Column="0"
-                IsChecked="{Binding Channel.Data.IsSkipMeasurement}"
+                IsChecked="{Binding Channel.Data.IsSkipMeasurement, Mode=TwoWay}"
                 Content="Skipped Measurement"
                 VerticalAlignment="Center"
                 />
             <CheckBox
                 Grid.Row="5"
                 Grid.Column="2"
-                IsChecked="{Binding Channel.Data.MidrangeCompensation}"
+                IsChecked="{Binding Channel.Data.MidrangeCompensation, Mode=TwoWay}"
                 Content="Midrange Compensation"
                 VerticalAlignment="Center"
                 />
