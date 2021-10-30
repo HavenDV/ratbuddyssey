@@ -25,12 +25,10 @@ public partial class FileView
                 static viewModel => viewModel.TargetCurvePointsViewModel,
                 static view => view.TargetCurvePointsView.ViewModel)
             .DisposeWith(disposables);
-#if HAS_WPF
         _ = this.OneWayBind(ViewModel,
                 static viewModel => viewModel.GraphViewModel,
                 static view => view.GraphView.ViewModel)
             .DisposeWith(disposables);
-#endif
         _ = this.OneWayBind(ViewModel,
                 static viewModel => viewModel.PreviewDropViewModel,
                 static view => view.PreviewDropView.ViewModel)

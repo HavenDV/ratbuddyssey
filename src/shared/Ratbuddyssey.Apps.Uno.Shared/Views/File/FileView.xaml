@@ -112,13 +112,13 @@
                         Width="5"
                         HorizontalAlignment="Stretch"
                         />-->
-                    <!--<views:GraphView
+                    <views:GraphView
                         Grid.Column="2"
                         x:Name="GraphView"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeGraphViewModel, 
                             IsDesignTimeCreatable=True}"
-                        />-->
+                        />
                 </Grid>
             </Grid>
         </Grid>

@@ -25,6 +25,9 @@
                 <!-- Load our resources -->
                 <ResourceDictionary Source="Styles/_Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Create converters -->
+            <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
