@@ -11,55 +11,55 @@
     mc:Ignorable="d"
     d:DesignWidth="500"
     d:DataContext="{d:DesignInstance viewModels:ChannelReportViewModel}"
+    IsEnabled="{Binding IsChannelSelected}"
     >
-    <GroupBox 
-        x:Name="ChannelReportGroupBox" 
-        Header="Channel Report"
-        >
-        <Grid e:GridExtensions.ColumnsAndRows="A,*;A,A,A,A">
-            <Label 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Content="EnSpeakerConnect" 
+    <GroupBox Header="Channel Report">
+        <Grid
+            e:GridExtensions.ColumnsAndRows="A,*;A,A,A,A"
+            Style="{StaticResource PropertiesGrid}"
+            >
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="EnSpeakerConnect"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="0" 
-                Grid.Column="1" 
-                x:Name="EnSpeakerConnectTextBox" 
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.ChannelReport.EnSpeakerConnect}"
                 VerticalAlignment="Center"
                 />
             <Label
-                Grid.Row="1" 
-                Grid.Column="0" 
-                Content="CustomEnSpeakerConnect" 
-                VerticalContentAlignment="Center"
-                />
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="1" 
-                x:Name="CustomEnSpeakerConnectTextBox" 
-                VerticalAlignment="Center"
-                />
-            <Label 
-                Grid.Row="2" 
+                Grid.Row="1"
                 Grid.Column="0"
-                Content="Distance" 
+                Content="CustomEnSpeakerConnect"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="2" 
-                Grid.Column="1" 
-                x:Name="DistanceTextBox" 
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.ChannelReport.CustomEnSpeakerConnect}"
                 VerticalAlignment="Center"
                 />
-            <CheckBox 
-                Grid.Row="3" 
-                Grid.Column="0" 
-                x:Name="IsReversePolarityCheckBox" 
-                Content="Reverse Polarity" 
-                VerticalAlignment="Center" 
-                Margin="5,0,0,0"
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Content="Distance"
+                VerticalContentAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.ChannelReport.Distance}"
+                VerticalAlignment="Center"
+                />
+            <CheckBox
+                Grid.Row="3"
+                Grid.Column="0"
+                IsChecked="{Binding Channel.Data.ChannelReport.IsReversePolarity}"
+                Content="Reverse Polarity"
+                VerticalAlignment="Center"
                 />
         </Grid>
     </GroupBox>

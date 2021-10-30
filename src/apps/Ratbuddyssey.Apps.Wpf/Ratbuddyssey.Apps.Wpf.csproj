@@ -12,6 +12,7 @@
     <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\Ethernet\EthernetView.xaml" />
     <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\TargetCurvePointsView.xaml" />
     <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\ChannelInformationView.xaml" />
+    <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\ChannelReportView.xaml" />
     <AdditionalFiles
       Include="@(AdditionalXamlFiles)"
       ViewBaseGenerator_GenerateConstructor="True"
