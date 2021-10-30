@@ -11,140 +11,138 @@
     d:DesignWidth="500"
     d:DataContext="{d:DesignInstance viewModels:ChannelInformationViewModel}"
     mc:Ignorable="d"
+    IsEnabled="{Binding IsChannelSelected}"
     >
-    <GroupBox 
-        x:Name="ChannelInformationGroupBox" 
-        Header="Channel Information" 
-        >
+    <GroupBox Header="Channel Information">
         <Grid
             e:GridExtensions.ColumnsAndRows="A,*,A,*;A,A,A,A,A,A"
             Style="{StaticResource PropertiesGrid}"
             >
-            <Label 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Content="Trim Adjustment" 
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="Trim Adjustment"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="0" 
-                Grid.Column="1" 
-                x:Name="TrimAdjustmentTextBox" 
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.TrimAdjustment}"
                 VerticalAlignment="Center"
                 />
-            <Label 
-                Grid.Row="1" 
-                Grid.Column="0" 
-                Content="Delay Adjustment" 
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="Delay Adjustment"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="1" 
-                x:Name="DelayAdjustmentTextBox" 
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.DelayAdjustment}"
                 VerticalAlignment="Center"
                 />
-            <Label 
-                Grid.Row="2" 
-                Grid.Column="0" 
-                Content="Frequency Range Rolloff" 
-                VerticalContentAlignment="Center"
-                />
-            <TextBox 
+            <Label
                 Grid.Row="2"
-                Grid.Column="1" 
-                x:Name="FrequencyRangeRolloffTextBox" 
+                Grid.Column="0"
+                Content="Frequency Range Rolloff"
                 VerticalContentAlignment="Center"
                 />
-            <Label 
-                Grid.Row="3" 
-                Grid.Column="0" 
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.FrequencyRangeRolloff}"
+                VerticalContentAlignment="Center"
+                />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
                 Content="Channel Type"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="3" 
-                Grid.Column="1" 
-                x:Name="EnChannelTypeTextBox" 
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.EnChannelType}"
                 VerticalAlignment="Center"
                 />
-            <Label 
-                Grid.Row="4" 
-                Grid.Column="0" 
-                Content="Command Id" 
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Content="Command Id"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="4" 
-                Grid.Column="1" 
-                x:Name="CommandIdTextBox" 
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.CommandId}"
                 VerticalAlignment="Center"
                 />
-            <Label 
-                Grid.Row="0" 
-                Grid.Column="2" 
-                Content="Custom Level" 
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Content="Custom Level"
                 VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="0" 
-                Grid.Column="3" 
-                x:Name="CustomLevelTextBox" 
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="3"
+                Text="{Binding Channel.Data.CustomLevel}"
                 VerticalAlignment="Center"
                 />
-            <Label 
-                Grid.Row="1" 
-                Grid.Column="2" 
-                Content="Custom Distance" 
-                VerticalContentAlignment="Center" 
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="Custom Distance"
+                VerticalContentAlignment="Center"
                 />
-            <TextBox 
-                Grid.Row="1" 
-                Grid.Column="3" 
-                x:Name="CustomDistanceTextBox" 
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="3"
+                Text="{Binding Channel.Data.CustomDistance}"
                 VerticalAlignment="Center"
                 />
-            <Label 
-                Grid.Row="2" 
-                Grid.Column="2" 
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"
                 Content="Custom Crossover"
                 VerticalContentAlignment="Center"
                 />
-            <ComboBox 
-                Grid.Row="2" 
-                Grid.Column="3" 
-                x:Name="CustomCrossoverComboBox" 
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="3"
+                ItemsSource="{Binding CrossoverList}"
+                SelectedItem="{Binding Channel.Data.CustomCrossover}"
                 VerticalAlignment="Center"
                 DisplayMemberPath="."
                 />
-            <Label 
-                Grid.Row="3" 
-                Grid.Column="2" 
-                Content="Custom Speaker Type" 
+            <Label
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="Custom Speaker Type"
                 VerticalContentAlignment="Center"
                 />
-            <ComboBox 
-                Grid.Row="3" 
-                Grid.Column="3" 
-                x:Name="CustomSpeakerTypeComboBox" 
+            <ComboBox
+                Grid.Row="3"
+                Grid.Column="3"
+                ItemsSource="{Binding SpeakerTypeList}"
+                SelectedItem="{Binding Channel.Data.CustomSpeakerType}"
                 VerticalAlignment="Center"
                 DisplayMemberPath="."
                 />
             <CheckBox
-                Grid.Row="5" 
-                Grid.Column="0" 
-                x:Name="IsSkipMeasurementCheckBox" 
-                Content="Skipped Measurement" 
-                VerticalAlignment="Center" 
-                Margin="5,0,0,0"
+                Grid.Row="5"
+                Grid.Column="0"
+                IsChecked="{Binding Channel.Data.IsSkipMeasurement}"
+                Content="Skipped Measurement"
+                VerticalAlignment="Center"
                 />
-            <CheckBox 
-                Grid.Row="5" 
-                Grid.Column="2" 
-                x:Name="MidrangeCompensationCheckBox" 
-                Content="Midrange Compensation" 
-                VerticalAlignment="Center" 
-                Margin="5,0,0,0"
+            <CheckBox
+                Grid.Row="5"
+                Grid.Column="2"
+                IsChecked="{Binding Channel.Data.MidrangeCompensation}"
+                Content="Midrange Compensation"
+                VerticalAlignment="Center"
                 />
         </Grid>
     </GroupBox>
