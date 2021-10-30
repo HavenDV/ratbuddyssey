@@ -13,18 +13,20 @@
     d:DesignWidth="1200"
     d:DesignHeight="800" 
     d:DataContext="{d:DesignInstance 
-        viewModels:DesignTimeGraphViewModel,
+        viewModels:GraphViewModel,
         IsDesignTimeCreatable=True}"
     >
     <GroupBox Header="Graph View">
         <Grid e:GridExtensions.Rows="A,*,A,A,A">
-            <StackPanel 
-                Grid.Row="0" 
+            <StackPanel
+                Grid.Row="0"
                 Orientation="Horizontal"
                 >
-                <Label Content="Measurement position:"/>
-                <ListView 
-                    x:Name="MeasurementPositionsListView"
+                <Label
+                    Content="Measurement position:"
+                    VerticalAlignment="Center"
+                    />
+                <ListView
                     ItemsSource="{Binding MeasurementPositions}"
                     BorderThickness="0"
                     >
@@ -36,9 +38,9 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModels:MeasurementPositionViewModel}">
-                            <CheckBox 
-                                Content="{Binding Value}" 
-                                Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" 
+                            <CheckBox
+                                Content="{Binding Value}"
+                                Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
                                 IsChecked="{Binding IsChecked}"
                                 IsEnabled="{Binding IsEnabled}"
                                 />
@@ -47,21 +49,25 @@
                 </ListView>
                 <CheckBox 
                     Content="Select/Unselect all" 
+                    IsChecked="{Binding SelectAllMeasurementPositionsIsChecked}"
                     x:Name="SelectAllMeasurementPositionsCheckBox" 
                     VerticalAlignment="Center" 
-                    Margin="3,0,0,0"
                     />
             </StackPanel>
-            <oxy:PlotView 
-                Grid.Row="1" 
-                x:Name="PlotView" 
+            <oxy:PlotView
+                Grid.Row="1"
+                x:Name="PlotView"
+                Model="{Binding PlotModel}"
                 />
-            <StackPanel 
-                Grid.Row="2" 
+            <StackPanel
+                Grid.Row="2"
                 Orientation="Horizontal"
                 >
-                <ListView 
-                    x:Name="SmoothingFactorsListView"
+                <Label
+                    Content="Smoothing Factors:"
+                    VerticalAlignment="Center"
+                    />
+                <ListView
                     ItemsSource="{Binding SmoothingFactors}"
                     BorderThickness="0"
                     >
@@ -73,21 +79,24 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModels:SmoothingFactorViewModel}">
-                            <RadioButton 
+                            <RadioButton
                                 GroupName="SmoothingFactors"
-                                Content="{Binding Title}" 
+                                Content="{Binding Title}"
                                 IsChecked="{Binding IsChecked}"
                                 />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
-            <StackPanel 
-                Grid.Row="3" 
-                Orientation="Horizontal" 
+            <StackPanel
+                Grid.Row="3"
+                Orientation="Horizontal"
                 >
-                <ListView 
-                    x:Name="RangesListView"
+                <Label
+                    Content="Ranges:"
+                    VerticalAlignment="Center"
+                    />
+                <ListView
                     ItemsSource="{Binding Ranges}"
                     BorderThickness="0"
                     >
@@ -99,22 +108,18 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModels:RangeViewModel}">
-                            <RadioButton 
+                            <RadioButton
                                 GroupName="Ranges"
-                                Content="{Binding Title}" 
+                                Content="{Binding Title}"
                                 IsChecked="{Binding IsChecked}"
                                 />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackPanel>
-            <StackPanel 
-                Grid.Row="4" 
-                Orientation="Horizontal" 
-                >
-                <CheckBox 
-                    x:Name="LogarithmicAxisCheckBox" 
-                    Content="Logarithmic Axis" 
+                <CheckBox
+                    IsChecked="{Binding LogarithmicAxisIsChecked}"
+                    Content="Logarithmic Axis"
+                    Margin="130,0,0,0"
                     />
             </StackPanel>
         </Grid>
