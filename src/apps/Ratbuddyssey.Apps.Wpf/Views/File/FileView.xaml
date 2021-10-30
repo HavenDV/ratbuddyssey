@@ -9,18 +9,35 @@
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Apps.Core"
     xmlns:views="clr-namespace:Ratbuddyssey.Views"
     xmlns:e="clr-namespace:H.XamlExtensions;assembly=H.XamlExtensions.Wpf"
+    xmlns:h="clr-namespace:H.ReactiveUI;assembly=H.ReactiveUI.CommonInteractions.Wpf"
     mc:Ignorable="d"
     AllowDrop="true"
+    h:DragAndDropExtensions.DragFilesEnterCommand="{Binding DragFilesEnter}"
+    h:DragAndDropExtensions.DragLeaveCommand="{Binding DragLeave}"
+    h:DragAndDropExtensions.DropFilesCommand="{Binding DropFiles}"
+    d:DataContext="{d:DesignInstance viewModels:FileViewModel}"
     >
     <Grid>
         <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
             <Menu Grid.Row="0" Grid.Column="0">
                 <MenuItem Header="_Commands">
-                    <MenuItem Header="_Open Audyssey file" x:Name="OpenFileMenuItem"/>
-                    <MenuItem Header="_Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
+                    <MenuItem
+                        Header="Open Audyssey file"
+                        Command="{Binding OpenFile}"
+                        />
+                    <MenuItem
+                        Header="Reload (discard unsaved changes)"
+                        Command="{Binding ReloadFile}"
+                        />
                     <Separator/>
-                    <MenuItem Header="_Save" x:Name="SaveFileMenuItem"/>
-                    <MenuItem Header="Save _As" x:Name="SaveFileAsMenuItem"/>
+                    <MenuItem
+                        Header="Save"
+                        Command="{Binding SaveFile}"
+                        />
+                    <MenuItem
+                        Header="Save As"
+                        Command="{Binding SaveFileAs}"
+                        />
                 </MenuItem>
             </Menu>
 
@@ -31,11 +48,11 @@
                 >
                 <views:ChannelsView
                     Grid.Row="0"
-                    x:Name="ChannelsView"
-                    d:DataContext="{d:DesignInstance
-                        viewModels:DesignTimeChannelsViewModel, 
-                        IsDesignTimeCreatable=True}"
+                    ViewModel="{Binding ChannelsViewModel}"
                     />
+                <!-- DESIGNER STOP WORKS AFTER REOPEN: d:DataContext="{d:DesignInstance
+                        viewModels:DesignTimeChannelsViewModel, 
+                        IsDesignTimeCreatable=True}" -->
                 <GridSplitter 
                     Grid.Row="1" 
                     HorizontalAlignment="Stretch" 
@@ -43,7 +60,7 @@
                     />
                 <views:ChannelInformationView
                     Grid.Row="2"
-                    x:Name="ChannelInformationView"
+                    ViewModel="{Binding ChannelInformationViewModel}"
                     />
                 <GridSplitter
                     Grid.Row="3"
@@ -52,7 +69,7 @@
                     />
                 <views:ChannelReportView
                     Grid.Row="4"
-                    x:Name="ChannelReportView"
+                    ViewModel="{Binding ChannelReportViewModel}"
                     />
             </Grid>
             <GridSplitter 
@@ -70,7 +87,7 @@
                 >
                 <views:StatusView
                     Grid.Row="0"
-                    x:Name="StatusView"
+                    ViewModel="{Binding StatusViewModel}"
                     />
                 <GridSplitter 
                     Grid.Row="1" 
@@ -83,7 +100,7 @@
                     >
                     <views:TargetCurvePointsView 
                         Grid.Column="0"
-                        x:Name="TargetCurvePointsView"
+                        ViewModel="{Binding TargetCurvePointsViewModel}"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeTargetCurvePointsViewModel, 
                             IsDesignTimeCreatable=True}"
@@ -95,7 +112,7 @@
                         />
                     <views:GraphView
                         Grid.Column="2"
-                        x:Name="GraphView"
+                        ViewModel="{Binding GraphViewModel}"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeGraphViewModel, 
                             IsDesignTimeCreatable=True}"
@@ -105,8 +122,9 @@
         </Grid>
 
         <views:PreviewDropView
-            x:Name="PreviewDropView"
             d:Visibility="Collapsed"
+            ViewModel="{Binding PreviewDropViewModel}"
+            Visibility="{Binding PreviewDropViewModel.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
             />
     </Grid>
 </rx:ReactiveUserControl>

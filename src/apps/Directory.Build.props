@@ -8,6 +8,7 @@
 
   <ItemGroup Label="ViewConstructors">
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" />
+    <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\FileView.xaml" />
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\StatusView.xaml" />
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\ChannelsView.xaml" />
     <AdditionalFiles

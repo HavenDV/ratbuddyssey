@@ -9,20 +9,37 @@
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:e="using:H.XamlExtensions"
+    xmlns:h="using:H.ReactiveUI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     AllowDrop="True"
+    h:DragAndDropExtensions.DragFilesEnterCommand="{Binding DragFilesEnter}"
+    h:DragAndDropExtensions.DragLeaveCommand="{Binding DragLeave}"
+    h:DragAndDropExtensions.DropFilesCommand="{Binding DropFiles}"
+    d:DataContext="{d:DesignInstance viewModels:FileViewModel}"
     >
     <!--xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"-->
     <Grid>
         <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
             <muxc:MenuBar Grid.Row="0" Grid.Column="0">
                 <muxc:MenuBarItem Title="Commands">
-                    <MenuFlyoutItem Text="Open Audyssey file" x:Name="OpenFileMenuItem"/>
-                    <MenuFlyoutItem Text="Reload (discard unsaved changes)" x:Name="ReloadFileMenuItem"/>
+                    <MenuFlyoutItem
+                        Text="Open Audyssey file"
+                        Command="{Binding OpenFile}"
+                        />
+                    <MenuFlyoutItem
+                        Text="Reload (discard unsaved changes)"
+                        Command="{Binding ReloadFile}"
+                        />
                     <MenuFlyoutSeparator />
-                    <MenuFlyoutItem Text="Save" x:Name="SaveFileMenuItem"/>
-                    <MenuFlyoutItem Text="Save As" x:Name="SaveFileAsMenuItem"/>
+                    <MenuFlyoutItem
+                        Text="Save"
+                        Command="{Binding SaveFile}"
+                        />
+                    <MenuFlyoutItem
+                        Text="Save As"
+                        Command="{Binding SaveFileAs}"
+                        />
                 </muxc:MenuBarItem>
             </muxc:MenuBar>
 
@@ -33,7 +50,7 @@
                 >
                 <views:ChannelsView
                     Grid.Row="0"
-                    x:Name="ChannelsView"
+                    ViewModel="{Binding ChannelsViewModel}"
                     d:DataContext="{d:DesignInstance
                         viewModels:DesignTimeChannelsViewModel, 
                         IsDesignTimeCreatable=True}"
@@ -45,7 +62,7 @@
                     />-->
                 <!--<views:ChannelInformationView
                     Grid.Row="2"
-                    x:Name="ChannelInformationView"
+                    ViewModel="{Binding ChannelInformationViewModel}"
                     />-->
                 <!--<mtuuc:GridSplitter
                     Grid.Row="3"
@@ -54,7 +71,7 @@
                     />-->
                 <!--<views:ChannelReportView
                     Grid.Row="4"
-                    x:Name="ChannelReportView"
+                    ViewModel="{Binding ChannelReportViewModel}"
                     />-->
             </Grid>
             <!--<mtuuc:GridSplitter 
@@ -72,7 +89,7 @@
                 >
                 <views:StatusView
                     Grid.Row="0"
-                    x:Name="StatusView"
+                    ViewModel="{Binding StatusViewModel}"
                     />
                 <!--<mtuuc:GridSplitter 
                     Grid.Row="1" 
@@ -85,7 +102,7 @@
                     >
                     <!--<views:TargetCurvePointsView 
                         Grid.Column="0"
-                        x:Name="TargetCurvePointsView"
+                        ViewModel="{Binding TargetCurvePointsViewModel}"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeTargetCurvePointsViewModel, 
                             IsDesignTimeCreatable=True}"
@@ -97,7 +114,7 @@
                         />-->
                     <!--<views:GraphView
                         Grid.Column="2"
-                        x:Name="GraphView"
+                        ViewModel="{Binding GraphViewModel}"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeGraphViewModel, 
                             IsDesignTimeCreatable=True}"
@@ -108,6 +125,8 @@
 
         <views:PreviewDropView
             x:Name="PreviewDropView"
+            ViewModel="{Binding PreviewDropViewModel}"
+            Visibility="{Binding PreviewDropViewModel.IsVisible}"
             d:Visibility="Collapsed"
             />
     </Grid>
