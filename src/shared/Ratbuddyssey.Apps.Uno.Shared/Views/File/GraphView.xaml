@@ -13,6 +13,7 @@
         viewModels:GraphViewModel,
         IsDesignTimeCreatable=True}"
     >
+    <!-- xmlns:oxy="using:OxyPlot.Windows" -->
     <controls:GroupBox Header="Graph View">
         <Grid e:GridExtensions.Rows="A,*,A,A,A">
             <StackPanel
@@ -55,6 +56,8 @@
                 Grid.Row="1"
                 x:Name="PlotView"
                 Model="{Binding PlotModel}"
+                Height="500"
+                Width="500"
                 />-->
             <StackPanel
                 Grid.Row="2"
