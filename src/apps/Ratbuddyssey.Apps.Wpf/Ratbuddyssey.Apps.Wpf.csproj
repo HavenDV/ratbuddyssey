@@ -8,6 +8,17 @@
     <DefineConstants>$(DefineConstants);HAS_WPF</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup Label="ViewConstructors">
+    <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\Ethernet\EthernetView.xaml" />
+    <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\TargetCurvePointsView.xaml" />
+    <AdditionalFiles
+      Include="@(AdditionalXamlFiles)"
+      ViewBaseGenerator_GenerateConstructor="True"
+      ViewBaseGenerator_SetReactiveUIDataContext="True"
+      Visible="False"
+      />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.21" />
     <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.11" />

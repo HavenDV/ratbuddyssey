@@ -11,11 +11,9 @@
     d:DataContext="{d:DesignInstance 
         viewModels:DesignTimeTargetCurvePointsViewModel,
         IsDesignTimeCreatable=True}"
+    IsEnabled="{Binding IsChannelSelected}"
     >
-    <GroupBox
-        x:Name="TargetCurvePointsGroupBox"
-        Header="Target Curve Points"
-        >
+    <GroupBox Header="Target Curve Points">
         <ScrollViewer>
             <DataGrid
                 x:Name="TargetCurvePointsDataGrid"
