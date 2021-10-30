@@ -11,6 +11,7 @@
         viewModels:DesignTimePreviewDropViewModel,
         IsDesignTimeCreatable=True}"
     Opacity="0.5"
+    Visibility="{Binding IsVisible}"
     >
     <Grid
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"

@@ -124,9 +124,7 @@
         </Grid>
 
         <views:PreviewDropView
-            x:Name="PreviewDropView"
             ViewModel="{Binding PreviewDropViewModel}"
-            Visibility="{Binding PreviewDropViewModel.IsVisible}"
             d:Visibility="Collapsed"
             />
     </Grid>

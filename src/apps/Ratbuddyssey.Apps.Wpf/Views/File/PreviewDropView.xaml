@@ -16,6 +16,7 @@
     Background="Black"
     Foreground="White"
     Opacity="0.5"
+    Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
     >
     <StackPanel
         VerticalAlignment="Center"

@@ -124,7 +124,6 @@
         <views:PreviewDropView
             d:Visibility="Collapsed"
             ViewModel="{Binding PreviewDropViewModel}"
-            Visibility="{Binding PreviewDropViewModel.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
             />
     </Grid>
 </rx:ReactiveUserControl>
