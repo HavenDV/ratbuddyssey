@@ -48,7 +48,7 @@
                 >
                 <views:ChannelsView
                     Grid.Row="0"
-                    ViewModel="{Binding ChannelsViewModel}"
+                    x:Name="ChannelsView"
                     />
                 <!-- DESIGNER STOP WORKS AFTER REOPEN: d:DataContext="{d:DesignInstance
                         viewModels:DesignTimeChannelsViewModel, 
@@ -60,7 +60,7 @@
                     />
                 <views:ChannelInformationView
                     Grid.Row="2"
-                    ViewModel="{Binding ChannelInformationViewModel}"
+                    x:Name="ChannelInformationView"
                     />
                 <GridSplitter
                     Grid.Row="3"
@@ -69,7 +69,7 @@
                     />
                 <views:ChannelReportView
                     Grid.Row="4"
-                    ViewModel="{Binding ChannelReportViewModel}"
+                    x:Name="ChannelReportView"
                     />
             </Grid>
             <GridSplitter 
@@ -87,7 +87,7 @@
                 >
                 <views:StatusView
                     Grid.Row="0"
-                    ViewModel="{Binding StatusViewModel}"
+                    x:Name="StatusView"
                     />
                 <GridSplitter 
                     Grid.Row="1" 
@@ -100,7 +100,7 @@
                     >
                     <views:TargetCurvePointsView 
                         Grid.Column="0"
-                        ViewModel="{Binding TargetCurvePointsViewModel}"
+                        x:Name="TargetCurvePointsView"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeTargetCurvePointsViewModel, 
                             IsDesignTimeCreatable=True}"
@@ -112,7 +112,7 @@
                         />
                     <views:GraphView
                         Grid.Column="2"
-                        ViewModel="{Binding GraphViewModel}"
+                        x:Name="GraphView"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeGraphViewModel, 
                             IsDesignTimeCreatable=True}"
@@ -122,8 +122,8 @@
         </Grid>
 
         <views:PreviewDropView
+            x:Name="PreviewDropView"
             d:Visibility="Collapsed"
-            ViewModel="{Binding PreviewDropViewModel}"
             />
     </Grid>
 </rx:ReactiveUserControl>
