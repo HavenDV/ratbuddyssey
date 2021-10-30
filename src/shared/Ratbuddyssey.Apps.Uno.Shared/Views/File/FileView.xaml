@@ -100,13 +100,13 @@
                     Grid.Row="2"
                     e:GridExtensions.Columns="A,A,*"
                     >
-                    <!--<views:TargetCurvePointsView 
+                    <views:TargetCurvePointsView 
                         Grid.Column="0"
                         x:Name="TargetCurvePointsView"
                         d:DataContext="{d:DesignInstance
                             viewModels:DesignTimeTargetCurvePointsViewModel, 
                             IsDesignTimeCreatable=True}"
-                        />-->
+                        />
                     <!--<mtuuc:GridSplitter
                         Grid.Column="1"
                         Width="5"

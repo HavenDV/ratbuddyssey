@@ -10,7 +10,6 @@
 
   <ItemGroup Label="ViewConstructors">
     <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\Ethernet\EthernetView.xaml" />
-    <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\TargetCurvePointsView.xaml" />
     <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\GraphView.xaml" />
     <AdditionalFiles
       Include="@(AdditionalXamlFiles)"
