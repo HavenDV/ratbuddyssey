@@ -29,9 +29,11 @@ public partial class FileView
                 static viewModel => viewModel.GraphViewModel,
                 static view => view.GraphView.ViewModel)
             .DisposeWith(disposables);
+#if HAS_WPF
         _ = this.OneWayBind(ViewModel,
                 static viewModel => viewModel.PreviewDropViewModel,
                 static view => view.PreviewDropView.ViewModel)
             .DisposeWith(disposables);
+#endif
     }
 }

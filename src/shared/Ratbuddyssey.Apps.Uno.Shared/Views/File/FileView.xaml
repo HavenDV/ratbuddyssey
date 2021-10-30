@@ -123,9 +123,9 @@
             </Grid>
         </Grid>
 
-        <views:PreviewDropView
+        <!--<views:PreviewDropView
             x:Name="PreviewDropView"
             d:Visibility="Collapsed"
-            />
+            />-->
     </Grid>
 </views:FileViewBase>
