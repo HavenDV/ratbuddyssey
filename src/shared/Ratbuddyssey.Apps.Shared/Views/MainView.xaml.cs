@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Ratbuddyssey.Views;
+﻿namespace Ratbuddyssey.Views;
 
 public partial class MainView
 {

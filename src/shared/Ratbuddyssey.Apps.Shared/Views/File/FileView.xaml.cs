@@ -38,11 +38,11 @@ public partial class FileView
                     static viewModel => viewModel.StatusViewModel,
                     static view => view.StatusView.ViewModel)
                 .DisposeWith(disposable);
-#if WPF_APP
-                _ = this.OneWayBind(ViewModel,
+            _ = this.OneWayBind(ViewModel,
                     static viewModel => viewModel.ChannelsViewModel,
                     static view => view.ChannelsView.ViewModel)
                 .DisposeWith(disposable);
+#if WPF_APP
             _ = this.OneWayBind(ViewModel,
                     static viewModel => viewModel.TargetCurvePointsViewModel,
                     static view => view.TargetCurvePointsView.ViewModel)
@@ -61,8 +61,8 @@ public partial class FileView
                 .DisposeWith(disposable);
 #endif
 
-                // Drag and drop
-                _ = this.OneWayBind(ViewModel,
+            // Drag and drop
+            _ = this.OneWayBind(ViewModel,
                     static viewModel => viewModel.PreviewDropViewModel,
                     static view => view.PreviewDropView.ViewModel)
                 .DisposeWith(disposable);

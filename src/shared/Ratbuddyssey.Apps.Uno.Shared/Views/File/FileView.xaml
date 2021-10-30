@@ -31,13 +31,13 @@
                 Grid.Column="0"
                 e:GridExtensions.Rows="*,A,A,A,A"
                 >
-                <!--<views:ChannelsView
+                <views:ChannelsView
                     Grid.Row="0"
                     x:Name="ChannelsView"
                     d:DataContext="{d:DesignInstance
                         viewModels:DesignTimeChannelsViewModel, 
                         IsDesignTimeCreatable=True}"
-                    />-->
+                    />
                 <!--<mtuuc:GridSplitter 
                     Grid.Row="1" 
                     HorizontalAlignment="Stretch" 

@@ -16,6 +16,8 @@
         <ListView
             x:Name="ChannelsListView"
             ItemsSource="{Binding Channels}"
+            SelectedItem="{Binding SelectedChannel}"
+            d:SelectedItem="{Binding SelectedChannel, Mode=OneWay}"
             >
             <ListView.View>
                 <GridView>
