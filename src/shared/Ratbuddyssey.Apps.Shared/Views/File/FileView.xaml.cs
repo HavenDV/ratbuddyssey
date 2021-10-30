@@ -13,14 +13,14 @@ public partial class FileView
                 static viewModel => viewModel.ChannelsViewModel,
                 static view => view.ChannelsView.ViewModel)
             .DisposeWith(disposables);
+        _ = this.OneWayBind(ViewModel,
+                static viewModel => viewModel.ChannelInformationViewModel,
+                static view => view.ChannelInformationView.ViewModel)
+            .DisposeWith(disposables);
 #if HAS_WPF
         _ = this.OneWayBind(ViewModel,
                 static viewModel => viewModel.TargetCurvePointsViewModel,
                 static view => view.TargetCurvePointsView.ViewModel)
-            .DisposeWith(disposables);
-        _ = this.OneWayBind(ViewModel,
-                static viewModel => viewModel.ChannelInformationViewModel,
-                static view => view.ChannelInformationView.ViewModel)
             .DisposeWith(disposables);
         _ = this.OneWayBind(ViewModel,
                 static viewModel => viewModel.ChannelReportViewModel,

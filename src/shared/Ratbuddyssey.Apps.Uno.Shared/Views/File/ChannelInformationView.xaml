@@ -1,0 +1,158 @@
+﻿<views:ChannelInformationViewBase
+    x:Class="Ratbuddyssey.Views.ChannelInformationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Ratbuddyssey.Views"
+    xmlns:viewModels="using:Ratbuddyssey.ViewModels"
+    xmlns:controls="using:Ratbuddyssey.Controls"
+    xmlns:e="using:H.XamlExtensions"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance
+        viewModels:DesignTimeChannelsViewModel,
+        IsDesignTimeCreatable=True}"
+    >
+    <controls:GroupBox Header="Channel Information">
+        <Grid
+            e:GridExtensions.ColumnsAndRows="A,*,A,*;A,A,A,A,A,A"
+            Style="{StaticResource PropertiesGrid}"
+            >
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Trim Adjustment"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.TrimAdjustment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Delay Adjustment"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.DelayAdjustment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Frequency Range Rolloff"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.FrequencyRangeRolloff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                />
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Channel Type"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.EnChannelType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                />
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Command Id"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding Channel.Data.CommandId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="2"
+                Text="Custom Level"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="3"
+                Text="{Binding Channel.Data.CustomLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="2"
+                Text="Custom Distance"
+                VerticalAlignment="Center"
+                />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="3"
+                Text="{Binding Channel.Data.CustomDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="2"
+                Text="Custom Crossover"
+                VerticalAlignment="Center"
+                />
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="3"
+                ItemsSource="{Binding CrossoverList}"
+                SelectedItem="{Binding Channel.Data.CustomCrossover, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="2"
+                Text="Custom Speaker Type"
+                VerticalAlignment="Center"
+                />
+            <ComboBox
+                Grid.Row="3"
+                Grid.Column="3"
+                ItemsSource="{Binding SpeakerTypeList}"
+                SelectedItem="{Binding Channel.Data.CustomSpeakerType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <CheckBox
+                Grid.Row="5"
+                Grid.Column="0"
+                IsChecked="{Binding Channel.Data.IsSkipMeasurement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Content="Skipped Measurement"
+                VerticalAlignment="Center"
+                />
+            <CheckBox
+                Grid.Row="5"
+                Grid.Column="2"
+                IsChecked="{Binding Channel.Data.MidrangeCompensation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Content="Midrange Compensation"
+                VerticalAlignment="Center"
+                />
+        </Grid>
+    </controls:GroupBox>
+</views:ChannelInformationViewBase>

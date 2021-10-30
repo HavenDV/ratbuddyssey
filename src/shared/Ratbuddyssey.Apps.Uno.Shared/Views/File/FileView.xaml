@@ -60,10 +60,10 @@
                     HorizontalAlignment="Stretch" 
                     Height="5" 
                     />-->
-                <!--<views:ChannelInformationView
+                <views:ChannelInformationView
                     Grid.Row="2"
                     x:Name="ChannelInformationView"
-                    />-->
+                    />
                 <!--<mtuuc:GridSplitter
                     Grid.Row="3"
                     Height="5"

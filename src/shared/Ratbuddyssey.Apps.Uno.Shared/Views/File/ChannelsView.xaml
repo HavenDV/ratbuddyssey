@@ -15,9 +15,8 @@
     >
     <controls:GroupBox Header="Channels">
         <GridView
-            x:Name="ChannelsListView"
             ItemsSource="{Binding Channels}"
-            SelectedItem="{Binding SelectedChannel}"
+            SelectedItem="{Binding SelectedChannel, Mode=TwoWay}"
             d:SelectedItem="{Binding SelectedChannel, Mode=OneWay}"
             HorizontalAlignment="Left"
             >
