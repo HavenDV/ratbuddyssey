@@ -15,7 +15,10 @@
         IsDesignTimeCreatable=True}"
     >
     <GroupBox Header="Status">
-        <Grid e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A">
+        <Grid
+            e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A"
+            Style="{StaticResource PropertiesGrid}"
+            >
             <Label 
                 Grid.Row="0" 
                 Grid.Column="0" 

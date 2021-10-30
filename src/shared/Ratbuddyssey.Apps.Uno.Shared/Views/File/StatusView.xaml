@@ -16,7 +16,10 @@
     >
     <!--xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"-->
     <!--<mtuuc:HeaderedContentControl Header="Status">-->
-        <Grid e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A">
+        <Grid
+            e:GridExtensions.ColumnsAndRows="A,*,A,*,A,*,A;A,A,A,A,A"
+            Style="{StaticResource PropertiesGrid}"
+            >
             <TextBlock 
                 Grid.Row="0" 
                 Grid.Column="0" 

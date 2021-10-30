@@ -2,6 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     >
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Grid.xaml"/>
+        <ResourceDictionary Source="StackPanel.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Fixes a UWP bug that caused the CheckBox minimum width to be 100 -->

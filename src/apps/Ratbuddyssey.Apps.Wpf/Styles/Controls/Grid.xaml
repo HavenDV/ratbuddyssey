@@ -1,0 +1,51 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    >
+    <Style 
+        x:Key="PropertiesGrid"
+        TargetType="{x:Type Grid}"
+        >
+        <Style.Resources>
+            <Style 
+                TargetType="{x:Type TextBlock}" 
+                BasedOn="{StaticResource {x:Type TextBlock}}"
+                >
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style 
+                TargetType="{x:Type TextBox}" 
+                BasedOn="{StaticResource {x:Type TextBox}}"
+                >
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style 
+                TargetType="{x:Type ComboBox}" 
+                BasedOn="{StaticResource {x:Type ComboBox}}"
+                >
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style 
+                TargetType="{x:Type CheckBox}" 
+                BasedOn="{StaticResource {x:Type CheckBox}}"
+                >
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style 
+                TargetType="{x:Type GridSplitter}" 
+                BasedOn="{StaticResource {x:Type GridSplitter}}"
+                >
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+        </Style.Resources>
+
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+</ResourceDictionary>
+
