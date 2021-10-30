@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Initialization;
-using Ratbuddyssey.ViewModels;
 #if !HAS_WPF
 using Windows.ApplicationModel.Activation;
 #endif

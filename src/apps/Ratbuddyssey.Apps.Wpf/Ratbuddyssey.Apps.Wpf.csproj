@@ -10,19 +10,14 @@
 
   <ItemGroup Label="ViewConstructors">
     <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\Ethernet\EthernetView.xaml" />
-    <AdditionalFiles
-      Include="@(AdditionalXamlFiles)"
-      ViewBaseGenerator_GenerateConstructor="True"
-      ViewBaseGenerator_SetReactiveUIDataContext="True"
-      Visible="False"
-      />
+    <AdditionalFiles Include="@(AdditionalXamlFiles)" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.21" />
-    <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.11" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.22" />
+    <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.12" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci62" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci75" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
     <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.1.4">
       <PrivateAssets>all</PrivateAssets>

@@ -4,7 +4,10 @@ global using System.Linq;
 
 global using ReactiveUI;
 global using H.ReactiveUI;
+global using H.ReactiveUI.Converters;
 global using System.Reactive.Disposables;
+
+global using Ratbuddyssey.ViewModels;
 
 #if HAS_WPF
 global using System.Globalization;
