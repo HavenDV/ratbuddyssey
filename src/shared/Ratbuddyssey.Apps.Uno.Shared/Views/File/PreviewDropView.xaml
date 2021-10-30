@@ -24,8 +24,7 @@
                 Text="Drop to open"
                 />
             <ListView
-                x:Name="NamesListView"
-                d:ItemsSource="{Binding Names}"
+                ItemsSource="{Binding Names}"
                 Foreground="White"
                 FontSize="20"
                 HorizontalAlignment="Center"

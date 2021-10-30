@@ -11,6 +11,7 @@
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\FileView.xaml" />
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\StatusView.xaml" />
     <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\ChannelsView.xaml" />
+    <XamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\File\PreviewDropView.xaml" />
     <AdditionalFiles
       Include="@(XamlFiles -> '%(Filename)')"
       ViewBaseGenerator_GenerateConstructor="True"
