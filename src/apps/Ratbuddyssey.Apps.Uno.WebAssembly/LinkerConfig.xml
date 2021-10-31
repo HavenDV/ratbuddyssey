@@ -2,7 +2,7 @@
   <assembly fullname="Ratbuddyssey.Apps.Uno.WebAssembly" />
   <assembly fullname="Ratbuddyssey.Apps.Core" />
   <assembly fullname="H.ReactiveUI.CommonInteractions.Uno" />
-  <assembly fullname="Uno.WinUI" />
+  <assembly fullname="Uno.UI" />
   <assembly fullname="Microsoft.Extensions.Options" />
 
   <assembly fullname="DynamicData" />
