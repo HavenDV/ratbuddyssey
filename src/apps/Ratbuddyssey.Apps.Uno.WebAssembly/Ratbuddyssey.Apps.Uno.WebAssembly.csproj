@@ -5,6 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <NoWarn>$(NoWarn);NU1701;CS8669;UXAML0002;CS1030;Uno0001</NoWarn>
+    <!--<DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>-->
     <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
   
@@ -14,13 +15,10 @@
     <!--<WasmShellMonoRuntimeExecutionMode Condition=" '$(Configuration)' == 'Release' ">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
 
     <MonoRuntimeDebuggerEnabled Condition=" '$(Configuration)' == 'Debug' ">true</MonoRuntimeDebuggerEnabled>
-    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+    <WasmShellILLinkerEnabled Condition=" '$(Configuration)' == 'Debug' ">false</WasmShellILLinkerEnabled>
   </PropertyGroup>
 
   <ItemGroup>
-    <MonoRuntimeMixedModeExcludedAssembly Include="ReactiveUI" />
-    <MonoRuntimeMixedModeExcludedAssembly Include="System.Reactive" />
-    <MonoRuntimeMixedModeExcludedAssembly Include="DynamicData" />
     <LinkerDescriptor Include="LinkerConfig.xml" />
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
