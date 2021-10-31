@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.Uno" Version="16.2.6" />
+    <PackageReference Include="ReactiveUI.Uno" Version="16.3.5" />
     <PackageReference Include="H.ReactiveUI.CommonInteractions.Uno" Version="0.9.22" />
     <PackageReference Include="H.XamlExtensions.Uno" Version="0.9.12" />
     <!--<PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid" Version="7.1.0-build.45.gd2e4192c8c" />
