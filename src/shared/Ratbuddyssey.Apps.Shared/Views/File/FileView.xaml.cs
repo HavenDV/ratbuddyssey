@@ -2,7 +2,7 @@
 
 public partial class FileView
 {
-    // Workaround for issue: 
+    // Workaround for issue: https://github.com/unoplatform/uno/issues/7404
     partial void AfterWhenActivated(CompositeDisposable disposables)
     {
         _ = this.OneWayBind(ViewModel,
