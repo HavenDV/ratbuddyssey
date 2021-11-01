@@ -31,8 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{BA76CF
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Apps.Shared", "src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.shproj", "{264A09D3-F3F5-4A21-92E6-CBFEAA604FFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Apps.Wpf", "src\apps\Ratbuddyssey.Apps.Wpf\Ratbuddyssey.Apps.Wpf.csproj", "{D73146AD-2465-40AE-9856-5A416328400F}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ratbuddyssey.Apps.Uno.Shared", "src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Apps.Uno.WebAssembly", "src\apps\Ratbuddyssey.Apps.Uno.WebAssembly\Ratbuddyssey.Apps.Uno.WebAssembly.csproj", "{ECBB9D30-4FFF-4098-9CA0-2D047784134A}"
@@ -44,19 +42,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ratbuddyssey.Apps.Uno.Core"
 		src\libs\Ratbuddyssey.Apps.Uno.Core\Directory.Build.props = src\libs\Ratbuddyssey.Apps.Uno.Core\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ratbuddyssey.Apps.WindowsAppSdk", "src\apps\Ratbuddyssey.Apps.WindowsAppSdk\Ratbuddyssey.Apps.WindowsAppSdk.csproj", "{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratbuddyssey.Apps.Uwp", "src\apps\Ratbuddyssey.Apps.Uwp\Ratbuddyssey.Apps.Uwp.csproj", "{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{18cae0bb-aaaa-4ca7-9359-f680aa32712c}*SharedItemsImports = 5
-		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{18cae0bb-aaaa-4ca7-9359-f680aa32712c}*SharedItemsImports = 5
 		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{264a09d3-f3f5-4a21-92e6-cbfeaa604ffe}*SharedItemsImports = 13
 		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
 		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
 		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
-		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{d73146ad-2465-40ae-9856-5a416328400f}*SharedItemsImports = 5
 		src\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems*{ecbb9d30-4fff-4098-9ca0-2d047784134a}*SharedItemsImports = 5
 		src\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems*{ecbb9d30-4fff-4098-9ca0-2d047784134a}*SharedItemsImports = 5
 	EndGlobalSection
@@ -93,26 +86,6 @@ Global
 		{A53DA76F-0057-4533-832E-3B4FC57967F4}.Release|x64.Build.0 = Release|Any CPU
 		{A53DA76F-0057-4533-832E-3B4FC57967F4}.Release|x86.ActiveCfg = Release|Any CPU
 		{A53DA76F-0057-4533-832E-3B4FC57967F4}.Release|x86.Build.0 = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|ARM.Build.0 = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|arm64.Build.0 = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|x64.Build.0 = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Debug|x86.Build.0 = Debug|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|ARM.Build.0 = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|arm64.ActiveCfg = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|arm64.Build.0 = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|x64.ActiveCfg = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|x64.Build.0 = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|x86.ActiveCfg = Release|Any CPU
-		{D73146AD-2465-40AE-9856-5A416328400F}.Release|x86.Build.0 = Release|Any CPU
 		{ECBB9D30-4FFF-4098-9CA0-2D047784134A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECBB9D30-4FFF-4098-9CA0-2D047784134A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECBB9D30-4FFF-4098-9CA0-2D047784134A}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -153,26 +126,6 @@ Global
 		{AC510601-EB02-415A-AA69-3F428029E208}.Release|x64.Build.0 = Release|Any CPU
 		{AC510601-EB02-415A-AA69-3F428029E208}.Release|x86.ActiveCfg = Release|Any CPU
 		{AC510601-EB02-415A-AA69-3F428029E208}.Release|x86.Build.0 = Release|Any CPU
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|Any CPU.Build.0 = Debug|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|ARM.ActiveCfg = Debug|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|ARM.Build.0 = Debug|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|arm64.ActiveCfg = Debug|arm64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|arm64.Build.0 = Debug|arm64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|x64.ActiveCfg = Debug|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|x64.Build.0 = Debug|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|x86.ActiveCfg = Debug|x86
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Debug|x86.Build.0 = Debug|x86
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|Any CPU.ActiveCfg = Release|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|Any CPU.Build.0 = Release|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|ARM.ActiveCfg = Release|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|ARM.Build.0 = Release|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|arm64.ActiveCfg = Release|arm64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|arm64.Build.0 = Release|arm64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|x64.ActiveCfg = Release|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|x64.Build.0 = Release|x64
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|x86.ActiveCfg = Release|x86
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C}.Release|x86.Build.0 = Release|x86
 		{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4}.Debug|Any CPU.Build.0 = Debug|x64
 		{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4}.Debug|Any CPU.Deploy.0 = Debug|x64
@@ -210,12 +163,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A53DA76F-0057-4533-832E-3B4FC57967F4} = {BAA5012B-8770-4776-A793-C9890F7A0BC3}
 		{264A09D3-F3F5-4A21-92E6-CBFEAA604FFE} = {BA76CFC8-6CD7-434C-A613-769C29EEF3D9}
-		{D73146AD-2465-40AE-9856-5A416328400F} = {6A1A1E25-CA93-446C-9677-70E2B00A70FC}
 		{6279C845-92F8-4333-AB99-3D213163593C} = {BA76CFC8-6CD7-434C-A613-769C29EEF3D9}
 		{ECBB9D30-4FFF-4098-9CA0-2D047784134A} = {6A1A1E25-CA93-446C-9677-70E2B00A70FC}
 		{AC510601-EB02-415A-AA69-3F428029E208} = {6DD0D918-2E31-4D56-A71A-B176C0E14BB0}
 		{6DD0D918-2E31-4D56-A71A-B176C0E14BB0} = {BAA5012B-8770-4776-A793-C9890F7A0BC3}
-		{18CAE0BB-AAAA-4CA7-9359-F680AA32712C} = {6A1A1E25-CA93-446C-9677-70E2B00A70FC}
 		{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4} = {6A1A1E25-CA93-446C-9677-70E2B00A70FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

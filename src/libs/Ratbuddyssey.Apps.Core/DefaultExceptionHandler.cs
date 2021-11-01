@@ -4,14 +4,14 @@ namespace Ratbuddyssey;
 
 public class DefaultExceptionHandler : IObserver<Exception>
 {
-    private static async void OnException(Exception value)
+    private static void OnException(Exception value)
     {
         if (Debugger.IsAttached)
         {
             Debugger.Break();
         }
 
-        await MessageInteractions.Exception.Handle(value);
+        Console.WriteLine($"{value}");
     }
 
     public void OnNext(Exception value)

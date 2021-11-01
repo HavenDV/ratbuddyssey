@@ -50,10 +50,7 @@ public static class HostBuilder
         {
             services
                 .AddSingleton<MainViewModel>()
-                .AddSingleton<IScreen, MainViewModel>(provider => provider.GetRequiredService<MainViewModel>())
-
                 .AddSingleton<FileViewModel>()
-                .AddSingleton<EthernetViewModel>()
                 ;
         });
 

@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Initialization;
-#if !HAS_WPF
 using Windows.ApplicationModel.Activation;
-#endif
 
 #nullable enable
 
@@ -14,7 +12,6 @@ public sealed partial class App
     #region Properties
 
     public IHost Host { get; }
-    private InteractionManager InteractionManager { get; } = new();
 
     #endregion
 
@@ -22,22 +19,16 @@ public sealed partial class App
 
     public App()
     {
-        InteractionManager.Register();
-        InteractionManager.CatchUnhandledExceptions(this);
-
         Host = Initialization.HostBuilder
             .Create()
             .AddViews()
-            .AddConverters()
             .AddPlatformSpecificLoggers()
 #if __WASM__
             .RemoveFileWatchers()
 #endif
             .Build();
 
-#if !HAS_WPF
         InitializeComponent();
-#endif
     }
 
     #endregion
@@ -55,28 +46,6 @@ public sealed partial class App
         view.ViewModel = viewModel;
         return view;
     }
-
-#if HAS_WPF
-
-    private void Application_Startup(object _, StartupEventArgs e)
-    {
-        var mainView = (Window)GetView<MainViewModel>(out var _);
-
-        if (e.Args.Any())
-        {
-            var path = e.Args.ElementAtOrDefault(0);
-            if (path != null && !string.IsNullOrWhiteSpace(path))
-            {
-                var fileViewModel = Host.Services.GetRequiredService<FileViewModel>();
-
-                fileViewModel.Open(path.ToFile());
-            }
-        }
-
-        mainView.ShowDialog();
-    }
-
-#else
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
@@ -106,8 +75,6 @@ public sealed partial class App
 
         window.Activate();
     }
-
-#endif
 
 #endregion
     }

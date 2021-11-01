@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Ratbuddyssey.Converters;
 using Ratbuddyssey.ViewModels;
 using Ratbuddyssey.Views;
 
@@ -22,27 +21,6 @@ public static class HostBuilderExtensions
             _ = services
                 .AddSingleton<IViewFor<MainViewModel>, MainView>()
                 .AddSingleton<IViewFor<FileViewModel>, FileView>()
-#if HAS_WPF
-                .AddSingleton<IViewFor<EthernetViewModel>, EthernetView>()
-#else
-#endif
-                ;
-        });
-
-        return hostBuilder;
-    }
-
-    public static IHostBuilder AddConverters(this IHostBuilder hostBuilder)
-    {
-        hostBuilder = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
-
-        _ = hostBuilder.ConfigureServices(static services =>
-        {
-            _ = services
-#if HAS_WPF
-#else
-                .AddSingleton<IBindingTypeConverter, IntegerTextTypeConverter>()
-#endif
                 ;
         });
 
