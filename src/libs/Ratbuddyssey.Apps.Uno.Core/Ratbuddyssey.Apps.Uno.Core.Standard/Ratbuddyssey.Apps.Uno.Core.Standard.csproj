@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.Uno" Version="16.3.5" />
+    <PackageReference Include="ReactiveUI.Uno.WinUI" Version="16.3.5" />
   </ItemGroup>
 
   <ItemGroup>
