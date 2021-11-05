@@ -110,4 +110,4 @@ public sealed partial class App
 #endif
 
 #endregion
-    }
+}
