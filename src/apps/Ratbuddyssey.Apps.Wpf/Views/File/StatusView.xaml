@@ -11,7 +11,7 @@
     mc:Ignorable="d" 
     d:DesignWidth="800"
     d:DataContext="{d:DesignInstance
-        viewModels:DesignTimeStatusViewModel,
+        viewModels:StatusViewModel,
         IsDesignTimeCreatable=True}"
     >
     <GroupBox Header="Status">
@@ -31,6 +31,7 @@
                 Grid.ColumnSpan="5"
                 VerticalAlignment="Center"
                 Text="{Binding CurrentFile.FullPath, Mode=OneWay}"
+                d:Text="CurrentFile"
                 />
             <Label 
                 Grid.Row="1"
@@ -44,6 +45,7 @@
                 Grid.ColumnSpan="5"
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.AmpAssignInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="AmpAssignInfo"
                 />
             <Label 
                 Grid.Row="2" 
@@ -56,6 +58,7 @@
                 Grid.Column="1" 
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="Title"
                 />
             <Label 
                 Grid.Row="3" 
@@ -69,6 +72,7 @@
                 Margin="0" 
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.TargetModelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="TargetModelName"
                 />
             <Label 
                 Content="Interface Version" 
@@ -82,6 +86,7 @@
                 Margin="0" 
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.InterfaceVersion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="InterfaceVersion"
                 />
             <Label 
                 Grid.Row="2" 
@@ -95,6 +100,7 @@
                 Margin="0" 
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.UpgradeInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="UpgradeInfo"
                 />
             <Label 
                 Grid.Row="3" 
@@ -108,6 +114,7 @@
                 Margin="0" 
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.AdcLineup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="1"
                 />
             <Label 
                 Grid.Row="4" 
@@ -120,6 +127,7 @@
                 Grid.Column="3" 
                 VerticalAlignment="Center"
                 Text="{Binding AudysseyApp.SystemDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="1"
                 />
             <Label 
                 Grid.Row="2" 
@@ -134,6 +142,7 @@
                 DisplayMemberPath="."
                 ItemsSource="{Binding AmpAssignTypeList, Mode=OneWay}"
                 SelectedIndex="{Binding AudysseyApp.EnAmpAssignType, Mode=TwoWay}"
+                d:SelectedIndex="1"
                 />
             <Label 
                 Grid.Row="3" 
@@ -148,6 +157,7 @@
                 DisplayMemberPath="."
                 ItemsSource="{Binding MultEQTypeList, Mode=OneWay}"
                 SelectedIndex="{Binding AudysseyApp.EnMultEQType, Mode=TwoWay}"
+                d:SelectedIndex="1"
                 />
             <Label 
                 Grid.Row="4" 
@@ -162,6 +172,7 @@
                 DisplayMemberPath="."
                 ItemsSource="{Binding TargetCurveTypeList, Mode=OneWay}"
                 SelectedIndex="{Binding AudysseyApp.EnTargetCurveType, Mode=TwoWay}"
+                d:SelectedIndex="1"
                 />
             <CheckBox
                 Grid.Row="0" 
