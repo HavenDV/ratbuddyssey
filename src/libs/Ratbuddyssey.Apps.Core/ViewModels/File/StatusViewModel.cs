@@ -14,7 +14,7 @@ public class StatusViewModel : ActivatableViewModel
     public AudysseyMultEQApp AudysseyApp { get; set; } = new();
 
     [Reactive]
-    public string CurrentFile { get; set; } = string.Empty;
+    public FileData? CurrentFile { get; set; }
 
     public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
     {

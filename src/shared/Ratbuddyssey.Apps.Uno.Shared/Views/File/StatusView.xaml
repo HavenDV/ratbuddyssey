@@ -30,7 +30,7 @@
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="5"
-                Text="{Binding CurrentFile, Mode=OneWay}"
+                Text="{Binding CurrentFile.FullPath, Mode=OneWay}"
                 VerticalAlignment="Center"
                 />
             <TextBlock 

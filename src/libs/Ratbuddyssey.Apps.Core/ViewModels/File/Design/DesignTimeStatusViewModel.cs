@@ -15,7 +15,7 @@ public class DesignTimeStatusViewModel
         UpgradeInfo = nameof(AudysseyMultEQApp.UpgradeInfo),
     };
 
-    public string CurrentFile { get; set; } = nameof(CurrentFile);
+    public FileData CurrentFile { get; set; } = new FileData(nameof(CurrentFile));
 
     public IReadOnlyCollection<string> AmpAssignTypeList { get; } = new[]
     {
