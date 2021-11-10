@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:rx="http://reactiveui.net"
+    xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewModels="clr-namespace:Ratbuddyssey.ViewModels;assembly=Ratbuddyssey.Apps.Core"
     xmlns:views="clr-namespace:Ratbuddyssey.Views"
     xmlns:e="clr-namespace:H.XamlExtensions;assembly=H.XamlExtensions.Wpf"
@@ -19,27 +20,56 @@
     >
     <Grid>
         <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
-            <Menu Grid.Row="0" Grid.Column="0">
-                <MenuItem Header="_Commands">
-                    <MenuItem
-                        Header="Open Audyssey file"
-                        Command="{Binding OpenFile}"
-                        />
-                    <MenuItem
-                        Header="Reload (discard unsaved changes)"
-                        Command="{Binding ReloadFile}"
-                        />
-                    <Separator/>
-                    <MenuItem
-                        Header="Save"
-                        Command="{Binding SaveFile}"
-                        />
-                    <MenuItem
-                        Header="Save As"
-                        Command="{Binding SaveFileAs}"
-                        />
-                </MenuItem>
-            </Menu>
+            <ToolBar Grid.Row="0" Grid.Column="0">
+                <ToolBar.Resources>
+                    <Style TargetType="material:PackIcon">
+                        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                </ToolBar.Resources>
+                
+                <Button
+                    Command="{Binding OpenFile}"
+                    Padding="3"
+                    ToolTip="Open Audyssey file"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <material:PackIcon Kind="File"/>
+                        <TextBlock Text="Open"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                    Command="{Binding ReloadFile}"
+                    Padding="3"
+                    ToolTip="Reload (discard unsaved changes)"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <material:PackIcon Kind="Reload"/>
+                        <TextBlock Text="Reload"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button
+                    Command="{Binding SaveFile}"
+                    Padding="3"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <material:PackIcon Kind="ContentSave"/>
+                        <TextBlock Text="Save"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                    Command="{Binding SaveFileAs}"
+                    Padding="3"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <material:PackIcon Kind="ContentSaveMove"/>
+                        <TextBlock Text="Save As"/>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
 
             <Grid
                 Grid.Row="1"
