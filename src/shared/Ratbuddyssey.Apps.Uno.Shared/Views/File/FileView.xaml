@@ -4,10 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:rx="using:ReactiveUI"
     xmlns:views="using:Ratbuddyssey.Views"
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:e="using:H.XamlExtensions"
     xmlns:h="using:H.ReactiveUI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -21,27 +19,35 @@
     <!--xmlns:mtuuc="using:Microsoft.Toolkit.Uwp.UI.Controls"-->
     <Grid>
         <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
-            <muxc:MenuBar Grid.Row="0" Grid.Column="0">
-                <muxc:MenuBarItem Title="Commands">
-                    <MenuFlyoutItem
-                        Text="Open Audyssey file"
-                        Command="{Binding OpenFile}"
-                        />
-                    <MenuFlyoutItem
-                        Text="Reload (discard unsaved changes)"
-                        Command="{Binding ReloadFile}"
-                        />
-                    <MenuFlyoutSeparator />
-                    <MenuFlyoutItem
-                        Text="Save"
-                        Command="{Binding SaveFile}"
-                        />
-                    <MenuFlyoutItem
-                        Text="Save As"
-                        Command="{Binding SaveFileAs}"
-                        />
-                </muxc:MenuBarItem>
-            </muxc:MenuBar>
+            <CommandBar
+                Grid.Row="0"
+                Grid.Column="0"
+                DefaultLabelPosition="Right"
+                Margin="5"
+                HorizontalAlignment="Left"
+                >
+                <AppBarButton
+                    Label="Open"
+                    Icon="OpenFile"
+                    Command="{Binding OpenFile}"
+                    />
+                <AppBarButton
+                    Label="Reload (discard unsaved changes)"
+                    Icon="Refresh"
+                    Command="{Binding ReloadFile}"
+                    />
+                <AppBarSeparator/>
+                <AppBarButton
+                    Label="Save"
+                    Icon="Save"
+                    Command="{Binding SaveFile}"
+                    />
+                <AppBarButton
+                    Label="Save As"
+                    Icon="SaveLocal"
+                    Command="{Binding SaveFileAs}"
+                    />
+            </CommandBar>
 
             <Grid
                 Grid.Row="1"
