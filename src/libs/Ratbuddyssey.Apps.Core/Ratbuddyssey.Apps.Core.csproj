@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Core" Version="0.9.22" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Core" Version="1.0.27" />
     <PackageReference Include="H.Resources.Generator" Version="1.2.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -28,7 +28,7 @@
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0-rc.2.21480.5" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
@@ -42,10 +42,10 @@
   </ItemGroup>
 
   <ItemGroup Label="MVVM">
-    <PackageReference Include="ReactiveUI.Fody" Version="16.3.5" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0-rc.2.21480.5" />
-    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="13.1.30" />
-    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="13.1.30" />
+    <PackageReference Include="ReactiveUI.Fody" Version="16.3.10" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="13.1.42" />
+    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="13.1.42" />
   </ItemGroup>
 
   <ItemGroup>

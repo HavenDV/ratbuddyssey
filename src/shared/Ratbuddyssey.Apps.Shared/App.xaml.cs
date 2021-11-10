@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using H.ReactiveUI.CommonInteractions.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Initialization;
 #if !HAS_WPF
@@ -58,7 +59,7 @@ public sealed partial class App
 
 #if HAS_WPF
 
-    private void Application_Startup(object _, StartupEventArgs e)
+    private async void Application_Startup(object _, StartupEventArgs e)
     {
         var mainView = (Window)GetView<MainViewModel>(out var _);
 
@@ -69,7 +70,7 @@ public sealed partial class App
             {
                 var fileViewModel = Host.Services.GetRequiredService<FileViewModel>();
 
-                fileViewModel.Open(path.ToFile());
+                await fileViewModel.OpenAsync(new SystemIOApiFileData(path)).ConfigureAwait(true);
             }
         }
 
@@ -109,5 +110,5 @@ public sealed partial class App
 
 #endif
 
-#endregion
+    #endregion
 }

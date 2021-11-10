@@ -16,7 +16,7 @@ public class FileViewModel : RoutableViewModel
     public AudysseyMultEQApp AudysseyApp { get; set; } = new();
 
     [Reactive]
-    public string CurrentFile { get; set; } = string.Empty;
+    public FileData? CurrentFile { get; set; }
 
     public ChannelsViewModel ChannelsViewModel { get; } = new();
     public StatusViewModel StatusViewModel { get; } = new();
@@ -49,23 +49,28 @@ public class FileViewModel : RoutableViewModel
     {
         var whenFileIsOpened = this
             .WhenAnyValue(static x => x.CurrentFile)
-            .Select(static value => !string.IsNullOrWhiteSpace(value));
+            .Select(static value => value != null);
         OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            var data = await FileInteractions.OpenFile.Handle(new OpenFileArguments
+            var file = await FileInteractions.OpenFile.Handle(new OpenFileArguments
             {
                 Extensions = new[] { ".ady" },
                 FilterName = "Audyssey files",
             });
-            if (data == null)
+            if (file == null)
             {
                 return;
             }
 
-            Open(data);
+            await OpenAsync(file, cancellationToken).ConfigureAwait(true);
         });
         ReloadFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
+            if (CurrentFile == null)
+            {
+                return;
+            }
+
             var value = await MessageInteractions.Question.Handle(new(
                 "This will reload the .ady file and discard all changes since last save"));
             if (!value)
@@ -73,31 +78,40 @@ public class FileViewModel : RoutableViewModel
                 return;
             }
 
-            LoadApp(CurrentFile);
+            var text = await CurrentFile.ReadTextAsync().ConfigureAwait(true);
+            LoadApp(text);
         }, whenFileIsOpened);
         SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
-            _ = await FileInteractions.SaveOpenFile.Handle(new SaveOpenFileArguments
-            {
-                FullPath = CurrentFile,
-                Text = SaveApp(),
-            });
-        }, whenFileIsOpened);
-        SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
-        {
-            var fileName = await FileInteractions.SaveFile.Handle(new SaveFileArguments
-            {
-                SuggestedFileName = Path.GetFileName(CurrentFile),
-                Extension = ".ady",
-                FilterName = "Audyssey files",
-                TextFunc = () => Task.FromResult(SaveApp()),
-            });
-            if (fileName == null)
+            if (CurrentFile == null)
             {
                 return;
             }
 
-            CurrentFile = fileName;
+            var json = SaveApp();
+
+            await CurrentFile.WriteTextAsync(json).ConfigureAwait(false);
+        }, whenFileIsOpened);
+        SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
+        {
+            if (CurrentFile == null)
+            {
+                return;
+            }
+
+            var file = await FileInteractions.SaveFile.Handle(new SaveFileArguments(".ady")
+            {
+                SuggestedFileName = CurrentFile.FileName,
+                FilterName = "Audyssey files",
+            });
+            if (file == null)
+            {
+                return;
+            }
+
+            CurrentFile = file;
+
+            _ = await SaveFile.Execute();
         }, whenFileIsOpened);
         DragFilesEnter = ReactiveCommand.Create<IReadOnlyCollection<FileData>>(files =>
         {
@@ -108,10 +122,10 @@ public class FileViewModel : RoutableViewModel
         {
             PreviewDropViewModel.IsVisible = false;
         });
-        DropFiles = ReactiveCommand.Create<IReadOnlyCollection<FileData>>(files =>
+        DropFiles = ReactiveCommand.CreateFromTask<IReadOnlyCollection<FileData>>(async (files, cancellationToken) =>
         {
             PreviewDropViewModel.IsVisible = false;
-            Open(files.First());
+            await OpenAsync(files.First(), cancellationToken).ConfigureAwait(true);
         });
 
         this.WhenActivated(disposables =>
@@ -193,10 +207,14 @@ public class FileViewModel : RoutableViewModel
 
     #region Methods
 
-    public void Open(FileData data)
+    public async Task OpenAsync(
+        FileData file,
+        CancellationToken cancellationToken = default)
     {
-        CurrentFile = data.FullPath;
-        LoadApp(data.Text);
+        CurrentFile = file;
+
+        var json = await file.ReadTextAsync(cancellationToken: cancellationToken).ConfigureAwait(true);
+        LoadApp(json);
     }
 
     private void LoadApp(string json)

@@ -13,7 +13,7 @@
 			-->
       <Version>6.2.13</Version>
     </PackageReference>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="0.9.22" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="1.0.27" />
     <!--<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
       <Version>7.1.1</Version>
     </PackageReference>
@@ -29,7 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Uwp">
-      <Version>16.3.5</Version>
+      <Version>16.3.10</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
       <Version>3.11.0-dev.487</Version>

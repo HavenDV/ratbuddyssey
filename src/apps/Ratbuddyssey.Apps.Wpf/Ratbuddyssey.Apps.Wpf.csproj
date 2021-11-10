@@ -14,16 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="0.9.22" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="1.0.27" />
     <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.12" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci75" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci82" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
     <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ReactiveUI.WPF" Version="16.3.5" />
+    <PackageReference Include="ReactiveUI.WPF" Version="16.3.10" />
     <PackageReference Include="ViewBaseGenerator" Version="1.3.21">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
