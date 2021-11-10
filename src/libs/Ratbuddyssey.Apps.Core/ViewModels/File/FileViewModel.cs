@@ -47,6 +47,9 @@ public class FileViewModel : RoutableViewModel
 
     public FileViewModel(IScreen hostScreen) : base(hostScreen, "App")
     {
+        var whenFileIsOpened = this
+            .WhenAnyValue(static x => x.CurrentFile)
+            .Select(static value => !string.IsNullOrWhiteSpace(value));
         OpenFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
             var data = await FileInteractions.OpenFile.Handle(new OpenFileArguments
@@ -61,6 +64,17 @@ public class FileViewModel : RoutableViewModel
 
             Open(data);
         });
+        ReloadFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
+        {
+            var value = await MessageInteractions.Question.Handle(new(
+                "This will reload the .ady file and discard all changes since last save"));
+            if (!value)
+            {
+                return;
+            }
+
+            LoadApp(CurrentFile);
+        }, whenFileIsOpened);
         SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
             _ = await FileInteractions.SaveOpenFile.Handle(new SaveOpenFileArguments
@@ -68,7 +82,7 @@ public class FileViewModel : RoutableViewModel
                 FullPath = CurrentFile,
                 Text = SaveApp(),
             });
-        });
+        }, whenFileIsOpened);
         SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
             var fileName = await FileInteractions.SaveFile.Handle(new SaveFileArguments
@@ -84,18 +98,7 @@ public class FileViewModel : RoutableViewModel
             }
 
             CurrentFile = fileName;
-        });
-        ReloadFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
-        {
-            var value = await MessageInteractions.Question.Handle(new(
-                "This will reload the .ady file and discard all changes since last save"));
-            if (!value)
-            {
-                return;
-            }
-
-            LoadApp(CurrentFile);
-        });
+        }, whenFileIsOpened);
         DragFilesEnter = ReactiveCommand.Create<IReadOnlyCollection<FileData>>(files =>
         {
             PreviewDropViewModel.Names = new[] { files.First().FullPath };
