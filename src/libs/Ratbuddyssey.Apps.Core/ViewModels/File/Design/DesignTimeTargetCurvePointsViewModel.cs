@@ -4,7 +4,7 @@ namespace Ratbuddyssey.ViewModels;
 
 public class DesignTimeTargetCurvePointsViewModel : TargetCurvePointsViewModel
 {
-    #region Properties
+    #region Constructors
 
     public DesignTimeTargetCurvePointsViewModel()
     {

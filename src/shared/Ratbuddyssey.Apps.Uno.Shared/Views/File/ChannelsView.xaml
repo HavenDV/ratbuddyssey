@@ -7,7 +7,6 @@
     xmlns:views="using:Ratbuddyssey.Views"
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:controls="using:Ratbuddyssey.Controls"
-    xmlns:e="using:H.XamlExtensions"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance
         viewModels:DesignTimeChannelsViewModel,
