@@ -1,15 +1,20 @@
-﻿namespace Ratbuddyssey.ViewModels;
+﻿using System.Collections.ObjectModel;
 
-public class DesignTimeTargetCurvePointsViewModel
+namespace Ratbuddyssey.ViewModels;
+
+public class DesignTimeTargetCurvePointsViewModel : TargetCurvePointsViewModel
 {
     #region Properties
 
-    public List<TargetCurvePointViewModel> CustomTargetCurvePoints { get; set; } = new List<TargetCurvePointViewModel>()
+    public DesignTimeTargetCurvePointsViewModel()
     {
-        new(0.0, 1.0),
-        new(1.0, 2.0),
-        new(2.0, 3.0),
-    };
+        CustomTargetCurvePoints = new ObservableCollection<TargetCurvePointViewModel>()
+        {
+            new(0.0, 1.0),
+            new(1.0, 2.0),
+            new(2.0, 3.0),
+        };
+    }
 
     #endregion
 }
