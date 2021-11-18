@@ -21,13 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ReactiveUI.WinUI" Version="16.3.10" />
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.WindowsAppSDK" Version="1.0.27" />
-    <PackageReference Include="H.XamlExtensions.WindowsAppSDK" Version="0.9.12" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.WinUI" Version="1.0.29" />
+    <PackageReference Include="H.XamlExtensions.WinUI" Version="0.9.14" />
     <PackageReference Include="Uno.WinUI" Version="3.12.0-dev.2" />
     <PackageReference Include="ViewBaseGenerator" Version="1.3.21">
       <PrivateAssets>all</PrivateAssets>
