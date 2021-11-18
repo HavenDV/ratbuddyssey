@@ -4,8 +4,7 @@ on:
     branches: [ master ]   
 
 jobs:
-  wpf:
-    name: WPF
+  WPF:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-latest
@@ -17,8 +16,7 @@ jobs:
       asset-name2: Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-content-type2: application/zip
 
-  uwp:
-    name: UWP
+  UWP:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
@@ -26,18 +24,16 @@ jobs:
       use-msbuild: true
       generate-build-number: false
 
-  windows-app-sdk:
-    name: WindowsAppSDK
+  WinUI:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
-      project-path: /target:apps\Ratbuddyssey_Apps_WindowsAppSdk
+      project-path: /target:apps\Ratbuddyssey_Apps_WinUI
       use-msbuild: true
       generate-build-number: false
       windows-sdk-version: 19041
 
-  web-assembly:
-    name: WebAssembly
+  WebAssembly:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       project-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly
