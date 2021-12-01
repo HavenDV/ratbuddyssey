@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <ItemGroup>
     <PackageReference Include="H.XamlExtensions.Uwp">
-      <Version>0.9.14</Version>
+      <Version>0.9.15</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <!-- 
@@ -29,7 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Uwp">
-      <Version>16.3.10</Version>
+      <Version>16.4.1</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
       <Version>3.11.0-dev.487</Version>
