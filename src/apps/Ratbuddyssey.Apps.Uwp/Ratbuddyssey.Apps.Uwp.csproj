@@ -32,7 +32,7 @@
       <Version>17.0.1</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
-      <Version>3.11.0-dev.487</Version>
+      <Version>4.1.0-dev.16</Version>
     </PackageReference>
     <PackageReference Include="ViewBaseGenerator">
       <Version>1.3.21</Version>
