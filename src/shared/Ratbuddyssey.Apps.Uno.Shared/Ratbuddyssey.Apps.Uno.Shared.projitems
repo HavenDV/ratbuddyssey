@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\InvertBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\GroupBox.cs" />
   </ItemGroup>
+  <!-- There are warnings because: https://developercommunity.visualstudio.com/t/overactive-warning-the-parent-file-cannot-be-found/911196 -->
   <ItemGroup Label="Linking">
     <None Include="$(MSBuildThisFileDirectory)..\..\shared\Ratbuddyssey.Apps.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
   </ItemGroup>
