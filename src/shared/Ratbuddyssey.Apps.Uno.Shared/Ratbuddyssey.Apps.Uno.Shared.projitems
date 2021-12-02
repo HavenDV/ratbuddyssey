@@ -18,7 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\GroupBox.cs" />
   </ItemGroup>
   <ItemGroup Label="Linking">
-    <None Include="..\..\shared\Ratbuddyssey.Apps.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\shared\Ratbuddyssey.Apps.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\LargeTile.scale-100.png" />
