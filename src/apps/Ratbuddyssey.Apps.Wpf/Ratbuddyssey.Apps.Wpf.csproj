@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net4.6.1;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net4.6.2;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <DefineConstants>$(DefineConstants);HAS_WPF</DefineConstants>
@@ -23,7 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ReactiveUI.WPF" Version="16.4.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="17.0.1" />
     <PackageReference Include="ViewBaseGenerator" Version="1.3.21">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

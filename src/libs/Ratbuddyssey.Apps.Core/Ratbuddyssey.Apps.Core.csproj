@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net4.6.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net4.6.2</TargetFrameworks>
     <RootNamespace>Ratbuddyssey</RootNamespace>
     <NoWarn>$(NoWarn)</NoWarn>
   </PropertyGroup>
@@ -36,13 +36,13 @@
     <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.6.1' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.6.2' ">
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 
   <ItemGroup Label="MVVM">
-    <PackageReference Include="ReactiveUI.Fody" Version="16.4.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="17.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.1.1" />
     <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="14.1.1" />
