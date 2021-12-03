@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Label="MVVM">
-    <PackageReference Include="ReactiveUI.Fody" Version="17.0.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="17.0.13" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.1.1" />
     <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="14.1.1" />

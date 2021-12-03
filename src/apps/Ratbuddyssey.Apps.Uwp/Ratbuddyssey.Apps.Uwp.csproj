@@ -29,7 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Uwp">
-      <Version>17.0.1</Version>
+      <Version>17.0.13</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
       <Version>4.1.0-dev.18</Version>

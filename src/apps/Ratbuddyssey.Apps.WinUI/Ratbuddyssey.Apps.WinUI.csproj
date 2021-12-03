@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI.WinUI" Version="17.0.1" />
+    <PackageReference Include="ReactiveUI.WinUI" Version="17.0.13" />
     <PackageReference Include="H.ReactiveUI.CommonInteractions.WinUI" Version="1.0.30" />
     <PackageReference Include="H.XamlExtensions.WinUI" Version="0.9.15" />
     <PackageReference Include="Uno.WinUI" Version="4.1.0-dev.18" />
