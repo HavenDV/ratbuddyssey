@@ -125,11 +125,11 @@ public sealed partial class App
 #if __WASM__
             builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
 #elif __IOS__
-                builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
+            builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
 #elif NETFX_CORE
-                builder.AddDebug();
+            builder.AddDebug();
 #else
-                builder.AddConsole();
+            builder.AddConsole();
 #endif
 
             // Exclude logs below this level
@@ -168,9 +168,8 @@ public sealed partial class App
             // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
         });
 
-        global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
-
 #if HAS_UNO
+        global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
         global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
     }
