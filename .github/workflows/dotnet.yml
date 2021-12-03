@@ -9,8 +9,8 @@ jobs:
     with:
       os: windows-latest
       project-path: src/apps/Ratbuddyssey.Apps.Wpf
-      asset-path1: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net4.6.1.zip
-      asset-name1: Ratbuddyssey.Apps.Wpf_net4.6.1.zip
+      asset-path1: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net4.6.2.zip
+      asset-name1: Ratbuddyssey.Apps.Wpf_net4.6.2.zip
       asset-content-type1: application/zip
       asset-path2: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
       asset-name2: Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
