@@ -32,10 +32,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Uwp">
-      <Version>17.0.13</Version>
+      <Version>17.1.3</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
-      <Version>4.1.0-dev.18</Version>
+      <Version>4.1.0-dev.32</Version>
     </PackageReference>
     <PackageReference Include="ViewBaseGenerator">
       <Version>1.3.21</Version>
