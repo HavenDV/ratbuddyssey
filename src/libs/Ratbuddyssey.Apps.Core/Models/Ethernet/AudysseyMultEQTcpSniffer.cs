@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Ratbuddyssey.MultEQAvr;
 
 #nullable disable
+#pragma warning disable
 
 namespace Ratbuddyssey.MultEQTcp;
 

@@ -5,6 +5,8 @@ using Ratbuddyssey.MultEQAvr;
 using Ratbuddyssey.MultEQAvrAdapter;
 using Ratbuddyssey.MultEQTcp;
 
+#pragma warning disable
+
 namespace Ratbuddyssey.ViewModels;
 
 public class EthernetViewModel : RoutableViewModel

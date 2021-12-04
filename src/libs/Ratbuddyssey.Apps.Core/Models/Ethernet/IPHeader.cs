@@ -1,6 +1,8 @@
 using System.Net;
 using Ratbuddyssey.MultEQTcp;
 
+#pragma warning disable
+
 namespace Ratbuddyssey;
 
 public class IPHeader

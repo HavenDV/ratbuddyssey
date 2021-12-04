@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 #nullable disable
+#pragma warning disable
 
 namespace Ratbuddyssey.MultEQAvr;
 

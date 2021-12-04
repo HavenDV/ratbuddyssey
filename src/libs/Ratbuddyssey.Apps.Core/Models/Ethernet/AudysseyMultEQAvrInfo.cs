@@ -1,6 +1,7 @@
 using System.ComponentModel;
 
 #nullable disable
+#pragma warning disable
 
 namespace Ratbuddyssey.MultEQAvr;
 

@@ -1,5 +1,7 @@
 using System.Net;
 
+#pragma warning disable
+
 namespace Ratbuddyssey;
 
 public class TCPHeader

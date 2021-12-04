@@ -4,6 +4,7 @@ using Ratbuddyssey.MultEQApp;
 using Ratbuddyssey.MultEQAvr;
 
 #nullable disable
+#pragma warning disable
 
 namespace Ratbuddyssey.MultEQAvrAdapter;
 

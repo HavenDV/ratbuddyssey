@@ -47,9 +47,5 @@
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.1.1" />
     <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="14.1.1" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
   
 </Project>

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 
 #nullable disable
+#pragma warning disable
 
 namespace Ratbuddyssey.MultEQAvr;
 

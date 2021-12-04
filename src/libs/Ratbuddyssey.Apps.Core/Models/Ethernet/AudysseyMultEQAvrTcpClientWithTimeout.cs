@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 
 #nullable disable
+#pragma warning disable
 
 namespace Ratbuddyssey.MultEQAvr;
 
