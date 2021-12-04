@@ -13,7 +13,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\GridSplitter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CommunityToolkit.WinUI.UI.Controls.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\IntegerTextTypeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\InvertBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\GroupBox.cs" />

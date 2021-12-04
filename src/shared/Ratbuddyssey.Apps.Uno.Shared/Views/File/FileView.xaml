@@ -8,7 +8,7 @@
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:e="using:H.XamlExtensions"
     xmlns:h="using:H.ReactiveUI"
-    xmlns:mtuuc="using:Ratbuddyssey.Controls"
+    xmlns:mtuuc="using:CommunityToolkit.WinUI.UI.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d"
     AllowDrop="True"
