@@ -11,7 +11,7 @@ public class SmoothingFactorViewModel : ViewModelBase
 
     public SmoothingFactorViewModel(string title, double value, bool isChecked = false)
     {
-        Title = title ?? throw new ArgumentNullException(nameof(Title));
+        Title = title ?? throw new ArgumentNullException(nameof(title));
         Value = value;
         IsChecked = isChecked;
     }

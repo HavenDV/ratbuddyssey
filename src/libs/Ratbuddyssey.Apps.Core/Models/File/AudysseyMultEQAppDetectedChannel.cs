@@ -37,7 +37,7 @@ public class DetectedChannel : ReactiveObject
 
     [DataMember]
     [Reactive]
-    public string[] CustomTargetCurvePoints { get; set; } = Array.Empty<string>();
+    public ICollection<string> CustomTargetCurvePoints { get; set; } = Array.Empty<string>();
 
     [DataMember]
     [Reactive]

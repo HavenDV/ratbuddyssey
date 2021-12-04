@@ -78,7 +78,7 @@ public class FileViewModel : RoutableViewModel
                 return;
             }
 
-            var text = await CurrentFile.ReadTextAsync().ConfigureAwait(true);
+            var text = await CurrentFile.ReadTextAsync(cancellationToken: cancellationToken).ConfigureAwait(true);
             LoadApp(text);
         }, whenFileIsOpened);
         SaveFile = ReactiveCommand.CreateFromTask(async cancellationToken =>
@@ -90,7 +90,7 @@ public class FileViewModel : RoutableViewModel
 
             var json = SaveApp();
 
-            await CurrentFile.WriteTextAsync(json).ConfigureAwait(false);
+            await CurrentFile.WriteTextAsync(json, cancellationToken: cancellationToken).ConfigureAwait(false);
         }, whenFileIsOpened);
         SaveFileAs = ReactiveCommand.CreateFromTask(async cancellationToken =>
         {
@@ -211,7 +211,7 @@ public class FileViewModel : RoutableViewModel
         FileData file,
         CancellationToken cancellationToken = default)
     {
-        CurrentFile = file;
+        CurrentFile = file ?? throw new ArgumentNullException(nameof(file));
 
         var json = await file.ReadTextAsync(cancellationToken: cancellationToken).ConfigureAwait(true);
         LoadApp(json);

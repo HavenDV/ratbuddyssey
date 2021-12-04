@@ -30,7 +30,7 @@ public class AudysseyMultEQReferenceCurveFilter
             stream2);
     }
 
-    public IReadOnlyCollection<DataPoint> LoadPoints(string json, Stream pngStream)
+    public static IReadOnlyCollection<DataPoint> LoadPoints(string json, Stream pngStream)
     {
         var points = JsonConvert.DeserializeObject<IReadOnlyCollection<DataPoint>>(json, new JsonSerializerSettings
         {
@@ -51,7 +51,7 @@ public class AudysseyMultEQReferenceCurveFilter
         return points;
     }
 
-    private IReadOnlyCollection<DataPoint> GeneratePointsFromBitmap(Stream stream)
+    private static IReadOnlyCollection<DataPoint> GeneratePointsFromBitmap(Stream stream)
     {
         const double fmax = 19000.0;
         const double fmin = 20.0;
