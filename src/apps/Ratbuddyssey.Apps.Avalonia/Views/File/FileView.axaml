@@ -6,6 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:viewModels="using:Ratbuddyssey.Apps.ViewModels"
   xmlns:views="using:Ratbuddyssey.Apps.Views"
+  xmlns:material="using:Material.Icons.Avalonia"
   mc:Ignorable="d"
   d:DesignWidth="800"
   d:DesignHeight="450"
@@ -16,16 +17,18 @@
         <Button
             Command="{Binding OpenFile}"
             Padding="3"
-                    >
+            >
           <StackPanel Orientation="Horizontal">
+            <material:MaterialIcon Kind="File"/>
             <TextBlock Text="Open"/>
           </StackPanel>
         </Button>
         <Button
             Command="{Binding ReloadFile}"
             Padding="3"
-                    >
+            >
           <StackPanel Orientation="Horizontal">
+            <material:MaterialIcon Kind="Reload"/>
             <TextBlock Text="Reload"/>
           </StackPanel>
         </Button>
@@ -33,16 +36,18 @@
         <Button
             Command="{Binding SaveFile}"
             Padding="3"
-                    >
+            >
           <StackPanel Orientation="Horizontal">
+            <material:MaterialIcon Kind="ContentSave"/>
             <TextBlock Text="Save"/>
           </StackPanel>
         </Button>
         <Button
             Command="{Binding SaveFileAs}"
             Padding="3"
-                    >
+            >
           <StackPanel Orientation="Horizontal">
+            <material:MaterialIcon Kind="ContentSaveMove"/>
             <TextBlock Text="Save As"/>
           </StackPanel>
         </Button>
@@ -52,7 +57,7 @@
           Grid.Row="1"
           Grid.Column="0"
           RowDefinitions="*,Auto,Auto,Auto,Auto"
-                >
+          >
         <!--<views:ChannelsView
             Grid.Row="0"
             x:Name="ChannelsView"
@@ -64,7 +69,7 @@
             Grid.Row="1"
             HorizontalAlignment="Stretch"
             Height="5"
-                    />
+            />
         <!--<views:ChannelInformationView
             Grid.Row="2"
             x:Name="ChannelInformationView"
@@ -73,7 +78,7 @@
             Grid.Row="3"
             Height="5"
             HorizontalAlignment="Stretch"
-                    />
+            />
         <!--<views:ChannelReportView
             Grid.Row="4"
             x:Name="ChannelReportView"
@@ -85,13 +90,13 @@
           Grid.Column="1"
           Width="5"
           HorizontalAlignment="Stretch"
-                />
+          />
       <Grid
           Grid.Row="0"
           Grid.RowSpan="2"
           Grid.Column="2"
           RowDefinitions="Auto,Auto,*"
-                >
+          >
         <!--<views:StatusView
             Grid.Row="0"
             x:Name="StatusView"
@@ -104,7 +109,7 @@
         <Grid
             Grid.Row="2"
             ColumnDefinitions="Auto,Auto,*"
-                    >
+            >
           <!--<views:TargetCurvePointsView
               Grid.Column="0"
               x:Name="TargetCurvePointsView"
@@ -116,7 +121,7 @@
               Grid.Column="1"
               Width="5"
               HorizontalAlignment="Stretch"
-                        />
+              />
           <!--<views:GraphView
               Grid.Column="2"
               x:Name="GraphView"
