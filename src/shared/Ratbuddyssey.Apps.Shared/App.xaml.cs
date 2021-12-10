@@ -34,9 +34,6 @@ public sealed partial class App
             .AddViews()
             .AddConverters()
             .AddPlatformSpecificLoggers()
-#if __WASM__
-            .RemoveFileWatchers()
-#endif
             .Build();
 
 #if !HAS_WPF

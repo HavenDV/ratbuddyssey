@@ -77,30 +77,4 @@ public static class HostBuilderExtensions
 
         return hostBuilder;
     }
-
-    /// <summary>
-    /// Uno WebAssembly does not support FileWatchers.
-    /// </summary>
-    /// <param name="hostBuilder"></param>
-    /// <returns></returns>
-    public static IHostBuilder RemoveFileWatchers(this IHostBuilder hostBuilder)
-    {
-        hostBuilder = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
-
-        hostBuilder.ConfigureAppConfiguration((context, builder) =>
-        {
-            foreach (var source in builder.Sources
-                .Where(source => source is JsonConfigurationSource)
-                .ToArray())
-            {
-                builder.Sources.Remove(source);
-            }
-
-            builder
-                .AddJsonFile("appsettings.json", true, false)
-                .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, false);
-        });
-
-        return hostBuilder;
-    }
 }
