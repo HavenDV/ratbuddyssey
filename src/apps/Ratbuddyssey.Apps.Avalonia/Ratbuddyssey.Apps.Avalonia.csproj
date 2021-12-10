@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net5.0</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);HAS_AVALONIA</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup Label="Assets">
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.10" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Avalonia" Version="1.0.35" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj" />
+  </ItemGroup>
+
+</Project>
