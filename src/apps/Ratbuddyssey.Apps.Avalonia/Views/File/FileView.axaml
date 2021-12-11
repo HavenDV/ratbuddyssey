@@ -4,6 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:e="using:H.XamlExtensions"
   xmlns:viewModels="using:Ratbuddyssey.Apps.ViewModels"
   xmlns:views="using:Ratbuddyssey.Apps.Views"
   xmlns:material="using:Material.Icons.Avalonia"
@@ -12,7 +13,7 @@
   d:DesignHeight="450"
   >
   <Grid>
-    <Grid ColumnDefinitions="Auto,Auto,*" RowDefinitions="Auto,*">
+    <Grid e:GridExtensions.ColumnsAndRows="A,A,*;A,*">
       <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
         <Button
             Command="{Binding OpenFile}"
@@ -56,7 +57,7 @@
       <Grid
           Grid.Row="1"
           Grid.Column="0"
-          RowDefinitions="*,Auto,Auto,Auto,Auto"
+          e:GridExtensions.Rows="*,A,A,A,A"
           >
         <!--<views:ChannelsView
             Grid.Row="0"
@@ -95,7 +96,7 @@
           Grid.Row="0"
           Grid.RowSpan="2"
           Grid.Column="2"
-          RowDefinitions="Auto,Auto,*"
+          e:GridExtensions.Rows="A,A,*"
           >
         <!--<views:StatusView
             Grid.Row="0"
@@ -108,7 +109,7 @@
                     />
         <Grid
             Grid.Row="2"
-            ColumnDefinitions="Auto,Auto,*"
+            e:GridExtensions.Columns="A,A,*"
             >
           <!--<views:TargetCurvePointsView
               Grid.Column="0"

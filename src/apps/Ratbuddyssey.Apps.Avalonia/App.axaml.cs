@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using H.ReactiveUI;
+using H.XamlExtensions;
 using Microsoft.Extensions.Hosting;
 using Ratbuddyssey.Apps.Views;
 using Ratbuddyssey.Initialization;
@@ -20,6 +21,10 @@ public class App : Application
 
     public override void Initialize()
     {
+#if DEBUG
+        GC.KeepAlive(typeof(GridExtensions));
+#endif
+
         AvaloniaXamlLoader.Load(this);
 
         InteractionManager.Register();
