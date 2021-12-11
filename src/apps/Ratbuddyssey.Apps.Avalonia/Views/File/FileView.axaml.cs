@@ -11,7 +11,7 @@ public partial class FileView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new FileViewModel(Locator.Current.GetService<MainViewModel>());
+        DataContext = new FileViewModel(Locator.Current.GetService<MainViewModel>()!);
     }
 
     private void InitializeComponent()
