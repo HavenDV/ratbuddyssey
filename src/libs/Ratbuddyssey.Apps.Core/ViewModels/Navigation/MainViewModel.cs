@@ -4,22 +4,21 @@ public class MainViewModel : ActivatableViewModel, IScreen
 {
     #region Properties
 
-    private IServiceProvider Services { get; }
-
     public RoutingState Router { get; } = new();
+    public FileViewModel FileViewModel { get; }
 
     #endregion
 
     #region Constructors
 
-    public MainViewModel(IServiceProvider services)
+    public MainViewModel()
     {
-        Services = services ?? throw new ArgumentNullException(nameof(services));
+        FileViewModel = new(this);
 
         this.WhenActivated(disposables =>
         {
             Router.Navigate
-                .Execute(Services.GetRequiredService<FileViewModel>())
+                .Execute(FileViewModel)
                 .Subscribe()
                 .DisposeWith(disposables);
         });

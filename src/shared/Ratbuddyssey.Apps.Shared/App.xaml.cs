@@ -61,14 +61,14 @@ public sealed partial class App
 
     private async void Application_Startup(object _, StartupEventArgs e)
     {
-        var mainView = (Window)GetView<MainViewModel>(out var _);
+        var mainView = (Window)GetView<MainViewModel>(out var mainViewModel);
 
         if (e.Args.Any())
         {
             var path = e.Args.ElementAtOrDefault(0);
             if (path != null && !string.IsNullOrWhiteSpace(path))
             {
-                var fileViewModel = Host.Services.GetRequiredService<FileViewModel>();
+                var fileViewModel = mainViewModel.FileViewModel;
 
                 await fileViewModel.OpenAsync(new SystemIOApiFileData(path)).ConfigureAwait(true);
             }
