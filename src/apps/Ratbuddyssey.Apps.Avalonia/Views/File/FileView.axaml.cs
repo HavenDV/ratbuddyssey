@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Ratbuddyssey.ViewModels;
-using Splat;
 
 namespace Ratbuddyssey.Apps.Views;
 
@@ -11,7 +10,7 @@ public partial class FileView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new FileViewModel(Locator.Current.GetService<MainViewModel>()!);
+        DataContext = new FileViewModel(new MainViewModel());
     }
 
     private void InitializeComponent()

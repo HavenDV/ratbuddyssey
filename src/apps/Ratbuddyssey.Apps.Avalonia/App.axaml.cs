@@ -14,7 +14,6 @@ public class App : Application
 {
     #region Properties
 
-    public IHost? Host { get; set; }
     private InteractionManager InteractionManager { get; } = new();
 
     #endregion
@@ -25,21 +24,13 @@ public class App : Application
 
         InteractionManager.Register();
         InteractionManager.CatchUnhandledExceptions(this);
-
-        Host = Initialization.HostBuilder
-            .Create()
-            .AddConverters()
-            .Build();
     }
 
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var view = new MainView
-            {
-                DataContext = Locator.Current.GetService<MainViewModel>(),
-            };
+            var view = new MainView();
             desktop.MainWindow = view;
             FileInteractionManager.Window = view;
         }
