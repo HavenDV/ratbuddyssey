@@ -81,10 +81,11 @@
             Height="5"
             HorizontalAlignment="Stretch"
             />
-        <!--<views:ChannelReportView
+        <views:ChannelReportView
             Grid.Row="4"
+            DataContext="{Binding ChannelReportViewModel}"
             x:Name="ChannelReportView"
-                    />-->
+            />
       </Grid>
       <GridSplitter
           Grid.Row="0"
