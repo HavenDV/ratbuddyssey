@@ -64,9 +64,6 @@
             DataContext="{Binding ChannelsViewModel}"
             x:Name="ChannelsView"
             />
-        <!-- DESIGNER STOP WORKS AFTER REOPEN: d:DataContext="{d:DesignInstance
-                        viewModels:DesignTimeChannelsViewModel, 
-                        IsDesignTimeCreatable=True}" -->
         <GridSplitter
             Grid.Row="1"
             HorizontalAlignment="Stretch"
@@ -115,13 +112,11 @@
             Grid.Row="2"
             e:GridExtensions.Columns="A,A,*"
             >
-          <!--<views:TargetCurvePointsView
+          <views:TargetCurvePointsView
               Grid.Column="0"
+              DataContext="{Binding TargetCurvePointsViewModel}"
               x:Name="TargetCurvePointsView"
-              d:DataContext="{d:DesignInstance
-                            viewModels:DesignTimeTargetCurvePointsViewModel, 
-                            IsDesignTimeCreatable=True}"
-                        />-->
+              />
           <GridSplitter
               Grid.Column="1"
               Width="5"
