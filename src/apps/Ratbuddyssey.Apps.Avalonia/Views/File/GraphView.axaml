@@ -14,6 +14,9 @@
   d:DesignWidth="800"
   d:DesignHeight="450"
   >
+  <Design.DataContext>
+  </Design.DataContext>
+  
   <UserControl.Styles>
     <Style Selector="HeaderedContentControl">
       <Setter Property="Template">
@@ -53,26 +56,25 @@
             Content="Measurement position:"
             VerticalAlignment="Center"
                     />
-        <ItemsRepeater
+        <ListBox
             Items="{Binding MeasurementPositions}"
             >
-          <!--<ItemsRepeater.ItemsPanel>
+          <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
               <StackPanel Orientation="Horizontal"/>
             </ItemsPanelTemplate>
-          </ItemsRepeater.ItemsPanel>-->
+          </ListBox.ItemsPanel>
 
-          <!--<ItemsRepeater.ItemTemplate>
-            <DataTemplate DataType="viewModels:MeasurementPositionViewModel">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
               <CheckBox
                   Content="{Binding Value}"
-                  Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
                   IsChecked="{Binding IsChecked}"
                   IsEnabled="{Binding IsEnabled}"
                   />
             </DataTemplate>
-          </ItemsRepeater.ItemTemplate>-->
-        </ItemsRepeater>
+          </ListBox.ItemTemplate>
+        </ListBox >
         <CheckBox
             Content="Select/Unselect all"
             IsChecked="{Binding SelectAllMeasurementPositionsIsChecked}"
@@ -92,25 +94,25 @@
             Content="Smoothing Factors:"
             VerticalAlignment="Center"
                     />
-        <ItemsRepeater
+        <ListBox
             Items="{Binding SmoothingFactors}"
             >
-          <!--<ItemsRepeater.ItemsPanel>
+          <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
               <StackPanel Orientation="Horizontal"/>
             </ItemsPanelTemplate>
-          </ItemsRepeater.ItemsPanel>-->
+          </ListBox.ItemsPanel>
 
-          <!--<ItemsRepeater.ItemTemplate>
-            <DataTemplate DataType="viewModels:SmoothingFactorViewModel">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
               <RadioButton
                   GroupName="SmoothingFactors"
                   Content="{Binding Title}"
                   IsChecked="{Binding IsChecked}"
                   />
             </DataTemplate>
-          </ItemsRepeater.ItemTemplate>-->
-        </ItemsRepeater>
+          </ListBox.ItemTemplate>
+        </ListBox>
       </StackPanel>
       <StackPanel
           Grid.Row="3"
@@ -120,25 +122,25 @@
             Content="Ranges:"
             VerticalAlignment="Center"
                     />
-        <ItemsRepeater
+        <ListBox
             Items="{Binding Ranges}"
-                    >
-          <!--<ItemsRepeater.ItemsPanel>
+            >
+          <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
               <StackPanel Orientation="Horizontal"/>
             </ItemsPanelTemplate>
-          </ItemsRepeater.ItemsPanel>-->
+          </ListBox.ItemsPanel>
 
-          <!--<ItemsRepeater.ItemTemplate>
-            <DataTemplate DataType="viewModels:RangeViewModel">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
               <RadioButton
                   GroupName="Ranges"
                   Content="{Binding Title}"
                   IsChecked="{Binding IsChecked}"
-                                />
+                  />
             </DataTemplate>
-          </ItemsRepeater.ItemTemplate>-->
-        </ItemsRepeater>
+          </ListBox.ItemTemplate>
+        </ListBox>
         <CheckBox
             IsChecked="{Binding LogarithmicAxisIsChecked}"
             Content="Logarithmic Axis"
