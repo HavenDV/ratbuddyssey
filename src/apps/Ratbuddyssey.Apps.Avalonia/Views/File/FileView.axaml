@@ -59,10 +59,11 @@
           Grid.Column="0"
           e:GridExtensions.Rows="*,A,A,A,A"
           >
-        <!--<views:ChannelsView
+        <views:ChannelsView
             Grid.Row="0"
+            DataContext="{Binding ChannelsViewModel}"
             x:Name="ChannelsView"
-                    />-->
+            />
         <!-- DESIGNER STOP WORKS AFTER REOPEN: d:DataContext="{d:DesignInstance
                         viewModels:DesignTimeChannelsViewModel, 
                         IsDesignTimeCreatable=True}" -->
