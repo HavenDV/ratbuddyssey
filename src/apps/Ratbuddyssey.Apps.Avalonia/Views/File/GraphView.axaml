@@ -1,0 +1,150 @@
+<UserControl
+  x:Class="Ratbuddyssey.Apps.Views.GraphView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:e="using:H.XamlExtensions"
+  xmlns:oxy="using:OxyPlot.Avalonia"
+  xmlns:controls="using:Ratbuddyssey.Apps.Controls"
+  xmlns:viewModels="using:Ratbuddyssey.Apps.ViewModels"
+  xmlns:views="using:Ratbuddyssey.Apps.Views"
+  xmlns:material="using:Material.Icons.Avalonia"
+  mc:Ignorable="d"
+  d:DesignWidth="800"
+  d:DesignHeight="450"
+  >
+  <UserControl.Styles>
+    <Style Selector="HeaderedContentControl">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <Border ZIndex="1" Padding="5,0,5,0" Background="White" Margin="5,0,0,0">
+                <TextBlock TextBlock.FontWeight="Bold" Text="{TemplateBinding Header}" />
+              </Border>
+              <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,10,0,0"
+                  BorderBrush="{TemplateBinding Background}"
+                  BorderThickness="1">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+              </Border>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Styles>
+
+  <HeaderedContentControl Header="Graph View">
+    <Grid e:GridExtensions.Rows="A,*,A,A,A">
+      <StackPanel
+          Grid.Row="0"
+          Orientation="Horizontal"
+                >
+        <Label
+            Content="Measurement position:"
+            VerticalAlignment="Center"
+                    />
+        <ItemsRepeater
+            Items="{Binding MeasurementPositions}"
+            >
+          <!--<ItemsRepeater.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsRepeater.ItemsPanel>-->
+
+          <!--<ItemsRepeater.ItemTemplate>
+            <DataTemplate DataType="viewModels:MeasurementPositionViewModel">
+              <CheckBox
+                  Content="{Binding Value}"
+                  Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
+                  IsChecked="{Binding IsChecked}"
+                  IsEnabled="{Binding IsEnabled}"
+                  />
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>-->
+        </ItemsRepeater>
+        <CheckBox
+            Content="Select/Unselect all"
+            IsChecked="{Binding SelectAllMeasurementPositionsIsChecked}"
+            x:Name="SelectAllMeasurementPositionsCheckBox"
+            VerticalAlignment="Center"
+                    />
+      </StackPanel>
+      <!--<oxy:PlotView
+          Grid.Row="1"
+          Model="{Binding PlotModel}"
+                />-->
+      <StackPanel
+          Grid.Row="2"
+          Orientation="Horizontal"
+                >
+        <Label
+            Content="Smoothing Factors:"
+            VerticalAlignment="Center"
+                    />
+        <ItemsRepeater
+            Items="{Binding SmoothingFactors}"
+            >
+          <!--<ItemsRepeater.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsRepeater.ItemsPanel>-->
+
+          <!--<ItemsRepeater.ItemTemplate>
+            <DataTemplate DataType="viewModels:SmoothingFactorViewModel">
+              <RadioButton
+                  GroupName="SmoothingFactors"
+                  Content="{Binding Title}"
+                  IsChecked="{Binding IsChecked}"
+                  />
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>-->
+        </ItemsRepeater>
+      </StackPanel>
+      <StackPanel
+          Grid.Row="3"
+          Orientation="Horizontal"
+                >
+        <Label
+            Content="Ranges:"
+            VerticalAlignment="Center"
+                    />
+        <ItemsRepeater
+            Items="{Binding Ranges}"
+                    >
+          <!--<ItemsRepeater.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsRepeater.ItemsPanel>-->
+
+          <!--<ItemsRepeater.ItemTemplate>
+            <DataTemplate DataType="viewModels:RangeViewModel">
+              <RadioButton
+                  GroupName="Ranges"
+                  Content="{Binding Title}"
+                  IsChecked="{Binding IsChecked}"
+                                />
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>-->
+        </ItemsRepeater>
+        <CheckBox
+            IsChecked="{Binding LogarithmicAxisIsChecked}"
+            Content="Logarithmic Axis"
+            Margin="130,0,0,0"
+                    />
+      </StackPanel>
+    </Grid>
+  </HeaderedContentControl>
+</UserControl>
