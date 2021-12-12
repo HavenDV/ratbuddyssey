@@ -71,10 +71,11 @@
             HorizontalAlignment="Stretch"
             Height="5"
             />
-        <!--<views:ChannelInformationView
+        <views:ChannelInformationView
             Grid.Row="2"
+            DataContext="{Binding ChannelInformationViewModel}"
             x:Name="ChannelInformationView"
-                    />-->
+            />
         <GridSplitter
             Grid.Row="3"
             Height="5"
