@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
 
-namespace Ratbuddyssey.Apps.Avalonia;
+namespace Ratbuddyssey.Apps;
 
 internal class Program
 {
