@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Ratbuddyssey.Views"
+    xmlns:oxy="using:OxyPlot"
     xmlns:viewModels="using:Ratbuddyssey.ViewModels"
     xmlns:controls="using:Ratbuddyssey.Controls"
     xmlns:e="using:H.XamlExtensions"
@@ -13,7 +14,6 @@
         viewModels:GraphViewModel,
         IsDesignTimeCreatable=True}"
     >
-    <!-- xmlns:oxy="using:OxyPlot.Windows" -->
     <controls:GroupBox Header="Graph View">
         <Grid e:GridExtensions.Rows="A,*,A,A,A">
             <StackPanel
@@ -52,13 +52,12 @@
                     VerticalAlignment="Center" 
                     />
             </StackPanel>
-            <!--<oxy:PlotView
+            <oxy:PlotView
                 Grid.Row="1"
                 x:Name="PlotView"
                 Model="{Binding PlotModel}"
-                Height="500"
-                Width="500"
-                />-->
+                Height="400"
+                />
             <StackPanel
                 Grid.Row="2"
                 Orientation="Horizontal"

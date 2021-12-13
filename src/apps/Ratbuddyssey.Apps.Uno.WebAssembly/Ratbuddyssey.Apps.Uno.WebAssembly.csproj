@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="H.OxyPlot.Uno" Version="0.9.10" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
     <PackageReference Include="Uno.UI.WebAssembly" Version="4.1.0-dev.32" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.0-dev.32" Condition="'$(Configuration)'=='Debug'" />
