@@ -16,23 +16,30 @@
       <_Parameter2_IsLiteral>true</_Parameter2_IsLiteral>
     </AssemblyAttribute>
   </ItemGroup>
-
+  
+  <PropertyGroup>
+    <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
+  </PropertyGroup>
+  
   <ItemGroup Label="ViewConstructors">
-    <AdditionalXamlFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\Ethernet\EthernetView.xaml" />
-    <AdditionalFiles Include="@(AdditionalXamlFiles)" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles 
+      Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\**\*.xaml" 
+      ViewBaseGenerator_GenerateConstructor="True" 
+      ViewBaseGenerator_SetReactiveUIDataContext="True" 
+      Visible="False" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="1.0.30" />
-    <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.15" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Wpf" Version="1.0.45" />
+    <PackageReference Include="H.XamlExtensions.Wpf" Version="0.9.19" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.4.0-ci11-ci11" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.4.0-ci89" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ReactiveUI.WPF" Version="17.1.3" />
+    <PackageReference Include="ReactiveUI.WPF" Version="17.1.50" />
     <PackageReference Include="ViewBaseGenerator" Version="1.3.21">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -40,7 +47,10 @@
   </ItemGroup>
 
   <ItemGroup Label="Linking">
-    <None Include="..\..\shared\Ratbuddyssey.Apps.Shared\**\*.cs" Link="%(RecursiveDir)%(FileName).cs" DependentUpon="%(FileName)" />
+    <None 
+      Include="..\..\shared\Ratbuddyssey.Apps.Shared\**\*.cs" 
+      Link="%(RecursiveDir)%(FileName).cs" 
+      DependentUpon="%(FileName)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +60,10 @@
   <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
 
   <Target Name="Release" AfterTargets="Build" Condition=" '$(Configuration)' == 'Release' AND '$(TargetDir)' != '' ">
-    <ZipDirectory SourceDirectory="$(TargetDir)" DestinationFile="$(TargetDir)../$(AssemblyName)_$(TargetFramework).zip" Overwrite="True" />
+    <ZipDirectory 
+      SourceDirectory="$(TargetDir)" 
+      DestinationFile="$(TargetDir)../$(AssemblyName)_$(TargetFramework).zip" 
+      Overwrite="True" />
   </Target>
 
 </Project>
