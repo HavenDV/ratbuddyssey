@@ -8,7 +8,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-latest
-      dotnet-version: 7.0.x
+      additional-dotnet-version: 7.0.x
       project-path: src/apps/Ratbuddyssey.Apps.Wpf
       asset-path1: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net4.6.2.zip
       asset-name1: Ratbuddyssey.Apps.Wpf_net4.6.2.zip
@@ -21,7 +21,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
-      dotnet-version: 7.0.x
+      additional-dotnet-version: 7.0.x
       project-path: /target:apps\Ratbuddyssey_Apps_Uwp
       use-msbuild: true
       generate-build-number: false
@@ -30,7 +30,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
-      dotnet-version: 7.0.x
+      additional-dotnet-version: 7.0.x
       project-path: /target:apps\Ratbuddyssey_Apps_WinUI
       use-msbuild: true
       generate-build-number: false
