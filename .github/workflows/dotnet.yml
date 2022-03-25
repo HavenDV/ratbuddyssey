@@ -42,5 +42,5 @@ jobs:
       dotnet-version: 7.0.x
       project-path: src/apps/Uno/Ratbuddyssey.Apps.Uno.WebAssembly
       additional-dotnet-version: 5.0.x
-      deploy-web-assembly-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
+      deploy-web-assembly-path: src/apps/Uno/Ratbuddyssey.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
       generate-build-number: false
