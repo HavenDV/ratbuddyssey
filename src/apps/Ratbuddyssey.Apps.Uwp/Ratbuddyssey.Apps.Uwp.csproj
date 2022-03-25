@@ -6,7 +6,7 @@
       <Version>0.9.19</Version>
     </PackageReference>
     <PackageReference Include="H.XamlExtensions.Uwp">
-      <Version>0.9.19</Version>
+      <Version>0.9.20</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <!-- 
@@ -16,7 +16,7 @@
 			-->
       <Version>6.2.13</Version>
     </PackageReference>
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="1.0.45" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Uwp" Version="1.0.48" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.Layout">
       <Version>7.1.2</Version>
     </PackageReference>
@@ -38,10 +38,10 @@
       <Version>17.1.50</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
-      <Version>4.2.0-dev.100</Version>
+      <Version>4.1.9</Version>
     </PackageReference>
     <PackageReference Include="ViewBaseGenerator">
-      <Version>1.3.21</Version>
+      <Version>1.3.22</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

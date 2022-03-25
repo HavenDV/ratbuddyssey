@@ -23,16 +23,16 @@
   
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Layout" Version="7.1.2" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="H.OxyPlot.WinUI" Version="0.9.19" />
     <PackageReference Include="ReactiveUI.WinUI" Version="17.1.50" />
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.WinUI" Version="1.0.45" />
-    <PackageReference Include="H.XamlExtensions.WinUI" Version="0.9.19" />
-    <PackageReference Include="Uno.WinUI" Version="4.2.0-dev.100" />
-    <PackageReference Include="ViewBaseGenerator" Version="1.3.21">
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.WinUI" Version="1.0.48" />
+    <PackageReference Include="H.XamlExtensions.WinUI" Version="0.9.20" />
+    <PackageReference Include="Uno.WinUI" Version="4.1.9" />
+    <PackageReference Include="ViewBaseGenerator" Version="1.3.22">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

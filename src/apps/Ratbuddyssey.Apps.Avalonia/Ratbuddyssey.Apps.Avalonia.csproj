@@ -11,12 +11,12 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.12" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.12" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
-    <PackageReference Include="H.ReactiveUI.CommonInteractions.Avalonia" Version="1.0.45" />
-    <PackageReference Include="H.XamlExtensions.Avalonia" Version="0.9.19" />
+    <PackageReference Include="Avalonia" Version="0.10.13" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.13" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.13" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.13" />
+    <PackageReference Include="H.ReactiveUI.CommonInteractions.Avalonia" Version="1.0.48" />
+    <PackageReference Include="H.XamlExtensions.Avalonia" Version="0.9.20" />
     <PackageReference Include="Material.Icons.Avalonia" Version="1.0.2" />
     <PackageReference Include="OxyPlot.Avalonia" Version="2.1.0-Preview1" />
   </ItemGroup>
