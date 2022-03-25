@@ -13,14 +13,15 @@ jobs:
       asset-path1: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net4.6.2.zip
       asset-name1: Ratbuddyssey.Apps.Wpf_net4.6.2.zip
       asset-content-type1: application/zip
-      asset-path2: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
-      asset-name2: Ratbuddyssey.Apps.Wpf_net6.0-windows.zip
+      asset-path2: src/apps/Ratbuddyssey.Apps.Wpf/bin/Release/Ratbuddyssey.Apps.Wpf_net7.0-windows.zip
+      asset-name2: Ratbuddyssey.Apps.Wpf_net7.0-windows.zip
       asset-content-type2: application/zip
 
   UWP:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
+      dotnet-version: 7.0.x
       install-latest-msbuild: true
       project-path: /target:apps\Ratbuddyssey_Apps_Uwp
       use-msbuild: true
@@ -30,6 +31,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
+      dotnet-version: 7.0.x
       install-latest-msbuild: true
       project-path: /target:apps\Ratbuddyssey_Apps_WinUI
       use-msbuild: true
