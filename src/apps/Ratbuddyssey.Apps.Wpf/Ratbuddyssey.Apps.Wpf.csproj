@@ -22,7 +22,7 @@
   </PropertyGroup>
   
   <ItemGroup Label="ViewConstructors">
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\**\*.xaml" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\**\*.xaml" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
   </ItemGroup>
 
   <ItemGroup>

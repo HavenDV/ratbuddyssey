@@ -25,7 +25,7 @@
     <LinkerDescriptor Include="LinkerConfig.xml" />
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
-    <UpToDateCheckInput Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\**\*.xaml" />
+    <UpToDateCheckInput Include="..\..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\**\*.xaml" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -33,7 +33,7 @@
   </PropertyGroup>
   
   <ItemGroup Label="View Constructors">
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\**\*.xaml" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles Include="..\..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\**\*.xaml" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,10 +58,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Uno.Core\Ratbuddyssey.Apps.Uno.Core.Standard\Ratbuddyssey.Apps.Uno.Core.Standard.csproj" />
+    <ProjectReference Include="..\Ratbuddyssey.Apps.Uno.Core\Ratbuddyssey.Apps.Uno.Core.Standard\Ratbuddyssey.Apps.Uno.Core.Standard.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Ratbuddyssey.Apps.WinUI.Shared.projitems" Label="Shared" />
   
 </Project>

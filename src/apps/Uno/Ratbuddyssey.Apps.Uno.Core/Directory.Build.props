@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="ViewBase">
+    <AdditionalFiles Include="..\..\..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\**\*.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+    <AdditionalFiles Remove="..\..\..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\MainView.xaml" />
+    <AdditionalFiles Include="..\..\..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.Uno.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" Visible="False" />
+  </ItemGroup>
+
+</Project>

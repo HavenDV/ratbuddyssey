@@ -139,9 +139,9 @@
     <ViewBaseGenerator_Namespace>Ratbuddyssey.Views</ViewBaseGenerator_Namespace>
   </PropertyGroup>
   <ItemGroup Label="ViewBase and Constructors">
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\**\*.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
-    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" />
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\**\*.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\MainView.xaml" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,12 +158,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\libs\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj">
-      <Project>{50f14d91-0dfb-4ce8-b252-830c7fea1538}</Project>
-      <Name>Ratbuddyssey.Core</Name>
+      <Project>{A53DA76F-0057-4533-832E-3B4FC57967F4}</Project>
+      <Name>Ratbuddyssey.Apps.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Ratbuddyssey.Apps.WinUI.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

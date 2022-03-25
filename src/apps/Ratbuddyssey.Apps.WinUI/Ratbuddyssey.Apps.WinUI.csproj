@@ -16,9 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="View Base and Constructors">
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\**\*.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
-    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" />
-    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\**\*.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactiveUserControl" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
+    <AdditionalFiles Remove="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\MainView.xaml" />
+    <AdditionalFiles Include="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Views\MainView.xaml" ViewBaseGenerator_BaseClass="ReactiveUI.ReactivePage" ViewBaseGenerator_ViewModelNamespace="Ratbuddyssey.ViewModels" ViewBaseGenerator_GenerateConstructor="True" ViewBaseGenerator_SetReactiveUIDataContext="True" Visible="False" />
   </ItemGroup>
   
   <ItemGroup>
@@ -43,6 +43,6 @@
   </ItemGroup>
 
   <Import Project="..\..\shared\Ratbuddyssey.Apps.Shared\Ratbuddyssey.Apps.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\Ratbuddyssey.Apps.Uno.Shared\Ratbuddyssey.Apps.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\Ratbuddyssey.Apps.WinUI.Shared\Ratbuddyssey.Apps.WinUI.Shared.projitems" Label="Shared" />
 
 </Project>

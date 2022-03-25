@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\libs\Ratbuddyssey.Apps.Core\Ratbuddyssey.Apps.Core.csproj" />
   </ItemGroup>
-
+  
 </Project>
