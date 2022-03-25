@@ -17,26 +17,32 @@ jobs:
       asset-name2: Ratbuddyssey.Apps.Wpf_net7.0-windows.zip
       asset-content-type2: application/zip
 
-  UWP:
+  Avalonia:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
-      os: windows-2022
       dotnet-version: 7.0.x
-      install-latest-msbuild: true
-      project-path: /target:apps\Ratbuddyssey_Apps_Uwp
-      use-msbuild: true
-      generate-build-number: false
+      project-path: src/apps/Ratbuddyssey.Apps.Avalonia
 
-  WinUI:
-    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
-    with:
-      os: windows-2022
-      dotnet-version: 7.0.x
-      install-latest-msbuild: true
-      project-path: /target:apps\Ratbuddyssey_Apps_WinUI
-      use-msbuild: true
-      generate-build-number: false
-      windows-sdk-version: 19041
+  #UWP:
+  #  uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+  #  with:
+  #    os: windows-2022
+  #    #dotnet-version: 7.0.x
+  #    #install-latest-msbuild: true
+  #    project-path: /target:apps\Ratbuddyssey_Apps_Uwp
+  #    use-msbuild: true
+  #    generate-build-number: false
+
+  #WinUI:
+  #  uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+  #  with:
+  #    os: windows-2022
+  #    #dotnet-version: 7.0.x
+  #    #install-latest-msbuild: true
+  #    project-path: /target:apps\Ratbuddyssey_Apps_WinUI
+  #    use-msbuild: true
+  #    generate-build-number: false
+  #    windows-sdk-version: 19041
 
   WebAssembly:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
