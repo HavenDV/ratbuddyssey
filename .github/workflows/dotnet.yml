@@ -21,7 +21,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
-      dotnet-version: 7.0.x
+      install-latest-msbuild: true
       project-path: /target:apps\Ratbuddyssey_Apps_Uwp
       use-msbuild: true
       generate-build-number: false
@@ -30,7 +30,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-2022
-      dotnet-version: 7.0.x
+      install-latest-msbuild: true
       project-path: /target:apps\Ratbuddyssey_Apps_WinUI
       use-msbuild: true
       generate-build-number: false
@@ -40,7 +40,7 @@ jobs:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       dotnet-version: 7.0.x
-      project-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly
+      project-path: src/apps/Uno/Ratbuddyssey.Apps.Uno.WebAssembly
       additional-dotnet-version: 5.0.x
       deploy-web-assembly-path: src/apps/Ratbuddyssey.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
       generate-build-number: false
