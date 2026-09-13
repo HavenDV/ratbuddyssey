@@ -1,5 +1,10 @@
 # [<img src="https://raw.githubusercontent.com/HavenDV/ratbuddyssey/master/docs/icon.png" alt="ratbuddyssey" width="24"/>](https://raw.githubusercontent.com/HavenDV/ratbuddyssey/) ratbuddyssey
 
+> [!IMPORTANT]
+> This HavenDV fork is retired and no longer maintained. Use the actively
+> maintained upstream project, [`ratbuddy/ratbuddyssey`](https://github.com/ratbuddy/ratbuddyssey),
+> which provides the current cross-platform release.
+
 Audyssey .ady file editor
 
 ![Example](docs/example.png)
